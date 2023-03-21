@@ -158,7 +158,8 @@ export default {
     },
     methods: {
         showLogin() {
-            this.$store.commit("User/SET_SHOW_LOGIN", true);
+            // this.$store.commit("User/SET_SHOW_LOGIN", true);
+            this.$router.push({ path: "/tray" });
         },
         async pcSign() {
             let [err, res] = await this.$errorCaptured(daily_signin(1));

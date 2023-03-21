@@ -6,6 +6,8 @@
         @mouseout="play()"
         v-if="list.length"
     >
+    <div class="auto-test">123</div>
+
         <div ref="content" class="slider-content" :class="mask ? 'mask' : ''">
             <div
                 ref="slider"
@@ -196,6 +198,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.auto-test {
+    width: 100%;
+    height: 100px;
+    color: green;
+    background-color: green;
+}
 .slider-container {
     box-sizing: content-box;
     width: 100%;

@@ -14,10 +14,12 @@
             <slot></slot>
         </section>
         <slot name="footer"></slot>
+        <home></home>
     </section>
 </template>
 
 <script>
+import Home from "@/views/Main/home";
 export default {
     name: "indexTopNav",
     props: {
@@ -52,6 +54,9 @@ export default {
                 ];
             },
         },
+    },
+    components: {
+        Home
     },
 };
 </script>

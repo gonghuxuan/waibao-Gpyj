@@ -38,6 +38,11 @@ export default {
     },
     created() {
         this.initDownload();
+
+        console.log(
+            "window.location.href::::::::::::::::::",
+            window.location.href
+        );
     },
     mounted() {
         this.$electron.ipcRenderer.on("will-close", () => {
