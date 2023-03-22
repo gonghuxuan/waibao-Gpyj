@@ -21,7 +21,7 @@ const createLyricWindow = function (BrowserWindow) {
         transparent: true,
         alwaysOnTop: true,
         skipTaskbar: true, // 任务栏中不显示窗口
-        closable: false,
+        closable: true,
         hasShadow: process.platform === "darwin" ? false : true,
         webPreferences: {
             webSecurity: false,

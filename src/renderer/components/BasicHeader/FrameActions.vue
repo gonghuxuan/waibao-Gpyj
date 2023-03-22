@@ -1,6 +1,6 @@
 <template>
     <div class="frame-actions">
-        <a-icon type="shrink" class="item" @click="setFrame('mini')" />
+        <!-- <a-icon type="shrink" class="item" @click="setFrame('mini')" /> -->
         <a-icon
             type="minus"
             class="item"
@@ -68,14 +68,14 @@ export default {
     align-items: center;
     margin-right: 10px;
     -webkit-app-region: no-drag;
-    &::before {
-        content: "";
-        display: inline-block;
-        width: 1px;
-        height: 20px;
-        margin-right: 8px;
-        background: #ddd;
-    }
+    // &::before {
+    //     content: "";
+    //     display: inline-block;
+    //     width: 1px;
+    //     height: 20px;
+    //     margin-right: 8px;
+    //     background: #ddd;
+    // }
     .item {
         padding: 0 4px;
         line-height: 54px;

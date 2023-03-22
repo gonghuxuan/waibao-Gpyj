@@ -1,17 +1,17 @@
 <template>
     <div class="top-bar">
-        <div class="top-bar-logo">
+        <!-- <div class="top-bar-logo">
             <img src="../../assets/images/logo.svg" alt="LOGO" />
-        </div>
+        </div> -->
         <div class="top-bar-main">
-            <div class="top-bar-control">
+            <!-- <div class="top-bar-control">
                 <controls />
             </div>
             <div class="top-bar-search">
                 <search-box />
-            </div>
+            </div> -->
             <div class="top-bar-menu">
-                <div class="top-bar-menu-user">
+                <!-- <div class="top-bar-menu-user">
                     <div class="item">
                         <user-info />
                     </div>
@@ -25,7 +25,7 @@
                         <a-icon type="setting" class="icon" />
                     </div>
                     <div class="item" @click="logout" v-if="userId">退出</div>
-                </div>
+                </div> -->
                 <frame-actions />
             </div>
         </div>

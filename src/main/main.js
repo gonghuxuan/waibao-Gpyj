@@ -113,9 +113,9 @@ async function createWindow() {
         // 去除原生顶部菜单栏
         mainWindow.setMenu(null);
         // 如果是windows系统模拟托盘菜单
-        global.tray = createTray(Tray);
-        let trayBounds = global.tray.getBounds();
-        global.trayWindow = createTrayWindow(BrowserWindow, trayBounds);
+        // global.tray = createTray(Tray);
+        // let trayBounds = global.tray.getBounds();
+        // global.trayWindow = createTrayWindow(BrowserWindow, trayBounds);
     }
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
