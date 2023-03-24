@@ -8,10 +8,10 @@
                 <basic-header />
             </a-layout-header>
             <a-layout>
-                <a-layout-sider class="basic-layout-sider" :width="siderWidth">
+                <!-- <a-layout-sider class="basic-layout-sider" :width="siderWidth">
                     <div ref="handle" class="split-handle"></div>
                     <basic-sider />
-                </a-layout-sider>
+                </a-layout-sider> -->
                 <a-layout-content class="basic-layout-content">
                     <keep-alive
                         :exclude="keepAliveExcludeList"
@@ -22,9 +22,9 @@
                     <offline v-else />
                 </a-layout-content>
             </a-layout>
-            <a-layout-footer class="basic-layout-footer">
+            <!-- <a-layout-footer class="basic-layout-footer">
                 <play-bar />
-            </a-layout-footer>
+            </a-layout-footer> -->
             <login />
             <player />
         </a-layout>

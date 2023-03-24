@@ -20,7 +20,8 @@ export default {
             this.$router.go(-1);
         },
         forward() {
-            this.$router.go(1);
+            // this.$router.go(1);
+            this.$router.push({ path: "/home" });
         },
         refresh() {
             eventBus.$emit("refresh");

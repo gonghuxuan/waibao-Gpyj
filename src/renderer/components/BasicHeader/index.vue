@@ -1,16 +1,17 @@
 <template>
     <div class="top-bar">
-        <!-- <div class="top-bar-logo">
+        <!-- <div class="top-bar-logo" @click="toRouter">
             <img src="../../assets/images/logo.svg" alt="LOGO" />
         </div> -->
         <div class="top-bar-main">
-            <!-- <div class="top-bar-control">
+            <div class="top-bar-control">
                 <controls />
             </div>
-            <div class="top-bar-search">
+            <!-- <div class="top-bar-search">
                 <search-box />
             </div> -->
             <div class="top-bar-menu">
+
                 <!-- <div class="top-bar-menu-user">
                     <div class="item">
                         <user-info />
@@ -61,6 +62,9 @@ export default {
         ...mapState(["User"]),
     },
     methods: {
+        toRouter() {
+            this.$router.push({ path: "/login" });
+        },
         showLogin() {
             this.$store.commit("User/SET_SHOW_LOGIN", true);
         },

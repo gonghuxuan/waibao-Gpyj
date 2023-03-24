@@ -1,6 +1,6 @@
 let recommendRoutes = [
     {
-        path: "/home",
+        path: "/home2",
         component: () =>
             import(/* webpackChunkName: "home" */ "@/views/Home/index.vue"),
         name: "home",

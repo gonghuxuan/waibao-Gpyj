@@ -2,7 +2,7 @@ import ls from "store";
 const state = {
     primaryColor: "",
     isChangingColor: false,
-    redirect: "/home",
+    redirect: "/home2",
     partRefreshFlag: false,
     isShowVisual: false,
     isOnline: navigator.onLine,

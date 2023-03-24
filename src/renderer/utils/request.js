@@ -40,7 +40,7 @@ instance.interceptors.response.use(
                 case 301:
                     store.commit("User/SET_SHOW_LOGIN", true);
                     store.commit("User/SET_USER_INFO", {});
-                    store.commit("App/SET_REDIRECT", "/home");
+                    store.commit("App/SET_REDIRECT", "/home2");
                     localStorage.removeItem("userId");
                     Message.warn(res.msg || "请先登录");
                     break;
@@ -52,7 +52,7 @@ instance.interceptors.response.use(
                 case 401:
                     store.commit("User/SET_SHOW_LOGIN", true);
                     store.commit("User/SET_USER_INFO", {});
-                    store.commit("App/SET_REDIRECT", "/home");
+                    store.commit("App/SET_REDIRECT", "/home2");
                     localStorage.removeItem("userId");
                     Message.warn(res.msg || "请先登录");
                     break;

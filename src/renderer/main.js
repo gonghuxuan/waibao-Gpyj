@@ -11,7 +11,13 @@ import "./directives";
 import createdInit from "./core/createdInit";
 import "./styles/index.less";
 import { errorCaptured } from "./utils/assist";
+import vueParticles from "vue-particles";
+import Vcomp from "./components/dataV/index";
+import Toast from "./components/dataV/toast";
 
+Vue.use(vueParticles)
+Vue.use(Vcomp)
+Vue.prototype.$Toast = Toast
 Vue.prototype.$db = db;
 Vue.prototype.$errorCaptured = errorCaptured;
 if (!process.env.IS_WEB) Vue.use(require("vue-electron"));
