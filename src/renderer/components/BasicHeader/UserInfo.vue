@@ -139,6 +139,8 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import { user_detail, daily_signin } from "@/api/user";
+import poll from "@/utils/poll.js";
+import { getNewSong } from "@/api/song";
 
 export default {
     data() {
@@ -156,9 +158,17 @@ export default {
             return this.userInfo.userId;
         },
     },
+    mounted() {
+        // poll.a();
+    },
     methods: {
         showLogin() {
+            poll.requestPoll(getNewSong);
+            return;
             this.$store.commit("User/SET_SHOW_LOGIN", true);
+        },
+        clear() {
+            poll.clear();
         },
         async pcSign() {
             let [err, res] = await this.$errorCaptured(daily_signin(1));

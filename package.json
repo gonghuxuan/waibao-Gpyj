@@ -25,6 +25,7 @@
   "dependencies": {
     "ant-design-vue": "^1.7.4",
     "core-js": "^3.6.5",
+    "dayjs": "^1.11.7",
     "deepmerge": "^4.2.2",
     "draggabilly": "^2.3.0",
     "electron-dl": "^3.2.0",
