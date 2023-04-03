@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import '@/assets/js/flexible'
+// import '@/assets/js/flexible'
 import '@/assets/js/china'
 import countTo from 'vue-count-to'
 

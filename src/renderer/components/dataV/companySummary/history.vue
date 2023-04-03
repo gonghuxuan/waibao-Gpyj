@@ -6,7 +6,7 @@
 
 <template>
   <div class="history-container">
-    <div class="tabs"> 
+    <!-- <div class="tabs">
       <ul class="tab-tilte">
         <li v-for="(itemTit, index) in tabTitle" :key="itemTit" @mouseover="handleMouseOver(index)" @mouseout="handleMouseOut(index)" :class="{active: cur == index}">
           {{ itemTit }}
@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-    </div>   
+    </div>    -->
   </div>
 </template>
 
