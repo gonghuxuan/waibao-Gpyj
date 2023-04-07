@@ -21,7 +21,8 @@ export default {
         },
         forward() {
             // this.$router.go(1);
-            this.$router.push({ path: "/brand" });
+            // this.$router.push({ path: "/brand" });
+            this.$router.push({ path: "/home" });
         },
         refresh() {
             eventBus.$emit("refresh");

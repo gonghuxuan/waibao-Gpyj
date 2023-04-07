@@ -15,9 +15,13 @@ import vueParticles from "vue-particles";
 import Vcomp from "./components/dataV/index";
 import Toast from "./components/dataV/toast";
 
-Vue.use(vueParticles)
-Vue.use(Vcomp)
-Vue.prototype.$Toast = Toast
+import "@/assets/styles/base.scss";
+import "@/assets/styles/common.scss";
+import "@/assets/iconfont/iconfont.css";
+
+Vue.use(vueParticles);
+Vue.use(Vcomp);
+Vue.prototype.$Toast = Toast;
 Vue.prototype.$db = db;
 Vue.prototype.$errorCaptured = errorCaptured;
 if (!process.env.IS_WEB) Vue.use(require("vue-electron"));

@@ -162,6 +162,7 @@ export default {
 
     .basic-layout-content {
         background: #f5f5f7;
+        position: relative;
     }
 }
 </style>

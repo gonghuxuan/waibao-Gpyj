@@ -24,7 +24,7 @@ const router = new Router({
             path: "/",
             name: "index",
             component: BasicLayout,
-            redirect: "/home2",
+            redirect: "/home",
             children: [
                 ...recommendRoutes,
                 ...rankRoutes,
@@ -45,29 +45,29 @@ const router = new Router({
                     },
                 },
                 {
-                    path: '/login',
-                    name: 'Login',
-                    component: () => import('@/views/dataV/Login.vue'),
+                    path: "/login",
+                    name: "Login",
+                    component: () => import("@/views/dataV/Login.vue"),
                     meta: {
-                      title: '登录界面'
-                    }
-                  },
-                  {
-                    path: '/home',
-                    name: 'Home',
-                    component: () => import('@/views/dataV/Home.vue'),
-                    meta: {
-                      title: '酷屏首页统计图'
-                    }
+                        title: "登录界面",
+                    },
                 },
                 {
-                    path: '/brand',
-                    name: 'Brand',
-                    component: () => import('@/views/dataV/Brand.vue'),
+                    path: "/home",
+                    name: "Home",
+                    component: () => import("@/views/dataV/Home.vue"),
                     meta: {
-                      title: '公司品牌介绍'
-                    }
-                  }
+                        title: "酷屏首页统计图",
+                    },
+                },
+                {
+                    path: "/brand",
+                    name: "Brand",
+                    component: () => import("@/views/dataV/Brand.vue"),
+                    meta: {
+                        title: "公司品牌介绍",
+                    },
+                },
             ],
         },
         {
@@ -77,6 +77,7 @@ const router = new Router({
                 require(["@/views/Mini/index.vue"], resolve);
             },
         },
+
         {
             name: "tray",
             path: "/tray",
@@ -112,8 +113,6 @@ const router = new Router({
                 require(["@/views/Video/player.vue"], resolve);
             },
         },
-
-
     ],
 });
 
