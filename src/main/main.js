@@ -18,6 +18,7 @@ import createLyricWindow from "./windows/desktopLyricWindow";
 import createMiniWindow from "./windows/miniWindow";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import { ACHEME, LOAD_URL } from "./config";
+import axios from 'axios'
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 if (process.env.NODE_ENV === "production") {
