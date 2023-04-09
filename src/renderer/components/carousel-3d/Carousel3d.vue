@@ -4,6 +4,7 @@
         :style="{ height: this.slideHeight + 'px' }"
     >
         <div
+            id="slider123"
             class="carousel-3d-slider"
             :style="{
                 width: this.slideWidth + 'px',
@@ -59,6 +60,10 @@ export default {
             default: "rtl",
         },
         width: {
+            type: [Number, String],
+            default: 360,
+        },
+        sliderWidthmy: {
             type: [Number, String],
             default: 360,
         },
@@ -169,9 +174,14 @@ export default {
         },
         slideWidth() {
             const vw = this.viewport;
+            console.log("this.viewport------------", vw);
             const sw = parseInt(this.width) + parseInt(this.border, 10) * 2;
+            console.log("this.sw------------", sw);
 
             return vw < sw && process.browser ? vw : sw;
+        },
+        getSliderWidthMy() {
+            return this.sliderWidthmy;
         },
         slideHeight() {
             const sw = parseInt(this.width, 10) + parseInt(this.border, 10) * 2;

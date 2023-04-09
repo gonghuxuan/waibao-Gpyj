@@ -1,5 +1,6 @@
 <template>
     <div
+        id="slider456"
         class="carousel-3d-slide"
         :style="slideStyle"
         :class="computedClasses"
@@ -58,6 +59,10 @@ export default {
         },
         slideStyle() {
             let styles = {};
+            // console.log("parents:::::::::", this.$parent.slideWidth);
+            // console.log("sliderWidthmy:::::::::", this.$parent.sliderWidthmy);
+
+            // console.log("parent:::::::::", this.$parent);
 
             if (!this.isCurrent) {
                 const lIndex = this.leftIndex;
@@ -91,10 +96,16 @@ export default {
                     }
                 }
             }
+            // console.log("this.isCurrent", this.isCurrent);
+            // console.log("this.slideWidth", this.parent.slideWidth + "px");
+            // console.log("this.sliderWidthmy", this.parent.sliderWidthmy + "px");
 
             return Object.assign(styles, {
                 "border-width": this.parent.border + "px",
-                width: this.parent.slideWidth + "px",
+                width: this.isCurrent
+                    ? this.parent.slideWidth + "px"
+                    : this.parent.sliderWidthmy + "px",
+                // this.parent.slideWidth + "px",
                 height: this.parent.slideHeight + "px",
                 transition:
                     " transform " +
@@ -134,7 +145,8 @@ export default {
                 : this.parent.total + index === this.index;
         },
         calculatePosition(i, positive, zIndex) {
-            console.log("89::::::::::::::::::::", i, positive, zIndex);
+            // console.log("this.parent.space:", this.parent.space);
+            // console.log("89::::::::::::::::::::", i, positive, zIndex);
             const z = !this.parent.disable3d
                 ? parseInt(this.parent.inverseScaling) + (i + 1) * 100
                 : 0;
@@ -144,9 +156,12 @@ export default {
             const leftRemain =
                 this.parent.space === "auto"
                     ? parseInt((i + 1) * (this.parent.width / 1.5), 10)
-                    : parseInt((i + 1) * this.parent.space, 10);
+                    : //  +  (this.parent.slideWidth - this.parent.sliderWidthmy)
+                      parseInt((i + 1) * this.parent.space, 10);
+            //   + (this.parent.slideWidth - this.parent.sliderWidthmy)
+            console.log("position::::", positive);
             const transform = positive
-                ? "translateX(" +
+                ? "translateX(+" +
                   leftRemain +
                   "px) translateZ(-" +
                   z +
