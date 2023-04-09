@@ -17,9 +17,9 @@
                 perspective="35"
                 space="800"
                 height="550"
-                width="766"
+                width="900"
                 inverseScaling="300"
-                sliderWidthmy="400"
+                sliderWidthmy="550"
             >
                 <slide :index="0"> Slide 1 Content </slide>
                 <slide :index="1"> Slide 2 Content </slide>

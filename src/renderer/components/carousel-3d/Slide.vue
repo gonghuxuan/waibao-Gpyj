@@ -160,9 +160,13 @@ export default {
                       parseInt((i + 1) * this.parent.space, 10);
             //   + (this.parent.slideWidth - this.parent.sliderWidthmy)
             console.log("position::::", positive);
+            const leftRemainRight =
+                leftRemain +
+                (this.parent.slideWidth - this.parent.sliderWidthmy);
+            console.log("leftRemainRight::::::::", leftRemainRight);
             const transform = positive
                 ? "translateX(+" +
-                  leftRemain +
+                  leftRemainRight +
                   "px) translateZ(-" +
                   z +
                   "px) " +
