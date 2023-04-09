@@ -116,7 +116,7 @@ export default {
 
     .basic-layout-header,
     .basic-layout-footer {
-        height: 50px;
+        height: 40px;
         line-height: 50px;
         padding: 0;
         z-index: 22;

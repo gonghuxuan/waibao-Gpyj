@@ -88,7 +88,7 @@ module.exports = {
         loaderOptions: {
             less: {
                 modifyVars: {
-                    "primary-color": "#c62f2f",
+                    "primary-color": "#003C50",
                     "link-color": "#c62f2f",
                     "border-radius-base": "4px",
                 },
@@ -105,6 +105,15 @@ module.exports = {
         port: 9080,
         https: false,
         hotOnly: false,
+        proxy: {
+            "/gpyj": {
+                target: "http://test46.szdjct.com", // 本地模拟数据服务器
+                changeOrigin: true,
+                pathRewrite: {
+                    "^/gpyj": "", // 去掉接口地址中的api字符串
+                },
+            },
+        },
     },
     // 第三方插件配置
     pluginOptions: {

@@ -24,7 +24,7 @@ const router = new Router({
             path: "/",
             name: "index",
             component: BasicLayout,
-            redirect: "/home",
+            redirect: "/login",
             children: [
                 ...recommendRoutes,
                 ...rankRoutes,
@@ -44,14 +44,7 @@ const router = new Router({
                         require(["@/views/Offline/index.vue"], resolve);
                     },
                 },
-                {
-                    path: "/login",
-                    name: "Login",
-                    component: () => import("@/views/dataV/Login.vue"),
-                    meta: {
-                        title: "登录界面",
-                    },
-                },
+
                 {
                     path: "/home",
                     name: "Home",
@@ -77,7 +70,14 @@ const router = new Router({
                 require(["@/views/Mini/index.vue"], resolve);
             },
         },
-
+        {
+            path: "/login",
+            name: "Login",
+            component: () => import("@/views/dataV/Login.vue"),
+            meta: {
+                title: "登录界面",
+            },
+        },
         {
             name: "tray",
             path: "/tray",

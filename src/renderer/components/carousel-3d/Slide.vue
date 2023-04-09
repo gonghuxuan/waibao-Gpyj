@@ -151,7 +151,7 @@ export default {
                   "px) translateZ(-" +
                   z +
                   "px) " +
-                  "rotateY(" +
+                  "rotateY(-" +
                   y +
                   "deg)"
                 : "translateX(-" +
@@ -159,7 +159,7 @@ export default {
                   "px) translateZ(-" +
                   z +
                   "px) " +
-                  "rotateY(-" +
+                  "rotateY(" +
                   y +
                   "deg)";
             const top =

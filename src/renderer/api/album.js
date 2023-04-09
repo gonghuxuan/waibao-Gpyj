@@ -25,3 +25,9 @@ export function getAlbum(id) {
         },
     });
 }
+
+export function loginTest({ limit, offset }) {
+    return request.get("/share/user/login_auth_check", {
+        params,
+    });
+}

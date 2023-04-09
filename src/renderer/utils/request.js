@@ -5,12 +5,14 @@ import Toast from "./../components/Toast/toast";
 
 const baseURL =
     process.env.NODE_ENV === "development"
-        ? "http://localhost:3000"
-        : "http://localhost:3000";
+        ? "http://test46.szdjct.com"
+        : "http://test46.szdjct.com";
 
 const instance = sguoyi.create({
     baseURL,
 });
+
+console.log(instance);
 
 instance.interceptors.request.use(
     (config) => {
