@@ -1,18 +1,21 @@
 <template>
-    <div
+    <dv-border-box-11
+        :color="['#0694B1', '#5D9A9E']"
         id="slider456"
         class="carousel-3d-slide"
         :style="slideStyle"
         :class="computedClasses"
-        @click="goTo()"
+        @click.native="goTo()"
     >
+        >
+
         <slot
             :index="index"
             :isCurrent="isCurrent"
             :leftIndex="leftIndex"
             :rightIndex="rightIndex"
         />
-    </div>
+    </dv-border-box-11>
 </template>
 
 <script>
@@ -213,12 +216,12 @@ export default {
     visibility: hidden;
     overflow: hidden;
     top: 0;
-    border-radius: 1px;
+    /* border-radius: 1px;
     border-color: #000;
     border-color: rgba(0, 0, 0, 0.4);
-    border-style: solid;
+    border-style: solid; */
     background-size: cover;
-    background-color: #ccc;
+    /* background-color: #ccc; */
     display: block;
     margin: 0;
     box-sizing: border-box;

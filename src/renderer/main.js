@@ -16,6 +16,7 @@ import Vcomp from "./components/dataV/index";
 import Toast from "./components/dataV/toast";
 
 import "@/assets/styles/base.scss";
+import "@/assets/styles/font.scss";
 import "@/assets/styles/common.scss";
 import "@/assets/iconfont/iconfont.css";
 

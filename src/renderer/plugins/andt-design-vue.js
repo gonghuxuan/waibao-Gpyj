@@ -1,4 +1,5 @@
 import Vue from "vue";
+import dataV from "@jiaminghi/data-view";
 import {
     Affix,
     Anchor,
@@ -107,3 +108,5 @@ Vue.use(Upload);
 Vue.use(Skeleton);
 Vue.use(Comment);
 Vue.use(ConfigProvider);
+
+Vue.use(dataV);
