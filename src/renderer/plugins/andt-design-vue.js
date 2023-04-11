@@ -52,6 +52,12 @@ import {
     Comment,
 } from "ant-design-vue";
 import Toast from "./../components/Toast/toast";
+// import * as Icons from "@ant-design/icons-vue";
+// const icons = Icons;
+// for (const i in icons) {
+//     // 全局注册一下组件
+//     Vue.component(i, icons[i]);
+// }
 
 Vue.prototype.$message = message;
 Vue.prototype.$notification = notification;

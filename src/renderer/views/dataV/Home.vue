@@ -20,111 +20,27 @@
                 width="950"
                 inverseScaling="300"
                 sliderWidthmy="500"
+                @before-slide-change="slideChange($event)"
             >
                 <slide :index="0" class="slider">
-                    <div class="juzhong font-18">全局预警 </div>
-                    <div class="flex bankuai-contain">
-                        <div class="quan-bankuai-contain">
-                            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                                ><div class="juzhong font-18 quan-bankuai-inner"
-                                    >市场水位
-                                </div></dv-border-box-10
-                            ></div
-                        >
-                        <div class="quan-bankuai-contain">
-                            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                                ><div class="juzhong font-18 quan-bankuai-inner"
-                                    >指数背离
-                                </div></dv-border-box-10
-                            ></div
-                        >
-                    </div>
-                    <div class="flex bankuai-contain">
-                        <div class="quan-bankuai-contain">
-                            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                                ><div class="juzhong font-18 quan-bankuai-inner"
-                                    >打板
-                                </div></dv-border-box-10
-                            ></div
-                        >
-                        <div class="quan-bankuai-contain">
-                            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                                ><div class="juzhong font-18 quan-bankuai-inner"
-                                    >资金流向
-                                </div></dv-border-box-10
-                            ></div
-                        >
-                    </div>
+                    <quanslide />
                 </slide>
                 <slide :index="1" class="slider">
-                    <div class="juzhong font-18">局部预警 </div>
+                    <jubuslide />
                 </slide>
                 <slide :index="2" class="slider">
-                    <div class="juzhong font-18">重点预警 </div>
+                    <zhongslide />
                 </slide>
             </carousel-3d>
-            <div class="sn-container sn-container-1">
-                <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                    ><div class="juzhong font-18 bankuai-title"
-                        >涨停板块个数
-                    </div></dv-border-box-10
-                >
+            <div v-show="status === 0">
+                <quanbankuai />
             </div>
-            <div class="sn-container sn-container-2">
-                <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                    ><div class="juzhong font-18 bankuai-title"
-                        >新高异动
-                    </div></dv-border-box-10
-                >
+            <div v-show="status === 1">
+                <jububankuai />
             </div>
-            <div class="sn-container sn-container-3">
-                <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                    ><div class="juzhong font-18 bankuai-title"
-                        >平台突破
-                    </div></dv-border-box-10
-                >
+            <div v-show="status === 2">
+                <zhongbankuai />
             </div>
-            <div class="sn-container sn-container-4">
-                <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                    ><div class="juzhong font-18 bankuai-title"
-                        >游资股预警
-                    </div></dv-border-box-10
-                >
-            </div>
-            <div class="sn-container sn-container-5">
-                <dv-border-box-10 :color="['#0694B1', '#5D9A9E']"
-                    ><div class="juzhong font-18 bankuai-title"
-                        >连板高度预警
-                    </div></dv-border-box-10
-                >
-            </div>
-            <!-- <scrollArc />
-            <szBar />
-
-            <ringPin />
-            <rotateColorful />
-            <circleRunway />
-            <scanRadius />
-
-            <cakeLinkage />
-            <pyramidTrend />
-            <dynamicLine />
-
-            <staffMix />
-            <flashCloud />
-            <ringPie />
-            <colorfulRadar />
-
-            <dynamicList />
-            <bar3d />
-            <colorfulArea />
-
-            <rainbow />
-            <gauge />
-            <waterPolo />
-            <circleNesting /> -->
-
-            <!-- <div class="divider"></div> -->
             <div class="divider2"></div>
         </div>
     </div>
@@ -134,25 +50,47 @@
 import { screenSize } from "@/assets/js/utils";
 import Carousel3d from "@/components/carousel-3d/Carousel3d.vue";
 import Slide from "@/components/carousel-3d/Slide.vue";
+import quanbankuai from "./quan/quan-bankuai.vue";
+import quanslide from "./quan/quan-slide.vue";
+import jubuslide from "./jubu/jubu-slide.vue";
+import jububankuai from "./jubu/jubu-bankuai.vue";
+import zhongslide from "./zhong/zhong-slide.vue";
+import zhongbankuai from "./zhong/zhong-bankuai.vue";
+
 export default {
     name: "Home",
     components: {
         Carousel3d,
         Slide,
+        quanbankuai,
+        quanslide,
+        jubuslide,
+        jububankuai,
+        zhongslide,
+        zhongbankuai,
     },
     data() {
-        return {};
+        return {
+            status: 0,
+        };
     },
     computed: {},
     created() {
         console.log("refresh");
+        console.log(this.status);
     },
     mounted() {
         // console.log(this.$refs.editor);
         screenSize(this.$refs.editor);
         console.log(document.location.href);
     },
-    methods: {},
+    methods: {
+        slideChange(el) {
+            console.log(el);
+            console.log("123");
+            this.status = el;
+        },
+    },
 };
 </script>
 
@@ -175,45 +113,7 @@ export default {
     .slider {
         color: white;
     }
-    .bankuai-title {
-        color: #1dffff;
-        padding-top: 10px;
-    }
-    .bankuai-contain {
-        width: 100%;
-        display: flex;
-        height: 250px;
-        justify-content: space-around;
-        align-items: center;
-    }
-    .quan-bankuai-contain {
-        height: 220px;
-        width: 400px;
-    }
-    .quan-bankuai-inner {
-        height: 200px;
-        width: 400px;
-    }
-    .sn-container {
-        top: 710px;
-        width: 350px;
-        height: 300px;
-    }
-    .sn-container-1 {
-        left: 50px;
-    }
-    .sn-container-2 {
-        left: 420px;
-    }
-    .sn-container-3 {
-        left: 790px;
-    }
-    .sn-container-4 {
-        left: 1160px;
-    }
-    .sn-container-5 {
-        left: 1530px;
-    }
+
     .wrap {
         transform-origin: 0px 0px 0px;
         background: url(../../assets/img/bg.png) no-repeat;

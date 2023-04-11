@@ -159,6 +159,9 @@ export default {
             this.computeData();
         },
     },
+    mounted() {
+        console.log(this.onSlideChange);
+    },
     computed: {
         isLastSlide() {
             return this.currentIndex === this.total - 1;
@@ -174,9 +177,8 @@ export default {
         },
         slideWidth() {
             const vw = this.viewport;
-            console.log("this.viewport------------", vw);
+            console.log(this.onSlideChange);
             const sw = parseInt(this.width) + parseInt(this.border, 10) * 2;
-            console.log("this.sw------------", sw);
 
             return vw < sw && process.browser ? vw : sw;
         },

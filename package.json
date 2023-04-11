@@ -23,6 +23,7 @@
     "appId": "com.xiaozhu.cloudmusic",
     "main": "background.js",
     "dependencies": {
+        "@jiaminghi/data-view": "^2.10.0",
         "ant-design-vue": "^1.7.4",
         "axios": "^1.3.5",
         "core-js": "^3.6.5",
@@ -46,7 +47,8 @@
         "vue-lazyload": "^1.3.3",
         "vue-router": "^3.5.1",
         "vue-seamless-scroll": "^1.1.21",
-        "vuex": "^3.6.2"
+        "vuex": "^3.6.2",
+        "yarn": "^1.22.19"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "~4.5.0",

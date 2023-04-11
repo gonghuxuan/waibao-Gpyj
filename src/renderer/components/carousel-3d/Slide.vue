@@ -33,9 +33,7 @@ export default {
             zIndex: 999,
         };
     },
-    mounted() {
-        console.log("11111111111111111111111111111");
-    },
+    mounted() {},
     computed: {
         isCurrent() {
             return this.index === this.parent.currentIndex;
@@ -162,11 +160,9 @@ export default {
                     : //  +  (this.parent.slideWidth - this.parent.sliderWidthmy)
                       parseInt((i + 1) * this.parent.space, 10);
             //   + (this.parent.slideWidth - this.parent.sliderWidthmy)
-            console.log("position::::", positive);
             const leftRemainRight =
                 leftRemain +
                 (this.parent.slideWidth - this.parent.sliderWidthmy);
-            console.log("leftRemainRight::::::::", leftRemainRight);
             const transform = positive
                 ? "translateX(+" +
                   leftRemainRight +

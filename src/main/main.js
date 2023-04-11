@@ -18,7 +18,7 @@ import createLyricWindow from "./windows/desktopLyricWindow";
 import createMiniWindow from "./windows/miniWindow";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import { ACHEME, LOAD_URL } from "./config";
-import axios from 'axios'
+import axios from "axios";
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 if (process.env.NODE_ENV === "production") {
@@ -192,6 +192,7 @@ app.on("ready", async () => {
     }
     global.execPath = process.execPath;
     global.argv = process.argv;
+    console.log("123");
     await createWindow();
     global.lyricWindow = createLyricWindow(BrowserWindow);
     global.miniWindow = createMiniWindow(BrowserWindow);
