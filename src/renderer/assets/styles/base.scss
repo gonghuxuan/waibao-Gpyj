@@ -49,6 +49,9 @@ a {
   color: #7e8c8d;
   text-decoration: none;
   -webkit-backface-visibility: hidden;
+  &:hover {
+    color: #1DFFFF;
+  }
 }
 ::-webkit-scrollbar {
   width: 10px;
