@@ -16,7 +16,7 @@
                 class="sn-container-car wrap-container"
                 perspective="35"
                 space="750"
-                height="550"
+                height="600"
                 width="950"
                 inverseScaling="300"
                 sliderWidthmy="500"
