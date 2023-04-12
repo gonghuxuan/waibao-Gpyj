@@ -47,6 +47,10 @@ export default {
             pointList: [],
             max: 0,
             min: 0,
+            kHigh: [],
+            kLow: [],
+            kOpen: [],
+            kClose: [],
         };
     },
     computed: {},
@@ -84,6 +88,10 @@ export default {
                 this.pointList = [];
                 this.max = 0;
                 this.min = 0;
+                this.kHigh = [];
+                this.kLow = [];
+                this.kOpen = [];
+                this.kClose = [];
                 this.resData.exponentList.forEach((item) => {
                     if (item.close > this.max) {
                         this.max = item.close;
@@ -94,6 +102,11 @@ export default {
                                 ? getSecond(item.dealDate)
                                 : getDay(item.dealDate);
                     this.closeList.push(item.close);
+                    if (this.timeType == "1") {
+                        this.kHigh.push(item.high);
+                        this.kLow.push(item.low);
+                        this.kOpen.push(item.open);
+                    }
                     this.timeList.push(item.timeX);
                 });
                 res.signalList.forEach((item) => {
@@ -118,13 +131,18 @@ export default {
                     }
                     this.min = getMin(this.closeList);
                     if (this.min > this.resData.preClose) {
-                        console.log(this.min);
-                        console.log(this.resData.preClose);
+                        this.min = this.resData.preClose;
+                    }
+                } else {
+                    this.max = getMax(this.kHigh);
+                    if (this.max < this.resData.preClose) {
+                        this.max = this.resData.preClose;
+                    }
+                    this.min = getMin(this.kLow);
+                    if (this.min > this.resData.preClose) {
                         this.min = this.resData.preClose;
                     }
                 }
-                console.log(this.closeList);
-                console.log(this.timeList);
                 this.setCharts();
             });
         },
