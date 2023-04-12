@@ -32,7 +32,7 @@
 <script>
 import { getExponentNames } from "@/api/userInfo.js";
 import { getExponentDivergeSignal } from "@/api/userInfo.js";
-import { getSecond, getDay } from "@/utils/gpyj.js";
+import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
 console.log(echarts);
 export default {
@@ -45,6 +45,8 @@ export default {
             closeList: [],
             timeList: [],
             pointList: [],
+            max: 0,
+            min: 0,
         };
     },
     computed: {},
@@ -80,11 +82,17 @@ export default {
                 this.closeList = [];
                 this.timeList = [];
                 this.pointList = [];
+                this.max = 0;
+                this.min = 0;
                 this.resData.exponentList.forEach((item) => {
-                    item.timeX =
-                        this.timeType == "0"
-                            ? getSecond(item.dealDate)
-                            : getDay(item.dealDate);
+                    if (item.close > this.max) {
+                        this.max = item.close;
+                    }
+                    if (item.close)
+                        item.timeX =
+                            this.timeType == "0"
+                                ? getSecond(item.dealDate)
+                                : getDay(item.dealDate);
                     this.closeList.push(item.close);
                     this.timeList.push(item.timeX);
                 });
@@ -103,6 +111,18 @@ export default {
                         yAxis: this.closeList[index],
                     });
                 });
+                if (this.timeType == "0") {
+                    this.max = getMax(this.closeList);
+                    if (this.max < this.resData.preClose) {
+                        this.max = this.resData.preClose;
+                    }
+                    this.min = getMin(this.closeList);
+                    if (this.min > this.resData.preClose) {
+                        console.log(this.min);
+                        console.log(this.resData.preClose);
+                        this.min = this.resData.preClose;
+                    }
+                }
                 console.log(this.closeList);
                 console.log(this.timeList);
                 this.setCharts();
@@ -119,6 +139,9 @@ export default {
                 },
                 yAxis: {
                     type: "value",
+                    // scale: true,
+                    max: this.max,
+                    min: this.min,
                 },
 
                 dataZoom: {
