@@ -38,9 +38,9 @@ export default {};
 <style lang="scss">
 .quan-bankuai {
     .sn-container {
-        top: 710px;
+        top: 760px;
         width: 440px;
-        height: 300px;
+        height: 250px;
     }
     .sn-container-1 {
         left: 50px;

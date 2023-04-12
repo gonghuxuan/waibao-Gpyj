@@ -3,17 +3,17 @@ import store from "@/store/index.js";
 import Router from "vue-router";
 import BasicLayout from "@/layouts/BasicLayout";
 
-import { recommendRoutes } from "./modules/recommend";
-import { myMusicRoutes } from "./modules/myMusic";
-import { playlistRoutes } from "./modules/playlist";
-import { artistRoutes } from "./modules/artist";
-import { albumRoutes } from "./modules/album";
-import { djRoutes } from "./modules/dj";
-import { rankRoutes } from "./modules/rank";
-import { settingRoutes } from "./modules/setting";
-import { searchRoutes } from "./modules/search";
-import { videoRoutes } from "./modules/video";
-import { userRoutes } from "./modules/user";
+// import { recommendRoutes } from "./modules/recommend";
+// import { myMusicRoutes } from "./modules/myMusic";
+// import { playlistRoutes } from "./modules/playlist";
+// import { artistRoutes } from "./modules/artist";
+// import { albumRoutes } from "./modules/album";
+// import { djRoutes } from "./modules/dj";
+// import { rankRoutes } from "./modules/rank";
+// import { settingRoutes } from "./modules/setting";
+// import { searchRoutes } from "./modules/search";
+// import { videoRoutes } from "./modules/video";
+// import { userRoutes } from "./modules/user";
 import { ipcRenderer } from "electron";
 import Toast from "./../components/Toast/toast";
 Vue.use(Router);
@@ -26,17 +26,17 @@ const router = new Router({
             component: BasicLayout,
             redirect: "/login",
             children: [
-                ...recommendRoutes,
-                ...rankRoutes,
-                ...myMusicRoutes,
-                ...playlistRoutes,
-                ...artistRoutes,
-                ...albumRoutes,
-                ...searchRoutes,
-                ...videoRoutes,
-                ...userRoutes,
-                ...settingRoutes,
-                ...djRoutes,
+                // ...recommendRoutes,
+                // ...rankRoutes,
+                // ...myMusicRoutes,
+                // ...playlistRoutes,
+                // ...artistRoutes,
+                // ...albumRoutes,
+                // ...searchRoutes,
+                // ...videoRoutes,
+                // ...userRoutes,
+                // ...settingRoutes,
+                // ...djRoutes,
                 {
                     path: "/offline",
                     name: "offline",
@@ -63,13 +63,13 @@ const router = new Router({
                 },
             ],
         },
-        {
-            path: "/mini",
-            name: "mini",
-            component: function (resolve) {
-                require(["@/views/Mini/index.vue"], resolve);
-            },
-        },
+        // {
+        //     path: "/mini",
+        //     name: "mini",
+        //     component: function (resolve) {
+        //         require(["@/views/Mini/index.vue"], resolve);
+        //     },
+        // },
         {
             path: "/login",
             name: "Login",
@@ -78,41 +78,41 @@ const router = new Router({
                 title: "登录界面",
             },
         },
-        {
-            name: "tray",
-            path: "/tray",
-            component: function (resolve) {
-                require(["@/views/Tray.vue"], resolve);
-            },
-        },
-        {
-            name: "desktopLyric",
-            path: "/desktop-lyric",
-            component: function (resolve) {
-                require(["@/views/DesktopLyric.vue"], resolve);
-            },
-        },
-        {
-            name: "fullscreen",
-            path: "/fullscreen",
-            component: function (resolve) {
-                require(["@/views/Video/fullscreen.vue"], resolve);
-            },
-        },
-        {
-            name: "update",
-            path: "/update",
-            component: function (resolve) {
-                require(["@/views/Update/index.vue"], resolve);
-            },
-        },
-        {
-            name: "localPlayer",
-            path: "/local-player",
-            component: function (resolve) {
-                require(["@/views/Video/player.vue"], resolve);
-            },
-        },
+        // {
+        //     name: "tray",
+        //     path: "/tray",
+        //     component: function (resolve) {
+        //         require(["@/views/Tray.vue"], resolve);
+        //     },
+        // },
+        // {
+        //     name: "desktopLyric",
+        //     path: "/desktop-lyric",
+        //     component: function (resolve) {
+        //         require(["@/views/DesktopLyric.vue"], resolve);
+        //     },
+        // },
+        // {
+        //     name: "fullscreen",
+        //     path: "/fullscreen",
+        //     component: function (resolve) {
+        //         require(["@/views/Video/fullscreen.vue"], resolve);
+        //     },
+        // },
+        // {
+        //     name: "update",
+        //     path: "/update",
+        //     component: function (resolve) {
+        //         require(["@/views/Update/index.vue"], resolve);
+        //     },
+        // },
+        // {
+        //     name: "localPlayer",
+        //     path: "/local-player",
+        //     component: function (resolve) {
+        //         require(["@/views/Video/player.vue"], resolve);
+        //     },
+        // },
     ],
 });
 

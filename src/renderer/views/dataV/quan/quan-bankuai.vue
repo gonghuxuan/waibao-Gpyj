@@ -45,9 +45,9 @@ export default {};
 <style lang="scss">
 .jubu-bankuai {
     .sn-container {
-        top: 710px;
+        top: 760px;
         width: 350px;
-        height: 300px;
+        height: 250px;
     }
     .sn-container-1 {
         left: 50px;

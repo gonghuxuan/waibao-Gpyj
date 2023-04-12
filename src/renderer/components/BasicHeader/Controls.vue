@@ -1,7 +1,7 @@
 <template>
     <div class="menu">
         <a-icon type="home" theme="filled" class="icon" />
-        <a-dropdown :trigger="['click']">
+        <a-dropdown>
             <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
                 全局市场预警 <a-icon type="down" />
             </a>
@@ -190,9 +190,24 @@ export default {
     //     background-color: #073b49;
     // }
 }
+.box-7 {
+    width: 40px;
+    height: 30px;
+    // margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.menu {
+    display: flex;
+    justify-content: start;
+}
 .icon {
-    padding-left: 15px;
-    padding-right: 5px;
-    font-size: 15px;
+    margin-top: 0px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
