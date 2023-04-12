@@ -1,8 +1,6 @@
 <template>
     <div class="menu">
-        <dv-border-box-7 class="box-7" :color="['#5D9A9E', '#0694B1']"
-            ><a-icon type="home" theme="filled" class="icon"
-        /></dv-border-box-7>
+        <a-icon type="home" theme="filled" class="icon" />
         <a-dropdown>
             <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
                 全局市场预警 <a-icon type="down" />
@@ -191,25 +189,5 @@ export default {
     // /deep/ .ant-dropdown-menu {
     //     background-color: #073b49;
     // }
-}
-.box-7 {
-    width: 40px;
-    height: 30px;
-    // margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-}
-.menu {
-    display: flex;
-    justify-content: start;
-}
-.icon {
-    margin-top: 0px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 </style>

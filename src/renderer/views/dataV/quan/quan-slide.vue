@@ -11,11 +11,9 @@
             >
             <div class="quan-bankuai-contain">
                 <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                    ><div class="juzhong font-18 quan-bankuai-inner"
-                        >指数背离
-                    </div></dv-border-box-10
-                ></div
-            >
+                    ><div class="font-18 quan-bankuai-inner"
+                        ><quanzhishu /> </div></dv-border-box-10
+            ></div>
         </div>
         <div class="flex bankuai-contain">
             <div class="quan-bankuai-contain">
@@ -37,7 +35,14 @@
 </template>
 
 <script>
-export default {};
+import quanzhishu from "./quan/quan-zhishu.vue";
+
+export default {
+    name: "quan-slide",
+    components: {
+        quanzhishu,
+    },
+};
 </script>
 
 <style lang="scss">
