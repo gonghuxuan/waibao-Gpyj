@@ -61,6 +61,28 @@ const router = new Router({
                         title: "公司品牌介绍",
                     },
                 },
+                {
+                    path: "/detail",
+                    component: () => import("@/views/dataV/detailContain.vue"),
+                    meta: {
+                        title: "troubleDebt",
+                        keepAlive: false,
+                    },
+                    children: [
+                        {
+                            path: "quan-zhishu-detail",
+                            name: "quan-zhishu-detail",
+                            component: () =>
+                                import(
+                                    "@/views/dataV/quan/quan/quan-zhishuDetail.vue"
+                                ),
+                            meta: {
+                                title: "quan-zhishuDetail",
+                                keepAlive: false,
+                            },
+                        },
+                    ],
+                },
             ],
         },
         // {

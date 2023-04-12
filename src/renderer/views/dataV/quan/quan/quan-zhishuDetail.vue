@@ -1,44 +1,61 @@
 <template>
     <div class="jubu-zhishu-detail">
         <div>
-            <div style="font-size: 16px; padding-left: 10px" @click="toDetail"
-                >指数背离</div
-            >
-            <a-dropdown :trigger="['click']">
-                <a-menu slot="overlay" @click="handleMenuClick($event)">
-                    <a-menu-item v-for="item in exponentNameList" :key="item">
-                        {{ item }}
-                    </a-menu-item>
-                </a-menu>
-                <a-button style="margin-left: 8px">
-                    {{ exponentName }} <a-icon type="down" />
-                </a-button>
-            </a-dropdown>
-            <a-dropdown :trigger="['click']">
-                <a-menu slot="overlay" @click="handleMenuClick2($event)">
-                    <a-menu-item key="0"> 分时 </a-menu-item>
-                    <a-menu-item key="1"> 日线 </a-menu-item>
-                </a-menu>
-                <a-button style="margin-left: 8px">
-                    {{ timeType == "0" ? "分时" : "日线" }}
-                    <a-icon type="down" />
-                </a-button>
-            </a-dropdown>
             <div
-                v-show="timeType == '0'"
-                id="charts"
-                style="height: 240px; width: 100%; margin-top: -20px"
-            ></div>
-            <div
-                v-show="timeType == '1'"
-                id="chart2"
                 style="
-                    height: 175px;
-                    width: 100%;
-                    margin-top: 0px;
-                    margin-left: -5px;
+                    font-size: 16px;
+                    padding-left: 10px;
+                    color: rgba(100, 183, 188, 0.5);
+                    margin-top: 30px;
+                    margin-bottom: -20px;
                 "
-            ></div>
+                @click="toDetail"
+                ><span style="padding-right: 5px">全市场预警</span>/<span
+                    style="color: rgba(100, 183, 188, 1); padding-left: 5px"
+                    >指数背离</span
+                ></div
+            >
+            <div class="top-contain"> 指数背离</div>
+            <div class="content-contain">
+                <a-dropdown class="dropdown" :trigger="['click']">
+                    <a-menu slot="overlay" @click="handleMenuClick($event)">
+                        <a-menu-item
+                            v-for="item in exponentNameList"
+                            :key="item"
+                        >
+                            {{ item }}
+                        </a-menu-item>
+                    </a-menu>
+                    <a-button style="margin-left: 8px">
+                        {{ exponentName }} <a-icon type="down" />
+                    </a-button>
+                </a-dropdown>
+                <a-dropdown class="dropdown" :trigger="['click']">
+                    <a-menu slot="overlay" @click="handleMenuClick2($event)">
+                        <a-menu-item key="0"> 分时2 </a-menu-item>
+                        <a-menu-item key="1"> 日线 </a-menu-item>
+                    </a-menu>
+                    <a-button style="margin-left: 8px">
+                        {{ timeType == "0" ? "分时" : "日线" }}
+                        <a-icon type="down" />
+                    </a-button>
+                </a-dropdown>
+                <div
+                    v-show="timeType == '0'"
+                    id="charts"
+                    style="height: 240px; width: 100%; margin-top: -20px"
+                ></div>
+                <div
+                    v-show="timeType == '1'"
+                    id="chart2"
+                    style="
+                        height: 800px;
+                        width: 100%;
+                        margin-top: 0px;
+                        margin-left: -5px;
+                    "
+                ></div>
+            </div>
         </div>
     </div>
 </template>
@@ -77,7 +94,7 @@ export default {
         toDetail() {
             console.log("tiaozhuan");
             this.$router.push({
-                path: "detail/quan-zhishu-detail",
+                path: "/quan-zhishu-detail",
             });
         },
         handleMenuClick(el) {
@@ -131,7 +148,7 @@ export default {
                     }
                     this.timeList.push(item.timeX);
                 });
-                res.signalList.forEach((item) => {
+                res?.signalList.forEach((item) => {
                     item.timeX =
                         this.timeType == "0"
                             ? getSecond(item.dealDate)
@@ -425,6 +442,7 @@ export default {
 <style lang="scss">
 .jubu-zhishu-detail {
     padding: 7px 5px;
+    z-index: 999;
     .ant-btn {
         background-color: #082932;
         border-color: #5d9a9e;
@@ -432,6 +450,36 @@ export default {
     }
     .ant-dropdown-menu-item {
         color: blue;
+    }
+    .top-contain {
+        border: 2px solid rgba(12, 220, 226, 0.3);
+        background-image: linear-gradient(
+            to right,
+            rgba(29, 255, 255, 0.1),
+            rgba(29, 255, 255, 0.3),
+            rgba(29, 255, 255, 0.1)
+        );
+        margin-top: 40px;
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-size: 18px;
+        color: rgba(29, 255, 255, 1);
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .content-contain {
+        border: 1px solid rgba(12, 220, 226, 0.1);
+        height: 900px;
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .dropdown {
+        margin-top: 20px;
     }
 }
 </style>

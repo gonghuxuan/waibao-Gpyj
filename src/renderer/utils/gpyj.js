@@ -4,7 +4,7 @@ export function getSecond(time) {
 }
 
 export function getDay(time) {
-    return dayjs().month() + "-" + dayjs(time).date();
+    return dayjs(time).month() + "-" + dayjs(time).date();
 }
 
 export function getMax(arr) {
