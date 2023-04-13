@@ -43,13 +43,13 @@
                 <div
                     v-show="timeType == '0'"
                     id="charts"
-                    style="height: 240px; width: 100%; margin-top: -20px"
+                    style="height: 800px; width: 100%; margin-top: 0px"
                 ></div>
                 <div
                     v-show="timeType == '1'"
                     id="chart2"
                     style="
-                        height: 800px;
+                        height: 750px;
                         width: 100%;
                         margin-top: 0px;
                         margin-left: -5px;
@@ -215,39 +215,32 @@ export default {
                     min: this.min,
                 },
 
-                dataZoom: {
-                    // 开启数据平移
-                    type: "inside", // 滑动条单独显示
-                    show: true, // 是否显示滑动条
-                    startValue: 0, // 展示区域内容的起始数值
-                    endValue: 5, // 展示区域内容的结束数值 当前展示x坐标下标为0-16
-                    height: 10, // 滑动条组件高度
-                    bottom: 0, // 距离图表区域下边的距离
-                    showDetail: false, // 拖拽时是否显示详情
-                    showDataShadow: false,
-                    fillerColor: "#D4D4D4", // 平移条的填充颜色
-                    borderColor: "transparent", // 边框颜色
-                    zoomLock: true, // 锁定视图
-                    brushSelect: false, // 不可缩放 滑动条默认是有手柄可以进行展示的内容区域缩放的，不太美观
-                    // 通过该属性可以只滑动，不显示缩放功能
-                    handleStyle: {
-                        opacity: 0,
-                    },
-                    lineStyle: {
-                        opacity: 0,
-                    },
-                    textStyle: {
-                        fontSize: 0,
-                    },
-                    filterMode: "none",
-                },
-
                 // dataZoom: [
                 //     {
-                //         type: "slider", //这个dataZoom组件是slider型dataZoom组件
-                //         xAxisIndex: 0, //dataZoom-slider组件控制第一个XAxis
-                //         start: 10, //左边在10%位置
-                //         end: 10, //右边在60%位置
+                //         // 开启数据平移
+                //         type: "inside", // 滑动条单独显示
+                //         show: true, // 是否显示滑动条
+                //         startValue: 0, // 展示区域内容的起始数值
+                //         endValue: 15, // 展示区域内容的结束数值 当前展示x坐标下标为0-16
+                //         height: 10, // 滑动条组件高度
+                //         bottom: 0, // 距离图表区域下边的距离
+                //         showDetail: false, // 拖拽时是否显示详情
+                //         showDataShadow: false,
+                //         fillerColor: "#D4D4D4", // 平移条的填充颜色
+                //         borderColor: "transparent", // 边框颜色
+                //         zoomLock: true, // 锁定视图
+                //         brushSelect: false, // 不可缩放 滑动条默认是有手柄可以进行展示的内容区域缩放的，不太美观
+                //         // 通过该属性可以只滑动，不显示缩放功能
+                //         handleStyle: {
+                //             opacity: 0,
+                //         },
+                //         lineStyle: {
+                //             opacity: 0,
+                //         },
+                //         textStyle: {
+                //             fontSize: 0,
+                //         },
+                //         filterMode: "none",
                 //     },
                 //     // {
                 //     //     type: "inside", //这个dataZoom组件是inside型dataZoom组件
@@ -256,6 +249,21 @@ export default {
                 //     //     end: 60, //右边在60%的位置
                 //     // },
                 // ],
+
+                dataZoom: [
+                    {
+                        type: "slider", //这个dataZoom组件是slider型dataZoom组件
+                        xAxisIndex: 0, //dataZoom-slider组件控制第一个XAxis
+                        start: 0, //左边在10%位置
+                        end: 30, //右边在60%位置
+                    },
+                    {
+                        type: "inside", //这个dataZoom组件是inside型dataZoom组件
+                        xAxisIndex: 0, //dataZoom-inslide组件控制第一个XAxis
+                        start: 0, //左边在10%的位置
+                        end: 30, //右边在60%的位置
+                    },
+                ],
                 tooltip: {
                     trigger: "axis",
                     axisPointer: {
@@ -271,7 +279,7 @@ export default {
                         type: "line",
                         markPoint: {
                             data: this.pointList,
-                            symbolSize: 50,
+                            symbolSize: 70,
                         },
                         markLine: {
                             symbol: "none", //去掉警戒线最后面的箭头
@@ -324,32 +332,48 @@ export default {
                 ],
             };
             const option3 = {
-                dataZoom: {
-                    // 开启数据平移
-                    type: "inside", // 滑动条单独显示
-                    show: true, // 是否显示滑动条
-                    startValue: 0, // 展示区域内容的起始数值
-                    endValue: 5, // 展示区域内容的结束数值 当前展示x坐标下标为0-16
-                    height: 10, // 滑动条组件高度
-                    bottom: 0, // 距离图表区域下边的距离
-                    showDetail: false, // 拖拽时是否显示详情
-                    showDataShadow: false,
-                    fillerColor: "#D4D4D4", // 平移条的填充颜色
-                    borderColor: "transparent", // 边框颜色
-                    zoomLock: true, // 锁定视图
-                    brushSelect: false, // 不可缩放 滑动条默认是有手柄可以进行展示的内容区域缩放的，不太美观
-                    // 通过该属性可以只滑动，不显示缩放功能
-                    handleStyle: {
-                        opacity: 0,
+                // dataZoom: {
+                //     // 开启数据平移
+                //     type: "inside", // 滑动条单独显示
+                //     show: true, // 是否显示滑动条
+                //     startValue: 0, // 展示区域内容的起始数值
+                //     endValue: 5, // 展示区域内容的结束数值 当前展示x坐标下标为0-16
+                //     height: 10, // 滑动条组件高度
+                //     bottom: 0, // 距离图表区域下边的距离
+                //     showDetail: false, // 拖拽时是否显示详情
+                //     showDataShadow: false,
+                //     fillerColor: "#D4D4D4", // 平移条的填充颜色
+                //     borderColor: "transparent", // 边框颜色
+                //     zoomLock: true, // 锁定视图
+                //     brushSelect: false, // 不可缩放 滑动条默认是有手柄可以进行展示的内容区域缩放的，不太美观
+                //     // 通过该属性可以只滑动，不显示缩放功能
+                //     handleStyle: {
+                //         opacity: 0,
+                //     },
+                //     lineStyle: {
+                //         opacity: 0,
+                //     },
+                //     textStyle: {
+                //         fontSize: 0,
+                //     },
+                //     filterMode: "none",
+                // },
+                dataZoom: [
+                    {
+                        type: "slider", //这个dataZoom组件是slider型dataZoom组件
+                        xAxisIndex: 0, //dataZoom-slider组件控制第一个XAxis
+                        start: 0, //左边在10%位置
+                        end: 30, //右边在60%位置
+                        bottom: 0, // 距离图表区域下边的距离
                     },
-                    lineStyle: {
-                        opacity: 0,
+                    {
+                        type: "inside", //这个dataZoom组件是inside型dataZoom组件
+                        xAxisIndex: 0, //dataZoom-inslide组件控制第一个XAxis
+                        start: 0, //左边在10%的位置
+                        end: 30, //右边在60%的位置
+                        bottom: 100, // 距离图表区域下边的距离
                     },
-                    textStyle: {
-                        fontSize: 0,
-                    },
-                    filterMode: "none",
-                },
+                ],
                 tooltip: {
                     trigger: "axis",
                     axisPointer: {
@@ -370,9 +394,9 @@ export default {
                     },
                 },
                 grid: {
-                    left: "3%",
-                    right: "4%",
-                    bottom: "3%",
+                    // left: "3%",
+                    // right: "4%",
+                    // bottom: "3%",
                     containLabel: true,
                 },
                 xAxis: {
