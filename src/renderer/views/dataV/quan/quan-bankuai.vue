@@ -9,10 +9,8 @@
         </div>
         <div class="sn-container sn-container-2">
             <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                ><div class="juzhong font-18 bankuai-title"
-                    >新高异动
-                </div></dv-border-box-10
-            >
+                ><div class="juzhong font-18 bankuai-title"><quanxingao /> </div
+            ></dv-border-box-10>
         </div>
         <div class="sn-container sn-container-3">
             <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
@@ -39,7 +37,22 @@
 </template>
 
 <script>
-export default {};
+import quanxingao from "./quan/quan-xingao.vue";
+
+export default {
+    data() {
+        return {};
+    },
+    components: {
+        quanxingao,
+    },
+    computed: {},
+    created() {},
+    mounted() {
+        // this.getData();
+    },
+    methods: {},
+};
 </script>
 
 <style lang="scss">

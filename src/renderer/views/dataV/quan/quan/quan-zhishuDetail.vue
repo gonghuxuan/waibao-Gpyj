@@ -1,63 +1,55 @@
 <template>
-    <div class="jubu-zhishu-detail">
-        <div>
-            <div
-                style="
-                    font-size: 16px;
+  <div class="jubu-zhishu-detail">
+    <div>
+      <div style="
+              font-size: 16px;
                     padding-left: 10px;
                     color: rgba(100, 183, 188, 0.5);
-                    margin-top: 30px;
+                    margin-top: 90px;
                     margin-bottom: -20px;
-                "
-                @click="toDetail"
-                ><span style="padding-right: 5px">全市场预警</span>/<span
-                    style="color: rgba(100, 183, 188, 1); padding-left: 5px"
-                    >指数背离</span
-                ></div
-            >
-            <div class="top-contain"> 指数背离</div>
-            <div class="content-contain">
-                <a-dropdown class="dropdown" :trigger="['click']">
-                    <a-menu slot="overlay" @click="handleMenuClick($event)">
-                        <a-menu-item
-                            v-for="item in exponentNameList"
-                            :key="item"
-                        >
-                            {{ item }}
-                        </a-menu-item>
-                    </a-menu>
-                    <a-button style="margin-left: 8px">
-                        {{ exponentName }} <a-icon type="down" />
-                    </a-button>
-                </a-dropdown>
-                <a-dropdown class="dropdown" :trigger="['click']">
-                    <a-menu slot="overlay" @click="handleMenuClick2($event)">
-                        <a-menu-item key="0"> 分时2 </a-menu-item>
-                        <a-menu-item key="1"> 日线 </a-menu-item>
-                    </a-menu>
-                    <a-button style="margin-left: 8px">
-                        {{ timeType == "0" ? "分时" : "日线" }}
-                        <a-icon type="down" />
-                    </a-button>
-                </a-dropdown>
-                <div
-                    v-show="timeType == '0'"
-                    id="charts"
-                    style="height: 800px; width: 100%; margin-top: 0px"
-                ></div>
-                <div
-                    v-show="timeType == '1'"
-                    id="chart2"
-                    style="
+                    display: flex;
+                    align-items: center;
+                    justify-content:space-between;
+                " @click="toDetail">
+        <div style="margin-left: 3vw">
+          <span style="padding-right: 5px">全市场预警</span>/
+          <span style="color: rgba(100, 183, 188, 1); padding-left: 5px">指数背离</span>
+        </div>
+        <div style="margin-right: 3vw" @click="back"> <a-button>
+            返回
+          </a-button></div>
+      </div>
+      <div class="top-contain">指数背离</div>
+      <div class="content-contain">
+        <a-dropdown class="dropdown" :trigger="['click']">
+          <a-menu slot="overlay" @click="handleMenuClick($event)">
+            <a-menu-item v-for="item in exponentNameList" :key="item">{{ item }}</a-menu-item>
+          </a-menu>
+          <a-button style="margin-left: 8px">
+            {{ exponentName }}
+            <a-icon type="down" />
+          </a-button>
+        </a-dropdown>
+        <a-dropdown class="dropdown" :trigger="['click']">
+          <a-menu slot="overlay" @click="handleMenuClick2($event)">
+            <a-menu-item key="0">分时</a-menu-item>
+            <a-menu-item key="1">日线</a-menu-item>
+          </a-menu>
+          <a-button style="margin-left: 8px">
+            {{ timeType == "0" ? "分时" : "日线" }}
+            <a-icon type="down" />
+          </a-button>
+        </a-dropdown>
+        <div v-show="timeType == '0'" id="charts" style="height: 750px; width: 100%; margin-top: 0px"></div>
+        <div v-show="timeType == '1'" id="chart2" style="
                         height: 750px;
                         width: 100%;
                         margin-top: 0px;
                         margin-left: -5px;
-                    "
-                ></div>
-            </div>
-        </div>
+                    "></div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -91,6 +83,10 @@ export default {
         this.getData();
     },
     methods: {
+        back() {
+            console.log(123);
+            this.$router.go(-1);
+        },
         toDetail() {
             console.log("tiaozhuan");
             this.$router.push({
@@ -279,7 +275,7 @@ export default {
                         type: "line",
                         markPoint: {
                             data: this.pointList,
-                            symbolSize: 70,
+                            symbolSize: 100,
                         },
                         markLine: {
                             symbol: "none", //去掉警戒线最后面的箭头
@@ -433,7 +429,7 @@ export default {
                         },
                         markPoint: {
                             data: this.pointList,
-                            symbolSize: 50,
+                            symbolSize: 70,
                         },
                     },
                     {
@@ -497,7 +493,7 @@ export default {
     }
     .content-contain {
         border: 1px solid rgba(12, 220, 226, 0.1);
-        height: 900px;
+        height: 825px;
         width: 96%;
         margin-left: auto;
         margin-right: auto;
