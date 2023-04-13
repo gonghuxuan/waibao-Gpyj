@@ -91,7 +91,7 @@ protocol.registerSchemesAsPrivileged([
 
 async function createWindow() {
     global.mainWindow = mainWindow = new BrowserWindow({
-        width: 1200,
+        width: 1400,
         height: 900,
         title: process.platform === "win32" ? "网易云音乐" : "",
         icon: previewIcon,
