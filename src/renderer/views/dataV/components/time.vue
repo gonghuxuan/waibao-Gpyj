@@ -1,0 +1,61 @@
+<template>
+  <div style="text-align: center;padding-top: 100px">
+    当前时间:{{ nowTime }}
+  </div>
+</template>
+  <script>
+export default {
+    data() {
+        return {
+            nowTime: "",
+        };
+    },
+    mounted() {
+        this.getNowTime();
+    },
+    methods: {
+        getNowTime() {
+            let speed = 1000;
+            let that = this;
+            let theNowTime = function () {
+                that.nowTime = that.timeNumber();
+            };
+            setInterval(theNowTime, speed);
+        },
+        timeNumber() {
+            let today = new Date();
+            let date =
+                today.getFullYear() +
+                "-" +
+                this.twoDigits(today.getMonth() + 1) +
+                "-" +
+                this.twoDigits(today.getDate());
+            let time =
+                this.twoDigits(today.getHours()) +
+                ":" +
+                this.twoDigits(today.getMinutes()) +
+                ":" +
+                this.twoDigits(today.getSeconds());
+            return date + "  " + time;
+        },
+        twoDigits(val) {
+            if (val < 10) return "0" + val;
+            return val;
+        },
+    },
+};
+</script>
+
+<style lang="scss">
+.time {
+    padding: 7px 5px;
+    .ant-btn {
+        background-color: #082932;
+        border-color: #5d9a9e;
+        color: #1de2e2;
+    }
+    .ant-dropdown-menu-item {
+        color: blue;
+    }
+}
+</style>
