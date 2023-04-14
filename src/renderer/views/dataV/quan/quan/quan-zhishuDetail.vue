@@ -1,11 +1,15 @@
 <template>
   <div class="jubu-zhishu-detail">
     <div>
+      <div class="top1">
+        <timecom />
+        <usercom />
+      </div>
       <div style="
               font-size: 16px;
                     padding-left: 10px;
                     color: rgba(100, 183, 188, 0.5);
-                    margin-top: 90px;
+                    margin-top: 20px;
                     margin-bottom: -20px;
                     display: flex;
                     align-items: center;
@@ -57,6 +61,8 @@ import { getExponentNames } from "@/api/userInfo.js";
 import { getExponentDivergeSignal } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
+import timecom from "@/views/dataV/components/time.vue";
+import usercom from "@/views/dataV/components/user.vue";
 console.log(echarts);
 export default {
     data() {
@@ -75,6 +81,10 @@ export default {
             kOpen: [],
             kClose: [],
         };
+    },
+    components: {
+        timecom,
+        usercom,
     },
     computed: {},
     created() {},
@@ -463,6 +473,12 @@ export default {
 .jubu-zhishu-detail {
     padding: 7px 5px;
     z-index: 999;
+    .top1 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+    }
     .ant-btn {
         background-color: #082932;
         border-color: #5d9a9e;

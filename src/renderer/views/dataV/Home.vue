@@ -5,46 +5,38 @@
 -->
 
 <template>
-    <div class="home-container">
-        <div class="wrap" ref="editor">
-            <div class="top">
-                <timecom />
-            </div>
-            <!-- <sinan />
+  <div class="home-container">
+    <div class="wrap" ref="editor">
+      <div class="top">
+        <timecom />
+        <usercom />
+      </div>
+      <!-- <sinan />
             <seamless />
             <pyramid /> -->
-            <carousel-3d
-                class="sn-container-car wrap-container"
-                perspective="35"
-                space="750"
-                height="600"
-                width="950"
-                inverseScaling="300"
-                sliderWidthmy="500"
-                @before-slide-change="slideChange($event)"
-            >
-                <slide :index="0" class="slider">
-                    <quanslide />
-                </slide>
-                <slide :index="1" class="slider">
-                    <jubuslide />
-                </slide>
-                <slide :index="2" class="slider">
-                    <zhongslide />
-                </slide>
-            </carousel-3d>
-            <div v-show="status === 0">
-                <quanbankuai />
-            </div>
-            <div v-show="status === 1">
-                <jububankuai />
-            </div>
-            <div v-show="status === 2">
-                <zhongbankuai />
-            </div>
-            <div class="divider2"></div>
-        </div>
+      <carousel-3d class="sn-container-car wrap-container" perspective="35" space="750" height="600" width="950" inverseScaling="300" sliderWidthmy="500" @before-slide-change="slideChange($event)">
+        <slide :index="0" class="slider">
+          <quanslide />
+        </slide>
+        <slide :index="1" class="slider">
+          <jubuslide />
+        </slide>
+        <slide :index="2" class="slider">
+          <zhongslide />
+        </slide>
+      </carousel-3d>
+      <div v-show="status === 0">
+        <quanbankuai />
+      </div>
+      <div v-show="status === 1">
+        <jububankuai />
+      </div>
+      <div v-show="status === 2">
+        <zhongbankuai />
+      </div>
+      <div class="divider2"></div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -58,6 +50,7 @@ import jububankuai from "./jubu/jubu-bankuai.vue";
 import zhongslide from "./zhong/zhong-slide.vue";
 import zhongbankuai from "./zhong/zhong-bankuai.vue";
 import timecom from "./components/time.vue";
+import usercom from "./components/user.vue";
 
 export default {
     name: "Home",
@@ -71,6 +64,7 @@ export default {
         zhongslide,
         zhongbankuai,
         timecom,
+        usercom,
     },
     data() {
         return {
@@ -139,6 +133,9 @@ export default {
             background-position: 65% 0;
             border: none;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
         .divider {
             position: absolute;

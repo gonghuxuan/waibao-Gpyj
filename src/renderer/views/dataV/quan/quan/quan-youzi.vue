@@ -1,11 +1,8 @@
 <template>
-  <div class="jubu-xingao-detail">
-    <div class="juzhong">新高异动123 <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;" /></div>
-    <div class="table-contain">
-      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
-        <a slot="name" slot-scope="text">{{ text }}</a>
-      </a-table>
-    </div>
+  <div>
+    <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
+      <a slot="name" slot-scope="text">{{ text }}</a>
+    </a-table>
   </div>
 </template>
 
@@ -38,7 +35,7 @@ export default {
     },
     methods: {
         getData() {
-            getLetfStocks({ stockType: 0 }).then((res) => {
+            getLetfStocks({ stockType: 3 }).then((res) => {
                 console.log(res);
                 this.resData = res;
             });
@@ -58,13 +55,6 @@ export default {
     }
     .ant-dropdown-menu-item {
         color: blue;
-    }
-    .table-contain {
-        width: 310px;
-        height: 195px;
-        overflow: scroll;
-        background-color: rgba(2, 81, 93, 1);
-        margin-top: 5px;
     }
     .ant-table-thead > tr > th {
         background-color: rgba(2, 81, 93, 1);

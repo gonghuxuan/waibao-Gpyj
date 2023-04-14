@@ -1,46 +1,36 @@
 <template>
-    <div class="jubu-zhishu-detail">
-        <div>
-            <div style="font-size: 16px; padding-left: 10px" @click="toDetail"
-                >指数背离</div
-            >
-            <a-dropdown :trigger="['click']">
-                <a-menu slot="overlay" @click="handleMenuClick($event)">
-                    <a-menu-item v-for="item in exponentNameList" :key="item">
-                        {{ item }}
-                    </a-menu-item>
-                </a-menu>
-                <a-button style="margin-left: 8px">
-                    {{ exponentName }} <a-icon type="down" />
-                </a-button>
-            </a-dropdown>
-            <a-dropdown :trigger="['click']">
-                <a-menu slot="overlay" @click="handleMenuClick2($event)">
-                    <a-menu-item key="0"> 分时 </a-menu-item>
-                    <a-menu-item key="1"> 日线 </a-menu-item>
-                </a-menu>
-                <a-button style="margin-left: 8px">
-                    {{ timeType == "0" ? "分时" : "日线" }}
-                    <a-icon type="down" />
-                </a-button>
-            </a-dropdown>
-            <div
-                v-show="timeType == '0'"
-                id="charts"
-                style="height: 240px; width: 100%; margin-top: -20px"
-            ></div>
-            <div
-                v-show="timeType == '1'"
-                id="chart2"
-                style="
+  <div class="jubu-zhishu-detail">
+    <div>
+      <div style="font-size: 16px; padding-left: 10px" @click="toDetail">指数背离</div>
+      <a-dropdown :trigger="['click']">
+        <a-menu slot="overlay" @click="handleMenuClick($event)">
+          <a-menu-item v-for="item in exponentNameList" :key="item">
+            {{ item }}
+          </a-menu-item>
+        </a-menu>
+        <a-button style="margin-left: 8px">
+          {{ exponentName }} <a-icon type="down" />
+        </a-button>
+      </a-dropdown>
+      <a-dropdown :trigger="['click']">
+        <a-menu slot="overlay" @click="handleMenuClick2($event)">
+          <a-menu-item key="0"> 分时 </a-menu-item>
+          <a-menu-item key="1"> 日线 </a-menu-item>
+        </a-menu>
+        <a-button style="margin-left: 8px">
+          {{ timeType == "0" ? "分时" : "日线" }}
+          <a-icon type="down" />
+        </a-button>
+      </a-dropdown>
+      <div v-show="timeType == '0'" id="charts" style="height: 240px; width: 100%; margin-top: -20px"></div>
+      <div v-show="timeType == '1'" id="chart2" style="
                     height: 175px;
                     width: 100%;
                     margin-top: 0px;
                     margin-left: -5px;
-                "
-            ></div>
-        </div>
+                "></div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -48,7 +38,6 @@ import { getExponentNames } from "@/api/userInfo.js";
 import { getExponentDivergeSignal } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
-console.log(echarts);
 export default {
     data() {
         return {
@@ -75,24 +64,20 @@ export default {
     },
     methods: {
         toDetail() {
-            console.log("tiaozhuan");
             this.$router.push({
                 path: "detail/quan-zhishu-detail",
             });
         },
         handleMenuClick(el) {
-            console.log(el);
             this.exponentName = el.key;
             this.getData();
         },
         handleMenuClick2(el) {
-            console.log(el.key);
             this.timeType = el.key;
             this.getData();
         },
         getName() {
             getExponentNames().then((res) => {
-                console.log(res);
                 this.exponentNameList = res;
             });
         },
@@ -101,7 +86,6 @@ export default {
                 timeType: this.timeType,
                 exponentName: this.exponentName,
             }).then((res) => {
-                console.log(res);
                 this.resData = res;
                 this.closeList = [];
                 this.timeList = [];
@@ -178,13 +162,11 @@ export default {
             });
         },
         setCharts() {
-            console.log(this.closeList);
             if (this.timeType == "0") {
                 this.chart = echarts.init(document.getElementById("charts"));
             } else {
                 this.chart2 = echarts.init(document.getElementById("chart2"));
             }
-            console.log(this.pointList);
             const option1 = {
                 xAxis: {
                     type: "category",

@@ -23,3 +23,11 @@ export function getExponentDivergeSignal(params) {
         params,
     });
 }
+
+export function getLetfStocks(params) {
+    return request({
+        url: "/stockAlert/overallMarketStocks/getLetfStocks",
+        method: "get",
+        params,
+    });
+}

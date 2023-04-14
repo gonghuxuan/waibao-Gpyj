@@ -1,10 +1,8 @@
 <template>
   <div class="jubu-xingao-detail">
-    <div class="juzhong">新高异动123 <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;" /></div>
+    <div class="juzhong">{{ title }}<img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;" /></div>
     <div class="table-contain">
-      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
-        <a slot="name" slot-scope="text">{{ text }}</a>
-      </a-table>
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -17,24 +15,21 @@ export default {
     data() {
         return {
             resData: [],
-            columns: [
-                {
-                    title: "名称",
-                    dataIndex: "plateName",
-                    key: "plateName",
-                },
-                {
-                    title: "价格",
-                    dataIndex: "stockCode",
-                    key: "stockCode",
-                },
-            ],
         };
+    },
+    props: {
+        title: {
+            type: String,
+            default() {
+                return this.$getItem("新高异动1");
+            },
+        },
     },
     computed: {},
     created() {},
     mounted() {
         this.getData();
+        console.log(this.title);
     },
     methods: {
         getData() {

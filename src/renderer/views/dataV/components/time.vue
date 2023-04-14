@@ -1,14 +1,12 @@
 <template>
-    <div
-        style="
+  <div style="
             color: white;
             font-size: 16px;
-            padding-top: 30px;
+            padding-top: 15px;
             padding-left: 30px;
-        "
-    >
-        {{ nowTime }}
-    </div>
+        ">
+    {{ nowTime }}
+  </div>
 </template>
 <script>
 import dayjs from "dayjs";
@@ -44,7 +42,6 @@ export default {
                 this.twoDigits(today.getMinutes()) +
                 ":" +
                 this.twoDigits(today.getSeconds());
-            console.log(dayjs(today).day());
             return date + " " + time + " " + this.getDay(dayjs(today).day());
         },
         getDay(index) {

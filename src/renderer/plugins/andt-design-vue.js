@@ -44,6 +44,7 @@ import {
     TimePicker,
     Timeline,
     Tooltip,
+    Table,
     // Mention,
     Upload,
     // version,
@@ -114,5 +115,6 @@ Vue.use(Upload);
 Vue.use(Skeleton);
 Vue.use(Comment);
 Vue.use(ConfigProvider);
+Vue.use(Table);
 
 Vue.use(dataV);
