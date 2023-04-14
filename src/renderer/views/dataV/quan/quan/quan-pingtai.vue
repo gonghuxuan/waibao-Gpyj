@@ -17,8 +17,8 @@ export default {
             columns: [
                 {
                     title: "名称",
-                    dataIndex: "plateName",
-                    key: "plateName",
+                    dataIndex: "stockName",
+                    key: "stockName",
                 },
                 {
                     title: "价格",

@@ -20,8 +20,8 @@ export default {
             columns: [
                 {
                     title: "名称",
-                    dataIndex: "plateName",
-                    key: "plateName",
+                    dataIndex: "stockName",
+                    key: "stockName",
                 },
                 {
                     title: "价格",
@@ -43,7 +43,16 @@ export default {
                 this.resData = res;
             });
         },
-        toDetail() {},
+        toDetail() {
+            this.$router.push({
+                path: "/quan-xingao-detail",
+                query: {
+                    stockType: 0,
+                    title1: "全场预警",
+                    title2: "新高异动",
+                },
+            });
+        },
     },
 };
 </script>

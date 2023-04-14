@@ -81,6 +81,31 @@ const router = new Router({
                                 keepAlive: false,
                             },
                         },
+                        {
+                            path: "detail2",
+                            component: () =>
+                                import(
+                                    "@/views/dataV/components/detail-item.vue"
+                                ),
+                            meta: {
+                                title: "detail-item",
+                                keepAlive: false,
+                            },
+                            children: [
+                                {
+                                    path: "/quan-xingao-detail",
+                                    name: "quan-xingao-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/quan/quan/quan-xingao-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "quan-xingao-detail",
+                                        keepAlive: false,
+                                    },
+                                },
+                            ],
+                        },
                     ],
                 },
             ],
