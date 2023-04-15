@@ -1,6 +1,6 @@
 <template>
   <div class="jubu-zijin">
-    <div class="juzhong">市场水位
+    <div class="juzhong">资金流向
       <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px" />
     </div>
     <div class="table-contain">
@@ -144,11 +144,11 @@ export default {
         },
         toDetail() {
             this.$router.push({
-                path: "/quan-xingao-detail",
+                path: "/quan-zijin-detail",
                 query: {
                     stockType: 0,
                     title1: "全场预警",
-                    title2: "新高异动",
+                    title2: "资金流向",
                 },
             });
         },

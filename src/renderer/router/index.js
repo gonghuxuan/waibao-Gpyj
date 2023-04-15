@@ -116,6 +116,18 @@ const router = new Router({
                                         keepAlive: false,
                                     },
                                 },
+                                {
+                                    path: "/quan-zijin-detail",
+                                    name: "quan-zijin-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/quan/quan/quan-zijin-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "quan-zijin-detail",
+                                        keepAlive: false,
+                                    },
+                                },
                             ],
                         },
                     ],
