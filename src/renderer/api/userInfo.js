@@ -39,3 +39,11 @@ export function getStockDataLine(params) {
         params,
     });
 }
+
+export function get2MarketAmount(params) {
+    return request({
+        url: "/stockAlert/overallMarket/get2MarketAmount",
+        method: "get",
+        params,
+    });
+}
