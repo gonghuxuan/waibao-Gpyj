@@ -1,9 +1,11 @@
 <template>
-  <div class="jubu-shuiwei">
-    <div class="juzhong">市场水位
-      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px" />
+  <div class="quan-shuiwei-detail">
+    <div class="top-contain">
+      <div>
+        <span class="padding active">市场水位</span>
+      </div>
     </div>
-    <div class="table-contain">
+    <div class="content-contain">
       <div class="juzhong title-contain">
         <div style="color: rgba(255, 244, 92, 1);">市场风格：</div>
         <div style="color: #FF5145">游资</div>
@@ -32,83 +34,93 @@
     </div>
   </div>
 </template>
-<!-- :class="
-record[index].changepercent > 0 ? 'red' : 'green'
-" -->
+
 <script>
-import { get2MarketAmount } from "@/api/userInfo.js";
-import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import { getLetfStocks, getStockDataLine } from "@/api/userInfo.js";
+
 import * as echarts from "echarts";
+
+console.log(echarts);
 export default {
     data() {
         return {
-            resData: [],
-            columns: [
-                {
-                    title: "名称",
-                    dataIndex: "stockName",
-                    key: "stockName",
-                    align: "center",
-                },
-                {
-                    title: "价格",
-                    dataIndex: "close",
-                    key: "close",
-                    scopedSlots: { customRender: "close" },
-                    align: "center",
-                },
-                {
-                    title: "涨跌幅",
-                    dataIndex: "changepercent",
-                    key: "changepercent",
-                    align: "center",
-                    scopedSlots: { customRender: "changepercent" },
-                },
-            ],
+            active: 0,
+            gupiaoList: [],
+            selectedGupiao: "",
+            timeType: "1",
+            stockDetail: [],
         };
     },
-    props: {
-        stockType: {
-            type: String,
-            default: 0,
-        },
-        title: {
-            type: String,
-            default: 0,
-        },
-    },
+    components: {},
     computed: {},
     created() {},
     mounted() {
+        // this.getName();
+        console.log(this.$route.query.stockType);
         this.getData();
     },
     methods: {
         getData() {
-            get2MarketAmount().then((res) => {
+            getLetfStocks({ stockType: this.$route.query.stockType }).then(
+                (res) => {
+                    this.gupiaoList = res;
+                    console.log(this.gupiaoList);
+                    this.selectedGupiao = this.gupiaoList[0].stockCode;
+                    this.getStockDetail();
+                }
+            );
+        },
+        getStockDetail() {
+            getStockDataLine({
+                timeType: this.timeType,
+                code: this.selectedGupiao,
+            }).then((res) => {
                 console.log(res);
-                this.resData = res;
+                this.stockDetail = res;
             });
         },
-        toDetail() {
-            this.$router.push({
-                path: "/quan-shuiwei-detail",
-                query: {
-                    stockType: 0,
-                    title1: "全场预警",
-                    title2: "新高异动",
-                },
-            });
+        selectgupiao(stockCode) {
+            this.selectedGupiao = stockCode;
+        },
+        selecttime(time) {
+            this.timeType = time;
         },
     },
 };
 </script>
 
 <style lang="scss">
-.jubu-shuiwei {
-    width: 100%;
-    height: 100%;
-    padding: 7px 5px;
-
+.quan-shuiwei-detail {
+    .gupiao-item {
+        font-size: 16px;
+        text-align: left;
+        height: 40px;
+        position: relative;
+    }
+    .ant-divider-horizontal {
+        margin: 0px;
+    }
+    .gupiao {
+        padding-left: 10%;
+        display: flex;
+        align-items: center;
+        height: 38px;
+    }
+    .gupiao-active {
+        color: #1dffff;
+        background-color: rgba(2, 81, 93, 1);
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .padding {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .content-contain {
+        // display: flex;
+        padding: 10px;
+    }
     .table-contain {
         width: 100%;
         height: 100%;
@@ -119,17 +131,21 @@ export default {
         right: 20px;
     }
     .title-contain {
-        height: 40px;
+        height: 100px;
+        width: 100%;
         background-image: linear-gradient(
             to right,
             rgba(255, 244, 92, 0.01),
             rgba(255, 244, 92, 0.05),
             rgba(255, 244, 92, 0.01)
         );
+        font-size: 22px;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
     .table-shuiwei {
         width: 30%;
-        height: 140px;
+        height: 250px;
         display: flex;
         align-items: center;
         justify-content: center;

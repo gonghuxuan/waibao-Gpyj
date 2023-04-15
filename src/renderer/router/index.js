@@ -104,6 +104,18 @@ const router = new Router({
                                         keepAlive: false,
                                     },
                                 },
+                                {
+                                    path: "/quan-shuiwei-detail",
+                                    name: "quan-shuiwei-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/quan/quan/quan-shuiwei-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "quan-shuiwei-detail",
+                                        keepAlive: false,
+                                    },
+                                },
                             ],
                         },
                     ],
