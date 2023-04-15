@@ -31,3 +31,11 @@ export function getLetfStocks(params) {
         params,
     });
 }
+
+export function getStockDataLine(params) {
+    return request({
+        url: "/stockAlert/overallMarketStocks/getStockDataLine",
+        method: "get",
+        params,
+    });
+}
