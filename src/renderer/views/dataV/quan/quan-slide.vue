@@ -26,7 +26,8 @@
       </div>
       <div class="quan-bankuai-contain right">
         <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-          <div class="juzhong font-18 quan-bankuai-inner under">资金流向
+          <div class="juzhong font-18 quan-bankuai-inner under">
+            <quanzijin />
           </div>
         </dv-border-box-10>
       </div>
@@ -37,12 +38,14 @@
 <script>
 import quanzhishu from "./quan/quan-zhishu.vue";
 import quanshuiwei from "./quan/quan-shuiwei.vue";
+import quanzijin from "./quan/quan-zijin.vue";
 
 export default {
     name: "quan-slide",
     components: {
         quanzhishu,
         quanshuiwei,
+        quanzijin,
     },
 };
 </script>

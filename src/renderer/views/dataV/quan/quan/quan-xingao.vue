@@ -1,38 +1,27 @@
 <template>
-    <div class="jubu-xingao">
-        <div class="juzhong"
-            >{{ title }}
-            <img
-                @click="toDetail"
-                src="@/assets/img/detail.svg"
-                alt=""
-                class="detail"
-                style="width: 20px"
-        /></div>
-        <div class="table-contain">
-            <a-table
-                bordered
-                :columns="columns"
-                :data-source="resData"
-                :pagination="false"
-            >
-                <template slot="close" slot-scope="close, record">
-                    <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+  <div class="jubu-xingao">
+    <div class="juzhong">{{ title }}
+      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px" />
+    </div>
+    <div class="table-contain">
+      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
+        <template slot="close" slot-scope="close, record">
+          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
                         close
                     }}</div>
-                </template>
-                <template slot="changepercent" slot-scope="changepercent">
-                    <div :class="changepercent > 0 ? 'red' : 'green'">
-                        <a-button type="primary">
-                            <span v-if="changepercent > 0"> +</span>
-                            {{ changepercent }}
-                        </a-button>
-                    </div>
-                </template>
-                <a slot="name" slot-scope="text">{{ text }}</a>
-            </a-table>
-        </div>
+        </template>
+        <template slot="changepercent" slot-scope="changepercent">
+          <div :class="changepercent > 0 ? 'red' : 'green'">
+            <a-button type="primary">
+              <span v-if="changepercent > 0"> +</span>
+              {{ changepercent }}
+            </a-button>
+          </div>
+        </template>
+        <a slot="name" slot-scope="text">{{ text }}</a>
+      </a-table>
     </div>
+  </div>
 </template>
 <!-- :class="
 record[index].changepercent > 0 ? 'red' : 'green'
@@ -70,10 +59,6 @@ export default {
         };
     },
     props: {
-        stockType: {
-            type: String,
-            default: 0,
-        },
         title: {
             type: String,
             default: 0,

@@ -47,3 +47,11 @@ export function get2MarketAmount(params) {
         params,
     });
 }
+
+export function getAmountDirection(params) {
+    return request({
+        url: "/stockAlert/overallMarket/getAmountDirection",
+        method: "get",
+        params,
+    });
+}
