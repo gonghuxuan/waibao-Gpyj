@@ -43,8 +43,8 @@ export default {
     data() {
         return {
             resData: [],
-            highestConNum: '',
-            avgSuccessRate: '',
+            highestConNum: "",
+            avgSuccessRate: "",
             zhangsuyujing: [],
             kaibantixing: [],
             geyeweituo: [],
@@ -68,24 +68,24 @@ export default {
     methods: {
         getData() {
             getHitStocks().then((res) => {
-                console.log('打板',res);
+                console.log("打板", res);
                 this.highestConNum = res.连板天梯.highestConNum;
                 this.avgSuccessRate = res.连板天梯.avgSuccessRate;
-                this.zhangsuyujing = res.涨速预警.slice(0,3);
-                this.kaibantixing = res.开板提醒.slice(0,3);
-                this.geyeweituo = res.隔夜委托量.slice(0,3);
+                this.zhangsuyujing = res.涨速预警.slice(0, 3);
+                this.kaibantixing = res.开板提醒.slice(0, 3);
+                this.geyeweituo = res.隔夜委托量.slice(0, 3);
                 this.resData = res;
             });
         },
         toDetail() {
-            this.$router.push({
-                path: "/quan-shuiwei-detail",
-                query: {
-                    stockType: 0,
-                    title1: "全场预警",
-                    title2: "新高异动",
-                },
-            });
+            // this.$router.push({
+            //     path: "/quan-shuiwei-detail",
+            //     query: {
+            //         stockType: 0,
+            //         title1: "全场预警",
+            //         title2: "新高异动",
+            //     },
+            // });
         },
     },
 };
