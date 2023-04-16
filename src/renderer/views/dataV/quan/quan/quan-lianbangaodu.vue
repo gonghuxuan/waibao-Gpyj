@@ -40,6 +40,7 @@ export default {
                     dataIndex: "stockName",
                     key: "stockName",
                     align: "center",
+                    width: 100,
                 },
                 {
                     title: "价格",
@@ -47,6 +48,7 @@ export default {
                     key: "stopAmount",
                     // scopedSlots: { customRender: "close" },
                     align: "center",
+                    width: 100,
                 },
                 {
                     title: "涨跌幅",
@@ -78,13 +80,19 @@ export default {
     },
     methods: {
         getData() {
-            getContinuousStockUpstop({ startDate: '2023-04-10',endDate: '2023-04-16'}).then((res) => {
-                console.log('个股连板',res);
+            getContinuousStockUpstop({
+                startDate: "2023-04-10",
+                endDate: "2023-04-16",
+            }).then((res) => {
+                console.log("个股连板", res);
                 let dataArr = [];
-                if(res){
-                    for(let key in res) {
-                        for( let i in res[key]) {
-                            dataArr = [...dataArr,...res[key][i].stockUpstopList]
+                if (res) {
+                    for (let key in res) {
+                        for (let i in res[key]) {
+                            dataArr = [
+                                ...dataArr,
+                                ...res[key][i].stockUpstopList,
+                            ];
                         }
                     }
                 }
@@ -92,14 +100,14 @@ export default {
             });
         },
         toDetail() {
-            this.$router.push({
-                path: "/quan-xingao-detail",
-                query: {
-                    stockType: 0,
-                    title1: "全场预警",
-                    title2: "新高异动",
-                },
-            });
+            // this.$router.push({
+            //     path: "/quan-xingao-detail",
+            //     query: {
+            //         stockType: 0,
+            //         title1: "全场预警",
+            //         title2: "新高异动",
+            //     },
+            // });
         },
     },
 };

@@ -86,9 +86,20 @@ export default {
                 query: {
                     stockType: 0,
                     title1: "全场预警",
-                    title2: "新高异动",
+                    title2: this.getTitle(),
                 },
             });
+        },
+        getTitle() {
+            if (this.stockType == "0") {
+                return "新高异动";
+            }
+            if (this.stockType == "1") {
+                return "平台突破";
+            }
+            if (this.stockType == "3") {
+                return "游资股预警";
+            }
         },
     },
 };

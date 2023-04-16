@@ -5,7 +5,7 @@
             padding-top: 15px;
             padding-left: 30px;
         ">
-    <span>test1</span>
+    <span>{{ username }}</span>
     <span style="padding-left: 15px;padding-right: 30px;"><img src="@/assets/img/logout.svg" alt="" style="width: 20px;" /></span>
   </div>
 </template>
@@ -13,7 +13,9 @@
 import dayjs from "dayjs";
 export default {
     data() {
-        return {};
+        return {
+            username: localStorage.getItem("username"),
+        };
     },
     mounted() {},
     methods: {},

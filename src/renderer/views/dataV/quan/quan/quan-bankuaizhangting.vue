@@ -94,26 +94,29 @@ export default {
         //     return date + " " + time + " " + this.getDay(dayjs(today).day());
         // startDate: dayjs().format("YYYY-MM-DD")
         getData() {
-            getPlateStockUpstop({ startDate: '2023-04-12',endDate: '2023-04-16'}).then((res) => {
-                console.log('板块涨停个股',res);
+            getPlateStockUpstop({
+                startDate: "2023-04-12",
+                endDate: "2023-04-16",
+            }).then((res) => {
+                console.log("板块涨停个股", res);
                 let dataArr = [];
-                if(res){
-                    for(let key in res) {
-                        dataArr = [...dataArr,...res[key]]
+                if (res) {
+                    for (let key in res) {
+                        dataArr = [...dataArr, ...res[key]];
                     }
                 }
                 this.resData = dataArr;
             });
         },
         toDetail() {
-            this.$router.push({
-                path: "/quan-xingao-detail",
-                query: {
-                    stockType: 0,
-                    title1: "全场预警",
-                    title2: "新高异动",
-                },
-            });
+            // this.$router.push({
+            //     path: "/quan-xingao-detail",
+            //     query: {
+            //         stockType: 0,
+            //         title1: "全场预警",
+            //         title2: "新高异动",
+            //     },
+            // });
         },
     },
 };
