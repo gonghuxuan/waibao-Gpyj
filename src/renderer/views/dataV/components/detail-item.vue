@@ -42,8 +42,8 @@ console.log(echarts);
 export default {
     data() {
         return {
-            title1: this.$route.query.title1,
-            title2: this.$route.query.title2,
+            title1: "",
+            title2: "",
         };
     },
     components: {
@@ -52,7 +52,15 @@ export default {
     },
     computed: {},
     created() {},
-    mounted() {},
+    mounted() {
+        console.log(this.$route.query.title1);
+        console.log(this.$route.query.title2);
+    },
+
+    activated() {
+        this.title1 = this.$route.query.title1;
+        this.title2 = this.$route.query.title2;
+    },
     methods: {
         back() {
             this.$router.go(-1);

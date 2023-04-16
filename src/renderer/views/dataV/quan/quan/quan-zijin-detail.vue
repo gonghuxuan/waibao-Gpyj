@@ -204,7 +204,7 @@ export default {
     mounted() {
         // this.getName();
         console.log(this.$route.query.stockType);
-        this.getData();
+        // this.getData();
     },
     methods: {
         getData() {

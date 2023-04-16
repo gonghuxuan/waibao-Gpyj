@@ -95,7 +95,7 @@ export default {
                 query: {
                     stockType: 0,
                     title1: "全场预警",
-                    title2: "新高异动",
+                    title2: "市场水位",
                 },
             });
         },
