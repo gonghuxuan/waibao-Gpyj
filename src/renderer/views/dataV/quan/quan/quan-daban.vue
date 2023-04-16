@@ -18,14 +18,14 @@
         <div class="table-shuiwei table-shuiwei-2">
           <div style="text-align: center">
             <div style="color: #FF5145; font-size: 20px;">开板提醒</div>
-            <div style="color:#64B7BC;font-size: 13px;padding-top: 10px;" v-for="(item,index) in zhangsuyujing" :key="index + 'opt'">{{item.stockName}}</div>
+            <div style="color:#64B7BC;font-size: 13px;padding-top: 10px;" v-for="(item,index) in kaibantixing" :key="index + 'opt'">{{item.stockName}}</div>
           </div>
         </div>
         <div class="table-shuiwei table-shuiwei-3">
 
           <div style="text-align: center">
             <div style="color: #1DFFFF; font-size: 20px;">隔夜委托量</div>
-            <div style="color:#64B7BC;font-size: 13px;padding-top: 10px;" v-for="(item,index) in zhangsuyujing" :key="index + 'opt'">{{item.stockName}}</div>
+            <div style="color:#64B7BC;font-size: 13px;padding-top: 10px;" v-for="(item,index) in geyeweituo" :key="index + 'opt'">{{item.stockName}}</div>
           </div>
         </div>
       </div>

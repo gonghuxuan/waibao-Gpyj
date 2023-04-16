@@ -40,7 +40,6 @@ export default {
                     dataIndex: "stockName",
                     key: "stockName",
                     align: "center",
-                    width: 100
                 },
                 {
                     title: "价格",
@@ -48,7 +47,6 @@ export default {
                     key: "stopAmount",
                     // scopedSlots: { customRender: "close" },
                     align: "center",
-                    width: 100
                 },
                 {
                     title: "涨跌幅",
