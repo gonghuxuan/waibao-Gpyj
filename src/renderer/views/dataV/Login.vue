@@ -77,6 +77,7 @@ export default {
                 console.log(res);
                 localStorage.setItem("authorization", res.authorization);
                 localStorage.setItem("userId", res.userId);
+                localStorage.setItem("username", this.userName);
                 this.$router.push({
                     path: "/home",
                 });
