@@ -55,3 +55,19 @@ export function getAmountDirection(params) {
         params,
     });
 }
+
+export function getPlateStockUpstop(params) {
+    return request({
+        url: "/stockAlert/overallMarketStocks/getPlateStockUpstop",
+        method: "get",
+        params,
+    });
+}
+
+export function getContinuousStockUpstop(params) {
+    return request({
+        url: "/stockAlert/overallMarketStocks/getContinuousStockUpstop",
+        method: "get",
+        params,
+    });
+}
