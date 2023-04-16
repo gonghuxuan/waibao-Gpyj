@@ -63,6 +63,10 @@ export default {
             type: String,
             default: 0,
         },
+        stockType: {
+            type: String,
+            default: 0,
+        },
     },
     computed: {},
     created() {},
