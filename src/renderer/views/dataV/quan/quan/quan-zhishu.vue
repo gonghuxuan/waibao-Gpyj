@@ -1,7 +1,10 @@
 <template>
   <div class="jubu-zhishu-detail">
     <div>
-      <div style="font-size: 16px; padding-left: 10px" @click="toDetail">指数背离</div>
+      <div class="juzhong">指数背离
+        <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px" />
+      </div>
+      <!-- <div style="font-size: 16px; padding-left: 10px" @click="toDetail">指数背离</div> -->
       <a-dropdown :trigger="['click']">
         <a-menu slot="overlay" @click="handleMenuClick($event)">
           <a-menu-item v-for="item in exponentNameList" :key="item">
@@ -414,6 +417,10 @@ export default {
     }
     .ant-dropdown-menu-item {
         color: blue;
+    }
+    .detail {
+        position: absolute;
+        right: 20px;
     }
 }
 </style>
