@@ -20,7 +20,8 @@
     <div class="flex bankuai-contain">
       <div class="quan-bankuai-contain left">
         <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-          <div class="juzhong font-18 quan-bankuai-inner under">打板
+          <div class="juzhong font-18 quan-bankuai-inner under">
+            <quandaban />
           </div>
         </dv-border-box-10>
       </div>
@@ -38,6 +39,7 @@
 <script>
 import quanzhishu from "./quan/quan-zhishu.vue";
 import quanshuiwei from "./quan/quan-shuiwei.vue";
+import quandaban from "./quan/quan-daban.vue";
 import quanzijin from "./quan/quan-zijin.vue";
 
 export default {
@@ -46,6 +48,7 @@ export default {
         quanzhishu,
         quanshuiwei,
         quanzijin,
+        quandaban,
     },
 };
 </script>

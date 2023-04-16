@@ -71,3 +71,11 @@ export function getContinuousStockUpstop(params) {
         params,
     });
 }
+
+export function getHitStocks(params) {
+    return request({
+        url: "/stockAlert/overallMarket/getHitStocks",
+        method: "get",
+        params,
+    });
+}
