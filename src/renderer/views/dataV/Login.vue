@@ -5,92 +5,53 @@
 -->
 
 <template>
-    <div class="login-container">
-        <div class="layer">
-            <div class="some-space">
-                <div class="form">
-                    <h2>股票预警系统可视化平台</h2>
-                    <div class="item">
-                        <i class="iconfont icon-user"></i>
-                        <input
-                            autocomplete="off"
-                            type="text"
-                            class="input"
-                            v-model="userName"
-                            placeholder="请输入用户名"
-                        />
-                    </div>
-                    <div class="item">
-                        <i class="iconfont icon-password"></i>
-                        <input
-                            autocomplete="off"
-                            type="password"
-                            class="input"
-                            v-model="userPwd"
-                            maxlength="20"
-                            @keyup.enter="login"
-                            placeholder="请输入密码"
-                        />
-                    </div>
-                    <a-checkbox @change="onChange" style="color: white">
-                        管理员登录
-                    </a-checkbox>
-                    <button
-                        class="loginBtn"
-                        :disabled="isLoginAble"
-                        @click.stop="login"
-                    >
-                        立即登录
-                    </button>
-                    <div class="tip">
-                        默认用户名：admin ，默认密码：123456
-                    </div>
-                </div>
-            </div>
+  <div class="login-container">
+    <div class="layer">
+      <div class="some-space">
+        <div class="form">
+          <h2>股票预警系统可视化平台</h2>
+          <div class="item">
+            <i class="iconfont icon-user"></i>
+            <input autocomplete="off" type="text" class="input" v-model="userName" placeholder="请输入用户名" />
+          </div>
+          <div class="item">
+            <i class="iconfont icon-password"></i>
+            <input autocomplete="off" type="password" class="input" v-model="userPwd" maxlength="20" @keyup.enter="login" placeholder="请输入密码" />
+          </div>
+          <a-checkbox @change="onChange" style="color: white">
+            管理员登录
+          </a-checkbox>
+          <button class="loginBtn" :disabled="isLoginAble" @click.stop="login">
+            立即登录
+          </button>
+          <!-- <div class="tip" @click="showDevtool">
+            devtool
+          </div> -->
         </div>
-
-        <vue-particles
-            color="#6495ED"
-            :particleOpacity="0.7"
-            :particlesNumber="80"
-            shapeType="circle"
-            :particleSize="4"
-            linesColor="#6495ED"
-            :linesWidth="1"
-            :lineLinked="true"
-            :lineOpacity="0.6"
-            :linesDistance="150"
-            :moveSpeed="3"
-            :hoverEffect="true"
-            hoverMode="grab"
-            :clickEffect="true"
-            clickMode="push"
-        >
-        </vue-particles>
-
-        <bgAnimation />
-
-        <modal
-            title="提示"
-            :content="modalContent"
-            :visible.sync="visible"
-            @confirm="confirm"
-        >
-        </modal>
+      </div>
     </div>
+
+    <vue-particles color="#6495ED" :particleOpacity="0.7" :particlesNumber="80" shapeType="circle" :particleSize="4" linesColor="#6495ED" :linesWidth="1" :lineLinked="true" :lineOpacity="0.6" :linesDistance="150"
+      :moveSpeed="3" :hoverEffect="true" hoverMode="grab" :clickEffect="true" clickMode="push">
+    </vue-particles>
+
+    <bgAnimation />
+
+    <modal title="提示" :content="modalContent" :visible.sync="visible" @confirm="confirm">
+    </modal>
+  </div>
 </template>
 
 <script>
 import { login123 } from "@/api/userInfo.js";
 import apis from "@/utils/httputils.js";
-
 export default {
     name: "Login",
     components: {},
     data() {
         return {
-            userName: "test1",
-            userPwd: "test1",
+            userName: "",
+            userPwd: "",
             visible: false,
             modalContent: "这是一段自定义模态框消息",
             typeFlag: false,
@@ -155,6 +116,12 @@ export default {
         confirm() {
             this.visible = false;
             console.log("点击确定");
+        },
+        showDevtool() {
+            console.log(window.mainWindow);
+            console.log(this.$electron);
+            this.$electron.ipcRenderer.send("open-devtools");
+            console.log(this.$electron.ipcRenderer.send("open-devtools"));
         },
     },
 };

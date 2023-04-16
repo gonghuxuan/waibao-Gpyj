@@ -90,6 +90,7 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 async function createWindow() {
+    console.log(global);
     global.mainWindow = mainWindow = new BrowserWindow({
         width: 1400,
         height: 900,
@@ -118,11 +119,11 @@ async function createWindow() {
         // let trayBounds = global.tray.getBounds();
         // global.trayWindow = createTrayWindow(BrowserWindow, trayBounds);
     }
-
+    // mainWindow.webContents.openDevTools();
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
         await mainWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
-        if (!process.env.IS_TEST) mainWindow.webContents.openDevTools();
+        mainWindow.webContents.openDevTools();
     } else {
         createProtocol(ACHEME);
         // Load the index.html when not in development
@@ -199,6 +200,7 @@ app.on("ready", async () => {
     global.wins = {};
     global.wins["lyricWindow"] = global.lyricWindow;
     global.wins["miniWindow"] = global.miniWindow;
+    // global.webContents.openDevTools();
     ipcMain.on("thumbar-buttons", (e, data) => {
         if (global.mainWindow === null || mainWindow === null) return;
         if (process.platform === "win32") {

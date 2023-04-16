@@ -1,9 +1,15 @@
 import axios from "axios";
+import Message from "ant-design-vue/es/message";
+import Toast from "./../components/Toast/toast";
 // 根据环境不同引入不同api地址
 
 // create an axios instance
+const baseURL =
+    process.env.NODE_ENV === "development"
+        ? "/gpyj"
+        : "http://test46.szdjct.com";
 const service = axios.create({
-    baseURL: "/gpyj", // url = base api url + request url
+    baseURL: baseURL, // url = base api url + request url
     withCredentials: true, // send cookies when cross-domain requests
     timeout: 300000, // request timeout
 });
@@ -19,15 +25,20 @@ service.interceptors.request.use(
             //     duration: 300000,
             // });
         }
-        if (config.method === "get" && config.params?.accessToken) {
-            config.headers["accessToken"] = config.params.accessToken;
-        } else if (config.method === "post" && config.data?.accessToken) {
-            config.headers["accessToken"] = config.data.accessToken;
-        } else {
-            // if (getItem("accessToken")) {
-            //     config.headers["accessToken"] = getItem("accessToken");
-            // }
+        // if (config.method === "get" && config.params?.accessToken) {
+        //     config.headers["accessToken"] = config.params.accessToken;
+        // } else if (config.method === "post" && config.data?.accessToken) {
+        //     config.headers["accessToken"] = config.data.accessToken;
+        // } else {
+        if (localStorage.getItem("authorization")) {
+            config.headers["authorization"] = localStorage.getItem(
+                "authorization"
+            );
         }
+        if (localStorage.getItem("userId")) {
+            config.headers["userId"] = localStorage.getItem("userId");
+        }
+        // }
         config.headers["platform"] = "web";
 
         // console.log('config===' + JSON.stringify(config))
@@ -50,6 +61,8 @@ service.interceptors.response.use(
                     // 401
                 }
                 // Toast(res.errorMessage)
+                console.log(res);
+                Message.error(res.msg);
                 return Promise.reject(res || "error");
             } else {
                 console.log("123");
@@ -70,7 +83,7 @@ service.interceptors.response.use(
                 // })
                 return Promise.reject(error);
             }
-
+            Message.error(error.response.data.msg);
             const errorMessage = error?.response?.data?.errorMessage;
             return Promise.reject(error);
         } catch (err) {
