@@ -8,6 +8,7 @@
         <span class="padding" :class="active == 3 ? 'active' : 'unactive'">游资股</span>
       </div>
     </div>
+    <div id="charts123" ref="charts123"></div>
     <div class="content-contain">
       <div class="table1">
         <div style="height: 20px"></div>
@@ -47,11 +48,49 @@
                                     : 'time-unactive'
                             " @click="selecttime('1')">日k</div>
           </div>
+          <div id="charts" style="height: 550px; width: 100%; margin-top: 0px">
+            12312312</div>
         </div>
         <div class="table2-2 table-shadow"></div>
       </div>
+
       <div class="table3 table-shadow">
-        <div></div>
+        <div class="table3-item-contain">
+          <div style="color: white; font-size: 16px;padding-left: 30px;">{{ stockDetail[stockIndex].stockName }}</div>
+          <div style="color: white; font-size: 16px;padding-right: 30px;">{{ stockDetail[stockIndex].stockCode }}</div>
+        </div>
+        <div class="table3-item-contain">
+          <div class="table3-key">今开</div>
+          <div class="table3-value">{{ stockDetail[stockIndex].open }}</div>
+        </div>
+        <div class="table3-item-contain">
+          <div class="table3-key">最高</div>
+          <div class="table3-value">{{ stockDetail[stockIndex].high }}</div>
+        </div>
+        <div class="table3-item-contain">
+          <div class="table3-key">最低</div>
+          <div class="table3-value">{{ stockDetail[stockIndex].low }}</div>
+        </div>
+        <div class="table3-item-contain">
+          <div class="table3-key">涨幅</div>
+          <div class="table3-value" :style="stockDetail[stockIndex].changepercent > 0 ? 'color: #FF5145': 'color: #1AB05D'">{{ stockDetail[stockIndex].changepercent }}</div>
+        </div>
+        <div class="table3-item-contain">
+          <div class="table3-key">换手</div>
+          <div class="table3-value">{{ stockDetail[stockIndex].tun }}</div>
+        </div>
+        <div class="table3-item-contain">
+          <div class="table3-key">成交额</div>
+          <div class="table3-value">{{ stockDetail[stockIndex].amount }}</div>
+        </div>
+        <div class="table3-item-contain">
+          <div class="table3-key">总市值</div>
+          <div class="table3-value">{{ stockDetail[stockIndex].mktCap }}</div>
+        </div>
+        <div class="table3-item-contain">
+          <div class="table3-key">流通值</div>
+          <div class="table3-value">{{ stockDetail[stockIndex].nmc }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -59,18 +98,23 @@
 
 <script>
 import { getLetfStocks, getStockDataLine } from "@/api/userInfo.js";
+import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 
 import * as echarts from "echarts";
 
-console.log(echarts);
 export default {
     data() {
         return {
             active: 0,
             gupiaoList: [],
             selectedGupiao: "",
-            timeType: "1",
+            timeType: "0",
             stockDetail: [],
+            table3: [],
+            stockIndex: 0,
+            closeList: [],
+            changeList: [],
+            timeList: [],
         };
     },
     components: {},
@@ -78,15 +122,19 @@ export default {
     created() {},
     mounted() {
         // this.getName();
-        console.log(this.$route.query.stockType);
+        // console.log(this.$route.query.stockType);
         this.getData();
+        console.log(document.getElementById("charts"));
+        console.log(this.$refs.charts123);
+        setTimeout(() => {
+            console.log(this.$refs.charts123);
+        }, 1000);
     },
     methods: {
         getData() {
             getLetfStocks({ stockType: this.$route.query.stockType }).then(
                 (res) => {
                     this.gupiaoList = res;
-                    console.log(this.gupiaoList);
                     this.selectedGupiao = this.gupiaoList[0].stockCode;
                     this.getStockDetail();
                 }
@@ -97,15 +145,91 @@ export default {
                 timeType: this.timeType,
                 code: this.selectedGupiao,
             }).then((res) => {
-                console.log(res);
+                this.clearList();
                 this.stockDetail = res;
+                this.stockIndex = this.stockDetail.length - 1;
+                this.stockDetail.forEach((item) => {
+                    this.closeList.push(item.close);
+                    this.changeList.push(item.changepercent);
+                    this.timeList.push(getSecond(item.dealDate));
+                });
+                setTimeout(() => {
+                    this.setCharts();
+                }, 0);
             });
         },
         selectgupiao(stockCode) {
             this.selectedGupiao = stockCode;
+            this.getStockDetail();
+        },
+        clearList() {
+            this.closeList = [];
+            this.changeList = [];
+            this.timeList = [];
         },
         selecttime(time) {
             this.timeType = time;
+        },
+        setCharts() {
+            console.log(document.getElementById("charts"));
+            console.log(document.getElementById("charts123"));
+            setTimeout(() => {
+                console.log(this.$refs.charts123);
+            }, 1000);
+            this.chart = echarts.init(document.getElementById("charts"));
+            const option = {
+                tooltip: {
+                    trigger: "axis",
+                    axisPointer: {
+                        type: "cross",
+                        crossStyle: {
+                            color: "#999",
+                        },
+                    },
+                },
+                legend: {
+                    data: ["close", "changepercent"],
+                    textStyle: {
+                        fontSize: 16, //字体大小
+                        color: "#ffffff", //字体颜色
+                    },
+                },
+                xAxis: [
+                    {
+                        type: "category",
+                        data: this.timeList,
+                        axisPointer: {
+                            type: "shadow",
+                        },
+                    },
+                ],
+                yAxis: [
+                    {
+                        type: "value",
+                        name: "close",
+                        scale: true,
+                    },
+                    {
+                        type: "value",
+                        name: "changepercent",
+                    },
+                ],
+                series: [
+                    {
+                        name: "close",
+                        type: "line",
+                        yAxisIndex: 0,
+                        data: this.closeList,
+                    },
+                    {
+                        name: "changepercent",
+                        type: "line",
+                        yAxisIndex: 1,
+                        data: this.changeList,
+                    },
+                ],
+            };
+            this.chart.setOption(option);
         },
     },
 };
@@ -113,6 +237,24 @@ export default {
 
 <style lang="scss">
 .xingao-detail {
+    .table3-item-contain {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .table3-key {
+        color: rgba(93, 154, 158, 0.7);
+        padding: 10px;
+        padding-left: 20px;
+        font-size: 14px;
+    }
+    .table3-value {
+        color: white;
+        padding: 10px;
+
+        padding-right: 20px;
+        font-size: 14px;
+    }
     .gupiao-item {
         font-size: 16px;
         text-align: left;
