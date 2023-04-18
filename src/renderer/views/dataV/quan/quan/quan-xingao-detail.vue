@@ -99,6 +99,7 @@
 <script>
 import { getLetfStocks, getStockDataLine } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import { table2Option } from "@/views/dataV/echartsOption/xingao.js";
 
 import * as echarts from "echarts";
 
@@ -108,7 +109,7 @@ export default {
             active: 0,
             gupiaoList: [],
             selectedGupiao: "",
-            timeType: "0",
+            timeType: "1",
             stockDetail: [],
             table3: [],
             stockIndex: 0,
@@ -124,11 +125,6 @@ export default {
         // this.getName();
         // console.log(this.$route.query.stockType);
         this.getData();
-        console.log(document.getElementById("charts"));
-        console.log(this.$refs.charts123);
-        setTimeout(() => {
-            console.log(this.$refs.charts123);
-        }, 1000);
     },
     methods: {
         getData() {
@@ -169,13 +165,9 @@ export default {
         },
         selecttime(time) {
             this.timeType = time;
+            this.getStockDetail();
         },
         setCharts() {
-            console.log(document.getElementById("charts"));
-            console.log(document.getElementById("charts123"));
-            setTimeout(() => {
-                console.log(this.$refs.charts123);
-            }, 1000);
             this.chart = echarts.init(document.getElementById("charts"));
             const option = {
                 tooltip: {
@@ -229,7 +221,12 @@ export default {
                     },
                 ],
             };
-            this.chart.setOption(option);
+            console.log(table2Option());
+            if (this.timeType === "0") {
+                this.chart.setOption(option);
+            } else {
+                this.chart.setOption(table2Option());
+            }
         },
     },
 };
