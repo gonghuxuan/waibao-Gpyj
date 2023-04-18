@@ -128,6 +128,18 @@ const router = new Router({
                                         keepAlive: false,
                                     },
                                 },
+                                {
+                                    path: "/quan-bankuaizhangting-detail",
+                                    name: "quan-bankuaizhangting-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/quan/quan/quan-bankuaizhangting-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "quan-bankuaizhangting-detail",
+                                        keepAlive: false,
+                                    },
+                                },
                             ],
                         },
                     ],

@@ -109,14 +109,9 @@ export default {
             });
         },
         toDetail() {
-            // this.$router.push({
-            //     path: "/quan-xingao-detail",
-            //     query: {
-            //         stockType: 0,
-            //         title1: "全场预警",
-            //         title2: "新高异动",
-            //     },
-            // });
+            this.$router.push({
+                path: "/quan-bankuaizhangting-detail",
+            });
         },
     },
 };

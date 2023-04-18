@@ -52,11 +52,13 @@ export default {
                     dataIndex: "stockName",
                     key: "stockName",
                     align: "center",
+                    width: 102,
                 },
                 {
                     title: "封单额(万)",
                     dataIndex: "stopAmount",
                     key: "stopAmount",
+                    width: 110,
                     // scopedSlots: { customRender: "close" },
                     align: "center",
                 },
@@ -104,7 +106,7 @@ export default {
         },
         toDetail() {
             this.$router.push({
-                path: "/quan-xingao-detail",
+                path: "/quan-bankuaizhangting-detail",
                 query: {
                     stockType: 0,
                     title1: "全场预警",
