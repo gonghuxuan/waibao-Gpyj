@@ -1,11 +1,23 @@
 <template>
-  <div class="jubu-xingao">
-    <div class="juzhong">{{ title }}
-      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px" />
-    </div>
-    <div class="table-contain">
-      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
-        <!-- <template slot="close" slot-scope="close, record">
+    <div class="jubu-xingao">
+        <div class="juzhong"
+            >{{ title }}
+            <img
+                @click="toDetail"
+                src="@/assets/img/detail.svg"
+                alt=""
+                class="detail"
+                style="width: 20px"
+            />
+        </div>
+        <div class="table-contain">
+            <a-table
+                bordered
+                :columns="columns"
+                :data-source="resData"
+                :pagination="false"
+            >
+                <!-- <template slot="close" slot-scope="close, record">
           <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
                         close
                     }}</div>
@@ -18,10 +30,10 @@
             </a-button>
           </div>
         </template> -->
-        <!-- <a slot="name" slot-scope="text">{{ text }}</a> -->
-      </a-table>
+                <!-- <a slot="name" slot-scope="text">{{ text }}</a> -->
+            </a-table>
+        </div>
     </div>
-  </div>
 </template>
 <!-- :class="
 record[index].changepercent > 0 ? 'red' : 'green'
@@ -40,27 +52,18 @@ export default {
                     dataIndex: "stockName",
                     key: "stockName",
                     align: "center",
-                    width: 100,
                 },
                 {
-                    title: "价格",
+                    title: "封单额(万)",
                     dataIndex: "stopAmount",
                     key: "stopAmount",
                     // scopedSlots: { customRender: "close" },
                     align: "center",
-                    width: 100,
                 },
                 {
-                    title: "涨跌幅",
-                    dataIndex: "changepercent",
-                    key: "changepercent",
-                    align: "center",
-                    // scopedSlots: { customRender: "changepercent" },
-                },
-                {
-                    title: "股票代码",
-                    dataIndex: "stockCode",
-                    key: "stockCode",
+                    title: "连板数",
+                    dataIndex: "conNum",
+                    key: "conNum",
                     align: "center",
                     // scopedSlots: { customRender: "changepercent" },
                 },
@@ -96,18 +99,18 @@ export default {
                         }
                     }
                 }
-                this.resData = dataArr;
+                this.resData = dataArr.filter((i) => i.conNum === "1") || [];
             });
         },
         toDetail() {
-            // this.$router.push({
-            //     path: "/quan-xingao-detail",
-            //     query: {
-            //         stockType: 0,
-            //         title1: "全场预警",
-            //         title2: "新高异动",
-            //     },
-            // });
+            this.$router.push({
+                path: "/quan-xingao-detail",
+                query: {
+                    stockType: 0,
+                    title1: "全场预警",
+                    title2: "新高异动",
+                },
+            });
         },
     },
 };

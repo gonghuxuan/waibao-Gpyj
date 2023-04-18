@@ -37,7 +37,7 @@
         <div class="sn-container sn-container-5">
             <dv-border-box-10 :color="['#0694B1', '#5D9A9E']">
                 <div class="juzhong font-18 bankuai-title">
-                    <!-- <bankuaiitem title="连板高度预警"> -->
+                    <!-- <bankuaiitem title=""> -->
                         <quanlianbangaodu stockType="1" title="连板高度预警" />
                     <!-- </bankuaiitem> -->
                 </div>
