@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 export function getSecond(time) {
-    return dayjs(time).hour() + ":" + dayjs(time).minute();
+    // return dayjs(time).hour() + ":" + dayjs(time).minute();
+    return dayjs(time).format("YYYY-MM-DD HH:mm");
 }
 
 export function getDay(time) {
