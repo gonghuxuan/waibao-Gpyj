@@ -52,7 +52,9 @@
           <div id="chartsVol" v-show="timeType == '1'" style="height: 150px">
           </div>
         </div>
-        <div class="table2-2 table-shadow"></div>
+        <div class="table2-2 table-shadow">
+          <div id="charts-2" style="height: 260px; width: 100%"></div>
+        </div>
       </div>
 
       <div class="table3 table-shadow">
@@ -100,7 +102,10 @@
 <script>
 import { getLetfStocks, getStockDataLine } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
-import { table2Option } from "@/views/dataV/echartsOption/xingao.js";
+import {
+    table2Option,
+    table2bottomOption,
+} from "@/views/dataV/echartsOption/xingao.js";
 
 import * as echarts from "echarts";
 
@@ -110,7 +115,7 @@ export default {
             active: 0,
             gupiaoList: [],
             selectedGupiao: "",
-            timeType: "1",
+            timeType: "0",
             stockDetail: [],
             table3: [],
             stockIndex: 0,
@@ -157,7 +162,10 @@ export default {
 
                 setTimeout(() => {
                     this.setCharts();
-                }, 10);
+                }, 0);
+                setTimeout(() => {
+                    this.setCharts2();
+                }, 0);
             });
         },
         selectgupiao(stockCode) {
@@ -174,12 +182,13 @@ export default {
             this.timeType = time;
             this.getStockDetail();
         },
-        setCharts() {
+        setCharts2() {
             console.log("11111111111111");
-            console.log(document.getElementById("charts"));
+            this.chart2 = echarts.init(document.getElementById("charts-2"));
+            this.chart2.setOption(table2bottomOption(this.stockDetail));
+        },
+        setCharts() {
             this.chart = echarts.init(document.getElementById("charts"));
-            console.log("22222222222222");
-
             const option = {
                 tooltip: {
                     trigger: "axis",
@@ -271,7 +280,7 @@ export default {
         margin-top: 0px;
     }
     .rik {
-        height: 350px;
+        height: 500px;
         width: 100%;
         margin-top: 0px;
     }
