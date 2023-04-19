@@ -140,6 +140,18 @@ const router = new Router({
                                         keepAlive: false,
                                     },
                                 },
+                                {
+                                    path: "/quan-daban-detail",
+                                    name: "quan-daban-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/quan/quan/quan-daban-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "quan-daban-detail",
+                                        keepAlive: false,
+                                    },
+                                },
                             ],
                         },
                     ],

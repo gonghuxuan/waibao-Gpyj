@@ -5,7 +5,7 @@
         <span class="padding active">板块涨停个数预警</span>
       </div>
     </div>
-    <div class="content-contain">
+    <div class="content-contain-detail">
       <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
         <template slot="plateChangepercent" slot-scope="plateChangepercent">
           <div :class="plateChangepercent > 0 ? 'red' : 'green'">
@@ -244,7 +244,7 @@ export default {
         padding-left: 20px;
         padding-right: 20px;
     }
-    .content-contain {
+    .content-contain-detail {
         // display: flex;
         padding: 10px;
     }

@@ -78,14 +78,9 @@ export default {
             });
         },
         toDetail() {
-            // this.$router.push({
-            //     path: "/quan-shuiwei-detail",
-            //     query: {
-            //         stockType: 0,
-            //         title1: "全场预警",
-            //         title2: "新高异动",
-            //     },
-            // });
+          this.$router.push({
+              path: "/quan-daban-detail",
+          });
         },
     },
 };
