@@ -8,7 +8,6 @@
         <span class="padding" :class="active == 3 ? 'active' : 'unactive'">游资股</span>
       </div>
     </div>
-    <div id="charts123" ref="charts123"></div>
     <div class="content-contain">
       <div class="table1">
         <div style="height: 20px"></div>
@@ -48,10 +47,14 @@
                                     : 'time-unactive'
                             " @click="selecttime('1')">日k</div>
           </div>
-          <div id="charts" style="height: 550px; width: 100%; margin-top: 0px">
-            12312312</div>
+          <div id="charts" :class="timeType == '0' ? 'fenshi': 'rik'">
+          </div>
+          <div id="chartsVol" v-show="timeType == '1'" style="height: 150px">
+          </div>
         </div>
-        <div class="table2-2 table-shadow"></div>
+        <div class="table2-2 table-shadow">
+          <div id="charts-2" style="height: 260px; width: 100%"></div>
+        </div>
       </div>
 
       <div class="table3 table-shadow">
@@ -99,7 +102,10 @@
 <script>
 import { getLetfStocks, getStockDataLine } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
-import { table2Option } from "@/views/dataV/echartsOption/xingao.js";
+import {
+    table2Option,
+    table2bottomOption,
+} from "@/views/dataV/echartsOption/xingao.js";
 
 import * as echarts from "echarts";
 
@@ -109,13 +115,14 @@ export default {
             active: 0,
             gupiaoList: [],
             selectedGupiao: "",
-            timeType: "1",
+            timeType: "0",
             stockDetail: [],
             table3: [],
             stockIndex: 0,
             closeList: [],
             changeList: [],
             timeList: [],
+            resData: [],
         };
     },
     components: {},
@@ -141,16 +148,23 @@ export default {
                 timeType: this.timeType,
                 code: this.selectedGupiao,
             }).then((res) => {
-                this.clearList();
                 this.stockDetail = res;
-                this.stockIndex = this.stockDetail.length - 1;
-                this.stockDetail.forEach((item) => {
-                    this.closeList.push(item.close);
-                    this.changeList.push(item.changepercent);
-                    this.timeList.push(getSecond(item.dealDate));
-                });
+                if (this.timeType === "0") {
+                    this.clearList();
+                    this.stockIndex = this.stockDetail.length - 1;
+                    this.stockDetail.forEach((item) => {
+                        this.closeList.push(item.close);
+                        this.changeList.push(item.changepercent);
+                        this.timeList.push(getSecond(item.dealDate));
+                    });
+                } else {
+                }
+
                 setTimeout(() => {
                     this.setCharts();
+                }, 0);
+                setTimeout(() => {
+                    this.setCharts2();
                 }, 0);
             });
         },
@@ -164,8 +178,14 @@ export default {
             this.timeList = [];
         },
         selecttime(time) {
+            this.chart.clear();
             this.timeType = time;
             this.getStockDetail();
+        },
+        setCharts2() {
+            console.log("11111111111111");
+            this.chart2 = echarts.init(document.getElementById("charts-2"));
+            this.chart2.setOption(table2bottomOption(this.stockDetail));
         },
         setCharts() {
             this.chart = echarts.init(document.getElementById("charts"));
@@ -186,6 +206,19 @@ export default {
                         color: "#ffffff", //字体颜色
                     },
                 },
+                dataZoom: [
+                    {
+                        type: "inside",
+                        start: 0,
+                        end: 20,
+                    },
+                    {
+                        show: true,
+                        type: "slider",
+                        top: "90%",
+                        // show: false,
+                    },
+                ],
                 xAxis: [
                     {
                         type: "category",
@@ -221,11 +254,12 @@ export default {
                     },
                 ],
             };
-            console.log(table2Option());
             if (this.timeType === "0") {
+                console.log("sssssssssssssssssssssss");
                 this.chart.setOption(option);
             } else {
-                this.chart.setOption(table2Option());
+                console.log("kkkkkkkkkkkkkkkkkkkkkkkkk");
+                this.chart.setOption(table2Option(this.stockDetail));
             }
         },
     },
@@ -238,6 +272,17 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+    .fenshi {
+        // style="height: 500px; width: 100%; margin-top: 0px"
+        height: 500px;
+        width: 100%;
+        margin-top: 0px;
+    }
+    .rik {
+        height: 500px;
+        width: 100%;
+        margin-top: 0px;
     }
     .table3-key {
         color: rgba(93, 154, 158, 0.7);

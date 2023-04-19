@@ -5,7 +5,15 @@ export function getSecond(time) {
 }
 
 export function getDay(time) {
-    return dayjs(time).month() + "-" + dayjs(time).date();
+    return dayjs(time).format("YYYY-MM-DD");
+}
+
+export function getDayArr(data) {
+    const newdata = [];
+    data.forEach((element) => {
+        newdata.push(getDay(element));
+    });
+    return newdata;
 }
 
 export function getMax(arr) {
@@ -28,4 +36,24 @@ export function getMin(arr) {
         }
     }
     return min;
+}
+
+export function splitData(rawData, key) {
+    console.log(key);
+    const values = [];
+    if (typeof key === "string") {
+        for (var i = 0; i < rawData.length; i++) {
+            values.push(rawData[i][key]);
+        }
+    } else {
+        for (var i = 0; i < rawData.length; i++) {
+            const itemArr = [];
+            key.forEach((item) => {
+                // console.log(rawData[i][item]);
+                itemArr.push(rawData[i][item]);
+            });
+            values.push(itemArr);
+        }
+    }
+    return values;
 }
