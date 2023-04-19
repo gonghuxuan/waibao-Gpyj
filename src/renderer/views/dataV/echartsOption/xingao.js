@@ -1,10 +1,24 @@
+import { splitData, getDayArr } from "@/utils/gpyj.js";
+
 export function table2Option(data) {
+    console.log("data", data);
     const upColor = "#ec0000";
     const upBorderColor = "#8A0000";
     const downColor = "#00da3c";
     const downBorderColor = "#008F28";
     // Each item: open，close，lowest，highest
-    const data0 = splitData([
+    let data0 = getDayArr(splitData(data, "dealDate"));
+    let dataMa5 = splitData(data, "ma5");
+    let dataMa10 = splitData(data, "ma10");
+
+    let dataMa20 = splitData(data, "ma20");
+
+    let dataMa30 = splitData(data, "ma30");
+
+    let dataK = splitData(data, ["open", "close", "low", "high"]);
+    console.log("kkkkkkkkkk", dataK);
+    // console.log(data0);
+    const data1 = splitData2([
         ["2013/1/24", 2320.26, 2320.26, 2287.3, 2362.94],
         ["2013/1/25", 2300, 2291.3, 2288.26, 2308.38],
         ["2013/1/28", 2295.35, 2346.5, 2295.35, 2346.92],
@@ -94,7 +108,7 @@ export function table2Option(data) {
         ["2013/6/7", 2242.26, 2210.9, 2205.07, 2250.63],
         ["2013/6/13", 2190.1, 2148.35, 2126.22, 2190.1],
     ]);
-    function splitData(rawData) {
+    function splitData2(rawData) {
         const categoryData = [];
         const values = [];
         for (var i = 0; i < rawData.length; i++) {
@@ -106,6 +120,7 @@ export function table2Option(data) {
             values: values,
         };
     }
+    console.log(data1);
     function calculateMA(dayCount) {
         var result = [];
         for (var i = 0, len = data0.values.length; i < len; i++) {
@@ -122,10 +137,10 @@ export function table2Option(data) {
         return result;
     }
     const option = {
-        title: {
-            text: "上证指数",
-            left: 0,
-        },
+        // title: {
+        //     text: "上证指数",
+        //     left: 0,
+        // },
         tooltip: {
             trigger: "axis",
             axisPointer: {
@@ -139,19 +154,24 @@ export function table2Option(data) {
                 color: "#ffffff", //字体颜色
             },
         },
-        // grid: {
-        //     left: "10%",
-        //     right: "10%",
-        //     bottom: "15%",
-        // },
+        // grid: [
+        //     {
+        //         height: "70%",
+        //         // top: 20
+        //     },
+        //     {
+        //         height: "30%",
+        //         // bottom: 80
+        //     },
+        // ],
         xAxis: {
             type: "category",
-            data: data0.categoryData,
+            data: data0,
             boundaryGap: false,
-            axisLine: { onZero: false },
-            splitLine: { show: false },
-            min: "dataMin",
-            max: "dataMax",
+            // axisLine: { onZero: false },
+            // splitLine: { show: false },
+            // min: "dataMin",
+            // max: "dataMax",
         },
         yAxis: {
             scale: true,
@@ -159,25 +179,25 @@ export function table2Option(data) {
                 show: false,
             },
         },
-        // dataZoom: [
-        //     {
-        //         type: "inside",
-        //         start: 50,
-        //         end: 100,
-        //     },
-        //     {
-        //         show: true,
-        //         type: "slider",
-        //         top: "90%",
-        //         start: 50,
-        //         end: 100,
-        //     },
-        // ],
+        dataZoom: [
+            {
+                type: "inside",
+                start: 0,
+                end: 20,
+            },
+            {
+                show: true,
+                type: "slider",
+                top: "90%",
+                start: 50,
+                end: 100,
+            },
+        ],
         series: [
             {
                 name: "日K",
                 type: "candlestick",
-                data: data0.values,
+                data: dataK,
                 itemStyle: {
                     color: upColor,
                     color0: downColor,
@@ -275,7 +295,7 @@ export function table2Option(data) {
             {
                 name: "MA5",
                 type: "line",
-                data: calculateMA(5),
+                data: dataMa5,
                 smooth: true,
                 symbol: "none",
                 lineStyle: {
@@ -285,7 +305,7 @@ export function table2Option(data) {
             {
                 name: "MA10",
                 type: "line",
-                data: calculateMA(10),
+                data: dataMa10,
                 smooth: true,
                 symbol: "none",
                 lineStyle: {
@@ -295,7 +315,7 @@ export function table2Option(data) {
             {
                 name: "MA20",
                 type: "line",
-                data: calculateMA(20),
+                data: dataMa20,
                 smooth: true,
                 symbol: "none",
                 lineStyle: {
@@ -305,7 +325,7 @@ export function table2Option(data) {
             {
                 name: "MA30",
                 type: "line",
-                data: calculateMA(30),
+                data: dataMa30,
                 smooth: true,
                 symbol: "none",
                 lineStyle: {
