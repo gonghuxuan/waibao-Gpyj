@@ -1,4 +1,4 @@
-import { splitData, getDayArr } from "@/utils/gpyj.js";
+import { splitData, getDayArr, getSecondArr } from "@/utils/gpyj.js";
 
 export function table2Option(data) {
     const upColor = "#ec0000";
@@ -216,17 +216,22 @@ export function table2Option(data) {
 }
 
 export function table2bottomOption(data) {
+    let data0 = getSecondArr(splitData(data, "dealDate"));
     let dif = splitData(data, "dif"); // 白
     let dea = splitData(data, "dea"); // 黄
     let macd = splitData(data, "macd");
     const option = {
         legend: {
-            data: ["Evaporation", "Precipitation", "Temperature"],
+            data: ["dif", "dea", "macd"],
+            textStyle: {
+                fontSize: 16, //字体大小
+                color: "#ffffff", //字体颜色
+            },
         },
         xAxis: [
             {
                 type: "category",
-                data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                data: data0,
             },
         ],
         yAxis: [
@@ -245,65 +250,35 @@ export function table2bottomOption(data) {
             //     },
             // },
         ],
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "cross",
+                label: {
+                    backgroundColor: "#6a7985",
+                },
+            },
+        },
         series: [
             {
-                name: "Evaporation",
-                type: "bar",
-                data: [
-                    2.0,
-                    4.9,
-                    7.0,
-                    23.2,
-                    25.6,
-                    76.7,
-                    135.6,
-                    162.2,
-                    32.6,
-                    20.0,
-                    6.4,
-                    3.3,
-                ],
+                name: "dif",
+                type: "line",
+                data: dif,
             },
             {
-                name: "Precipitation",
-                type: "bar",
+                name: "dea",
+                type: "line",
                 tooltip: {
                     valueFormatter: function (value) {
                         return value + " ml";
                     },
                 },
-                data: [
-                    2.6,
-                    5.9,
-                    9.0,
-                    26.4,
-                    28.7,
-                    70.7,
-                    175.6,
-                    182.2,
-                    48.7,
-                    18.8,
-                    6.0,
-                    2.3,
-                ],
+                data: dea,
             },
             {
-                name: "Temperature",
-                type: "line",
-                data: [
-                    2.0,
-                    2.2,
-                    3.3,
-                    4.5,
-                    6.3,
-                    10.2,
-                    20.3,
-                    23.4,
-                    23.0,
-                    16.5,
-                    12.0,
-                    6.2,
-                ],
+                name: "macd",
+                type: "bar",
+                data: macd,
             },
         ],
     };

@@ -16,6 +16,14 @@ export function getDayArr(data) {
     return newdata;
 }
 
+export function getSecondArr(data) {
+    const newdata = [];
+    data.forEach((element) => {
+        newdata.push(getSecond(element));
+    });
+    return newdata;
+}
+
 export function getMax(arr) {
     var max = arr[0];
     var len = arr.length;
