@@ -2,10 +2,10 @@
   <div class="xingao-detail">
     <div class="top-contain">
       <div>
-        <span class="padding" :class="active == 0 ? 'active' : 'unactive'">新高异动</span>
-        <span class="padding" :class="active == 1 ? 'active' : 'unactive'">平台突破</span>
-        <span class="padding" :class="active == 2 ? 'active' : 'unactive'">强势回调</span>
-        <span class="padding" :class="active == 3 ? 'active' : 'unactive'">游资股</span>
+        <span class="padding" :class="active == 0 ? 'active' : 'unactive'" @click="selectType(0)">新高异动</span>
+        <span class="padding" :class="active == 1 ? 'active' : 'unactive'" @click="selectType(1)">平台突破</span>
+        <span class="padding" :class="active == 2 ? 'active' : 'unactive'" @click="selectType(2)">强势回调</span>
+        <span class="padding" :class="active == 3 ? 'active' : 'unactive'" @click="selectType(3)">游资股</span>
       </div>
     </div>
     <div class="content-contain">
@@ -172,17 +172,24 @@ export default {
     mounted() {
         // this.getName();
         // console.log(this.$route.query.stockType);
+        // this.getData();
+        // this.active = this.$route.query.stockType;
+        // console.log(this.$route.query.stockType);
+    },
+    activated() {
+        this.active = this.$route.query.stockType;
         this.getData();
     },
+
     methods: {
-        getData() {
-            getLetfStocks({ stockType: this.$route.query.stockType }).then(
-                (res) => {
-                    this.gupiaoList = res;
-                    this.selectedGupiao = this.gupiaoList[0].stockCode;
-                    this.getStockDetail();
-                }
-            );
+        getData(stockType) {
+            getLetfStocks({
+                stockType: stockType ? stockType : this.$route.query.stockType,
+            }).then((res) => {
+                this.gupiaoList = res;
+                this.selectedGupiao = this.gupiaoList[0].stockCode;
+                this.getStockDetail();
+            });
         },
         getStockDetail() {
             getStockDataLine({
@@ -209,6 +216,10 @@ export default {
                     this.setCharts2();
                 }, 0);
             });
+        },
+        selectType(index) {
+            this.active = index;
+            this.getData(index);
         },
         selectgupiao(stockCode) {
             this.selectedGupiao = stockCode;
