@@ -73,6 +73,7 @@ export default {
     mounted() {
         this.getData();
     },
+    activated() {},
     methods: {
         getData() {
             getLetfStocks({ stockType: this.stockType }).then((res) => {
@@ -84,7 +85,7 @@ export default {
             this.$router.push({
                 path: "/quan-xingao-detail",
                 query: {
-                    stockType: 0,
+                    stockType: this.stockType,
                     title1: "全场预警",
                     title2: this.getTitle(),
                 },
