@@ -152,6 +152,30 @@ const router = new Router({
                                         keepAlive: false,
                                     },
                                 },
+                                {
+                                    path: "/jubu-chengjiaoeyidong-detail",
+                                    name: "jubu-chengjiaoeyidong-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/jubu/jubu/jubu-chengjiaoeyidong-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "jubu-chengjiaoeyidong-detail",
+                                        keepAlive: false,
+                                    },
+                                },
+                                {
+                                    path: "/zhong-chengjiaoeyidong-detail",
+                                    name: "zhong-chengjiaoeyidong-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/zhong/zhong/zhong-chengjiaoeyidong-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "zhong-chengjiaoeyidong-detail",
+                                        keepAlive: false,
+                                    },
+                                },
                             ],
                         },
                     ],

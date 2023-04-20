@@ -86,3 +86,24 @@ export function getStockChangePercentAction(params) {
         params,
     });
 }
+export function getStockAmountAction(params) {
+    return request({
+        url: "/stockAlert/partStocks/getStockAmountAction",
+        method: "get",
+        params,
+    });
+}
+export function getStockChangePercentActionZhong(params) {
+    return request({
+        url: "/stockAlert/importantStocks/getStockChangePercentAction",
+        method: "get",
+        params,
+    });
+}
+export function getStockAmountActionZhong(params) {
+    return request({
+        url: "/stockAlert/importantStocks/getStockAmountAction",
+        method: "get",
+        params,
+    });
+}

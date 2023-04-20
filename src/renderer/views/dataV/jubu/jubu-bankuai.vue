@@ -11,7 +11,8 @@
         <div class="sn-container sn-container-2">
             <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
                 ><div class="juzhong font-18 bankuai-title"
-                    >成交额异动
+                    >
+                    <jubuchengjiaoeyidong title="成交额异动" />
                 </div></dv-border-box-10
             >
         </div>
@@ -34,6 +35,7 @@
 
 <script>
 import jubuzhangfuyidong from "./jubu/jubu-zhangfuyidong.vue";
+import jubuchengjiaoeyidong from "./jubu/jubu-chengjiaoeyidong.vue";
 
 export default {
     data() {
@@ -41,6 +43,7 @@ export default {
     },
     components: {
         jubuzhangfuyidong,
+        jubuchengjiaoeyidong,
     },
     computed: {},
     created() {},

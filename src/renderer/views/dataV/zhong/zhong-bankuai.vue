@@ -3,14 +3,14 @@
         <div class="sn-container sn-container-1">
             <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
                 ><div class="juzhong font-18 bankuai-title"
-                    >涨幅异动
+                    ><zhongzhangfuyidong title="涨幅异动" />
                 </div></dv-border-box-10
             >
         </div>
         <div class="sn-container sn-container-2">
             <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
                 ><div class="juzhong font-18 bankuai-title"
-                    >成交额异动
+                    ><zhongchengjiaoeyidong title="成交额异动" />
                 </div></dv-border-box-10
             >
         </div>
@@ -32,7 +32,23 @@
 </template>
 
 <script>
-export default {};
+import zhongzhangfuyidong from "./zhong/zhong-zhangfuyidong.vue";
+import zhongchengjiaoeyidong from "./zhong/zhong-chengjiaoeyidong.vue";
+
+export default {
+    data() {
+        return {};
+    },
+    components: {
+        zhongzhangfuyidong,
+        zhongchengjiaoeyidong,
+    },
+    computed: {},
+    created() {},
+    mounted() {
+    },
+    methods: {},
+};
 </script>
 
 <style lang="scss">
