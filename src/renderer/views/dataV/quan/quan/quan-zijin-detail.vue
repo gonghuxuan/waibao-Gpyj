@@ -6,43 +6,43 @@
       </div>
     </div>
     <div class="content-contain">
-      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
+      <a-table bordered :columns="columns" :data-source="resData" :pagination="pagination">
 
-        <template slot="changepercent" slot-scope="changepercent">
-          <div :class="changepercent > 0 ? 'red' : 'green'">
+        <template slot="changePercent" slot-scope="changePercent">
+          <div :class="changePercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
-              <span v-if="changepercent > 0"> +</span>
-              {{ changepercent }}
+              <span v-if="changePercent > 0"> +</span>
+              {{ changePercent }}
             </a-button>
           </div>
         </template>
         <template slot="mainAmount" slot-scope="mainAmount, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+          <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
                           mainAmount
                       }}</div>
         </template>
         <template slot="mainAmountProportion" slot-scope="mainAmountProportion, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+          <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
                           mainAmountProportion
                       }}</div>
         </template>
         <template slot="superLargeAmount" slot-scope="superLargeAmount, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+          <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
                           superLargeAmount
                       }}</div>
         </template>
         <template slot="superLargeAmountProportion" slot-scope="superLargeAmountProportion, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+          <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
                           superLargeAmountProportion
                       }}</div>
         </template>
         <template slot="largeAmount" slot-scope="largeAmount, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+          <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
                           largeAmount
                       }}</div>
         </template>
         <template slot="largeAmountProportion" slot-scope="largeAmountProportion, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+          <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
                           largeAmountProportion
                       }}</div>
         </template>
@@ -53,7 +53,8 @@
 </template>
 
 <script>
-import { getLetfStocks, getStockDataLine } from "@/api/userInfo.js";
+import { getAmountDirection, getLetfStocks } from "@/api/userInfo.js";
+import dayjs from "dayjs";
 
 import * as echarts from "echarts";
 
@@ -61,6 +62,9 @@ console.log(echarts);
 export default {
     data() {
         return {
+            pagination: {
+                showQuickJumper: true,
+            },
             columns: [
                 {
                     title: "序号",
@@ -83,9 +87,9 @@ export default {
                 },
                 {
                     title: "涨跌幅",
-                    dataIndex: "changepercent",
-                    key: "changepercent",
-                    scopedSlots: { customRender: "changepercent" },
+                    dataIndex: "changePercent",
+                    key: "changePercent",
+                    scopedSlots: { customRender: "changePercent" },
                     align: "center",
                 },
                 {
@@ -155,47 +159,7 @@ export default {
                     ],
                 },
             ],
-            resData: [
-                {
-                    amount: 1136690.0, //成交额
-                    changepercent: -2.7, //涨跌幅
-                    close: 17.97, //价格
-                    largeAmount: 820.0, //大单净流入额
-                    largeAmountProportion: 0.07200000000000001, //大单净流入占比（%）
-                    mainAmount: 11461.0, //主力净流入额
-                    mainAmountProportion: 1.008, //主力净流入占比（%）
-                    stockCode: "601360", //股票代码
-                    stockName: "三六零", //股票名称
-                    superLargeAmount: 10641.0, //超大单净流入额
-                    superLargeAmountProportion: 0.936, //超大单净流入占比（%）
-                },
-                {
-                    amount: 1136690.0, //成交额
-                    changepercent: 7.09, //涨跌幅
-                    close: 17.97, //价格
-                    largeAmount: 820.0, //大单净流入额
-                    largeAmountProportion: 0.07200000000000001, //大单净流入占比（%）
-                    mainAmount: 11461.0, //主力净流入额
-                    mainAmountProportion: 1.008, //主力净流入占比（%）
-                    stockCode: "601361", //股票代码
-                    stockName: "三六零2", //股票名称
-                    superLargeAmount: 10641.0, //超大单净流入额
-                    superLargeAmountProportion: 0.936, //超大单净流入占比（%）
-                },
-                {
-                    amount: 1136690.0, //成交额
-                    changepercent: 7.09, //涨跌幅
-                    close: 17.97, //价格
-                    largeAmount: 820.0, //大单净流入额
-                    largeAmountProportion: 0.07200000000000001, //大单净流入占比（%）
-                    mainAmount: 11461.0, //主力净流入额
-                    mainAmountProportion: 1.008, //主力净流入占比（%）
-                    stockCode: "601362", //股票代码
-                    stockName: "三六零3", //股票名称
-                    superLargeAmount: 10641.0, //超大单净流入额
-                    superLargeAmountProportion: 0.936, //超大单净流入占比（%）
-                },
-            ],
+            resData: [],
         };
     },
     components: {},
@@ -203,17 +167,15 @@ export default {
     created() {},
     mounted() {
         // this.getName();
-        console.log(this.$route.query.stockType);
-        // this.getData();
+        this.getData();
     },
     methods: {
         getData() {
-            getLetfStocks({ stockType: this.$route.query.stockType }).then(
+            getAmountDirection({ dealDate: dayjs().format("YYYY-MM-DD") }).then(
                 (res) => {
-                    this.gupiaoList = res;
-                    console.log(this.gupiaoList);
-                    this.selectedGupiao = this.gupiaoList[0].stockCode;
-                    this.getStockDetail();
+                    // console.log("资金流向", res);
+                    // this.resData = res;
+                    this.resData = res;
                 }
             );
         },
@@ -311,6 +273,17 @@ export default {
         color: white;
         font-size: 14px;
         text-align: center;
+    }
+    .ant-pagination-options-quick-jumper {
+        color: white;
+    }
+    .ant-pagination-item-container {
+        color: white;
+    }
+    .ant-pagination-jump-next
+        .ant-pagination-item-container
+        .ant-pagination-item-ellipsis {
+        color: white;
     }
     .ant-table-tbody > tr > td {
         color: #64b7bc;

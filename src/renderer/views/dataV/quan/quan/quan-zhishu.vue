@@ -40,6 +40,7 @@
 import { getExponentNames } from "@/api/userInfo.js";
 import { getExponentDivergeSignal } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import { splitData, getDayArr, getSecondArr } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
 export default {
     data() {

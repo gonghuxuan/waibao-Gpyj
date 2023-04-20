@@ -8,25 +8,25 @@
     <div class="content-contain">
       <div class="juzhong title-contain">
         <div style="color: rgba(255, 244, 92, 1);">市场风格：</div>
-        <div style="color: #FF5145">游资</div>
+        <div style="color: #FF5145">{{resData.style}}</div>
       </div>
       <div class="table-shuiwei-contain">
         <div class="table-shuiwei table-shuiwei-1">
           <div style="text-align: center">
-            <div style="color: #FFF45C; font-size: 20px;">1386亿</div>
+            <div style="color: #FFF45C; font-size: 20px;">{{resData.amount3Avg | fixedTwo}}亿</div>
             <div style="color:#64B7BC;font-size: 13px;padding-top: 10px;">前3日均值</div>
           </div>
         </div>
         <div class="table-shuiwei table-shuiwei-2">
           <div style="text-align: center">
-            <div style="color: #FF5145; font-size: 20px;">4586亿</div>
+            <div style="color: #FF5145; font-size: 20px;">{{resData.amount | fixedTwo}}亿</div>
             <div style="color:#64B7BC;font-size: 13px;padding-top: 10px;">两市成交额</div>
           </div>
         </div>
         <div class="table-shuiwei table-shuiwei-3">
 
           <div style="text-align: center">
-            <div style="color: #1DFFFF; font-size: 20px;">1.88</div>
+            <div style="color: #1DFFFF; font-size: 20px;">{{ resData.amountRatio }}</div>
             <div style="color:#64B7BC;font-size: 13px;padding-top: 10px;">量比</div>
           </div>
         </div>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { getLetfStocks, getStockDataLine } from "@/api/userInfo.js";
+import { get2MarketAmount } from "@/api/userInfo.js";
 
 import * as echarts from "echarts";
 
@@ -49,6 +49,7 @@ export default {
             selectedGupiao: "",
             timeType: "1",
             stockDetail: [],
+            resData: [],
         };
     },
     components: {},
@@ -61,14 +62,10 @@ export default {
     },
     methods: {
         getData() {
-            getLetfStocks({ stockType: this.$route.query.stockType }).then(
-                (res) => {
-                    this.gupiaoList = res;
-                    console.log(this.gupiaoList);
-                    this.selectedGupiao = this.gupiaoList[0].stockCode;
-                    this.getStockDetail();
-                }
-            );
+            get2MarketAmount().then((res) => {
+                console.log(res);
+                this.resData = res;
+            });
         },
         getStockDetail() {
             getStockDataLine({

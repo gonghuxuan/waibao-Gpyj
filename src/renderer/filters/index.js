@@ -15,6 +15,14 @@ Vue.filter("toWan", function (num) {
     return num >= 10000 ? (num / 10000).toFixed(1) + "万" : num;
 });
 
+Vue.filter("fixedTwo", function (num) {
+    const money = Number(num);
+    if (isNaN(money)) {
+        return "0";
+    }
+    return money.toFixed(2);
+});
+
 Vue.filter("moment", function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
     return moment(dataStr).format(pattern);
 });

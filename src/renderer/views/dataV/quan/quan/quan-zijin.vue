@@ -6,21 +6,21 @@
     <div class="table-contain">
       <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
 
-        <template slot="changepercent" slot-scope="changepercent">
-          <div :class="changepercent > 0 ? 'red' : 'green'">
+        <template slot="changePercent" slot-scope="changePercent">
+          <div :class="changePercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
-              <span v-if="changepercent > 0"> +</span>
-              {{ changepercent }}
+              <span v-if="changePercent > 0"> +</span>
+              {{ changePercent }}
             </a-button>
           </div>
         </template>
         <template slot="mainAmount" slot-scope="mainAmount, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+          <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
                         mainAmount
                     }}</div>
         </template>
         <template slot="mainAmountProportion" slot-scope="mainAmountProportion, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+          <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
                         mainAmountProportion
                     }}</div>
         </template>
@@ -30,7 +30,7 @@
   </div>
 </template>
   <!-- :class="
-  record[index].changepercent > 0 ? 'red' : 'green'
+  record[index].changePercent > 0 ? 'red' : 'green'
   " -->
   <script>
 import { getAmountDirection, getLetfStocks } from "@/api/userInfo.js";
@@ -49,9 +49,9 @@ export default {
                 },
                 {
                     title: "涨跌幅",
-                    dataIndex: "changepercent",
-                    key: "changepercent",
-                    scopedSlots: { customRender: "changepercent" },
+                    dataIndex: "changePercent",
+                    key: "changePercent",
+                    scopedSlots: { customRender: "changePercent" },
                     align: "center",
                 },
                 {
@@ -75,47 +75,7 @@ export default {
                     ],
                 },
             ],
-            resData: [
-                {
-                    amount: 1136690.0, //成交额
-                    changepercent: -2.7, //涨跌幅
-                    close: 17.97, //价格
-                    largeAmount: 820.0, //大单净流入额
-                    largeAmountProportion: 0.07200000000000001, //大单净流入占比（%）
-                    mainAmount: 11461.0, //主力净流入额
-                    mainAmountProportion: 1.008, //主力净流入占比（%）
-                    stockCode: "601360", //股票代码
-                    stockName: "三六零", //股票名称
-                    superLargeAmount: 10641.0, //超大单净流入额
-                    superLargeAmountProportion: 0.936, //超大单净流入占比（%）
-                },
-                {
-                    amount: 1136690.0, //成交额
-                    changepercent: 7.09, //涨跌幅
-                    close: 17.97, //价格
-                    largeAmount: 820.0, //大单净流入额
-                    largeAmountProportion: 0.07200000000000001, //大单净流入占比（%）
-                    mainAmount: 11461.0, //主力净流入额
-                    mainAmountProportion: 1.008, //主力净流入占比（%）
-                    stockCode: "601361", //股票代码
-                    stockName: "三六零2", //股票名称
-                    superLargeAmount: 10641.0, //超大单净流入额
-                    superLargeAmountProportion: 0.936, //超大单净流入占比（%）
-                },
-                {
-                    amount: 1136690.0, //成交额
-                    changepercent: 7.09, //涨跌幅
-                    close: 17.97, //价格
-                    largeAmount: 820.0, //大单净流入额
-                    largeAmountProportion: 0.07200000000000001, //大单净流入占比（%）
-                    mainAmount: 11461.0, //主力净流入额
-                    mainAmountProportion: 1.008, //主力净流入占比（%）
-                    stockCode: "601362", //股票代码
-                    stockName: "三六零3", //股票名称
-                    superLargeAmount: 10641.0, //超大单净流入额
-                    superLargeAmountProportion: 0.936, //超大单净流入占比（%）
-                },
-            ],
+            resData: [],
         };
     },
     props: {
@@ -137,8 +97,9 @@ export default {
         getData() {
             getAmountDirection({ dealDate: dayjs().format("YYYY-MM-DD") }).then(
                 (res) => {
-                    console.log('资金流向',res);
+                    console.log("资金流向", res);
                     // this.resData = res;
+                    this.resData = res.slice(0, 100);
                 }
             );
         },
@@ -155,7 +116,7 @@ export default {
     },
 };
 </script>
-  
+
   <style lang="scss">
 .jubu-zijin {
     width: 100%;
@@ -208,4 +169,3 @@ export default {
     }
 }
 </style>
-  
