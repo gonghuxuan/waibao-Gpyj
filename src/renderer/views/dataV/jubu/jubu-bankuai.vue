@@ -3,7 +3,8 @@
         <div class="sn-container sn-container-1">
             <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
                 ><div class="juzhong font-18 bankuai-title"
-                    >涨幅异动
+                    >
+                    <jubuzhangfuyidong title="涨幅异动" />
                 </div></dv-border-box-10
             >
         </div>
@@ -32,7 +33,21 @@
 </template>
 
 <script>
-export default {};
+import jubuzhangfuyidong from "./jubu/jubu-zhangfuyidong.vue";
+
+export default {
+    data() {
+        return {};
+    },
+    components: {
+        jubuzhangfuyidong,
+    },
+    computed: {},
+    created() {},
+    mounted() {
+    },
+    methods: {},
+};
 </script>
 
 <style lang="scss">

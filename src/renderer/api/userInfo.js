@@ -79,3 +79,10 @@ export function getHitStocks(params) {
         params,
     });
 }
+export function getStockChangePercentAction(params) {
+    return request({
+        url: "/stockAlert/partStocks/getStockChangePercentAction",
+        method: "get",
+        params,
+    });
+}
