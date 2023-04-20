@@ -53,46 +53,82 @@
           </div>
         </div>
         <div class="table2-2 table-shadow">
-          <div id="charts-2" style="height: 260px; width: 100%"></div>
+          <div class="juzhong" style="padding-top: 10px">
+            <div class="table-shadow" style="
+                                width: 70px;
+                                padding: 5px;
+                                text-align: center;
+                                font-size: 14px;
+                                margin-right: 30px;
+                            " :class="
+                                category == 'MACD'
+                                    ? 'time-active'
+                                    : 'time-unactive'
+                            " @click="selectBottom('MACD')">MACD</div>
+            <div class="table-shadow" style="
+                                width: 70px;
+                                padding: 5px;
+                                text-align: center;
+                                font-size: 14px;
+                                margin-right: 30px;
+                            " :class="
+                                category == 'KDJ'
+                                    ? 'time-active'
+                                    : 'time-unactive'
+                            " @click="selectBottom('KDJ')">KDJ</div>
+            <div class="table-shadow" style="
+                                width: 70px;
+                                padding: 5px;
+                                text-align: center;
+                                font-size:14px;
+                         " :class="
+                                 category == 'RSI'
+                                    ? 'time-active'
+                                    : 'time-unactive'
+                            " @click="selectBottom('RSI')">RSI</div>
+
+          </div>
+
+          <div id="charts-2" style="height: 210px; width: 100%"></div>
         </div>
       </div>
 
       <div class="table3 table-shadow">
         <div class="table3-item-contain">
-          <div style="color: white; font-size: 16px;padding-left: 30px;">{{ stockDetail[stockIndex].stockName }}</div>
-          <div style="color: white; font-size: 16px;padding-right: 30px;">{{ stockDetail[stockIndex].stockCode }}</div>
+          <div style="color: white; font-size: 16px;padding-left: 30px;">{{ stockDetailItem.stockName }}</div>
+          <div style="color: white; font-size: 16px;padding-right: 30px;">{{ stockDetailItem.stockCode }}</div>
         </div>
         <div class="table3-item-contain">
           <div class="table3-key">今开</div>
-          <div class="table3-value">{{ stockDetail[stockIndex].open }}</div>
+          <div class="table3-value">{{ stockDetailItem.open }}</div>
         </div>
         <div class="table3-item-contain">
           <div class="table3-key">最高</div>
-          <div class="table3-value">{{ stockDetail[stockIndex].high }}</div>
+          <div class="table3-value">{{ stockDetailItem.high }}</div>
         </div>
         <div class="table3-item-contain">
           <div class="table3-key">最低</div>
-          <div class="table3-value">{{ stockDetail[stockIndex].low }}</div>
+          <div class="table3-value">{{ stockDetailItem.low }}</div>
         </div>
         <div class="table3-item-contain">
           <div class="table3-key">涨幅</div>
-          <div class="table3-value" :style="stockDetail[stockIndex].changepercent > 0 ? 'color: #FF5145': 'color: #1AB05D'">{{ stockDetail[stockIndex].changepercent }}</div>
+          <div class="table3-value" :style="stockDetailItem.changepercent > 0 ? 'color: #FF5145': 'color: #1AB05D'">{{ stockDetailItem.changepercent }}</div>
         </div>
         <div class="table3-item-contain">
           <div class="table3-key">换手</div>
-          <div class="table3-value">{{ stockDetail[stockIndex].tun }}</div>
+          <div class="table3-value">{{ stockDetailItem.tun }}</div>
         </div>
         <div class="table3-item-contain">
           <div class="table3-key">成交额</div>
-          <div class="table3-value">{{ stockDetail[stockIndex].amount }}</div>
+          <div class="table3-value">{{ stockDetailItem.amount }}</div>
         </div>
         <div class="table3-item-contain">
           <div class="table3-key">总市值</div>
-          <div class="table3-value">{{ stockDetail[stockIndex].mktCap }}</div>
+          <div class="table3-value">{{ stockDetailItem.mktCap }}</div>
         </div>
         <div class="table3-item-contain">
           <div class="table3-key">流通值</div>
-          <div class="table3-value">{{ stockDetail[stockIndex].nmc }}</div>
+          <div class="table3-value">{{ stockDetailItem.nmc }}</div>
         </div>
       </div>
     </div>
@@ -105,6 +141,9 @@ import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import {
     table2Option,
     table2bottomOption,
+    table2bottomOptionKDJ,
+    table2bottomOptionRSI,
+    table2Optionfen,
 } from "@/views/dataV/echartsOption/xingao.js";
 
 import * as echarts from "echarts";
@@ -123,6 +162,8 @@ export default {
             changeList: [],
             timeList: [],
             resData: [],
+            category: "MACD",
+            stockDetailItem: {},
         };
     },
     components: {},
@@ -159,7 +200,8 @@ export default {
                     });
                 } else {
                 }
-
+                this.stockDetailItem =
+                    this.stockDetail[this.stockDetail.length - 1];
                 setTimeout(() => {
                     this.setCharts();
                 }, 0);
@@ -172,6 +214,23 @@ export default {
             this.selectedGupiao = stockCode;
             this.getStockDetail();
         },
+        selectBottom(category) {
+            this.category = category;
+            this.chart2.clear();
+            if (category === "MACD") {
+                this.setCharts2();
+            }
+            if (category === "KDJ") {
+                this.setCharts2(
+                    table2bottomOptionKDJ(this.stockDetail, this.timeType)
+                );
+            }
+            if (category === "RSI") {
+                this.setCharts2(
+                    table2bottomOptionRSI(this.stockDetail, this.timeType)
+                );
+            }
+        },
         clearList() {
             this.closeList = [];
             this.changeList = [];
@@ -182,85 +241,109 @@ export default {
             this.timeType = time;
             this.getStockDetail();
         },
-        setCharts2() {
-            console.log("11111111111111");
+        setCharts2(
+            option = table2bottomOption(this.stockDetail, this.timeType)
+        ) {
             this.chart2 = echarts.init(document.getElementById("charts-2"));
-            this.chart2.setOption(table2bottomOption(this.stockDetail));
+            this.chart2.setOption(option);
         },
         setCharts() {
             this.chart = echarts.init(document.getElementById("charts"));
-            const option = {
-                tooltip: {
-                    trigger: "axis",
-                    axisPointer: {
-                        type: "cross",
-                        crossStyle: {
-                            color: "#999",
-                        },
-                    },
-                },
-                legend: {
-                    data: ["close", "changepercent"],
-                    textStyle: {
-                        fontSize: 16, //字体大小
-                        color: "#ffffff", //字体颜色
-                    },
-                },
-                dataZoom: [
-                    {
-                        type: "inside",
-                        start: 0,
-                        end: 20,
-                    },
-                    {
-                        show: true,
-                        type: "slider",
-                        top: "90%",
-                        // show: false,
-                    },
-                ],
-                xAxis: [
-                    {
-                        type: "category",
-                        data: this.timeList,
-                        axisPointer: {
-                            type: "shadow",
-                        },
-                    },
-                ],
-                yAxis: [
-                    {
-                        type: "value",
-                        name: "close",
-                        scale: true,
-                    },
-                    {
-                        type: "value",
-                        name: "changepercent",
-                    },
-                ],
-                series: [
-                    {
-                        name: "close",
-                        type: "line",
-                        yAxisIndex: 0,
-                        data: this.closeList,
-                    },
-                    {
-                        name: "changepercent",
-                        type: "line",
-                        yAxisIndex: 1,
-                        data: this.changeList,
-                    },
-                ],
-            };
+            // const option = {
+            //     tooltip: {
+            //         trigger: "axis",
+            //         axisPointer: {
+            //             type: "cross",
+            //             crossStyle: {
+            //                 color: "#999",
+            //             },
+            //         },
+            //     },
+            //     legend: {
+            //         data: ["close", "changepercent"],
+            //         textStyle: {
+            //             fontSize: 16, //字体大小
+            //             color: "#ffffff", //字体颜色
+            //         },
+            //     },
+            //     dataZoom: [
+            //         {
+            //             type: "inside",
+            //             start: 0,
+            //             end: 20,
+            //         },
+            //         {
+            //             show: true,
+            //             type: "slider",
+            //             top: "90%",
+            //             // show: false,
+            //         },
+            //     ],
+            //     xAxis: [
+            //         {
+            //             type: "category",
+            //             data: this.timeList,
+            //             axisPointer: {
+            //                 type: "shadow",
+            //             },
+            //         },
+            //     ],
+            //     yAxis: [
+            //         {
+            //             type: "value",
+            //             name: "close",
+            //             scale: true,
+            //         },
+            //         {
+            //             type: "value",
+            //             name: "changepercent",
+            //         },
+            //     ],
+            //     series: [
+            //         {
+            //             name: "close",
+            //             type: "line",
+            //             yAxisIndex: 0,
+            //             data: this.closeList,
+            //         },
+            //         {
+            //             name: "changepercent",
+            //             type: "line",
+            //             yAxisIndex: 1,
+            //             data: this.changeList,
+            //         },
+            //     ],
+            // };
             if (this.timeType === "0") {
-                console.log("sssssssssssssssssssssss");
-                this.chart.setOption(option);
+                this.chart.setOption(
+                    table2Optionfen(
+                        this.timeList,
+                        this.closeList,
+                        this.changeList
+                    )
+                );
             } else {
-                console.log("kkkkkkkkkkkkkkkkkkkkkkkkk");
                 this.chart.setOption(table2Option(this.stockDetail));
             }
+            const _this = this;
+            this.chart.on("mouseover", function (param) {
+                _this.stockIndex = param.dataIndex;
+                _this.stockDetailItem = _this.stockDetail[_this.stockIndex];
+            });
+            // this.chart.getZr().on("click", function (param) {
+            //     // 获取 点击的 触发点像素坐标
+            //     const pointInPixel = [param.offsetX, param.offsetY];
+            //     // 判断给定的点是否在指定的坐标系或者系列上
+            //     if (this.chart.containPixel("grid", pointInPixel)) {
+            //         // 获取到点击的 x轴 下标  转换为逻辑坐标
+            //         let xIndex = this.chart.convertFromPixel(
+            //             { seriesIndex: 0 },
+            //             pointInPixel
+            //         )[0];
+            //         // 做一些其他事情
+            //         console.log("xindex", xIndex);
+            //     }
+            // });
         },
     },
 };

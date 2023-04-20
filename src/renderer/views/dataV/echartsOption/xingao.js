@@ -1,5 +1,74 @@
 import { splitData, getDayArr, getSecondArr } from "@/utils/gpyj.js";
 
+export function table2Optionfen(timeList, closeList, changeList) {
+    const option = {
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "cross",
+                crossStyle: {
+                    color: "#999",
+                },
+            },
+        },
+        legend: {
+            data: ["close", "changepercent"],
+            textStyle: {
+                fontSize: 16, //字体大小
+                color: "#ffffff", //字体颜色
+            },
+        },
+        dataZoom: [
+            {
+                type: "inside",
+                start: 0,
+                end: 20,
+            },
+            {
+                show: true,
+                type: "slider",
+                top: "90%",
+                // show: false,
+            },
+        ],
+        xAxis: [
+            {
+                type: "category",
+                data: timeList,
+                axisPointer: {
+                    type: "shadow",
+                },
+            },
+        ],
+        yAxis: [
+            {
+                type: "value",
+                name: "close",
+                scale: true,
+            },
+            {
+                type: "value",
+                name: "changepercent",
+            },
+        ],
+        series: [
+            {
+                name: "close",
+                type: "line",
+                yAxisIndex: 0,
+                data: closeList,
+            },
+            {
+                name: "changepercent",
+                type: "line",
+                yAxisIndex: 1,
+                data: changeList,
+            },
+        ],
+    };
+    return option;
+}
+
 export function table2Option(data) {
     const upColor = "#ec0000";
     const upBorderColor = "#8A0000";
@@ -215,8 +284,14 @@ export function table2Option(data) {
     return option;
 }
 
-export function table2bottomOption(data) {
-    let data0 = getSecondArr(splitData(data, "dealDate"));
+export function table2bottomOption(data, timetype) {
+    let data0;
+    console.log(timetype);
+    if (timetype == "0") {
+        data0 = getSecondArr(splitData(data, "dealDate"));
+    } else {
+        data0 = getDayArr(splitData(data, "dealDate"));
+    }
     let dif = splitData(data, "dif"); // 白
     let dea = splitData(data, "dea"); // 黄
     let macd = splitData(data, "macd");
@@ -237,7 +312,7 @@ export function table2bottomOption(data) {
         yAxis: [
             {
                 type: "value",
-                name: "Precipitation",
+                // name: "Precipitation",
             },
             // {
             //     type: "value",
@@ -264,21 +339,158 @@ export function table2bottomOption(data) {
                 name: "dif",
                 type: "line",
                 data: dif,
+                itemStyle: { normal: { color: "white" } },
             },
             {
                 name: "dea",
                 type: "line",
-                tooltip: {
-                    valueFormatter: function (value) {
-                        return value + " ml";
-                    },
-                },
                 data: dea,
+                itemStyle: { normal: { color: "yellow" } },
             },
             {
                 name: "macd",
                 type: "bar",
                 data: macd,
+            },
+        ],
+    };
+    return option;
+}
+
+export function table2bottomOptionKDJ(data, timetype) {
+    let data0;
+    if (timetype == "0") {
+        data0 = getSecondArr(splitData(data, "dealDate"));
+    } else {
+        data0 = getDayArr(splitData(data, "dealDate"));
+    }
+    let k = splitData(data, "k"); // 白
+    let d = splitData(data, "d"); // 黄
+    let j = splitData(data, "j");
+    const option = {
+        legend: {
+            data: ["k", "d", "j"],
+            textStyle: {
+                fontSize: 16, //字体大小
+                color: "#ffffff", //字体颜色
+            },
+        },
+        xAxis: [
+            {
+                type: "category",
+                data: data0,
+            },
+        ],
+        yAxis: [
+            {
+                type: "value",
+                // name: "Precipitation",
+            },
+            // {
+            //     type: "value",
+            //     name: "Temperature",
+            //     min: 0,
+            //     max: 25,
+            //     interval: 5,
+            //     axisLabel: {
+            //         formatter: "{value} °C",
+            //     },
+            // },
+        ],
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "cross",
+                label: {
+                    backgroundColor: "#6a7985",
+                },
+            },
+        },
+        series: [
+            {
+                name: "k",
+                type: "line",
+                data: k,
+            },
+            {
+                name: "d",
+                type: "line",
+                data: d,
+            },
+            {
+                name: "j",
+                type: "line",
+                data: j,
+            },
+        ],
+    };
+    return option;
+}
+
+export function table2bottomOptionRSI(data, timetype) {
+    let data0;
+    if (timetype == "0") {
+        data0 = getSecondArr(splitData(data, "dealDate"));
+    } else {
+        data0 = getDayArr(splitData(data, "dealDate"));
+    }
+    let rsi1 = splitData(data, "rsi1"); // 白
+    let rsi2 = splitData(data, "rsi2"); // 黄
+    let rsi3 = splitData(data, "rsi3");
+    const option = {
+        legend: {
+            data: ["rsi1", "rsi2", "rsi3"],
+            textStyle: {
+                fontSize: 16, //字体大小
+                color: "#ffffff", //字体颜色
+            },
+        },
+        xAxis: [
+            {
+                type: "category",
+                data: data0,
+            },
+        ],
+        yAxis: [
+            {
+                type: "value",
+                // name: "Precipitation",
+            },
+            // {
+            //     type: "value",
+            //     name: "Temperature",
+            //     min: 0,
+            //     max: 25,
+            //     interval: 5,
+            //     axisLabel: {
+            //         formatter: "{value} °C",
+            //     },
+            // },
+        ],
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "cross",
+                label: {
+                    backgroundColor: "#6a7985",
+                },
+            },
+        },
+        series: [
+            {
+                name: "rsi1",
+                type: "line",
+                data: rsi1,
+            },
+            {
+                name: "rsi2",
+                type: "line",
+                data: rsi2,
+            },
+            {
+                name: "rsi3",
+                type: "line",
+                data: rsi3,
             },
         ],
     };
