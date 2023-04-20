@@ -7,7 +7,7 @@
                 src="@/assets/img/detail.svg"
                 alt=""
                 class="detail"
-                style="width: 20px"
+                style="width: 20px;cursor: pointer;"
             />
         </div>
         <div class="table-contain">

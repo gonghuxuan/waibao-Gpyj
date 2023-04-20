@@ -1,7 +1,7 @@
 <template>
   <div class="jubu-xingao">
     <div class="juzhong">{{ title }}
-      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px" />
+      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;cursor: pointer;" />
     </div>
     <div class="table-contain">
       <a-table bordered :columns="columns" :data-source="resData" :pagination="false">

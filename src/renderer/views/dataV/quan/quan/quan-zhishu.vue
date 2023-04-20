@@ -2,7 +2,7 @@
   <div class="jubu-zhishu-detail">
     <div>
       <div class="juzhong">指数背离
-        <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px" />
+        <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;cursor: pointer;" />
       </div>
       <!-- <div style="font-size: 16px; padding-left: 10px" @click="toDetail">指数背离</div> -->
       <a-dropdown :trigger="['click']">

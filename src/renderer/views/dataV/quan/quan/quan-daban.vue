@@ -1,7 +1,7 @@
 <template>
   <div class="jubu-shuiwei">
     <div class="juzhong">打板
-      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px" />
+      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;cursor: pointer;" />
     </div>
     <div class="table-contain">
       <div class="juzhong title-contain">

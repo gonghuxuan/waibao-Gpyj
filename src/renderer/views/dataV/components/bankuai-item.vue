@@ -1,6 +1,6 @@
 <template>
   <div class="jubu-xingao-detail">
-    <div class="juzhong">{{ title }}<img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;" /></div>
+    <div class="juzhong">{{ title }}<img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;cursor: pointer;" /></div>
     <div class="table-contain">
       <slot></slot>
     </div>
