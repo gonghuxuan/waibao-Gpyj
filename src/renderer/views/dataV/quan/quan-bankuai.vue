@@ -3,9 +3,7 @@
         <div class="sn-container sn-container-1">
             <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
                 <div class="juzhong font-18 bankuai-title">
-                    <!-- <bankuaiitem title="板块涨停个数"> -->
-                        <quanbankuaizhangting stockType="1" title="板块涨停个数" />
-                    <!-- </bankuaiitem> -->
+                    <quanbankuaizhangting stockType="1" title="板块涨停个数" />
                 </div>
             </dv-border-box-10>
         </div>
