@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="content-contain-detail">
-      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
+      <a-table bordered :columns="columns" :data-source="datasource" :pagination="false">
         <!-- <template slot="plateChangepercent" slot-scope="plateChangepercent">
           <div :class="plateChangepercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
@@ -34,6 +34,7 @@
         <a slot="name" slot-scope="text">{{ text }}</a> -->
         <span :slot="item" v-for="(item, index) in columnsSlot" :key="index">共 <span style="color:#FFF45C">{{ resData[index].countall }}</span> 只 晋级率 <span style="color:#FF5145">{{ resData[index].rateall }}</span></span>
       </a-table>
+      <div style="padding-bottom: 150px"></div>
     </div>
   </div>
 </template>
@@ -44,7 +45,6 @@ import { getFiveDay, getDay, getMax, getMin } from "@/utils/gpyj.js";
 
 import * as echarts from "echarts";
 
-console.log(echarts);
 export default {
     data() {
         return {
@@ -52,8 +52,8 @@ export default {
             columns: [
                 {
                     title: "板块",
-                    dataIndex: "plateName",
-                    key: "plateName",
+                    dataIndex: "bankuai",
+                    key: "bankuai",
                     align: "center",
                 },
                 // {
@@ -92,6 +92,7 @@ export default {
             resData: [],
             timeData: [],
             columnsSlot: [],
+            datasource: [],
             columnsTemplate: {
                 title: "2023-01-03",
                 align: "center",
@@ -105,15 +106,15 @@ export default {
                         children: [
                             {
                                 title: "名称",
-                                dataIndex: "stockUpstopCountM",
-                                key: "stockUpstopCountM",
+                                dataIndex: "stockName",
+                                key: "stockName",
                                 // scopedSlots: { customRender: "mainAmount" },
                                 align: "center",
                             },
                             {
                                 title: "封单额",
-                                dataIndex: "stockUpstopProportionM",
-                                key: "stockUpstopProportionM",
+                                dataIndex: "stopAmount",
+                                key: "stopAmount",
                                 // scopedSlots: {
                                 //     customRender: "mainAmountProportion",
                                 // },
@@ -142,7 +143,6 @@ export default {
                 startDate: this.fiveDateArr[4],
                 endDate: this.fiveDateArr[0],
             }).then((res) => {
-                console.log("lianbangaodu", res);
                 this.setRes(res);
                 this.setColumns();
             });
@@ -161,7 +161,7 @@ export default {
                 res[key].countall = countall;
                 res[key].rateall = rateall;
             }
-            console.log(res);
+            // console.log(res);
             const resData = [];
             for (let key in res) {
                 res[key].key = key;
@@ -169,11 +169,90 @@ export default {
                 this.timeData.push(key);
                 this.resObj = res;
             }
-            console.log(resData);
-            console.log(this.timeData);
-            console.log(this.resObj);
+            // console.log(resData);
+            // console.log(this.timeData);
+            // console.log(this.resObj);
             this.resData = resData;
-            console.log(this.resData[0]);
+            this.setResContent(res);
+            // console.log(this.resData);
+        },
+        setResContent(res) {
+            const resDataChange = [];
+            const arr = Object.keys(res[this.fiveDateArr[0]]).splice(0, 8);
+            const arrmax = [];
+            console.log(arr);
+            arr.forEach((item) => {
+                const maxnum = { [item]: 0 };
+                for (let key in res) {
+                    if (res[key][item].stockCount > maxnum[item]) {
+                        maxnum[item] = res[key][item].stockCount;
+                    }
+                }
+                arrmax.push(maxnum);
+            });
+            const datasource = [];
+            const reskeyArr = Object.keys(res);
+            // arr =  ["1", "2", "3", "4", "5", "6", "7", "8+"]
+            // arrmax = [0: {1: 36}
+            // 1: {2: 5}
+            // 2: {3: 1}
+            // 3: {4: 0}
+            // 4: {5: 0}
+            // 5: {6: 0}
+            // 6: {7: 0}
+            // 7: {8+: 0}]
+
+            // reskeyArr =  ["2023-04-21", "2023-04-20", "2023-04-19", "2023-04-18", "2023-04-17"]
+            // console.log(reskeyArr);
+            arr.forEach((item, index) => {
+                console.log(arrmax[index][item]);
+                for (let i = 0; i < arrmax[index][item]; i++) {
+                    const param = {};
+                    reskeyArr.forEach((itemdate, index) => {
+                        param.bankuai = item;
+                        // console.log(res[itemdate][item]?.stockUpstopList);
+                        // console.log(typeof res[itemdate][item].stockUpstopList);
+                        if (
+                            typeof res[itemdate][item].stockUpstopList ===
+                            "object"
+                        ) {
+                            if (
+                                res[itemdate][item].stockUpstopList[i] ==
+                                undefined
+                            ) {
+                                console.log(
+                                    res[itemdate][item].stockUpstopList
+                                );
+                                console.log(i);
+                                console.log(itemdate);
+                            }
+                            param["stockName" + index] =
+                                res[itemdate][item].stockUpstopList[
+                                    i
+                                ]?.stockName;
+                            param["stopAmount" + index] =
+                                res[itemdate][item].stockUpstopList[
+                                    i
+                                ]?.stopAmount;
+                            // console.log(
+                            //     res[itemdate][item].stockUpstopList[i].stockName
+                            // );
+                        }
+                    });
+                    datasource.push(param);
+                }
+            });
+            this.datasource = datasource;
+            console.log(datasource);
+
+            // console.log(arrmax);
+            // for (let key in res) {
+            //     let num = 0;
+            //     console.log(res[key]);
+            //     arr.forEach((item) => {
+            //         console.log(res[key][item].stockCount);
+            //     });
+            // }
         },
         setColumns() {
             this.timeData.forEach((item, index) => {
@@ -183,22 +262,22 @@ export default {
                 const indexFlag = item.substring(item.length - 2);
                 copyColumns.title = item;
                 copyColumns.children[0].children[0].dataIndex =
-                    copyColumns.children[0].children[0].dataIndex + indexFlag;
+                    copyColumns.children[0].children[0].dataIndex + index;
                 copyColumns.children[0].children[0].key =
-                    copyColumns.children[0].children[0].key + indexFlag;
+                    copyColumns.children[0].children[0].key + index;
 
                 copyColumns.children[0].children[1].dataIndex =
-                    copyColumns.children[0].children[1].dataIndex + indexFlag;
+                    copyColumns.children[0].children[1].dataIndex + index;
                 copyColumns.children[0].children[1].key =
-                    copyColumns.children[0].children[1].key + indexFlag;
+                    copyColumns.children[0].children[1].key + index;
 
                 copyColumns.children[0].slots.title =
-                    copyColumns.children[0].slots.title + indexFlag;
+                    copyColumns.children[0].slots.title + index;
                 this.columnsSlot.push(copyColumns.children[0].slots.title);
 
                 this.columns.push(copyColumns);
-                console.log(this.columns);
-                console.log(this.columnsSlot);
+                // console.log(this.columns);
+                // console.log(this.columnsSlot);
             });
         },
     },
@@ -236,6 +315,7 @@ export default {
     .content-contain-detail {
         // display: flex;
         padding: 10px;
+        overflow: scroll;
     }
     .table-contain {
         width: 100%;
