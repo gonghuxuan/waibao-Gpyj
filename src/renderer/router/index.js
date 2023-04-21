@@ -129,6 +129,18 @@ const router = new Router({
                                     },
                                 },
                                 {
+                                    path: "/quan-lianbangaodu-detail",
+                                    name: "quan-lianbangaodu-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/quan/quan/quan-lianbangaodu-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "quan-lianbangaodu-detail",
+                                        keepAlive: false,
+                                    },
+                                },
+                                {
                                     path: "/quan-bankuaizhangting-detail",
                                     name: "quan-bankuaizhangting-detail",
                                     component: () =>

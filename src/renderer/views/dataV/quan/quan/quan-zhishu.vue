@@ -58,6 +58,7 @@ export default {
             kLow: [],
             kOpen: [],
             kClose: [],
+            dataK: [],
         };
     },
     computed: {},
@@ -100,6 +101,13 @@ export default {
                 this.kLow = [];
                 this.kOpen = [];
                 this.kClose = [];
+                this.dataK = [];
+                this.dataK = splitData(this.resData.exponentList, [
+                    "open",
+                    "close",
+                    "low",
+                    "high",
+                ]);
                 this.resData.exponentList.forEach((item) => {
                     if (item.close > this.max) {
                         this.max = item.close;
@@ -298,7 +306,7 @@ export default {
                     type: "inside", // 滑动条单独显示
                     show: true, // 是否显示滑动条
                     startValue: 0, // 展示区域内容的起始数值
-                    endValue: 5, // 展示区域内容的结束数值 当前展示x坐标下标为0-16
+                    endValue: 30, // 展示区域内容的结束数值 当前展示x坐标下标为0-16
                     height: 10, // 滑动条组件高度
                     bottom: 0, // 距离图表区域下边的距离
                     showDetail: false, // 拖拽时是否显示详情
@@ -332,7 +340,7 @@ export default {
                     // text: "Stacked Line",
                 },
                 legend: {
-                    data: ["LOW", "CLOSE", "OPEN", "HIGH"],
+                    data: ["日k", "CLOSE", "OPEN", "HIGH"],
                     textStyle: {
                         fontSize: 12, //字体大小
                         color: "#ffffff", //字体颜色
@@ -356,9 +364,9 @@ export default {
                 },
                 series: [
                     {
-                        name: "LOW",
-                        type: "line",
-                        data: this.kLow,
+                        name: "日k",
+                        type: "candlestick",
+                        data: this.dataK,
                         markLine: {
                             symbol: "none", //去掉警戒线最后面的箭头
                             label: {
@@ -381,21 +389,21 @@ export default {
                             symbolSize: 50,
                         },
                     },
-                    {
-                        name: "CLOSE",
-                        type: "line",
-                        data: this.kClose,
-                    },
-                    {
-                        name: "OPEN",
-                        type: "line",
-                        data: this.kOpen,
-                    },
-                    {
-                        name: "HIGH",
-                        type: "line",
-                        data: this.kHigh,
-                    },
+                    // {
+                    //     name: "CLOSE",
+                    //     type: "line",
+                    //     data: this.kClose,
+                    // },
+                    // {
+                    //     name: "OPEN",
+                    //     type: "line",
+                    //     data: this.kOpen,
+                    // },
+                    // {
+                    //     name: "HIGH",
+                    //     type: "line",
+                    //     data: this.kHigh,
+                    // },
                 ],
             };
             if (this.timeType == "0") {

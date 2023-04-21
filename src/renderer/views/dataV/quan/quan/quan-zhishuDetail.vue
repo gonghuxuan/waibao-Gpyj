@@ -59,7 +59,7 @@
 <script>
 import { getExponentNames } from "@/api/userInfo.js";
 import { getExponentDivergeSignal } from "@/api/userInfo.js";
-import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import { getSecond, getDay, getMax, getMin, splitData } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
 import timecom from "@/views/dataV/components/time.vue";
 import usercom from "@/views/dataV/components/user.vue";
@@ -80,6 +80,7 @@ export default {
             kLow: [],
             kOpen: [],
             kClose: [],
+            dataK: [],
         };
     },
     components: {
@@ -135,6 +136,13 @@ export default {
                 this.kLow = [];
                 this.kOpen = [];
                 this.kClose = [];
+                this.dataK = [];
+                this.dataK = splitData(this.resData.exponentList, [
+                    "open",
+                    "close",
+                    "low",
+                    "high",
+                ]);
                 this.resData.exponentList.forEach((item) => {
                     if (item.close > this.max) {
                         this.max = item.close;
@@ -393,7 +401,7 @@ export default {
                     // text: "Stacked Line",
                 },
                 legend: {
-                    data: ["LOW", "CLOSE", "OPEN", "HIGH"],
+                    data: ["日k", "CLOSE", "OPEN", "HIGH"],
                     textStyle: {
                         fontSize: 12, //字体大小
                         color: "#ffffff", //字体颜色
@@ -417,9 +425,9 @@ export default {
                 },
                 series: [
                     {
-                        name: "LOW",
-                        type: "line",
-                        data: this.kLow,
+                        name: "日k",
+                        type: "candlestick",
+                        data: this.dataK,
                         markLine: {
                             symbol: "none", //去掉警戒线最后面的箭头
                             label: {
@@ -442,21 +450,21 @@ export default {
                             symbolSize: 70,
                         },
                     },
-                    {
-                        name: "CLOSE",
-                        type: "line",
-                        data: this.kClose,
-                    },
-                    {
-                        name: "OPEN",
-                        type: "line",
-                        data: this.kOpen,
-                    },
-                    {
-                        name: "HIGH",
-                        type: "line",
-                        data: this.kHigh,
-                    },
+                    // {
+                    //     name: "CLOSE",
+                    //     type: "line",
+                    //     data: this.kClose,
+                    // },
+                    // {
+                    //     name: "OPEN",
+                    //     type: "line",
+                    //     data: this.kOpen,
+                    // },
+                    // {
+                    //     name: "HIGH",
+                    //     type: "line",
+                    //     data: this.kHigh,
+                    // },
                 ],
             };
             if (this.timeType == "0") {
