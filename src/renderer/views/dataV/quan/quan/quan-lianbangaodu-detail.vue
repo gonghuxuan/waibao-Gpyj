@@ -2,11 +2,11 @@
   <div class="quan-lianban-detail">
     <div class="top-contain">
       <div>
-        <span class="padding active">板块涨停个数预警</span>
+        <span class="padding active">个股连扳高度预警</span>
       </div>
     </div>
     <div class="content-contain-detail">
-      <a-table bordered :columns="columns" :data-source="datasource" :pagination="false">
+      <a-table bordered :columns="columnscopy" :data-source="datasource" :pagination="false">
         <!-- <template slot="plateChangepercent" slot-scope="plateChangepercent">
           <div :class="plateChangepercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
@@ -23,15 +23,13 @@
             </a-button>
           </div>
         </template>
-        <template slot="plateChangepercentLast" slot-scope="plateChangepercentLast">
-          <div :class="plateChangepercentLast > 0 ? 'red' : 'green'">
-            <a-button type="primary">
-              <span v-if="plateChangepercentLast > 0"> +</span>
-              {{ plateChangepercentLast }}
-            </a-button>
+
+        <a slot="name" slot-scope="text">{{ text }}</a> -->
+        <template slot="stockName" slot-scope="stockName">
+          <div>
+            {{ stockName }}
           </div>
         </template>
-        <a slot="name" slot-scope="text">{{ text }}</a> -->
         <span :slot="item" v-for="(item, index) in columnsSlot" :key="index">共 <span style="color:#FFF45C">{{ resData[index].countall }}</span> 只 晋级率 <span style="color:#FF5145">{{ resData[index].rateall }}</span></span>
       </a-table>
       <div style="padding-bottom: 150px"></div>
@@ -49,12 +47,25 @@ export default {
     data() {
         return {
             fiveDateArr: [],
+            columnscopy: [],
             columns: [
                 {
                     title: "板块",
                     dataIndex: "bankuai",
                     key: "bankuai",
                     align: "center",
+                    customRender: (value, row, index) => {
+                        const obj = {
+                            children: value,
+                            attrs: {},
+                        };
+                        if (row.col) {
+                            obj.attrs.rowSpan = row.col + 1;
+                        } else {
+                            obj.attrs.rowSpan = 0;
+                        }
+                        return obj;
+                    },
                 },
                 // {
                 //     title: "2023-01-03",
@@ -108,8 +119,19 @@ export default {
                                 title: "名称",
                                 dataIndex: "stockName",
                                 key: "stockName",
-                                // scopedSlots: { customRender: "mainAmount" },
+                                scopedSlots: { customRender: "stockName" },
                                 align: "center",
+                                customRender: (value, row, index) => {
+                                    const obj = {
+                                        children: value,
+                                        attrs: {},
+                                    };
+                                    console.log(value);
+                                    if (index === 4) {
+                                        obj.attrs.colSpan = 0;
+                                    }
+                                    return obj;
+                                },
                             },
                             {
                                 title: "封单额",
@@ -119,6 +141,16 @@ export default {
                                 //     customRender: "mainAmountProportion",
                                 // },
                                 align: "center",
+                                customRender: (value, row, index) => {
+                                    const obj = {
+                                        children: value,
+                                        attrs: {},
+                                    };
+                                    if (index === 4) {
+                                        obj.attrs.colSpan = 0;
+                                    }
+                                    return obj;
+                                },
                             },
                         ],
                     },
@@ -204,8 +236,14 @@ export default {
 
             // reskeyArr =  ["2023-04-21", "2023-04-20", "2023-04-19", "2023-04-18", "2023-04-17"]
             // console.log(reskeyArr);
+            const paramtitleobj = {};
+            arr.forEach((item) => {
+                paramtitleobj[item] = false;
+            });
             arr.forEach((item, index) => {
-                console.log(arrmax[index][item]);
+                const paramtitle = {
+                    bankuai: item,
+                };
                 for (let i = 0; i < arrmax[index][item]; i++) {
                     const param = {};
                     reskeyArr.forEach((itemdate, index) => {
@@ -216,16 +254,24 @@ export default {
                             typeof res[itemdate][item].stockUpstopList ===
                             "object"
                         ) {
-                            if (
-                                res[itemdate][item].stockUpstopList[i] ==
-                                undefined
-                            ) {
-                                console.log(
-                                    res[itemdate][item].stockUpstopList
-                                );
-                                console.log(i);
-                                console.log(itemdate);
+                            // if (
+                            //     res[itemdate][item].stockUpstopList[i] ==
+                            //     undefined
+                            // ) {
+                            //     // console.log(
+                            //     //     res[itemdate][item].stockUpstopList
+                            //     // );
+                            //     // console.log(i);
+                            //     // console.log(itemdate);
+                            // }
+                            if (i === 0) {
+                                paramtitle["stockName" + index] = {
+                                    stockCount: res[itemdate][item].stockCount,
+                                    successRate:
+                                        res[itemdate][item].successRate,
+                                };
                             }
+
                             param["stockName" + index] =
                                 res[itemdate][item].stockUpstopList[
                                     i
@@ -239,10 +285,51 @@ export default {
                             // );
                         }
                     });
+                    if (i === 0) {
+                        paramtitle.col = arrmax[index][item];
+                        datasource.push(paramtitle);
+                    }
                     datasource.push(param);
                 }
             });
             this.datasource = datasource;
+            // // const paramtitleobj = {};
+            // // arr.forEach((item) => {
+            // //     paramtitleobj[item] = false;
+            // // });
+            // console.log(paramtitleobj);
+            // // this.datasource.forEach(item) {
+            // //     if(!paramtitleobj[item].bankuai) {
+
+            // //     }
+            // // }
+            // const resArr = [];
+            // for (let key in res) {
+            //     resArr.push(res[key]);
+            // }
+            // console.log(resArr);
+            // arr.forEach((item, index) => {
+            //     const paramtitle = {}
+            //     paramtitle.bankuai = item
+            //     reskeyArr.forEach((itemdate,index) => {
+            //         if(typeof res[itemdate][item].stockUpstopList === 'object') {
+            //             paramtitle['stockName' + index] =
+            //         }
+            //     })
+            // });
+            // for (let key in res) {
+            //     for (let num in res[key]) {
+            //         if (typeof res[key][num] === "object") {
+            //             // console.log(typeof res[key][num].stockUpstopList);
+            //             if (typeof res[key][num].stockUpstopList === "object") {
+            //                 // console.log(res[key][num].stockUpstopList);
+            //                 // console.log(res[key].key);
+            //                 // console.log(res[key][num]);
+            //             }
+            //         }
+            //     }
+            // }
+            console.log(arrmax);
             console.log(datasource);
 
             // console.log(arrmax);
@@ -276,6 +363,7 @@ export default {
                 this.columnsSlot.push(copyColumns.children[0].slots.title);
 
                 this.columns.push(copyColumns);
+                this.columnscopy = this.columns;
                 // console.log(this.columns);
                 // console.log(this.columnsSlot);
             });
