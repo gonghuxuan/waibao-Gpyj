@@ -6,12 +6,11 @@
       </div>
     </div>
     <div class="content-contain-detail">
-      <div>自定义时间
+      <div style="color: #64B7BC; font-size: 16px; padding-left: 20px; padding-bottom: 20px;">自定义时间
 
-        <a-range-picker :disabledDate="disabledPriceRangeDate" v-model="rangeTime" format="YYYY-MM-DD"></a-range-picker>
-        <a-range-picker :disabled-date="disabledDate" format="YYYY-MM-DD HH:mm:ss" />
+        <a-range-picker style="margin-left: 20px;" :disabled-date="disabledDate" v-model="rangeTime" @change="changetime" @calendarChange="calendarPriceRangeChange" format="YYYY-MM-DD" />
       </div>
-      <a-table bordered :columns="realColumns" :data-source="datasource" :pagination="false" :customCell="customCell">
+      <a-table bordered :columns="columns" :data-source="datasource" :pagination="false" class="table">
         <!-- <template slot="plateChangepercent" slot-scope="plateChangepercent">
           <div :class="plateChangepercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
@@ -38,7 +37,10 @@
             共<span style="color: #FFF45C">{{stockName.stockCount}}</span>只晋级率 <span style="color:#FF5145">{{ stockName.successRate }} %</span>
           </div>
         </template>
-        <span :slot="item" v-for="(item, index) in columnsSlot" :key="index">共 <span style="color:#FFF45C">{{ resData[index].countall }}</span> 只 晋级率 <span style="color:#FF5145">{{ resData[index].rateall }}</span></span>
+        <span :slot="item" v-for="(item, index) in columnsSlot" :key="index">共
+          <span style="color:#FFF45C">{{  resData[index].countall }}</span> 只 晋级率
+          <span style="color:#FF5145">{{  resData[index].rateall }}</span>
+        </span>
       </a-table>
       <div style="padding-bottom: 150px"></div>
     </div>
@@ -49,6 +51,8 @@
 import { getContinuousStockUpstop } from "@/api/userInfo.js";
 import { getFiveDay, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import cloneDeep from "lodash/cloneDeep";
+import moment from "moment";
+
 import * as echarts from "echarts";
 import { get } from "http";
 import { chownSync } from "fs";
@@ -60,6 +64,8 @@ export default {
             columnscopy: [],
             realColumns: [],
             rangeTime: [],
+            selectPriceDate: "",
+            offsetDays: 2592000 * 1000,
             show: false,
             columns: [
                 {
@@ -130,7 +136,7 @@ export default {
                         align: "center",
                         slots: { title: "title" },
                         scopedSlots: { customRender: "title" },
-
+                        width: 300,
                         children: [
                             {
                                 title: "名称",
@@ -143,7 +149,6 @@ export default {
                                         children: value,
                                         attrs: {},
                                     };
-                                    console.log("1111111111111", value);
                                     if (index === 4) {
                                         obj.attrs.colSpan = 0;
                                     }
@@ -188,23 +193,119 @@ export default {
         //     ...this.dateColumns.children,
         // ];
         this.fiveDateArr = getFiveDay();
+        this.rangeTime = [this.fiveDateArr[4], this.fiveDateArr[0]];
         this.getData();
     },
     methods: {
-        disabledPriceRangeDate(current) {
-            console.log(current);
+        calendarPriceRangeChange(date) {
+            this.selectPriceDate = date[0];
+        },
+        changetime() {
+            this.getData(
+                this.rangeTime[0].format("YYYY-MM-DD"),
+                this.rangeTime[1].format("YYYY-MM-DD")
+            );
         },
         disabledDate(current) {
             // Can not select days before today and today
-            return current && current < moment().endOf("day");
+            if (this.selectPriceDate) {
+                let selectV = moment(
+                    this.selectPriceDate,
+                    "YYYY-MM-DD"
+                ).valueOf();
+                return (
+                    current >
+                        moment(
+                            this.formatDate(
+                                new Date(selectV + this.offsetDays).getTime(),
+                                "Y-m-d"
+                            )
+                        ) ||
+                    current <
+                        moment(
+                            this.formatDate(
+                                new Date(selectV - this.offsetDays).getTime(),
+                                "Y-m-d"
+                            )
+                        ) ||
+                    current > moment().endOf("day")
+                );
+            } else {
+                return current > moment().endOf("day");
+            }
+        },
+        formatDate: (timestamp, formatLayout = "Y-m-d H:i:s") => {
+            let formatDate = "";
+            formatLayout = formatLayout.toUpperCase();
+            timestamp =
+                (timestamp + "").length > 11 ? timestamp : timestamp * 1000;
+            let time = new Date(timestamp);
+            for (let i in formatLayout) {
+                if (
+                    ["Y", "M", "D", "W", "H", "I", "S"].indexOf(
+                        formatLayout[i]
+                    ) >= 0
+                ) {
+                    switch (formatLayout[i]) {
+                        case "Y":
+                            formatDate += time.getFullYear();
+                            break;
+                        case "M":
+                            formatDate +=
+                                time.getMonth() >= 9
+                                    ? time.getMonth() + 1
+                                    : "0" + (time.getMonth() + 1);
+                            break;
+                        case "D":
+                            formatDate +=
+                                time.getDate() > 9
+                                    ? time.getDate()
+                                    : "0" + time.getDate();
+                            break;
+                        case "W":
+                            formatDate +=
+                                time.getDay() == 0 ? 7 : time.getDay();
+                            break;
+                        case "H":
+                            formatDate +=
+                                time.getHours() > 9
+                                    ? time.getHours()
+                                    : "0" + time.getHours();
+                            break;
+                        case "I":
+                            formatDate +=
+                                time.getMinutes() > 9
+                                    ? time.getMinutes()
+                                    : "0" + time.getMinutes();
+                            break;
+                        case "S":
+                            formatDate +=
+                                time.getSeconds() > 9
+                                    ? time.getSeconds()
+                                    : "0" + time.getSeconds();
+                            break;
+                    }
+                } else {
+                    formatDate += formatLayout[i];
+                }
+            }
+
+            return formatDate;
         },
         render() {},
         customCell(record, index) {},
-        getData() {
+        getData(start, end) {
             getContinuousStockUpstop({
-                startDate: this.fiveDateArr[4],
-                endDate: this.fiveDateArr[0],
+                startDate: start ? start : this.rangeTime[0],
+                endDate: end ? end : this.rangeTime[1],
             }).then((res) => {
+                this.datasource = [];
+                this.resObj = [];
+                this.resData = [];
+                this.timeData = [];
+                this.columns.length = 1;
+                this.columnsSlot = [];
+
                 this.setRes(res);
                 this.setColumns();
                 this.show = true;
@@ -214,15 +315,20 @@ export default {
             for (let key in res) {
                 let countall = 0;
                 let rateall = 0;
+                // console.log(res[key]);
                 for (let keyinner in res[key]) {
                     countall += res[key][keyinner].stockCount;
                     rateall +=
                         res[key][keyinner].stockCount *
                         res[key][keyinner].successRate;
                 }
+                // console.log(res[key]);
+                // console.log("alllllllllllll", countall);
+
                 rateall = (rateall / countall).toFixed(2);
                 res[key].countall = countall;
                 res[key].rateall = rateall;
+                // console.log(res);
             }
             // console.log(res);
             const resData = [];
@@ -241,7 +347,7 @@ export default {
         },
         setResContent(res) {
             const resDataChange = [];
-            const arr = Object.keys(res[this.fiveDateArr[0]]).splice(0, 8);
+            const arr = Object.keys(res[this.fiveDateArr[1]]).splice(0, 8);
             const arrmax = [];
             // console.log(arr);
             arr.forEach((item) => {
@@ -380,6 +486,7 @@ export default {
                 );
                 const indexFlag = item.substring(item.length - 2);
                 copyColumns.title = item;
+                console.log(item);
                 copyColumns.children[0].children[0].dataIndex =
                     copyColumns.children[0].children[0].dataIndex + index;
                 copyColumns.children[0].children[0].key =
@@ -399,6 +506,10 @@ export default {
                 // console.log(this.columns);
                 // console.log(this.columnsSlot);
             });
+            // console.log(this.columns);
+            // console.log(this.columnsSlot);
+            // console.log(this.datasource);
+            // console.log(this.resData);
             this.realColumns = cloneDeep(this.columns);
         },
     },
@@ -407,6 +518,35 @@ export default {
 
 <style lang="scss">
 .quan-lianban-detail {
+    td {
+        min-width: 200px;
+    }
+    .ant-input {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-variant: tabular-nums;
+        list-style: none;
+        font-feature-settings: "tnum";
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: 32px;
+        padding: 4px 11px;
+        color: rgba(93, 154, 158, 0.5);
+        font-size: 14px;
+        line-height: 1.5;
+        background-color: #082932;
+        background-image: none;
+        border: 1px solid #d9d9d9;
+        border-radius: 4px;
+        transition: all 0.3s;
+    }
+    .table {
+        overflow: scroll;
+        width: 100%;
+        height: 790px;
+    }
     .stockNaame {
         border-color: green;
     }
