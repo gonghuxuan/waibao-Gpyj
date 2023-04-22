@@ -31,9 +31,12 @@
         "deepmerge": "^4.2.2",
         "draggabilly": "^2.3.0",
         "echarts": "^5.4.2",
+        "electron-debug": "^1.5.0",
+        "electron-devtools-installer": "^3.1.0",
         "electron-dl": "^3.2.0",
         "jquery": "^3.6.4",
         "loadsh": "^0.0.4",
+        "lodash": "^4.17.21",
         "music-metadata": "^7.8.1",
         "nedb": "^1.8.0",
         "request-progress": "^3.0.0",
@@ -49,9 +52,7 @@
         "vue-router": "^3.5.1",
         "vue-seamless-scroll": "^1.1.21",
         "vuex": "^3.6.2",
-        "yarn": "^1.22.19",
-        "electron-debug": "^1.5.0",
-        "electron-devtools-installer": "^3.1.0"
+        "yarn": "^1.22.19"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "~4.5.0",

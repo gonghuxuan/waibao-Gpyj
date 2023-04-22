@@ -6,7 +6,12 @@
       </div>
     </div>
     <div class="content-contain-detail">
-      <a-table bordered :columns="columns" :data-source="datasource" :pagination="false" v-if="show">
+      <div>自定义时间
+
+        <a-range-picker :disabledDate="disabledPriceRangeDate" v-model="rangeTime" format="YYYY-MM-DD"></a-range-picker>
+        <a-range-picker :disabled-date="disabledDate" format="YYYY-MM-DD HH:mm:ss" />
+      </div>
+      <a-table bordered :columns="realColumns" :data-source="datasource" :pagination="false" :customCell="customCell">
         <!-- <template slot="plateChangepercent" slot-scope="plateChangepercent">
           <div :class="plateChangepercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
@@ -29,7 +34,7 @@
           <div class="stockNaame" v-if="typeof stockName == 'string'">
             {{ stockName }}
           </div>
-          <div v-else>
+          <div v-if="typeof stockName == 'object'">
             共<span style="color: #FFF45C">{{stockName.stockCount}}</span>只晋级率 <span style="color:#FF5145">{{ stockName.successRate }} %</span>
           </div>
         </template>
@@ -43,15 +48,18 @@
 <script>
 import { getContinuousStockUpstop } from "@/api/userInfo.js";
 import { getFiveDay, getDay, getMax, getMin } from "@/utils/gpyj.js";
-
+import cloneDeep from "lodash/cloneDeep";
 import * as echarts from "echarts";
 import { get } from "http";
+import { chownSync } from "fs";
 
 export default {
     data() {
         return {
             fiveDateArr: [],
             columnscopy: [],
+            realColumns: [],
+            rangeTime: [],
             show: false,
             columns: [
                 {
@@ -72,51 +80,41 @@ export default {
                         return obj;
                     },
                 },
-                {
-                    title: "2023-01-03",
-                    align: "center",
-                    children: [
-                        {
-                            // title: "共16只晋级率23%",
-                            align: "center",
-                            slots: { title: "title" },
-                            scopedSlots: { customRender: "title" },
+                // {
+                //     title: "2023-01-03",
+                //     align: "center",
+                //     children: [
+                //         {
+                //             // title: "共16只晋级率23%",
+                //             align: "center",
+                //             slots: { title: "title" },
+                //             scopedSlots: { customRender: "title" },
 
-                            children: [
-                                {
-                                    title: "名称",
-                                    dataIndex: "stockName",
-                                    key: "stockName",
-                                    scopedSlots: { customRender: "stockName" },
-                                    align: "center",
-                                    customRender: (value, row, index) => {
-                                        const obj = {
-                                            children: value,
-                                            attrs: {},
-                                        };
-                                        console.log("value", value);
-                                        if (index === 4) {
-                                            obj.attrs.colSpan = 0;
-                                        }
-                                        return obj;
-                                    },
-                                },
-                                {
-                                    title: "封单额",
-                                    dataIndex: "stopAmount",
-                                    key: "stopAmount",
-                                    // scopedSlots: {
-                                    //     customRender: "mainAmountProportion",
-                                    // },
-                                    align: "center",
-                                    customRender: (value, row, index) => {
-                                        // this.render();
-                                    },
-                                },
-                            ],
-                        },
-                    ],
-                },
+                //             children: [
+                //                 {
+                //                     title: "名称",
+                //                     dataIndex: "stockName",
+                //                     key: "stockName",
+                //                     scopedSlots: { customRender: "stockName" },
+                //                     align: "center",
+                //                     customRender: () => 123,
+                //                 },
+                //                 {
+                //                     title: "封单额",
+                //                     dataIndex: "stopAmount",
+                //                     key: "stopAmount",
+                //                     // scopedSlots: {
+                //                     //     customRender: "mainAmountProportion",
+                //                     // },
+                //                     align: "center",
+                //                     customRender: (value, row, index) => {
+                //                         // this.render();
+                //                     },
+                //                 },
+                //             ],
+                //         },
+                //     ],
+                // },
             ],
             resObj: [],
             resData: [],
@@ -170,8 +168,19 @@ export default {
             },
         };
     },
+    watch: {
+        columns(val, oldVal) {
+            this.copyColumns = val;
+        },
+    },
     components: {},
-    computed: {},
+    computed: {
+        getColumns() {
+            return this.columns;
+            // await this.getData();
+            // return this.columns;
+        },
+    },
     created() {},
     mounted() {
         // this.dateColumns.children = [
@@ -182,13 +191,15 @@ export default {
         this.getData();
     },
     methods: {
-        render() {
-            console.log("111111111111111111111111111111111");
+        disabledPriceRangeDate(current) {
+            console.log(current);
         },
-        async getColumns() {
-            // await this.getData();
-            // return this.columns;
+        disabledDate(current) {
+            // Can not select days before today and today
+            return current && current < moment().endOf("day");
         },
+        render() {},
+        customCell(record, index) {},
         getData() {
             getContinuousStockUpstop({
                 startDate: this.fiveDateArr[4],
@@ -232,7 +243,7 @@ export default {
             const resDataChange = [];
             const arr = Object.keys(res[this.fiveDateArr[0]]).splice(0, 8);
             const arrmax = [];
-            console.log(arr);
+            // console.log(arr);
             arr.forEach((item) => {
                 const maxnum = { [item]: 0 };
                 for (let key in res) {
@@ -264,7 +275,7 @@ export default {
                 const paramtitle = {
                     bankuai: item,
                 };
-                console.log(arrmax[index][item]);
+                // console.log(arrmax[index][item]);
                 for (let i = 0; i < arrmax[index][item]; i++) {
                     const param = {};
                     reskeyArr.forEach((itemdate, index) => {
@@ -350,8 +361,8 @@ export default {
             //         }
             //     }
             // }
-            console.log(arrmax);
-            console.log(datasource);
+            // console.log(arrmax);
+            // console.log(datasource);
 
             // console.log(arrmax);
             // for (let key in res) {
@@ -384,10 +395,11 @@ export default {
                 this.columnsSlot.push(copyColumns.children[0].slots.title);
 
                 this.columns.push(copyColumns);
-                this.columnscopy = this.columns;
+
                 // console.log(this.columns);
                 // console.log(this.columnsSlot);
             });
+            this.realColumns = cloneDeep(this.columns);
         },
     },
 };
