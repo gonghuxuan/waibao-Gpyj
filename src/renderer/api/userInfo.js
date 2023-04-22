@@ -107,3 +107,19 @@ export function getStockAmountActionZhong(params) {
         params,
     });
 }
+
+export function getStockThrough10Data(params) {
+    return request({
+        url: "/stockAlert/partStocks/getStockThrough10Data",
+        method: "get",
+        params,
+    });
+}
+
+export function getPlateChangepercentData(params) {
+    return request({
+        url: "/stockAlert/partStocks/getPlateChangepercentData",
+        method: "get",
+        params,
+    });
+}

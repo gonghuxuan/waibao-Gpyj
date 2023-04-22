@@ -1,51 +1,34 @@
 <template>
-    <div class="zhong-zhangfuyidong">
-        <div class="juzhong"
-            >{{ title }}
-            <img
-                @click="toDetail"
-                src="@/assets/img/detail.svg"
-                alt=""
-                class="detail"
-                style="width: 20px; cursor: pointer"
-            />
-        </div>
-        <div class="table-contain">
-            <a-select
-                label-in-value
-                :default-value="{ key: 'qian' }"
-                style="width: 320px"
-                @change="handleChange"
-            >
-                <a-select-option value="qian"> 前部异动 </a-select-option>
-                <a-select-option value="zhong"> 中部异动 </a-select-option>
-                <a-select-option value="hou"> 后部异动 </a-select-option>
-                <!-- <a-select-option v-for="item in items" :key="item" :value="item">
+  <div class="zhong-zhangfuyidong">
+    <div class="juzhong">{{ title }}
+      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
+    </div>
+    <div class="table-contain">
+      <a-select label-in-value :default-value="{ key: 'qian' }" style="width: 400px;min-height: 30px; margin-bottom: 10px;" @change="handleChange">
+        <a-select-option value="qian"> 前部异动 </a-select-option>
+        <a-select-option value="zhong"> 中部异动 </a-select-option>
+        <a-select-option value="hou"> 后部异动 </a-select-option>
+        <!-- <a-select-option v-for="item in items" :key="item" :value="item">
             {{ item }}
             </a-select-option> -->
-            </a-select>
-            <a-table
-                bordered
-                :columns="columns"
-                :data-source="resData"
-                :pagination="false"
-            >
-                <template slot="close" slot-scope="close, record">
-                    <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+      </a-select>
+      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
+        <template slot="close" slot-scope="close, record">
+          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
                         close
                     }}</div>
-                </template>
-                <template slot="changepercent" slot-scope="changepercent">
-                    <div :class="changepercent > 0 ? 'red' : 'green'">
-                        <a-button type="primary">
-                            <span v-if="changepercent > 0"> +</span>
-                            {{ changepercent }}
-                        </a-button>
-                    </div>
-                </template>
-            </a-table>
-        </div>
+        </template>
+        <template slot="changepercent" slot-scope="changepercent">
+          <div :class="changepercent > 0 ? 'red' : 'green'">
+            <a-button type="primary">
+              <span v-if="changepercent > 0"> +</span>
+              {{ changepercent }}
+            </a-button>
+          </div>
+        </template>
+      </a-table>
     </div>
+  </div>
 </template>
 
 <script>
@@ -126,6 +109,15 @@ export default {
 <style lang="scss">
 .zhong-zhangfuyidong {
     padding: 7px 5px;
+    .ant-select-selection {
+        background-color: rgba(5, 49, 58, 0.5);
+        color: #09b8bc;
+        // border-color: rgba(5, 49, 58, 1);
+        height: 35px;
+    }
+    .anticon {
+        color: #09b8bc;
+    }
     .ant-btn {
         color: white;
         border-color: #5d9a9e;
@@ -169,5 +161,21 @@ export default {
     .ant-table-tbody > tr > td {
         text-align: cenetr;
     }
+}
+.ant-select-dropdown-menu {
+    background-color: rgba(5, 49, 58, 0.7);
+    color: #09b8bc;
+}
+.ant-select-dropdown-menu-item-selected {
+    background-color: #082d37;
+    color: #09b8bc;
+}
+.ant-select-dropdown-menu-item:hover:not(
+        .ant-select-dropdown-menu-item-disabled
+    ) {
+    background-color: #082d37;
+}
+.ant-select-dropdown-menu-item {
+    color: #09b8bc;
 }
 </style>

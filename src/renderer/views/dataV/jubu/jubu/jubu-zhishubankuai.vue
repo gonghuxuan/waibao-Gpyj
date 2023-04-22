@@ -1,38 +1,16 @@
 <template>
-  <div class="zhong-chengjiaoeyidong">
+  <div class="jubu-zhishubankuai">
     <div class="juzhong">{{ title }}
       <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
     </div>
     <div class="table-contain">
-      <a-select label-in-value :default-value="{ key: 'qian' }" style="width: 400px;min-height: 30px; margin-bottom: 10px;" @change="handleChange">
-        <a-select-option value="qian"> 成交额递增 </a-select-option>
-        <a-select-option value="zhong"> 机构票监测 </a-select-option>
-        <a-select-option value="hou"> 成交额异动 </a-select-option>
-        <!-- <a-select-option v-for="item in items" :key="item" :value="item">
-            {{ item }}
-            </a-select-option> -->
-      </a-select>
-      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
-        <template slot="close" slot-scope="close, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close
-                    }}</div>
-        </template>
-        <template slot="changepercent" slot-scope="changepercent">
-          <div :class="changepercent > 0 ? 'red' : 'green'">
-            <a-button type="primary">
-              <span v-if="changepercent > 0"> +</span>
-              {{ changepercent }}
-            </a-button>
-          </div>
-        </template>
-      </a-table>
+
     </div>
   </div>
 </template>
 
 <script>
-import { getStockAmountActionZhong } from "@/api/userInfo.js";
+import { getPlateChangepercentData } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
@@ -80,12 +58,8 @@ export default {
     },
     methods: {
         getData() {
-            getStockAmountActionZhong().then((res) => {
-                console.log("重点预警成交额异动-----", res);
-                this.resData = res.成交额递增;
-                this.resDataQianbu = res.成交额递增;
-                this.resDataZhongbu = res.机构票监测;
-                this.resDataHoubu = res.成交额异动;
+            getPlateChangepercentData({}).then((res) => {
+                console.log("指数板块-----", res);
             });
         },
         toDetail() {
@@ -93,21 +67,14 @@ export default {
                 path: "/jubu-chengjiaoeyidong-detail",
             });
         },
-        handleChange(v) {
-            if (v.key === "qian") {
-                this.resData = this.resDataQianbu;
-            } else if (v.key === "zhong") {
-                this.resData = this.resDataZhongbu;
-            } else if (v.key === "hou") {
-                this.resData = this.resDataHoubu;
-            }
-        },
     },
 };
 </script>
 
 <style lang="scss">
-.zhong-chengjiaoeyidong {
+.jubu-zhishubankuai {
+    width: 900px;
+    height: 500px;
     padding: 7px 5px;
     .ant-select-selection {
         background-color: rgba(5, 49, 58, 0.5);
@@ -125,13 +92,12 @@ export default {
     .ant-dropdown-menu-item {
         color: blue;
     }
-    .table-contain {
-        // width: 310px;
-        height: 195px;
-        overflow: scroll;
-        background-color: rgba(2, 81, 93, 1);
-        margin-top: 5px;
-    }
+    // .table-contain {
+    //     width: 100%;
+    //     height: 100%;
+    //     overflow: scroll;
+    //     margin-top: 5px;
+    // }
     .ant-table-thead > tr > th {
         background-color: rgba(2, 81, 93, 1);
         color: white;
