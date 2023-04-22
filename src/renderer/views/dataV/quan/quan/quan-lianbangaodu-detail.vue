@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="content-contain-detail">
-      <a-table bordered :columns="columnscopy" :data-source="datasource" :pagination="false">
+      <a-table bordered :columns="columns" :data-source="datasource" :pagination="false" v-if="show">
         <!-- <template slot="plateChangepercent" slot-scope="plateChangepercent">
           <div :class="plateChangepercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
@@ -26,8 +26,11 @@
 
         <a slot="name" slot-scope="text">{{ text }}</a> -->
         <template slot="stockName" slot-scope="stockName">
-          <div>
+          <div class="stockNaame" v-if="typeof stockName == 'string'">
             {{ stockName }}
+          </div>
+          <div v-else>
+            共<span style="color: #FFF45C">{{stockName.stockCount}}</span>只晋级率 <span style="color:#FF5145">{{ stockName.successRate }} %</span>
           </div>
         </template>
         <span :slot="item" v-for="(item, index) in columnsSlot" :key="index">共 <span style="color:#FFF45C">{{ resData[index].countall }}</span> 只 晋级率 <span style="color:#FF5145">{{ resData[index].rateall }}</span></span>
@@ -42,12 +45,14 @@ import { getContinuousStockUpstop } from "@/api/userInfo.js";
 import { getFiveDay, getDay, getMax, getMin } from "@/utils/gpyj.js";
 
 import * as echarts from "echarts";
+import { get } from "http";
 
 export default {
     data() {
         return {
             fiveDateArr: [],
             columnscopy: [],
+            show: false,
             columns: [
                 {
                     title: "板块",
@@ -67,37 +72,51 @@ export default {
                         return obj;
                     },
                 },
-                // {
-                //     title: "2023-01-03",
-                //     align: "center",
-                //     children: [
-                //         {
-                //             // title: "共16只晋级率23%",
-                //             align: "center",
-                //             slots: { title: "title1" },
-                //             scopedSlots: { customRender: "title1" },
+                {
+                    title: "2023-01-03",
+                    align: "center",
+                    children: [
+                        {
+                            // title: "共16只晋级率23%",
+                            align: "center",
+                            slots: { title: "title" },
+                            scopedSlots: { customRender: "title" },
 
-                //             children: [
-                //                 {
-                //                     title: "名称",
-                //                     dataIndex: "stockUpstopCountM",
-                //                     key: "stockUpstopCountM",
-                //                     // scopedSlots: { customRender: "mainAmount" },
-                //                     align: "center",
-                //                 },
-                //                 {
-                //                     title: "封单额",
-                //                     dataIndex: "stockUpstopProportionM",
-                //                     key: "stockUpstopProportionM",
-                //                     // scopedSlots: {
-                //                     //     customRender: "mainAmountProportion",
-                //                     // },
-                //                     align: "center",
-                //                 },
-                //             ],
-                //         },
-                //     ],
-                // },
+                            children: [
+                                {
+                                    title: "名称",
+                                    dataIndex: "stockName",
+                                    key: "stockName",
+                                    scopedSlots: { customRender: "stockName" },
+                                    align: "center",
+                                    customRender: (value, row, index) => {
+                                        const obj = {
+                                            children: value,
+                                            attrs: {},
+                                        };
+                                        console.log("value", value);
+                                        if (index === 4) {
+                                            obj.attrs.colSpan = 0;
+                                        }
+                                        return obj;
+                                    },
+                                },
+                                {
+                                    title: "封单额",
+                                    dataIndex: "stopAmount",
+                                    key: "stopAmount",
+                                    // scopedSlots: {
+                                    //     customRender: "mainAmountProportion",
+                                    // },
+                                    align: "center",
+                                    customRender: (value, row, index) => {
+                                        // this.render();
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                },
             ],
             resObj: [],
             resData: [],
@@ -126,7 +145,7 @@ export default {
                                         children: value,
                                         attrs: {},
                                     };
-                                    console.log(value);
+                                    console.log("1111111111111", value);
                                     if (index === 4) {
                                         obj.attrs.colSpan = 0;
                                     }
@@ -142,14 +161,7 @@ export default {
                                 // },
                                 align: "center",
                                 customRender: (value, row, index) => {
-                                    const obj = {
-                                        children: value,
-                                        attrs: {},
-                                    };
-                                    if (index === 4) {
-                                        obj.attrs.colSpan = 0;
-                                    }
-                                    return obj;
+                                    this.render();
                                 },
                             },
                         ],
@@ -170,6 +182,13 @@ export default {
         this.getData();
     },
     methods: {
+        render() {
+            console.log("111111111111111111111111111111111");
+        },
+        async getColumns() {
+            // await this.getData();
+            // return this.columns;
+        },
         getData() {
             getContinuousStockUpstop({
                 startDate: this.fiveDateArr[4],
@@ -177,6 +196,7 @@ export default {
             }).then((res) => {
                 this.setRes(res);
                 this.setColumns();
+                this.show = true;
             });
         },
         setRes(res) {
@@ -244,6 +264,7 @@ export default {
                 const paramtitle = {
                     bankuai: item,
                 };
+                console.log(arrmax[index][item]);
                 for (let i = 0; i < arrmax[index][item]; i++) {
                     const param = {};
                     reskeyArr.forEach((itemdate, index) => {
@@ -374,6 +395,9 @@ export default {
 
 <style lang="scss">
 .quan-lianban-detail {
+    .stockNaame {
+        border-color: green;
+    }
     .gupiao-item {
         font-size: 16px;
         text-align: left;
