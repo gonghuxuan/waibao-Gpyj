@@ -162,13 +162,13 @@ export default {
                         type: "cross",
                     },
                 },
-                title: {
-                    text: "18 companies net profit and main business income (million)",
-                    subtext: "By ecStat.regression",
-                    sublink: "https://github.com/ecomfe/echarts-stat",
-                    left: "center",
-                    top: 16,
-                },
+                // title: {
+                //     text: "18 companies net profit and main business income (million)",
+                //     subtext: "By ecStat.regression",
+                //     sublink: "https://github.com/ecomfe/echarts-stat",
+                //     left: "center",
+                //     top: 16,
+                // },
                 xAxis: {
                     type: "category",
                     min: "value",
@@ -194,13 +194,14 @@ export default {
                                 show: true,
                                 position: "right",
                                 textStyle: {
-                                    color: "blue",
+                                    color: "red",
                                     fontSize: 16,
                                 },
                             },
                         },
                         itemStyle: {
                             show: true,
+                            color: "red",
                             markPoint: {
                                 tooltip: {
                                     show: true,
@@ -211,37 +212,21 @@ export default {
                         data: data,
                         itemStyle: {
                             normal: {
+                                color: "yellow",
+
                                 label: {
                                     position: [5, 9],
                                     show: true,
                                     formatter: function (params) {
                                         return params.value[2];
                                     },
+                                    textStyle: {
+                                        color: "red",
+                                        fontSize: 16,
+                                    },
                                 },
                             },
                         },
-                    },
-                    {
-                        name: "示例",
-                        type: "line",
-                        data: [60],
-                        markLine: {
-                            data: [{ type: "average", name: "平均值" }],
-                        },
-                    },
-                    {
-                        data: [120, 200, 150, 80, 70, 110, 130],
-                        type: "line",
-                        symbol: "pin",
-                        symbolSize: 10,
-                        lineStyle: {
-                            normal: {
-                                color: "blue",
-                                width: 4,
-                                type: "dashed",
-                            },
-                        },
-                        itemStyle: { normal: { label: { show: true } } },
                     },
                 ],
             };
