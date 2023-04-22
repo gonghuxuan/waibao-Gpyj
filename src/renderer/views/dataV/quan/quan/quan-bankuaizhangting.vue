@@ -46,6 +46,7 @@ export default {
                     dataIndex: "stockCount",
                     key: "stockCount",
                     // scopedSlots: { customRender: "stockCount" },
+                    sorter: (a, b) => b.stockCount - a.stockCount,
                     align: "center",
                 },
                 {
@@ -54,6 +55,7 @@ export default {
                     key: "stockUpstopCount",
                     align: "center",
                     scopedSlots: { customRender: "stockUpstopCount" },
+                    sorter: (a, b) => b.stockUpstopCount - a.stockUpstopCount,
                 },
                 {
                     title: "占比",
@@ -61,6 +63,8 @@ export default {
                     key: "stockUpstopProportion",
                     align: "center",
                     scopedSlots: { customRender: "stockUpstopProportion" },
+                    sorter: (a, b) =>
+                        b.stockUpstopProportion - a.stockUpstopProportion,
                 },
             ],
         };
@@ -113,6 +117,8 @@ export default {
         toDetail() {
             this.$router.push({
                 path: "/quan-bankuaizhangting-detail",
+                title1: "全场预警",
+                title2: "板块涨停",
             });
         },
         getFiveDay() {

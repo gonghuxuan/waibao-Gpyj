@@ -47,6 +47,7 @@ export default {
                     key: "close",
                     scopedSlots: { customRender: "close" },
                     align: "center",
+                    sorter: (a, b) => b.close - a.close,
                 },
                 {
                     title: "涨跌幅",
@@ -54,6 +55,7 @@ export default {
                     key: "changepercent",
                     align: "center",
                     scopedSlots: { customRender: "changepercent" },
+                    sorter: (a, b) => b.changepercent - a.changepercent,
                 },
             ],
         };

@@ -49,6 +49,8 @@ export default {
                     key: "stopAmount",
                     width: 110,
                     // scopedSlots: { customRender: "close" },
+                    sorter: (a, b) => b.stopAmount - a.stopAmount,
+
                     align: "center",
                 },
                 {
@@ -57,6 +59,7 @@ export default {
                     key: "conNum",
                     align: "center",
                     // scopedSlots: { customRender: "changepercent" },
+                    sorter: (a, b) => b.conNum - a.conNum,
                 },
             ],
         };

@@ -85,6 +85,8 @@ export default {
                             key: "stockUpstopCount",
                             // scopedSlots: { customRender: "mainAmount" },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopCount - a.stockUpstopCount,
                         },
                         {
                             title: "占比",
@@ -94,6 +96,9 @@ export default {
                             //     customRender: "mainAmountProportion",
                             // },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopProportion -
+                                a.stockUpstopProportion,
                         },
                         {
                             title: "涨幅",
@@ -103,12 +108,15 @@ export default {
                             scopedSlots: {
                                 customRender: "plateChangepercent",
                             },
+                            sorter: (a, b) =>
+                                b.plateChangepercent - a.plateChangepercent,
                         },
                         {
                             title: "连板高度",
                             dataIndex: "highestConNum",
                             key: "highestConNum",
                             align: "center",
+                            sorter: (a, b) => b.highestConNum - a.highestConNum,
                         },
                     ],
                 },
@@ -122,6 +130,8 @@ export default {
                             key: "stockUpstopCount2",
                             // scopedSlots: { customRender: "mainAmount" },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopCount2 - a.stockUpstopCount2,
                         },
                         {
                             title: "占比",
@@ -131,6 +141,9 @@ export default {
                             //     customRender: "mainAmountProportion",
                             // },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopProportion2 -
+                                a.stockUpstopProportion2,
                         },
                         {
                             title: "涨幅",
@@ -140,12 +153,16 @@ export default {
                             scopedSlots: {
                                 customRender: "plateChangepercent2",
                             },
+                            sorter: (a, b) =>
+                                b.plateChangepercent2 - a.plateChangepercent2,
                         },
                         {
                             title: "连板高度",
                             dataIndex: "highestConNum2",
                             key: "highestConNum2",
                             align: "center",
+                            sorter: (a, b) =>
+                                b.highestConNum2 - a.highestConNum2,
                         },
                     ],
                 },
@@ -159,6 +176,8 @@ export default {
                             key: "stockUpstopCount3",
                             // scopedSlots: { customRender: "mainAmount" },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopCount3 - a.stockUpstopCount3,
                         },
                         {
                             title: "占比",
@@ -168,6 +187,9 @@ export default {
                             //     customRender: "mainAmountProportion",
                             // },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopProportion3 -
+                                a.stockUpstopProportion3,
                         },
                         {
                             title: "涨幅",
@@ -177,12 +199,16 @@ export default {
                             scopedSlots: {
                                 customRender: "plateChangepercent3",
                             },
+                            sorter: (a, b) =>
+                                b.plateChangepercent3 - a.plateChangepercent3,
                         },
                         {
                             title: "连板高度",
                             dataIndex: "highestConNum3",
                             key: "highestConNum3",
                             align: "center",
+                            sorter: (a, b) =>
+                                b.highestConNum3 - a.highestConNum3,
                         },
                     ],
                 },
@@ -196,6 +222,8 @@ export default {
                             key: "stockUpstopCount4",
                             // scopedSlots: { customRender: "mainAmount" },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopCount4 - a.stockUpstopCount4,
                         },
                         {
                             title: "占比",
@@ -205,6 +233,8 @@ export default {
                             //     customRender: "mainAmountProportion",
                             // },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopCount4 - a.stockUpstopCount4,
                         },
                         {
                             title: "涨幅",
@@ -214,12 +244,16 @@ export default {
                             scopedSlots: {
                                 customRender: "plateChangepercent4",
                             },
+                            sorter: (a, b) =>
+                                b.plateChangepercent4 - a.plateChangepercent4,
                         },
                         {
                             title: "连板高度",
                             dataIndex: "highestConNum4",
                             key: "highestConNum4",
                             align: "center",
+                            sorter: (a, b) =>
+                                b.highestConNum4 - a.highestConNum4,
                         },
                     ],
                 },
@@ -233,6 +267,8 @@ export default {
                             key: "stockUpstopCount5",
                             // scopedSlots: { customRender: "mainAmount" },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopCount5 - a.stockUpstopCount5,
                         },
                         {
                             title: "占比",
@@ -242,6 +278,9 @@ export default {
                             //     customRender: "mainAmountProportion",
                             // },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.stockUpstopProportion5 -
+                                a.stockUpstopProportion5,
                         },
                         {
                             title: "涨幅",
@@ -251,12 +290,16 @@ export default {
                             scopedSlots: {
                                 customRender: "plateChangepercent5",
                             },
+                            sorter: (a, b) =>
+                                b.plateChangepercent5 - a.plateChangepercent5,
                         },
                         {
                             title: "连板高度",
                             dataIndex: "highestConNum5",
                             key: "highestConNum5",
                             align: "center",
+                            sorter: (a, b) =>
+                                b.highestConNum5 - a.highestConNum5,
                         },
                     ],
                 },
@@ -275,6 +318,9 @@ export default {
         this.getData();
     },
     methods: {
+        sorter(a, b, key) {
+            return b[key] - a[key];
+        },
         getData() {
             getPlateStockUpstop({
                 startDate: this.startTime,
@@ -311,8 +357,9 @@ export default {
                             item[key + "2"] = resList[1][index][key];
                             item[key + "3"] = resList[2][index][key];
                             item[key + "4"] = resList[3][index][key];
+                            console.log();
                             if (resList[4]) {
-                                item[key + "5"] = resList[4][index][key + "5"];
+                                item[key + "5"] = resList[4][index][key];
                             }
                             // console.log(resList[1][index]);
                             // console.log(resList[2][index]);

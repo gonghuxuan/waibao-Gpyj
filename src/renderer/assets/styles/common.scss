@@ -24,7 +24,13 @@
   width: 100%; 
   height: 100%;
 }
+.ant-table-thead > tr > th.ant-table-column-has-actions.ant-table-column-has-sorters:hover {
+  background: #082D37;
+}
+.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+  background: #082D37;
 
+}
 %sn-container-before {
   content: "";
   position: absolute;
