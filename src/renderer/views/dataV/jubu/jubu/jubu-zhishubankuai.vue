@@ -35,7 +35,6 @@ export default {
     methods: {
         getData() {
             getPlateChangepercentData({}).then((res) => {
-                console.log("指数板块-----", res);
                 this.resData = res;
                 this.resData.aboveAvgChangepercentPlates.forEach((item) => {
                     const dataItem = [];
@@ -94,9 +93,7 @@ export default {
                         },
                     },
                     formatter: function (params) {
-                        console.log(params[0].data[1]);
                         const data = params[0].data[1].toFixed(2);
-                        console.log(data);
                         return params[0].data[2] + ": " + data;
                     },
                 },
@@ -163,9 +160,7 @@ export default {
                 ],
             };
 
-            console.log("111111111111111111option11");
             this.chart.setOption(option);
-            console.log("111111111111111111option11222222222222");
         },
         toDetail() {
             this.$router.push({

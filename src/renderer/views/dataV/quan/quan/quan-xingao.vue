@@ -79,7 +79,6 @@ export default {
     methods: {
         getData() {
             getLetfStocks({ stockType: this.stockType }).then((res) => {
-                console.log(res);
                 this.resData = res;
             });
         },

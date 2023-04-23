@@ -86,6 +86,7 @@ export default {
             console.log(el);
             console.log("123");
             this.status = el;
+            sessionStorage.setItem("status", this.status);
         },
     },
 };

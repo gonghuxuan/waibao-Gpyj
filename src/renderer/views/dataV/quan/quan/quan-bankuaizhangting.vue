@@ -143,10 +143,8 @@ export default {
                     arr.push(dayjs(nowTime).format("YYYY-MM-DD"));
                 }
             }
-            console.log(arr);
             this.startTime = arr[4];
             this.endtime = arr[0];
-            console.log(this.startTime);
         },
     },
 };

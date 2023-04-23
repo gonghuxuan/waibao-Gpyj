@@ -97,7 +97,6 @@ export default {
         getData() {
             getAmountDirection({ dealDate: dayjs().format("YYYY-MM-DD") }).then(
                 (res) => {
-                    console.log("资金流向", res);
                     // this.resData = res;
                     this.resData = res.slice(0, 100);
                 }

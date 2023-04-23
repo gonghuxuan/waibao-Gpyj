@@ -68,7 +68,6 @@ export default {
     methods: {
         getData() {
             getHitStocks().then((res) => {
-                console.log("打板", res);
                 this.highestConNum = res.连板天梯.highestConNum;
                 this.avgSuccessRate = res.连板天梯.avgSuccessRate;
                 this.zhangsuyujing = res.涨速预警.slice(0, 3);

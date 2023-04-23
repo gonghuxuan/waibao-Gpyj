@@ -82,7 +82,6 @@ export default {
                 startDate: this.fiveDateArr[4],
                 endDate: this.fiveDateArr[0],
             }).then((res) => {
-                console.log("个股连板", res);
                 let dataArr = [];
                 if (res) {
                     for (let key in res) {
