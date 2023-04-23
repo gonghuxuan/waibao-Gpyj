@@ -1,41 +1,41 @@
 <template>
-    <div class="quan-bankuai">
-        <div class="sn-container sn-container-1">
-            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                ><div class="juzhong font-18 bankuai-title"
-                    >
-                    <jubuzhangfuyidong title="涨幅异动" />
-                </div></dv-border-box-10
-            >
+  <div class="quan-bankuai">
+    <div class="sn-container sn-container-1">
+      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
+        <div class="juzhong font-18 bankuai-title">
+          <jubuzhangfuyidong title="涨幅异动" />
         </div>
-        <div class="sn-container sn-container-2">
-            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                ><div class="juzhong font-18 bankuai-title"
-                    >
-                    <jubuchengjiaoeyidong title="成交额异动" />
-                </div></dv-border-box-10
-            >
-        </div>
-        <div class="sn-container sn-container-3">
-            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                ><div class="juzhong font-18 bankuai-title"
-                    >10天线性跟踪
-                </div></dv-border-box-10
-            >
-        </div>
-        <div class="sn-container sn-container-4">
-            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                ><div class="juzhong font-18 bankuai-title"
-                    >10天未突破跟踪
-                </div></dv-border-box-10
-            >
-        </div>
+      </dv-border-box-10>
     </div>
+    <div class="sn-container sn-container-2">
+      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
+        <div class="juzhong font-18 bankuai-title">
+          <jubuchengjiaoeyidong title="成交额异动" />
+        </div>
+      </dv-border-box-10>
+    </div>
+    <div class="sn-container sn-container-3">
+      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
+        <div class="juzhong font-18 bankuai-title">
+          <jubu10xianxing title="10天线性跟踪" />
+        </div>
+      </dv-border-box-10>
+    </div>
+    <div class="sn-container sn-container-4">
+      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
+        <div class="juzhong font-18 bankuai-title">
+          <jubu10xianxingwei title="10天未突破跟踪" />
+        </div>
+      </dv-border-box-10>
+    </div>
+  </div>
 </template>
 
 <script>
 import jubuzhangfuyidong from "./jubu/jubu-zhangfuyidong.vue";
 import jubuchengjiaoeyidong from "./jubu/jubu-chengjiaoeyidong.vue";
+import jubu10xianxing from "./jubu/jubu-10xianxing.vue";
+import jubu10xianxingwei from "./jubu/jubu-10xianxingwei.vue";
 
 export default {
     data() {
@@ -44,11 +44,12 @@ export default {
     components: {
         jubuzhangfuyidong,
         jubuchengjiaoeyidong,
+        jubu10xianxing,
+        jubu10xianxingwei,
     },
     computed: {},
     created() {},
-    mounted() {
-    },
+    mounted() {},
     methods: {},
 };
 </script>

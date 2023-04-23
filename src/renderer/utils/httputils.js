@@ -61,17 +61,12 @@ service.interceptors.response.use(
                     // 401
                 }
                 // Toast(res.errorMessage)
-                console.log(res);
                 Message.error(res.msg);
                 return Promise.reject(res || "error");
             } else {
-                console.log("123");
-                console.log(response);
                 return Promise.resolve(res.data);
             }
-        } catch (err) {
-            console.log(err);
-        }
+        } catch (err) {}
     },
     (error) => {
         try {

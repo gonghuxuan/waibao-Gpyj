@@ -1,38 +1,16 @@
 <template>
-  <div class="jubu-zhangfuyidong">
+  <div class="jubu-10xianxing">
     <div class="juzhong">{{ title }}
       <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
     </div>
     <div class="table-contain">
-      <a-select label-in-value :default-value="{ key: 'qian' }" style="width: 400px;min-height: 30px; margin-bottom: 10px;" @change="handleChange">
-        <a-select-option value="qian"> 前部异动 </a-select-option>
-        <a-select-option value="zhong"> 中部异动 </a-select-option>
-        <a-select-option value="hou"> 后部异动 </a-select-option>
-        <!-- <a-select-option v-for="item in items" :key="item" :value="item">
-            {{ item }}
-            </a-select-option> -->
-      </a-select>
-      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
-        <template slot="close" slot-scope="close, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close
-                    }}</div>
-        </template>
-        <template slot="changepercent" slot-scope="changepercent">
-          <div :class="changepercent > 0 ? 'red' : 'green'">
-            <a-button type="primary">
-              <span v-if="changepercent > 0"> +</span>
-              {{ changepercent }}
-            </a-button>
-          </div>
-        </template>
-      </a-table>
+
     </div>
   </div>
 </template>
 
 <script>
-import { getStockChangePercentAction } from "@/api/userInfo.js";
+import { getStockThrough10Data } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
@@ -80,34 +58,23 @@ export default {
     },
     methods: {
         getData() {
-            getStockChangePercentAction().then((res) => {
-                console.log("涨幅异动-----", res);
-                this.resData = res.前部异动;
-                this.resDataQianbu = res.前部异动;
-                this.resDataZhongbu = res.中部异动;
-                this.resDataHoubu = res.后部异动;
+            getStockThrough10Data({
+                startDate: dayjs().format("YYYY-MM-DD"),
+            }).then((res) => {
+                console.log("10TIAN-----", res);
             });
         },
         toDetail() {
             this.$router.push({
-                path: "/quan-bankuaizhangting-detail",
+                path: "/jubu-chengjiaoeyidong-detail",
             });
-        },
-        handleChange(v) {
-            if (v.key === "qian") {
-                this.resData = this.resDataQianbu;
-            } else if (v.key === "zhong") {
-                this.resData = this.resDataZhongbu;
-            } else if (v.key === "hou") {
-                this.resData = this.resDataHoubu;
-            }
         },
     },
 };
 </script>
 
 <style lang="scss">
-.jubu-zhangfuyidong {
+.jubu-10xianxing {
     padding: 7px 5px;
     .ant-select-selection {
         background-color: rgba(5, 49, 58, 0.5);
@@ -118,7 +85,6 @@ export default {
     .anticon {
         color: #09b8bc;
     }
-
     .ant-btn {
         color: white;
         border-color: #5d9a9e;
@@ -127,12 +93,11 @@ export default {
         color: blue;
     }
     .table-contain {
-        // width: 310px;
+        width: 400px;
         height: 195px;
         overflow: scroll;
         background-color: rgba(2, 81, 93, 1);
         margin-top: 5px;
-        width: 400px;
     }
     .ant-table-thead > tr > th {
         background-color: rgba(2, 81, 93, 1);

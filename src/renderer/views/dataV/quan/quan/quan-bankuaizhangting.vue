@@ -5,19 +5,16 @@
     </div>
     <div class="table-contain">
       <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
-        <!-- <template slot="close" slot-scope="close, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close
+        <template slot="stockUpstopCount" slot-scope="stockUpstopCount">
+          <div :class="stockUpstopCount > 0 ? 'red' : 'green'">{{
+                        stockUpstopCount
                     }}</div>
         </template>
-        <template slot="changepercent" slot-scope="changepercent">
-          <div :class="changepercent > 0 ? 'red' : 'green'">
-            <a-button type="primary">
-              <span v-if="changepercent > 0"> +</span>
-              {{ changepercent }}
-            </a-button>
+        <template slot="stockUpstopProportion" slot-scope="stockUpstopProportion">
+          <div :class="stockUpstopProportion > 0 ? 'red' : 'green'">
+            {{ stockUpstopProportion }}
           </div>
-        </template> -->
+        </template>
         <!-- <a slot="name" slot-scope="text">{{ text }}</a> -->
       </a-table>
     </div>
@@ -35,6 +32,8 @@ export default {
     data() {
         return {
             resData: [],
+            startTime: "",
+            endtime: "",
             columns: [
                 {
                     title: "板块",
@@ -47,6 +46,7 @@ export default {
                     dataIndex: "stockCount",
                     key: "stockCount",
                     // scopedSlots: { customRender: "stockCount" },
+                    sorter: (a, b) => b.stockCount - a.stockCount,
                     align: "center",
                 },
                 {
@@ -54,14 +54,17 @@ export default {
                     dataIndex: "stockUpstopCount",
                     key: "stockUpstopCount",
                     align: "center",
-                    // scopedSlots: { customRender: "stockUpstopCount" },
+                    scopedSlots: { customRender: "stockUpstopCount" },
+                    sorter: (a, b) => b.stockUpstopCount - a.stockUpstopCount,
                 },
                 {
                     title: "占比",
                     dataIndex: "stockUpstopProportion",
                     key: "stockUpstopProportion",
                     align: "center",
-                    // scopedSlots: { customRender: "stockUpstopProportion" },
+                    scopedSlots: { customRender: "stockUpstopProportion" },
+                    sorter: (a, b) =>
+                        b.stockUpstopProportion - a.stockUpstopProportion,
                 },
             ],
         };
@@ -75,7 +78,9 @@ export default {
     computed: {},
     created() {},
     mounted() {
+        this.getFiveDay();
         this.getData();
+        // console.log(this.getFiveDay());
     },
     methods: {
         // let today = new Date();
@@ -93,25 +98,55 @@ export default {
         //         this.twoDigits(today.getSeconds());
         //     return date + " " + time + " " + this.getDay(dayjs(today).day());
         // startDate: dayjs().format("YYYY-MM-DD")
+
         getData() {
             getPlateStockUpstop({
-                startDate: "2023-04-12",
-                endDate: "2023-04-16",
+                startDate: this.startTime,
+                endDate: this.endtime,
             }).then((res) => {
-                console.log("板块涨停个股", res);
-                let dataArr = [];
-                if (res) {
-                    for (let key in res) {
-                        dataArr = [...dataArr, ...res[key]];
-                    }
-                }
-                this.resData = dataArr;
+                // let dataArr = [];
+                // if (res) {
+                //     for (let key in res) {
+                //         dataArr = [...dataArr, ...res[key]];
+                //     }
+                // }
+                // this.resData = dataArr;
+                this.resData = res[this.endtime];
             });
         },
         toDetail() {
             this.$router.push({
                 path: "/quan-bankuaizhangting-detail",
+                title1: "全场预警",
+                title2: "板块涨停",
             });
+        },
+        getFiveDay() {
+            var weekday = [
+                "周日",
+                "周一",
+                "周二",
+                "周三",
+                "周四",
+                "周五",
+                "周六",
+            ];
+            var arr = [];
+            var date = new Date();
+            var oneDayLong = 24 * 60 * 60 * 1000;
+            var num = 0;
+            for (var i = 0; i < weekday.length; i++) {
+                var nowTime = date.getTime();
+                nowTime = nowTime - oneDayLong * i;
+                num = new Date(nowTime).getDay();
+                if (num != 0 && num != 6) {
+                    arr.push(dayjs(nowTime).format("YYYY-MM-DD"));
+                }
+            }
+            console.log(arr);
+            this.startTime = arr[4];
+            this.endtime = arr[0];
+            console.log(this.startTime);
         },
     },
 };

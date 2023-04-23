@@ -6,7 +6,7 @@
     <div class="table-contain">
       <div class="juzhong title-contain">
         <div style="color: rgba(255, 244, 92, 1);">连板天梯：</div>
-        <div style="color: #FF5145">最高连板{{highestConNum}}连板，平均晋级成功率{{avgSuccessRate}}%</div>
+        <div style="color: white">最高连板<span style="color: #FF5145">{{highestConNum}}</span>连板，平均晋级成功率<span style="color: #FF5145">{{avgSuccessRate}}%</span> </div>
       </div>
       <div class="table-shuiwei-contain">
         <div class="table-shuiwei table-shuiwei-1">
@@ -78,9 +78,9 @@ export default {
             });
         },
         toDetail() {
-          this.$router.push({
-              path: "/quan-daban-detail",
-          });
+            this.$router.push({
+                path: "/quan-daban-detail",
+            });
         },
     },
 };

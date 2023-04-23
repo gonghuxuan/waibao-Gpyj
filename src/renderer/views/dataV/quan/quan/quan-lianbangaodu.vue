@@ -1,23 +1,11 @@
 <template>
-    <div class="jubu-xingao">
-        <div class="juzhong"
-            >{{ title }}
-            <img
-                @click="toDetail"
-                src="@/assets/img/detail.svg"
-                alt=""
-                class="detail"
-                style="width: 20px;cursor: pointer;"
-            />
-        </div>
-        <div class="table-contain">
-            <a-table
-                bordered
-                :columns="columns"
-                :data-source="resData"
-                :pagination="false"
-            >
-                <!-- <template slot="close" slot-scope="close, record">
+  <div class="jubu-xingao">
+    <div class="juzhong">{{ title }}
+      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;cursor: pointer;" />
+    </div>
+    <div class="table-contain">
+      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
+        <!-- <template slot="close" slot-scope="close, record">
           <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
                         close
                     }}</div>
@@ -30,22 +18,23 @@
             </a-button>
           </div>
         </template> -->
-                <!-- <a slot="name" slot-scope="text">{{ text }}</a> -->
-            </a-table>
-        </div>
+        <!-- <a slot="name" slot-scope="text">{{ text }}</a> -->
+      </a-table>
     </div>
+  </div>
 </template>
 <!-- :class="
 record[index].changepercent > 0 ? 'red' : 'green'
 " -->
 <script>
 import { getContinuousStockUpstop } from "@/api/userInfo.js";
-import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import { getFiveDay, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
 export default {
     data() {
         return {
             resData: [],
+            fiveDateArr: [],
             columns: [
                 {
                     title: "名称",
@@ -60,6 +49,8 @@ export default {
                     key: "stopAmount",
                     width: 110,
                     // scopedSlots: { customRender: "close" },
+                    sorter: (a, b) => b.stopAmount - a.stopAmount,
+
                     align: "center",
                 },
                 {
@@ -68,6 +59,7 @@ export default {
                     key: "conNum",
                     align: "center",
                     // scopedSlots: { customRender: "changepercent" },
+                    sorter: (a, b) => b.conNum - a.conNum,
                 },
             ],
         };
@@ -81,13 +73,14 @@ export default {
     computed: {},
     created() {},
     mounted() {
+        this.fiveDateArr = getFiveDay();
         this.getData();
     },
     methods: {
         getData() {
             getContinuousStockUpstop({
-                startDate: "2023-04-10",
-                endDate: "2023-04-16",
+                startDate: this.fiveDateArr[4],
+                endDate: this.fiveDateArr[0],
             }).then((res) => {
                 console.log("个股连板", res);
                 let dataArr = [];
@@ -106,11 +99,11 @@ export default {
         },
         toDetail() {
             this.$router.push({
-                path: "/quan-bankuaizhangting-detail",
+                path: "/quan-lianbangaodu-detail",
                 query: {
                     stockType: 0,
                     title1: "全场预警",
-                    title2: "新高异动",
+                    title2: "连板高度",
                 },
             });
         },

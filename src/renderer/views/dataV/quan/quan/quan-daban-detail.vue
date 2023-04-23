@@ -6,38 +6,52 @@
       </div>
     </div>
     <div class="content-contain">
-        <div style="display: flex;">
-            <a-table bordered :columns="columns" :data-source="resData1" :pagination="false" :scroll="{ y: 240 }">
-                <template slot="value" slot-scope="value">
-                <div :class="value > 0 ? 'red' : 'green'">
-                    <a-button type="primary">
-                    <span v-if="value > 0"> +</span>
-                    {{ value }}
-                    </a-button>
-                </div>
-                </template>
-            </a-table>
-            <a-table bordered :columns="columns" :data-source="resData2" :pagination="false" :scroll="{ y: 240 }">
-                <template slot="value" slot-scope="value">
-                <div :class="value > 0 ? 'red' : 'green'">
-                    <a-button type="primary">
-                    <span v-if="value > 0"> +</span>
-                    {{ value }}
-                    </a-button>
-                </div>
-                </template>
-            </a-table>
-        </div>
-        <a-table bordered :columns="columns" :data-source="resData3" :pagination="false" :scroll="{ y: 240 }">
+      <div class="daban-1">
+        <div style="color: rgba(255, 244, 92, 1);">连板天梯：</div>
+        <div style="color: white">最高连板 <span style="color: #FF5145">{{highestConNum}}</span> 连板，平均晋级成功率 <span style="color: #FF5145">{{avgSuccessRate}}%</span> </div>
+      </div>
+      <div style="display: flex;">
+        <div class="table1">
+          <div class="active padding"><span style="color: white">涨速预警</span></div>
+          <a-table bordered :columns="columns" :data-source="resData1" :pagination="false" class="table-hei">
             <template slot="value" slot-scope="value">
-            <div :class="value > 0 ? 'red' : 'green'">
+              <div :class="value > 0 ? 'red' : 'green'">
                 <a-button type="primary">
-                <span v-if="value > 0"> +</span>
-                {{ value }}
+                  <span v-if="value > 0"> +</span>
+                  {{ value }}
                 </a-button>
-            </div>
+              </div>
             </template>
+          </a-table>
+        </div>
+        <div class="table2">
+          <div class="active padding"><span style="color: white">开板提醒</span></div>
+          <a-table bordered :columns="columns" :data-source="resData2" :pagination="false" class="table-hei">
+            <template slot="value" slot-scope="value">
+              <div :class="value > 0 ? 'red' : 'green'">
+                <a-button type="primary">
+                  <span v-if="value > 0"> +</span>
+                  {{ value }}
+                </a-button>
+              </div>
+            </template>
+          </a-table>
+        </div>
+
+      </div>
+      <div class="table-3">
+        <div class="active padding"><span style="color: white">隔夜委托量</span></div>
+        <a-table bordered :columns="columns2" :data-source="resData3" :pagination="pagination" class="table-hei">
+          <!-- <template slot="value" slot-scope="value">
+            <div style="color: white">
+              <span v-if="value > 0"> +</span>
+              {{ value }}
+            </div>
+          </template> -->
         </a-table>
+        <div style="padding-bottom: 100px;"></div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -50,6 +64,8 @@ console.log(echarts);
 export default {
     data() {
         return {
+            highestConNum: "",
+            avgSuccessRate: "",
             columns: [
                 {
                     title: "名称",
@@ -72,10 +88,29 @@ export default {
                     scopedSlots: { customRender: "value" },
                 },
             ],
+            columns2: [
+                {
+                    title: "名称",
+                    dataIndex: "stockName",
+                    key: "stockName",
+                    align: "center",
+                    // customRender: (text, record, index) => `${index + 1}`, //此处为重点
+                },
+                {
+                    title: "委托金额(万)",
+                    dataIndex: "value",
+                    key: "value",
+                    align: "center",
+                    scopedSlots: { customRender: "value" },
+                },
+            ],
             resData1: [],
             resData2: [],
             resData3: [],
             lianbantianti: {},
+            pagination: {
+                showQuickJumper: true,
+            },
         };
     },
     components: {},
@@ -92,6 +127,8 @@ export default {
                 this.resData2 = res.开板提醒;
                 this.resData3 = res.隔夜委托量;
                 this.lianbantianti = res.连板天梯;
+                this.highestConNum = res.连板天梯.highestConNum;
+                this.avgSuccessRate = res.连板天梯.avgSuccessRate;
             });
         },
     },
@@ -100,6 +137,51 @@ export default {
 
 <style lang="scss">
 .quan-zijin-detail {
+    .daban-1 {
+        background: url(../../../../assets/img/daban-1.png) no-repeat;
+        background-size: cover;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .table1 {
+        width: 980px;
+        margin-right: 30px;
+        // height: 400px;
+        // overflow: scroll;
+    }
+    .table2 {
+        width: 980px;
+    }
+    .table-3 {
+        height: 400px;
+        margin-top: 20px;
+    }
+    .table-hei {
+        height: 320px;
+        overflow: scroll;
+    }
+    .active {
+        height: 40px;
+        background-image: linear-gradient(
+            to right,
+            rgba(29, 255, 255, 0.1),
+            rgba(29, 255, 255, 0.3),
+            rgba(29, 255, 255, 0.1)
+        );
+        border-top: 2px solid rgba(12, 220, 226, 0.3);
+        border-bottom: 2px solid rgba(12, 220, 226, 0.3);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        color: #1dffff;
+    }
     .gupiao-item {
         font-size: 16px;
         text-align: left;
@@ -127,9 +209,9 @@ export default {
         padding-right: 20px;
     }
     .content-contain {
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
+        // display: flex;
+        // flex-direction: column;
+        // padding: 10px;
     }
     .table-contain {
         width: 100%;
@@ -205,7 +287,18 @@ export default {
     }
 }
 .ant-table-tbody > tr > td {
-        color: #64b7bc;
-        border-color: #5f9ea0;
-    }
+    color: #64b7bc;
+    border-color: #5f9ea0;
+}
+.ant-pagination-options-quick-jumper {
+    color: white;
+}
+.ant-pagination-item-container {
+    color: white;
+}
+.ant-pagination-jump-next
+    .ant-pagination-item-container
+    .ant-pagination-item-ellipsis {
+    color: white;
+}
 </style>

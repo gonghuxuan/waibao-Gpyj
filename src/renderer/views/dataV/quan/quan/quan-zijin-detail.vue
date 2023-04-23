@@ -91,6 +91,7 @@ export default {
                     key: "changePercent",
                     scopedSlots: { customRender: "changePercent" },
                     align: "center",
+                    sorter: (a, b) => b.changePercent - a.changePercent,
                 },
                 {
                     title: "今日主力净流入",
@@ -102,6 +103,7 @@ export default {
                             key: "mainAmount",
                             scopedSlots: { customRender: "mainAmount" },
                             align: "center",
+                            sorter: (a, b) => b.mainAmount - a.mainAmount,
                         },
                         {
                             title: "净占比",
@@ -111,6 +113,8 @@ export default {
                                 customRender: "mainAmountProportion",
                             },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.mainAmountProportion - a.mainAmountProportion,
                         },
                     ],
                 },
@@ -124,6 +128,8 @@ export default {
                             key: "superLargeAmount",
                             scopedSlots: { customRender: "superLargeAmount" },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.superLargeAmount - a.superLargeAmount,
                         },
                         {
                             title: "净占比",
@@ -133,6 +139,9 @@ export default {
                                 customRender: "superLargeAmountProportion",
                             },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.superLargeAmountProportion -
+                                a.superLargeAmountProportion,
                         },
                     ],
                 },
@@ -146,6 +155,7 @@ export default {
                             key: "largeAmount",
                             scopedSlots: { customRender: "largeAmount" },
                             align: "center",
+                            sorter: (a, b) => b.largeAmount - a.largeAmount,
                         },
                         {
                             title: "净占比",
@@ -155,6 +165,9 @@ export default {
                                 customRender: "largeAmountProportion",
                             },
                             align: "center",
+                            sorter: (a, b) =>
+                                b.largeAmountProportion -
+                                a.largeAmountProportion,
                         },
                     ],
                 },
