@@ -18,6 +18,7 @@ export default {
     data() {
         return {
             resData: [],
+            sandianData: [],
         };
     },
     props: {
@@ -36,6 +37,20 @@ export default {
             getPlateChangepercentData({}).then((res) => {
                 console.log("指数板块-----", res);
                 this.resData = res;
+                this.resData.aboveAvgChangepercentPlates.forEach((item) => {
+                    const dataItem = [];
+                    dataItem[0] = Math.random();
+                    dataItem[1] = item.plateChangepercent;
+                    dataItem[2] = item.plateName;
+                    this.sandianData.push(dataItem);
+                });
+                this.resData.belowAvgChangepercentPlates.forEach((item) => {
+                    const dataItem = [];
+                    dataItem[0] = Math.random();
+                    dataItem[1] = item.plateChangepercent;
+                    dataItem[2] = item.plateName;
+                    this.sandianData.push(dataItem);
+                });
                 this.setChart();
             });
         },
@@ -43,6 +58,7 @@ export default {
             this.chart = echarts.init(
                 document.getElementById("charts-zhishubankuai")
             );
+            // const data = this.resData;
             const option = {
                 xAxis: {
                     splitLine: {
@@ -77,30 +93,17 @@ export default {
                             backgroundColor: "#6a7985",
                         },
                     },
+                    formatter: function (params) {
+                        console.log(params[0].data[1]);
+                        const data = params[0].data[1].toFixed(2);
+                        console.log(data);
+                        return params[0].data[2] + ": " + data;
+                    },
                 },
                 series: [
                     {
-                        symbolSize: 10,
-                        data: [
-                            [96.24, 11.35, "张三"],
-                            [33.09, 85.11, "李四"],
-                            [57.6, 36.61, "王五"],
-                            [36.77, 27.26, "张三"],
-                            [20.1, 6.72, "张三"],
-                            [45.53, 36.37, "张三"],
-                            [110.07, 80.13, "张三"],
-                            [72.05, 20.88, "张三"],
-                            [39.82, 37.15, "张三"],
-                            [48.05, 70.5, "张三"],
-                            [0.85, 2.57, "张三"],
-                            [51.66, 63.7, "张三"],
-                            [61.07, 127.13, "张三"],
-                            [64.54, 33.59, "张三"],
-                            [35.5, 25.01, "张三"],
-                            [226.55, 664.02, "张三"],
-                            [188.6, 175.31, "张三"],
-                            [81.31, 108.68, "张三"],
-                        ],
+                        name: "scatter",
+                        type: "scatter",
                         markLine: {
                             symbol: "none", //去掉警戒线最后面的箭头
                             label: {
@@ -108,100 +111,29 @@ export default {
                             },
                             data: [
                                 {
-                                    silent: true, //鼠标悬停事件  true没有，false有
+                                    silent: false, //鼠标悬停事件  true没有，false有
                                     lineStyle: {
                                         //警戒线的样式  ，虚实  颜色
-                                        // type: "dashed",
-                                        // color: "#5D9A9E",
-                                        normal: {
-                                            lineStyle: {
-                                                type: "dashed",
-                                                color: "#5D9A9E",
-                                                // type: 'solid'  //'dotted'虚线 'solid'实线
-                                            },
-                                            label: {
-                                                show: false,
-                                                position: "center",
-                                                //  formatter: '{a}',
-                                            },
-                                        },
+                                        type: "dashed",
+                                        color: "#5D9A9E",
                                     },
                                     yAxis: this.resData.avgChangepercent, // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
                                 },
                             ],
                         },
-                        type: "scatter",
-                    },
-                ],
-            };
-            const data = [
-                [96.24, 11.35, "张三"],
-                [33.09, 85.11, "李四"],
-                [57.6, 36.61, "王五"],
-                [36.77, 27.26, "张三"],
-                [20.1, 6.72, "张三"],
-                [45.53, 36.37, "张三"],
-                [110.07, 80.13, "张三"],
-                [72.05, 20.88, "张三"],
-                [39.82, 37.15, "张三"],
-                [48.05, 70.5, "张三"],
-                [0.85, 2.57, "张三"],
-                [51.66, 63.7, "张三"],
-                [61.07, 127.13, "张三"],
-                [64.54, 33.59, "张三"],
-                [35.5, 25.01, "张三"],
-                [226.55, 664.02, "张三"],
-                [188.6, 175.31, "张三"],
-                [81.31, 108.68, "张三"],
-            ];
-
-            const option2 = {
-                tooltip: {
-                    trigger: "axis",
-                    axisPointer: {
-                        type: "cross",
-                    },
-                },
-                // title: {
-                //     text: "18 companies net profit and main business income (million)",
-                //     subtext: "By ecStat.regression",
-                //     sublink: "https://github.com/ecomfe/echarts-stat",
-                //     left: "center",
-                //     top: 16,
-                // },
-                xAxis: {
-                    type: "category",
-                    min: "value",
-                },
-                yAxis: {
-                    type: "value",
-                    min: 0,
-                    splitLine: {
-                        lineStyle: {
-                            type: "dashed",
-                        },
-                    },
-                },
-                grid: {
-                    top: 90,
-                },
-                series: [
-                    {
-                        name: "scatter",
-                        type: "scatter",
                         label: {
                             emphasis: {
                                 show: true,
                                 position: "right",
                                 textStyle: {
-                                    color: "red",
+                                    color: "white",
                                     fontSize: 16,
                                 },
                             },
                         },
                         itemStyle: {
                             show: true,
-                            color: "red",
+                            color: "white",
                             markPoint: {
                                 tooltip: {
                                     show: true,
@@ -209,10 +141,10 @@ export default {
                                 },
                             },
                         },
-                        data: data,
+                        data: this.sandianData,
                         itemStyle: {
                             normal: {
-                                color: "yellow",
+                                color: "rgba(255, 52, 38, 1)",
 
                                 label: {
                                     position: [5, 9],
@@ -221,8 +153,8 @@ export default {
                                         return params.value[2];
                                     },
                                     textStyle: {
-                                        color: "red",
-                                        fontSize: 16,
+                                        color: "white",
+                                        fontSize: 10,
                                     },
                                 },
                             },
@@ -232,7 +164,7 @@ export default {
             };
 
             console.log("111111111111111111option11");
-            this.chart.setOption(option2);
+            this.chart.setOption(option);
             console.log("111111111111111111option11222222222222");
         },
         toDetail() {
