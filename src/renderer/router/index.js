@@ -176,6 +176,18 @@ const router = new Router({
                                         keepAlive: false,
                                     },
                                 },
+                                {
+                                    path: "/importStockData",
+                                    name: "importStockData",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/houtaiManagement/importStockData.vue"
+                                        ),
+                                    meta: {
+                                        title: "importStockData",
+                                        keepAlive: false,
+                                    },
+                                },
                             ],
                         },
                     ],

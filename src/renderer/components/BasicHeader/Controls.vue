@@ -114,10 +114,10 @@
             </a-menu>
         </a-dropdown>
         <a-dropdown>
-            <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
+            <a class="ant-dropdown-link" @click="toManagement">
                 后台管理 <a-icon type="down" />
             </a>
-            <a-menu slot="overlay">
+            <!-- <a-menu slot="overlay">
                 <a-menu-item>
                     <a href="javascript:;">市场水位</a>
                 </a-menu-item>
@@ -148,7 +148,7 @@
                 <a-menu-item>
                     <a href="javascript:;">连板高度预警</a>
                 </a-menu-item>
-            </a-menu>
+            </a-menu> -->
         </a-dropdown>
         <a-button-group size="small">
             <a-button type="primary" @click="back">
@@ -168,6 +168,11 @@
 import eventBus from "@/utils/eventBus";
 export default {
     methods: {
+        toManagement(){
+            this.$router.push({
+                path: "/importStockData",
+            });
+        },
         back() {
             this.$router.go(-1);
         },
