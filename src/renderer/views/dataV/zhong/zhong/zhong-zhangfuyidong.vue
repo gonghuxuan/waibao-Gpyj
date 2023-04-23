@@ -89,9 +89,9 @@ export default {
             });
         },
         toDetail() {
-            this.$router.push({
-                path: "/quan-bankuaizhangting-detail",
-            });
+            // this.$router.push({
+            //     path: "/quan-bankuaizhangting-detail",
+            // });
         },
         handleChange(v) {
             if (v.key === "qian") {

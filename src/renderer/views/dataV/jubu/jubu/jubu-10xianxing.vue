@@ -14,6 +14,8 @@ import { getStockThrough10Data } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
+import { mapGetters } from "vuex";
+
 export default {
     data() {
         return {
@@ -144,9 +146,9 @@ export default {
             });
         },
         toDetail() {
-            this.$router.push({
-                path: "/jubu-chengjiaoeyidong-detail",
-            });
+            // this.$router.push({
+            //     path: "/jubu-chengjiaoeyidong-detail",
+            // });
         },
     },
 };

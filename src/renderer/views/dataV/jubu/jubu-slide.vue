@@ -3,7 +3,7 @@
     <div class="juzhong font-18">局部预警 </div>
     <div class="title" style="font-size: 16px">板块与指数的关系</div>
     <div class="quanqiu">
-      <div class="flex bankuai-contain">
+      <div v-if="show" class="flex bankuai-contain">
         <jubuzhishubankuai />
       </div>
     </div>
@@ -15,6 +15,22 @@ import jubuzhishubankuai from "./jubu/jubu-zhishubankuai.vue";
 
 export default {
     name: "jubu-slide",
+    data() {
+        return {
+            show: true,
+        };
+    },
+    watch: {
+        "$store.state.App.swiper"(newval, oldval) {
+            // 代码实现
+            if (newval === 1) {
+                this.show = false;
+                this.$nextTick(() => {
+                    this.show = true;
+                });
+            }
+        },
+    },
     components: {
         jubuzhishubankuai,
     },

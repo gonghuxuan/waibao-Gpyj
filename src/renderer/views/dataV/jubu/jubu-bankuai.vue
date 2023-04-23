@@ -14,16 +14,17 @@
         </div>
       </dv-border-box-10>
     </div>
-    <div class="sn-container sn-container-3">
+    <div class="sn-container sn-container-3" @click="show3d">
       <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title">
+        <!-- <span style="font-size: 16px; color: white">{{ getstatus3d() == 1 }}</span> -->
+        <div v-if="getstatus3d() == 1" class="juzhong font-18 bankuai-title">
           <jubu10xianxing title="10天线性跟踪" />
         </div>
       </dv-border-box-10>
     </div>
     <div class="sn-container sn-container-4">
       <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title">
+        <div v-if="getstatus3d() == 1" class="juzhong font-18 bankuai-title">
           <jubu10xianxingwei title="10天未突破跟踪" />
         </div>
       </dv-border-box-10>
@@ -36,10 +37,14 @@ import jubuzhangfuyidong from "./jubu/jubu-zhangfuyidong.vue";
 import jubuchengjiaoeyidong from "./jubu/jubu-chengjiaoeyidong.vue";
 import jubu10xianxing from "./jubu/jubu-10xianxing.vue";
 import jubu10xianxingwei from "./jubu/jubu-10xianxingwei.vue";
+import { mapGetters, mapMutations, mapState } from "vuex";
 
 export default {
     data() {
         return {};
+    },
+    computed: {
+        ...mapState("App", ["swiper"]),
     },
     components: {
         jubuzhangfuyidong,
@@ -48,9 +53,21 @@ export default {
         jubu10xianxingwei,
     },
     computed: {},
-    created() {},
+    created() {
+        console.warn(this.swiper);
+        console.warn(this.$store.state.App.swiper);
+    },
     mounted() {},
-    methods: {},
+    methods: {
+        show3d() {
+            console.warn("hhhhhhhhhhhh", this.swiper);
+            console.warn(this.$store.state.App.swiper);
+        },
+        getstatus3d() {
+            console.warn(this.$store.state.App.swiper);
+            return this.$store.state.App.swiper;
+        },
+    },
 };
 </script>
 

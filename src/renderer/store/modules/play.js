@@ -44,9 +44,10 @@ const state = () => ({
     lyric: null, // 歌词
     current_lyric: null, // 当前播放歌词
     current_lyric_line: 0, // 当前播放歌词索引
-    isMuted: false,
-    volume: 0.9,
+    isMuted: "false",
+    volume: 0.91,
     isShowDesktoplyric: false,
+    status3d: "123",
 });
 const getters = {
     current_song: (state) =>
@@ -66,6 +67,7 @@ const getters = {
     isMuted: (state) => state.isMuted,
     volume: (state) => state.volume,
     isShowDesktoplyric: (state) => state.isShowDesktoplyric,
+    status3d: (state) => state.status3d,
 };
 const mutations = {
     SET_SHOW_DESKTOP_LYRIC(state, flag) {
@@ -123,11 +125,18 @@ const mutations = {
     SET_MUTED(state, flag) {
         state.isMuted = flag;
     },
+    SET_STATUS3D(state, flag) {
+        state.status3d = flag;
+    },
 };
 
 const actions = {
     setLyric({ commit }, lyric) {
         commit("SET_LYRIC", lyric);
+    },
+    setStatus3d({ commit }, status3d) {
+        commit("SET_STATUS3D", status3d);
+        console.warn("ststus             ;;;;", status3d);
     },
     // 追加播放,用于搜索建议单曲播放,相似歌曲播放,动态歌曲播放等
     async appendPlay({ commit, state }, song) {

@@ -27,6 +27,21 @@ export default {
             default: 0,
         },
     },
+    // watch: {
+    //     "$store.state.App.swiper"(newval, oldval) {
+    //         // 代码实现
+    //         console.warn("32222222222", newval);
+    //         if (newval === 1) {
+    //             this.chart.clear();
+    //             console.warn("iiiiiiiiiiiiiiiiiiii");
+    //             setTimeout(() => {
+    //                 this.$nextTick(() => {
+    //                     this.setChart();
+    //                 });
+    //             }, 1000);
+    //         }
+    //     },
+    // },
     computed: {},
     created() {},
     mounted() {

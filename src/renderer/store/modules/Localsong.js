@@ -15,6 +15,7 @@ export default {
     namespaced: true,
     state: {
         localSongs: [],
+        status: 0,
         exportFolders: [`${remote.app.getPath("music")}`],
     },
     mutations: {
@@ -23,6 +24,9 @@ export default {
         },
         set(state, songs) {
             state.localSongs = songs;
+        },
+        setstatus(state, status) {
+            state.status = status;
         },
         add(state, song) {
             state.localSongs.push(song);
@@ -69,6 +73,9 @@ export default {
             } catch (error) {
                 console.log("match error:", error);
             }
+        },
+        setStatusAction({ state, commit }) {
+            commit("setstatus", localSongs);
         },
         async refresh({ state, commit, dispatch, rootState }, selectedFolders) {
             let folders =

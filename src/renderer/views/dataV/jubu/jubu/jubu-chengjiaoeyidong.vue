@@ -89,9 +89,9 @@ export default {
             });
         },
         toDetail() {
-            this.$router.push({
-                path: "/jubu-chengjiaoeyidong-detail",
-            });
+            // this.$router.push({
+            //     path: "/jubu-chengjiaoeyidong-detail",
+            // });
         },
         handleChange(v) {
             if (v.key === "qian") {

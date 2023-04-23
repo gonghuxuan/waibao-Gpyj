@@ -50,8 +50,8 @@ export default {
     components: {},
     data() {
         return {
-            userName: "test1",
-            userPwd: "test1",
+            userName: "",
+            userPwd: "",
             visible: false,
             modalContent: "这是一段自定义模态框消息",
             typeFlag: false,

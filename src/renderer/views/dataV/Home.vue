@@ -51,6 +51,7 @@ import zhongslide from "./zhong/zhong-slide.vue";
 import zhongbankuai from "./zhong/zhong-bankuai.vue";
 import timecom from "./components/time.vue";
 import usercom from "./components/user.vue";
+import { mapGetters, mapMutations, mapState } from "vuex";
 
 export default {
     name: "Home",
@@ -71,10 +72,13 @@ export default {
             status: 0,
         };
     },
-    computed: {},
+    computed: {
+        ...mapState("App", ["swiper"]),
+    },
     created() {
         console.log("refresh");
         console.log(this.status);
+        console.warn("created", this);
     },
     mounted() {
         // console.log(this.$refs.editor);
@@ -82,11 +86,15 @@ export default {
         console.log(document.location.href);
     },
     methods: {
+        ...mapMutations("Setting", ["mutateState"]),
         slideChange(el) {
             console.log(el);
-            console.log("123");
+            console.warn("el,:", el);
             this.status = el;
             sessionStorage.setItem("status", this.status);
+            this.$store.dispatch("gpyj/setSwiper", this.status);
+            this.$store.commit("App/SHOW_SWIPER", this.status);
+            console.warn("hhhhhhhhhhhh", this.swiper);
         },
     },
 };

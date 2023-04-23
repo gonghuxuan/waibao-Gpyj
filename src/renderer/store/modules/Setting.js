@@ -1,6 +1,7 @@
 import { remote } from "electron";
 let state = {
     downloadSongsFolders: [`${remote.app.getPath("music")}`],
+    swiper: 0,
 };
 
 let mutations = {
@@ -12,14 +13,19 @@ let mutations = {
         state.downloadSongsFolders = state.downloadSongsFolders.concat(folders);
     },
     mutateState(state, payload) {
-        for (let k in payload) {
-            state[k] = payload[k];
-        }
+        state.swiper = payload;
+        console.warn(payload);
+        console.warn("chufaaaaaaaaaaaaaaaaaaa");
     },
+};
+
+const getters = {
+    swiper: (state) => (state) => state.swiper,
 };
 
 export default {
     namespaced: true,
     state,
     mutations,
+    getters,
 };

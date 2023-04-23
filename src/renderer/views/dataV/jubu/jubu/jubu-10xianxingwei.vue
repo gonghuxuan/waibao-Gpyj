@@ -4,7 +4,7 @@
       <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
     </div>
     <div class="table-contain">
-      <div id="charts-10xianxing" style="height: 200px; width: 100%; margin-top: 0px"></div>
+      <div id="charts-10xianxingwei" style="height: 200px; width: 100%; margin-top: 0px"></div>
     </div>
   </div>
 </template>
@@ -42,10 +42,10 @@ export default {
         getData() {
             getStockThrough10Data({
                 // startDate: dayjs().format("YYYY-MM-DD"),
-                startDate: "2023-02-17",
+                startDate: "2023-03-07",
             }).then((res) => {
                 console.log("10TIAN-----", res);
-                res.throughList.forEach((element, index) => {
+                res.notthroughList.forEach((element, index) => {
                     if (!this.dataObj.hasOwnProperty(element.stockName)) {
                         this.dataObj[element.stockName] = [];
                         this.dataObj[element.stockName].push(
@@ -67,7 +67,7 @@ export default {
         },
         setChart() {
             this.chart = echarts.init(
-                document.getElementById("charts-10xianxing")
+                document.getElementById("charts-10xianxingwei")
             );
             // const data = this.resData;
             const option = {
@@ -147,9 +147,9 @@ export default {
             });
         },
         toDetail() {
-            this.$router.push({
-                path: "/jubu-chengjiaoeyidong-detail",
-            });
+            // this.$router.push({
+            //     path: "/jubu-chengjiaoeyidong-detail",
+            // });
         },
     },
 };
