@@ -91,9 +91,13 @@ export default {
             });
         },
         toDetail() {
-            // this.$router.push({
-            //     path: "/quan-bankuaizhangting-detail",
-            // });
+            this.$router.push({
+                path: "/jubu-zhangfuyidong-detail",
+                query: {
+                    title1: "局部预警",
+                    title2: "涨幅异动",
+                },
+            });
         },
         handleChange(v) {
             if (v.key === "qian") {

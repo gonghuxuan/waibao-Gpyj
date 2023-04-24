@@ -189,6 +189,18 @@ const router = new Router({
                                     },
                                 },
                                 {
+                                    path: "/jubu-zhangfuyidong-detail",
+                                    name: "jubu-zhangfuyidong-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/jubu/jubu/jubu-zhangfuyidong-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "jubu-zhangfuyidong-detail",
+                                        keepAlive: false,
+                                    },
+                                },
+                                {
                                     path: "/zhong-chengjiaoeyidong-detail",
                                     name: "zhong-chengjiaoeyidong-detail",
                                     component: () =>
