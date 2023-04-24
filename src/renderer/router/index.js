@@ -177,6 +177,18 @@ const router = new Router({
                                     },
                                 },
                                 {
+                                    path: "/jubu-zhishubankuai-detail",
+                                    name: "jubu-zhishubankuai-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/jubu/jubu/jubu-zhishubankuai-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "jubu-zhishubankuai-detail",
+                                        keepAlive: false,
+                                    },
+                                },
+                                {
                                     path: "/zhong-chengjiaoeyidong-detail",
                                     name: "zhong-chengjiaoeyidong-detail",
                                     component: () =>

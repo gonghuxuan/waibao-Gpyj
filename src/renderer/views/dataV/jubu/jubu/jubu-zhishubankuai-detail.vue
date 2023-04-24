@@ -1,22 +1,56 @@
 <template>
-  <div class="jubu-zhishubankuai">
-    <div class="juzhong">
-      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
+  <div class="jubu-zhishubankuai-detail">
+    <div class="top-contain">
+      <div>
+        <span class="padding active">板块与指数的得到关系</span>
+      </div>
     </div>
-    <div class="table-contain">
-      <div class="table-shuiwei table-shuiwei-1">
-        <div style="text-align: center">
-          <div style="color: #1AB05D; font-size: 20px;">{{resData.exponentChangepercent   | fixedTwo}}%</div>
-          <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">指数涨幅</div>
+    <div class="content-contain">
+      <div class="table1">
+        <div class="table1-1">
+          <div style="font-size: 16px; color: white;padding-top: 10px; padding-bottom: 10px;padding-left: 10px;">大于平均涨幅</div>
+          <div class="gupiao-item" v-for="(item, index)  in resData.aboveAvgChangepercentPlates" :key="item.plateName" :class="
+                        selectedGupiao == item.plateName
+                            ? 'gupiao-active'
+                            : 'gupiao-unactive'
+                    " @click="selectgupiao(item.plateName)">
+            <div class="gupiao">{{ item.plateName }}</div>
+            <div class="divider">
+              <a-divider />
+            </div>
+          </div>
+        </div>
+        <div class="table1-2">
+          <div style="font-size: 16px; color: white;padding-top: 10px; padding-bottom: 10px;padding-left: 10px;">大于平均涨幅</div>
+          <div class="gupiao-item" v-for="(item, index)  in resData.belowAvgChangepercentPlates" :key="item.plateName" :class="
+                        selectedGupiao == item.plateName
+                            ? 'gupiao-active'
+                            : 'gupiao-unactive'
+                    " @click="selectgupiao(item.plateName)">
+            <div class="gupiao">{{ item.plateName }}</div>
+            <div class="divider">
+              <a-divider />
+            </div>
+          </div>
         </div>
       </div>
-      <div class="table-shuiwei table-shuiwei-2">
-        <div style="text-align: center">
-          <div style="color: #FF5145; font-size: 20px;">{{resData.avgChangepercent | fixedTwo}}%</div>
-          <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">个股平均涨幅</div>
+
+      <div class="table2 table-shadow">
+        <div class="table-shuiwei table-shuiwei-1">
+          <div style="text-align: center">
+            <div style="color: #1AB05D; font-size: 20px;">{{resData.exponentChangepercent   | fixedTwo}}%</div>
+            <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">指数涨幅</div>
+          </div>
         </div>
+        <div class="table-shuiwei table-shuiwei-2">
+          <div style="text-align: center">
+            <div style="color: #FF5145; font-size: 20px;">{{resData.avgChangepercent | fixedTwo}}%</div>
+            <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">个股平均涨幅</div>
+          </div>
+        </div>
+        <div id="charts-zhishubankuai" style="height: 100%; width: 100%; margin-top: 0px"></div>
       </div>
-      <div id="charts-zhishubankuai" style="height: 500px; width: 100%; margin-top: 0px"></div>
+
     </div>
   </div>
 </template>
@@ -24,42 +58,47 @@
 <script>
 import { getPlateChangepercentData } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
-import dayjs from "dayjs";
+
 import * as echarts from "echarts";
+
 export default {
     data() {
         return {
             resData: [],
             sandianData: [],
+            selectedGupiao: 0,
         };
     },
-    props: {
-        title: {
-            type: String,
-            default: 0,
-        },
-    },
-    // watch: {
-    //     "$store.state.App.swiper"(newval, oldval) {
-    //         // 代码实现
-    //         console.warn("32222222222", newval);
-    //         if (newval === 1) {
-    //             this.chart.clear();
-    //             console.warn("iiiiiiiiiiiiiiiiiiii");
-    //             setTimeout(() => {
-    //                 this.$nextTick(() => {
-    //                     this.setChart();
-    //                 });
-    //             }, 1000);
-    //         }
-    //     },
-    // },
+    components: {},
     computed: {},
     created() {},
     mounted() {
         this.getData();
     },
+    activated() {
+        // this.getData();
+    },
+
     methods: {
+        selectgupiao(index) {
+            // this.chart.dispatchAction({
+            //     type: "hideTip",
+            // });
+            this.selectedGupiao = index;
+            let tipindex = 0;
+            this.sandianData.forEach((item, indexsandian) => {
+                if (item[2] === index) {
+                    tipindex = indexsandian;
+                }
+            });
+            setTimeout(() => {
+                this.chart.dispatchAction({
+                    type: "showTip",
+                    seriesIndex: 0, // 显示第几个series
+                    dataIndex: tipindex, // 显示第几个数据
+                });
+            });
+        },
         getData() {
             getPlateChangepercentData({}).then((res) => {
                 this.resData = res;
@@ -100,9 +139,9 @@ export default {
                     show: false,
                 },
                 yAxis: {
-                    splitLine: {
-                        show: false,
-                    },
+                    // splitLine: {
+                    //     show: false,
+                    // },
 
                     axisLine: {
                         show: true,
@@ -123,6 +162,9 @@ export default {
                         const data = params[0].data[1].toFixed(2);
                         return params[0].data[2] + ": " + data;
                     },
+                },
+                grid: {
+                    left: "5%",
                 },
                 series: [
                     {
@@ -189,24 +231,12 @@ export default {
 
             this.chart.setOption(option);
         },
-        toDetail() {
-            this.$router.push({
-                path: "/jubu-zhishubankuai-detail",
-                query: {
-                    title1: "局部预警",
-                    title2: "板块与指数的关系",
-                },
-            });
-        },
     },
 };
 </script>
 
 <style lang="scss">
-.jubu-zhishubankuai {
-    width: 900px;
-    height: 500px;
-    padding: 7px 5px;
+.jubu-zhishubankuai-detail {
     .table-shuiwei {
         position: absolute;
         width: 150px;
@@ -250,72 +280,113 @@ export default {
             border: 1px rgba(29, 255, 255, 0.2) solid;
         }
     }
-    .ant-select-selection {
-        background-color: rgba(5, 49, 58, 0.5);
-        color: #09b8bc;
-        // border-color: rgba(5, 49, 58, 1);
-        height: 35px;
+    .table3-item-contain {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
-    .anticon {
-        color: #09b8bc;
+    .fenshi {
+        // style="height: 500px; width: 100%; margin-top: 0px"
+        height: 500px;
+        width: 100%;
+        margin-top: 0px;
     }
-    .ant-btn {
-        color: white;
-        border-color: #5d9a9e;
+    .rik {
+        height: 500px;
+        width: 100%;
+        margin-top: 0px;
     }
-    .ant-dropdown-menu-item {
-        color: blue;
-    }
-    // .table-contain {
-    //     width: 100%;
-    //     height: 100%;
-    //     overflow: scroll;
-    //     margin-top: 5px;
-    // }
-    .ant-table-thead > tr > th {
-        background-color: rgba(2, 81, 93, 1);
-        color: white;
+    .table3-key {
+        color: rgba(93, 154, 158, 0.7);
+        padding: 10px;
+        padding-left: 20px;
         font-size: 14px;
-        text-align: center;
     }
-    .ant-table-tbody > tr > td {
+    .table3-value {
+        color: white;
+        padding: 10px;
+
+        padding-right: 20px;
+        font-size: 14px;
+    }
+    .gupiao-item {
+        font-size: 16px;
+        text-align: left;
+        height: 40px;
+        position: relative;
+    }
+    .ant-divider-horizontal {
+        margin: 0px;
+    }
+    .gupiao {
+        padding-left: 10%;
+        display: flex;
+        align-items: center;
+        height: 38px;
+    }
+    .gupiao-active {
+        color: #1dffff;
+        background-color: rgba(2, 81, 93, 1);
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .gupiao-unactive {
         color: #64b7bc;
-        border-color: #5f9ea0;
     }
-    .detail {
+    .ant-divider {
+        // color: rgba(2, 81, 93, 0.5);
+        background-color: rgba(2, 81, 93, 1);
+    }
+    .divider {
+        width: 90%;
         position: absolute;
-        right: 20px;
+        bottom: 0;
+        left: 5%;
     }
-    .green {
-        color: #1ab05d;
-        .ant-btn {
-            background-color: #1ab05d;
-        }
+    .padding {
+        padding-left: 20px;
+        padding-right: 20px;
     }
-    .red {
-        color: #ff5145;
-        .ant-btn {
-            background-color: #ff5145;
-        }
+    .unactive {
+        color: rgba(29, 255, 255, 0.5);
     }
-    .ant-table-tbody > tr > td {
-        text-align: cenetr;
+    .content-contain {
+        display: flex;
+        padding: 10px;
     }
-}
-.ant-select-dropdown-menu {
-    background-color: rgba(5, 49, 58, 0.7);
-    color: #09b8bc;
-}
-.ant-select-dropdown-menu-item-selected {
-    background-color: #082d37;
-    color: #09b8bc;
-}
-.ant-select-dropdown-menu-item:hover:not(
-        .ant-select-dropdown-menu-item-disabled
-    ) {
-    background-color: #082d37;
-}
-.ant-select-dropdown-menu-item {
-    color: #09b8bc;
+    .table1 {
+        height: 100%;
+        width: 15%;
+        border: 1px solid rgba(6, 100, 117, 1);
+        box-shadow: 0px 0px 15px rgba(6, 100, 117, 1) inset;
+    }
+    .table1-1 {
+        height: 48%;
+        overflow: scroll;
+    }
+    .table1-2 {
+        height: 48%;
+        overflow: scroll;
+        margin-top: 20px;
+    }
+    .table2 {
+        width: 85%;
+        height: 100%;
+        margin-left: 20px;
+        position: relative;
+        background: url(../../../../assets/img/quanqiu.png) no-repeat;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-origin: content-box;
+        background-size: 85% 85%;
+    }
+    .time-active {
+        color: #1dffff;
+        box-shadow: 0px 0px 15px #1dffff inset;
+    }
+    .time-unactive {
+        color: #64b7bc;
+    }
 }
 </style>
