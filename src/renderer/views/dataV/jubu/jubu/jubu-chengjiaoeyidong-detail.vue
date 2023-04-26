@@ -1,48 +1,130 @@
 <template>
-  <div class="jubu-chengjiaoeyidong-detail">
+  <div class="quan-zijin-detail">
     <div class="top-contain">
       <div>
-        <span class="padding active">成交额异动</span>
+        <span class="padding active">打板</span>
       </div>
     </div>
     <div class="content-contain">
-        <div style="display: flex;">
-            <a-table bordered :columns="columns" :data-source="成交额递增" :pagination="false" :scroll="{ y: 240 }">
-                <template slot="value" slot-scope="value">
-                <div :class="value > 0 ? 'red' : 'green'">
-                    <a-button type="primary">
-                    <span v-if="value > 0"> +</span>
-                    {{ value }}
-                    </a-button>
-                </div>
-                </template>
-            </a-table>
-            <a-table bordered :columns="columns" :data-source="成交额异动" :pagination="false" :scroll="{ y: 240 }">
-                <template slot="value" slot-scope="value">
-                <div :class="value > 0 ? 'red' : 'green'">
-                    <a-button type="primary">
-                    <span v-if="value > 0"> +</span>
-                    {{ value }}
-                    </a-button>
-                </div>
-                </template>
-            </a-table>
-        </div>
-        <a-table bordered :columns="columns" :data-source="机构票监测" :pagination="false" :scroll="{ y: 240 }">
-            <template slot="value" slot-scope="value">
-            <div :class="value > 0 ? 'red' : 'green'">
-                <a-button type="primary">
-                <span v-if="value > 0"> +</span>
-                {{ value }}
-                </a-button>
-            </div>
+      <div style="display: flex;">
+        <div class="table1">
+          <div class="active padding"><span style="color: white">成交额递增</span></div>
+          <a-table bordered :columns="columns" :data-source="resDatadizeng" :pagination="false" class="table-hei">
+            <template slot="close" slot-scope="close, record">
+              <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+                        close
+                    }}</div>
             </template>
+            <template slot="amount" slot-scope="amount, record">
+              <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+                        amount
+                    }}</div>
+            </template>
+            <template slot="changepercent" slot-scope="changepercent">
+              <div :class="changepercent > 0 ? 'red' : 'green'">
+                {{ changepercent }}
+              </div>
+            </template>
+            <template slot="changepercent" slot-scope="changepercent">
+              <div :class="changepercent > 0 ? 'red' : 'green'">
+                <a-button type="primary">
+                  <span v-if="changepercent > 0"> +</span>
+                  {{ changepercent }}
+                </a-button>
+              </div>
+            </template>
+            <template slot="changepercent3" slot-scope="changepercent3">
+              <div :class="changepercent3 > 0 ? 'red' : 'green'">
+                <a-button type="primary">
+                  <span v-if="changepercent3 > 0"> +</span>
+                  {{ changepercent3 }}
+                </a-button>
+              </div>
+            </template>
+          </a-table>
+        </div>
+        <div class="table2">
+          <div class="active padding"><span style="color: white">成交额异动</span></div>
+          <a-table bordered :columns="columns" :data-source="resDatayidong" :pagination="false" class="table-hei">
+            <template slot="close" slot-scope="close, record">
+              <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+                        close
+                    }}</div>
+            </template>
+            <template slot="amount" slot-scope="amount, record">
+              <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+                        amount
+                    }}</div>
+            </template>
+            <template slot="changepercent" slot-scope="changepercent">
+              <div :class="changepercent > 0 ? 'red' : 'green'">
+                {{ changepercent }}
+              </div>
+            </template>
+            <template slot="changepercent" slot-scope="changepercent">
+              <div :class="changepercent > 0 ? 'red' : 'green'">
+                <a-button type="primary">
+                  <span v-if="changepercent > 0"> +</span>
+                  {{ changepercent }}
+                </a-button>
+              </div>
+            </template>
+            <template slot="changepercent3" slot-scope="changepercent3">
+              <div :class="changepercent3 > 0 ? 'red' : 'green'">
+                <a-button type="primary">
+                  <span v-if="changepercent3 > 0"> +</span>
+                  {{ changepercent3 }}
+                </a-button>
+              </div>
+            </template>
+          </a-table>
+        </div>
+
+      </div>
+      <div class="table-3">
+        <div class="active padding"><span style="color: white">机构票监测</span></div>
+        <a-table bordered :columns="columns" :data-source="resDatajigou" :pagination="false" class="table-hei">
+          <template slot="close" slot-scope="close, record">
+            <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+                        close
+                    }}</div>
+          </template>
+          <template slot="amount" slot-scope="amount, record">
+            <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
+                        amount
+                    }}</div>
+          </template>
+          <template slot="changepercent" slot-scope="changepercent">
+            <div :class="changepercent > 0 ? 'red' : 'green'">
+              {{ changepercent }}
+            </div>
+          </template>
+          <template slot="changepercent" slot-scope="changepercent">
+            <div :class="changepercent > 0 ? 'red' : 'green'">
+              <a-button type="primary">
+                <span v-if="changepercent > 0"> +</span>
+                {{ changepercent }}
+              </a-button>
+            </div>
+          </template>
+          <template slot="changepercent3" slot-scope="changepercent3">
+            <div :class="changepercent3 > 0 ? 'red' : 'green'">
+              <a-button type="primary">
+                <span v-if="changepercent3 > 0"> +</span>
+                {{ changepercent3 }}
+              </a-button>
+            </div>
+          </template>
         </a-table>
+        <div style="padding-bottom: 100px;"></div>
+      </div>
+
     </div>
   </div>
 </template>
 
-<script>
+  <script>
+import { getHitStocks } from "@/api/userInfo.js";
 import { getStockAmountAction } from "@/api/userInfo.js";
 import * as echarts from "echarts";
 
@@ -50,6 +132,12 @@ console.log(echarts);
 export default {
     data() {
         return {
+            highestConNum: "",
+            avgSuccessRate: "",
+            resData: [],
+            resDatadizeng: [],
+            resDatayidong: [],
+            resDatajigou: [],
             columns: [
                 {
                     title: "名称",
@@ -63,6 +151,8 @@ export default {
                     dataIndex: "close",
                     key: "close",
                     align: "center",
+                    scopedSlots: { customRender: "close" },
+                    sorter: (a, b) => b.close - a.close,
                 },
                 {
                     title: "涨跌幅",
@@ -70,6 +160,7 @@ export default {
                     key: "changepercent",
                     align: "center",
                     scopedSlots: { customRender: "changepercent" },
+                    sorter: (a, b) => b.close - a.close,
                 },
                 {
                     title: "3日涨跌幅",
@@ -77,6 +168,7 @@ export default {
                     key: "changepercent3",
                     align: "center",
                     scopedSlots: { customRender: "changepercent3" },
+                    sorter: (a, b) => b.close - a.close,
                 },
                 {
                     title: "成交额(亿)",
@@ -84,12 +176,32 @@ export default {
                     key: "amount",
                     align: "center",
                     scopedSlots: { customRender: "amount" },
+                    sorter: (a, b) => b.close - a.close,
                 },
             ],
-            成交额递增: [],
-            机构票监测: [],
-            成交额异动: [],
+            columns2: [
+                {
+                    title: "名称",
+                    dataIndex: "stockName",
+                    key: "stockName",
+                    align: "center",
+                    // customRender: (text, record, index) => `${index + 1}`, //此处为重点
+                },
+                {
+                    title: "委托金额(万)",
+                    dataIndex: "value",
+                    key: "value",
+                    align: "center",
+                    scopedSlots: { customRender: "value" },
+                },
+            ],
+            resData1: [],
+            resData2: [],
+            resData3: [],
             lianbantianti: {},
+            pagination: {
+                showQuickJumper: true,
+            },
         };
     },
     components: {},
@@ -101,17 +213,63 @@ export default {
     methods: {
         getData() {
             getStockAmountAction().then((res) => {
-                this.成交额递增 = res.成交额递增;
-                this.机构票监测 = res.机构票监测;
-                this.成交额异动 = res.成交额异动;
+                this.resData = res.成交额递增;
+                this.resDatadizeng = res.成交额递增;
+                this.resDatajigou = res.机构票监测;
+                this.resDatayidong = res.成交额异动;
             });
         },
     },
 };
 </script>
 
-<style lang="scss">
-.jubu-chengjiaoeyidong-detail {
+  <style lang="scss">
+.quan-zijin-detail {
+    .daban-1 {
+        background: url(../../../../assets/img/daban-1.png) no-repeat;
+        background-size: cover;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .table1 {
+        width: 980px;
+        margin-right: 30px;
+        // height: 400px;
+        // overflow: scroll;
+    }
+    .table2 {
+        width: 980px;
+    }
+    .table-3 {
+        height: 400px;
+        margin-top: 20px;
+    }
+    .table-hei {
+        height: 360px;
+        overflow: scroll;
+    }
+    .active {
+        height: 40px;
+        background-image: linear-gradient(
+            to right,
+            rgba(29, 255, 255, 0.1),
+            rgba(29, 255, 255, 0.3),
+            rgba(29, 255, 255, 0.1)
+        );
+        border-top: 2px solid rgba(12, 220, 226, 0.3);
+        border-bottom: 2px solid rgba(12, 220, 226, 0.3);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        color: #1dffff;
+    }
     .gupiao-item {
         font-size: 16px;
         text-align: left;
@@ -139,9 +297,10 @@ export default {
         padding-right: 20px;
     }
     .content-contain {
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
+        margin-top: 20px;
+        // display: flex;
+        // flex-direction: column;
+        // padding: 10px;
     }
     .table-contain {
         width: 100%;
@@ -217,7 +376,18 @@ export default {
     }
 }
 .ant-table-tbody > tr > td {
-        color: #64b7bc;
-        border-color: #5f9ea0;
-    }
+    color: #64b7bc;
+    border-color: #5f9ea0;
+}
+.ant-pagination-options-quick-jumper {
+    color: white;
+}
+.ant-pagination-item-container {
+    color: white;
+}
+.ant-pagination-jump-next
+    .ant-pagination-item-container
+    .ant-pagination-item-ellipsis {
+    color: white;
+}
 </style>

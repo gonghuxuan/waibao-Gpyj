@@ -83,7 +83,6 @@ export default {
     methods: {
         getData() {
             getStockAmountAction().then((res) => {
-                console.log("成交额异动-----", res);
                 this.resData = res.成交额递增;
                 this.resDataQianbu = res.成交额递增;
                 this.resDataZhongbu = res.机构票监测;
@@ -91,9 +90,13 @@ export default {
             });
         },
         toDetail() {
-            // this.$router.push({
-            //     path: "/jubu-chengjiaoeyidong-detail",
-            // });
+            this.$router.push({
+                path: "/jubu-chengjiaoeyidong-detail",
+                query: {
+                    title1: "局部预警",
+                    title2: "成交异动",
+                },
+            });
         },
         handleChange(v) {
             if (v.key === "qian") {
