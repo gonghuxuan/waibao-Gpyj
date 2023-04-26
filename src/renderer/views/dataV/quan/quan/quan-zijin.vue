@@ -10,18 +10,18 @@
           <div :class="changePercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
               <span v-if="changePercent > 0"> +</span>
-              {{ changePercent }}
+              {{ changePercent | fixedTwo }}
             </a-button>
           </div>
         </template>
         <template slot="mainAmount" slot-scope="mainAmount, record">
           <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
-                        mainAmount
+                        mainAmount | fixedTwo
                     }}</div>
         </template>
         <template slot="mainAmountProportion" slot-scope="mainAmountProportion, record">
           <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
-                        mainAmountProportion
+                        mainAmountProportion| fixedTwo
                     }}</div>
         </template>
         <a slot="name" slot-scope="text">{{ text }}</a>
