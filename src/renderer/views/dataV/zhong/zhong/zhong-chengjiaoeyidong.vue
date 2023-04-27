@@ -89,9 +89,13 @@ export default {
             });
         },
         toDetail() {
-            // this.$router.push({
-            //     path: "/jubu-chengjiaoeyidong-detail",
-            // });
+            this.$router.push({
+                path: "/zhong-chengjiaoeyidong-detail",
+                query: {
+                    title1: "重点预警",
+                    title2: "成交额异动",
+                },
+            });
         },
         handleChange(v) {
             if (v.key === "qian") {

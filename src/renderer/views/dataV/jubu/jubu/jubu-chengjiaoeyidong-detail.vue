@@ -160,7 +160,7 @@ export default {
                     key: "changepercent",
                     align: "center",
                     scopedSlots: { customRender: "changepercent" },
-                    sorter: (a, b) => b.close - a.close,
+                    sorter: (a, b) => b.changepercent - a.changepercent,
                 },
                 {
                     title: "3日涨跌幅",
@@ -168,7 +168,7 @@ export default {
                     key: "changepercent3",
                     align: "center",
                     scopedSlots: { customRender: "changepercent3" },
-                    sorter: (a, b) => b.close - a.close,
+                    sorter: (a, b) => b.changepercent3 - a.changepercent3,
                 },
                 {
                     title: "成交额(亿)",
@@ -176,7 +176,7 @@ export default {
                     key: "amount",
                     align: "center",
                     scopedSlots: { customRender: "amount" },
-                    sorter: (a, b) => b.close - a.close,
+                    sorter: (a, b) => b.amount - a.amount,
                 },
             ],
             columns2: [
