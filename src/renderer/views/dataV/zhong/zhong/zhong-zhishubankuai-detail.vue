@@ -1,11 +1,43 @@
 <template>
-  <div class="jubu-zhishubankuai">
-    <div class="juzhong">
-      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
+  <div class="zhong-zhishubankuai-detail">
+    <div class="top-contain">
+      <div>
+        <span class="padding active">个股与指数的得到关系</span>
+      </div>
     </div>
-    <div class="table-contain">
-      <div class="juzhong" style="">
-        <div class="table-shadow" style="
+    <div class="content-contain">
+      <div class="table1">
+        <div class="table1-1">
+          <div style="font-size: 16px; color: white;padding-top: 10px; padding-bottom: 10px;padding-left: 10px;">大于平均涨幅</div>
+          <div class="gupiao-item" v-for="(item, index)  in resData.aboveAvgChangepercentStocks" :key="item.stockName" :class="
+                        selectedGupiao == item.stockName
+                            ? 'gupiao-active'
+                            : 'gupiao-unactive'
+                    " @click="selectgupiao(item.stockName)">
+            <div class="gupiao">{{ item.stockName }}</div>
+            <div class="divider">
+              <a-divider />
+            </div>
+          </div>
+        </div>
+        <div class="table1-2">
+          <div style="font-size: 16px; color: white;padding-top: 10px; padding-bottom: 10px;padding-left: 10px;">大于平均涨幅</div>
+          <div class="gupiao-item" v-for="(item, index)  in resData.belowAvgChangepercentStocks" :key="item.stockName" :class="
+                        selectedGupiao == item.stockName
+                            ? 'gupiao-active'
+                            : 'gupiao-unactive'
+                    " @click="selectgupiao(item.stockName)">
+            <div class="gupiao">{{ item.stockName }}</div>
+            <div class="divider">
+              <a-divider />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table2 table-shadow">
+        <div class="juzhong" style="">
+          <div class="table-shadow" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -16,7 +48,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selecttime('0')">同步性</div>
-        <div class="table-shadow" style="
+          <div class="table-shadow" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -26,20 +58,22 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selecttime('1')">抗跌性</div>
-      </div>
-      <div class="table-shuiwei table-shuiwei-1">
-        <div style="text-align: center">
-          <div style="color: #1AB05D; font-size: 20px;">{{resData.exponentChangepercent   | fixedTwo}}%</div>
-          <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">指数涨幅</div>
         </div>
-      </div>
-      <div class="table-shuiwei table-shuiwei-2">
-        <div style="text-align: center">
-          <div style="color: #FF5145; font-size: 20px;">{{resData.avgChangepercent | fixedTwo}}%</div>
-          <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">个股平均涨幅</div>
+        <div class="table-shuiwei table-shuiwei-1">
+          <div style="text-align: center">
+            <div style="color: #1AB05D; font-size: 20px;">{{resData.exponentChangepercent   | fixedTwo}}%</div>
+            <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">指数涨幅</div>
+          </div>
         </div>
+        <div class="table-shuiwei table-shuiwei-2">
+          <div style="text-align: center">
+            <div style="color: #FF5145; font-size: 20px;">{{resData.avgChangepercent | fixedTwo}}%</div>
+            <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">个股平均涨幅</div>
+          </div>
+        </div>
+        <div id="charts-zhishubankuai" style="height: 100%; width: 100%; margin-top: 0px"></div>
       </div>
-      <div id="charts-zhishubankuai-zhong" style="height: 500px; width: 100%; margin-top: 0px"></div>
+
     </div>
   </div>
 </template>
@@ -47,8 +81,9 @@
 <script>
 import { getStocksChangepercentData } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
-import dayjs from "dayjs";
+
 import * as echarts from "echarts";
+
 export default {
     data() {
         return {
@@ -56,40 +91,44 @@ export default {
             sandianData: [],
             timeType: 0,
             avgChangepercent: "",
+            selectedGupiao: "",
         };
     },
-    props: {
-        title: {
-            type: String,
-            default: 0,
-        },
-    },
-    // watch: {
-    //     "$store.state.App.swiper"(newval, oldval) {
-    //         // 代码实现
-    //         console.warn("32222222222", newval);
-    //         if (newval === 1) {
-    //             this.chart.clear();
-    //             console.warn("iiiiiiiiiiiiiiiiiiii");
-    //             setTimeout(() => {
-    //                 this.$nextTick(() => {
-    //                     this.setChart();
-    //                 });
-    //             }, 1000);
-    //         }
-    //     },
-    // },
+    components: {},
     computed: {},
     created() {},
     mounted() {
         this.getData();
     },
+    activated() {
+        // this.getData();
+    },
+
     methods: {
         selecttime(index) {
             this.timeType = index;
             this.chart.clear();
             this.sandianData = [];
             this.getData();
+        },
+        selectgupiao(index) {
+            // this.chart.dispatchAction({
+            //     type: "hideTip",
+            // });
+            this.selectedGupiao = index;
+            let tipindex = 0;
+            this.sandianData.forEach((item, indexsandian) => {
+                if (item[2] === index) {
+                    tipindex = indexsandian;
+                }
+            });
+            setTimeout(() => {
+                this.chart.dispatchAction({
+                    type: "showTip",
+                    seriesIndex: 0, // 显示第几个series
+                    dataIndex: tipindex, // 显示第几个数据
+                });
+            });
         },
         getData() {
             getStocksChangepercentData({}).then((res) => {
@@ -115,7 +154,7 @@ export default {
         },
         setChart() {
             this.chart = echarts.init(
-                document.getElementById("charts-zhishubankuai-zhong")
+                document.getElementById("charts-zhishubankuai")
             );
             // const data = this.resData;
             const option = {
@@ -133,9 +172,9 @@ export default {
                     show: false,
                 },
                 yAxis: {
-                    splitLine: {
-                        show: false,
-                    },
+                    // splitLine: {
+                    //     show: false,
+                    // },
 
                     axisLine: {
                         show: true,
@@ -153,9 +192,12 @@ export default {
                         },
                     },
                     formatter: function (params) {
-                        const data = params[0].data[1];
+                        const data = params[0].data[1].toFixed(2);
                         return params[0].data[2] + ": " + data;
                     },
+                },
+                grid: {
+                    left: "5%",
                 },
                 series: [
                     {
@@ -172,7 +214,7 @@ export default {
                                     lineStyle: {
                                         //警戒线的样式  ，虚实  颜色
                                         type: "dashed",
-                                        color: "#5D9A9E",
+                                        color: "white",
                                     },
                                     yAxis: this.resData.avgChangepercent, // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
                                 },
@@ -191,7 +233,6 @@ export default {
                         itemStyle: {
                             show: true,
                             color: "white",
-                            fontSize: 16,
                             markPoint: {
                                 tooltip: {
                                     show: true,
@@ -212,7 +253,7 @@ export default {
                                     },
                                     textStyle: {
                                         color: "white",
-                                        fontSize: 12,
+                                        fontSize: 14,
                                     },
                                 },
                             },
@@ -220,32 +261,15 @@ export default {
                     },
                 ],
             };
-            console.log(this.sandianData);
 
             this.chart.setOption(option);
-        },
-        toDetail() {
-            this.$router.push({
-                path: "/zhong-zhishubankuai-detail",
-                query: {
-                    title1: "重点预警",
-                    title2: "个股与指数的关系",
-                },
-            });
         },
     },
 };
 </script>
 
 <style lang="scss">
-.jubu-zhishubankuai {
-    width: 900px;
-    height: 500px;
-    padding: 7px 5px;
-    .time-active {
-        color: #1dffff;
-        box-shadow: 0px 0px 15px #1dffff inset;
-    }
+.zhong-zhishubankuai-detail {
     .table-shuiwei {
         position: absolute;
         width: 150px;
@@ -289,77 +313,113 @@ export default {
             border: 1px rgba(29, 255, 255, 0.2) solid;
         }
     }
-    .ant-select-selection {
-        background-color: rgba(5, 49, 58, 0.5);
-        color: #09b8bc;
-        // border-color: rgba(5, 49, 58, 1);
-        height: 35px;
+    .table3-item-contain {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
-    .anticon {
-        color: #09b8bc;
+    .fenshi {
+        // style="height: 500px; width: 100%; margin-top: 0px"
+        height: 500px;
+        width: 100%;
+        margin-top: 0px;
     }
-    .ant-btn {
+    .rik {
+        height: 500px;
+        width: 100%;
+        margin-top: 0px;
+    }
+    .table3-key {
+        color: rgba(93, 154, 158, 0.7);
+        padding: 10px;
+        padding-left: 20px;
+        font-size: 14px;
+    }
+    .table3-value {
         color: white;
-        border-color: #5d9a9e;
+        padding: 10px;
+
+        padding-right: 20px;
+        font-size: 14px;
     }
-    .ant-dropdown-menu-item {
-        color: blue;
+    .gupiao-item {
+        font-size: 16px;
+        text-align: left;
+        height: 40px;
+        position: relative;
     }
-    .table-contain {
+    .ant-divider-horizontal {
+        margin: 0px;
+    }
+    .gupiao {
+        padding-left: 10%;
+        display: flex;
+        align-items: center;
+        height: 38px;
+    }
+    .gupiao-active {
+        color: #1dffff;
+        background-color: rgba(2, 81, 93, 1);
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .gupiao-unactive {
+        color: #64b7bc;
+    }
+    .ant-divider {
+        // color: rgba(2, 81, 93, 0.5);
+        background-color: rgba(2, 81, 93, 1);
+    }
+    .divider {
+        width: 90%;
+        position: absolute;
+        bottom: 0;
+        left: 5%;
+    }
+    .padding {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .unactive {
+        color: rgba(29, 255, 255, 0.5);
+    }
+    .content-contain {
+        display: flex;
+        padding: 10px;
+    }
+    .table1 {
+        height: 100%;
+        width: 15%;
+        border: 1px solid rgba(6, 100, 117, 1);
+        box-shadow: 0px 0px 15px rgba(6, 100, 117, 1) inset;
+    }
+    .table1-1 {
+        height: 48%;
+        overflow: scroll;
+    }
+    .table1-2 {
+        height: 48%;
+        overflow: scroll;
+        margin-top: 20px;
+    }
+    .table2 {
+        width: 85%;
+        height: 100%;
+        margin-left: 20px;
+        position: relative;
         background: url(../../../../assets/img/quanqiu.png) no-repeat;
         background-repeat: no-repeat;
-        background-position: left top;
+        background-position: center center;
         background-origin: content-box;
-        background-size: 100% 100%;
-        width: 100%;
-        height: 480px;
-        margin-left: -20px;
-        margin-top: 10px;
+        background-size: 85% 85%;
     }
-    .ant-table-thead > tr > th {
-        background-color: rgba(2, 81, 93, 1);
-        color: white;
-        font-size: 14px;
-        text-align: center;
+    .time-active {
+        color: #1dffff;
+        box-shadow: 0px 0px 15px #1dffff inset;
     }
-    .ant-table-tbody > tr > td {
+    .time-unactive {
         color: #64b7bc;
-        border-color: #5f9ea0;
     }
-    .detail {
-        position: absolute;
-        right: 20px;
-    }
-    .green {
-        color: #1ab05d;
-        .ant-btn {
-            background-color: #1ab05d;
-        }
-    }
-    .red {
-        color: #ff5145;
-        .ant-btn {
-            background-color: #ff5145;
-        }
-    }
-    .ant-table-tbody > tr > td {
-        text-align: cenetr;
-    }
-}
-.ant-select-dropdown-menu {
-    background-color: rgba(5, 49, 58, 0.7);
-    color: #09b8bc;
-}
-.ant-select-dropdown-menu-item-selected {
-    background-color: #082d37;
-    color: #09b8bc;
-}
-.ant-select-dropdown-menu-item:hover:not(
-        .ant-select-dropdown-menu-item-disabled
-    ) {
-    background-color: #082d37;
-}
-.ant-select-dropdown-menu-item {
-    color: #09b8bc;
 }
 </style>
