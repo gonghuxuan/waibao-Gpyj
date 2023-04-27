@@ -140,6 +140,8 @@ export default {
                     dataItem[0] = Math.random();
                     dataItem[1] = item.changepercent;
                     dataItem[2] = item.stockName;
+                    dataItem[3] = item.close;
+
                     this.sandianData.push(dataItem);
                 });
                 this.resData.belowAvgChangepercentStocks.forEach((item) => {
@@ -147,6 +149,7 @@ export default {
                     dataItem[0] = Math.random();
                     dataItem[1] = item.changepercent;
                     dataItem[2] = item.stockName;
+                    dataItem[3] = item.close;
                     this.sandianData.push(dataItem);
                 });
                 this.setChart();
@@ -192,8 +195,18 @@ export default {
                         },
                     },
                     formatter: function (params) {
-                        const data = params[0].data[1].toFixed(2);
-                        return params[0].data[2] + ": " + data;
+                        // console.log(params);
+                        // const data = params[0].data[1].toFixed(2);
+                        // return params[0].data[2] + ": " + data;
+                        return `<div style="color: black;">${
+                            params[0].data[2]
+                        }<div><span>股票价格</span>: <span style="color: ${
+                            params[0].data[1] > 0 ? "red" : "green"
+                        }">${params[0].data[3]}</span></div>
+                        <div><span>股票涨幅</span>: <span style="color: ${
+                            params[0].data[1] > 0 ? "red" : "green"
+                        }">${params[0].data[1]}</span></div>
+                        </div>`;
                     },
                 },
                 grid: {
