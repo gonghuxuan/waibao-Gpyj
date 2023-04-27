@@ -1,9 +1,32 @@
 <template>
-  <div class="zhong-zhishubankuai">
+  <div class="jubu-zhishubankuai">
     <div class="juzhong">
       <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
     </div>
     <div class="table-contain">
+      <div class="juzhong" style="">
+        <div class="table-shadow" style="
+                                width: 70px;
+                                padding: 5px;
+                                text-align: center;
+                                font-size: 14px;
+                                margin-right: 30px;
+                            " :class="
+                                timeType == '0'
+                                    ? 'time-active'
+                                    : 'time-unactive'
+                            " @click="selecttime('0')">分时</div>
+        <div class="table-shadow" style="
+                                width: 70px;
+                                padding: 5px;
+                                text-align: center;
+                                font-size: 14px;
+                            " :class="
+                                timeType == '1'
+                                    ? 'time-active'
+                                    : 'time-unactive'
+                            " @click="selecttime('1')">日k</div>
+      </div>
       <div class="table-shuiwei table-shuiwei-1">
         <div style="text-align: center">
           <div style="color: #1AB05D; font-size: 20px;">{{resData.exponentChangepercent   | fixedTwo}}%</div>
@@ -16,13 +39,13 @@
           <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">个股平均涨幅</div>
         </div>
       </div>
-      <div id="charts-zhishubankuai" style="height: 500px; width: 100%; margin-top: 0px"></div>
+      <div id="charts-zhishubankuai-zhong" style="height: 500px; width: 100%; margin-top: 0px"></div>
     </div>
   </div>
 </template>
 
 <script>
-import { getPlateChangepercentData } from "@/api/userInfo.js";
+import { getStocksChangepercentData } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
@@ -31,6 +54,8 @@ export default {
         return {
             resData: [],
             sandianData: [],
+            timeType: 0,
+            avgChangepercent: "",
         };
     },
     props: {
@@ -60,21 +85,29 @@ export default {
         this.getData();
     },
     methods: {
+        selecttime(index) {
+            this.timeType = index;
+            this.chart.clear();
+            this.sandianData = [];
+            this.getData();
+        },
         getData() {
-            getPlateChangepercentData({}).then((res) => {
-                this.resData = res;
-                this.resData.aboveAvgChangepercentPlates.forEach((item) => {
+            getStocksChangepercentData({}).then((res) => {
+                console.log(res);
+                this.resData = this.timeType == "0" ? res.同步性 : res.抗跌性;
+                console.log(this.timeType == "0");
+                this.resData.aboveAvgChangepercentStocks.forEach((item) => {
                     const dataItem = [];
                     dataItem[0] = Math.random();
-                    dataItem[1] = item.plateChangepercent;
-                    dataItem[2] = item.plateName;
+                    dataItem[1] = item.changepercent;
+                    dataItem[2] = item.stockName;
                     this.sandianData.push(dataItem);
                 });
-                this.resData.belowAvgChangepercentPlates.forEach((item) => {
+                this.resData.belowAvgChangepercentStocks.forEach((item) => {
                     const dataItem = [];
                     dataItem[0] = Math.random();
-                    dataItem[1] = item.plateChangepercent;
-                    dataItem[2] = item.plateName;
+                    dataItem[1] = item.changepercent;
+                    dataItem[2] = item.stockName;
                     this.sandianData.push(dataItem);
                 });
                 this.setChart();
@@ -82,7 +115,7 @@ export default {
         },
         setChart() {
             this.chart = echarts.init(
-                document.getElementById("charts-zhishubankuai")
+                document.getElementById("charts-zhishubankuai-zhong")
             );
             // const data = this.resData;
             const option = {
@@ -120,7 +153,7 @@ export default {
                         },
                     },
                     formatter: function (params) {
-                        const data = params[0].data[1].toFixed(2);
+                        const data = params[0].data[1];
                         return params[0].data[2] + ": " + data;
                     },
                 },
@@ -158,6 +191,7 @@ export default {
                         itemStyle: {
                             show: true,
                             color: "white",
+                            fontSize: 16,
                             markPoint: {
                                 tooltip: {
                                     show: true,
@@ -178,7 +212,7 @@ export default {
                                     },
                                     textStyle: {
                                         color: "white",
-                                        fontSize: 10,
+                                        fontSize: 12,
                                     },
                                 },
                             },
@@ -186,6 +220,7 @@ export default {
                     },
                 ],
             };
+            console.log(this.sandianData);
 
             this.chart.setOption(option);
         },
@@ -203,10 +238,14 @@ export default {
 </script>
 
 <style lang="scss">
-.zhong-zhishubankuai {
+.jubu-zhishubankuai {
     width: 900px;
     height: 500px;
     padding: 7px 5px;
+    .time-active {
+        color: #1dffff;
+        box-shadow: 0px 0px 15px #1dffff inset;
+    }
     .table-shuiwei {
         position: absolute;
         width: 150px;
@@ -266,12 +305,17 @@ export default {
     .ant-dropdown-menu-item {
         color: blue;
     }
-    // .table-contain {
-    //     width: 100%;
-    //     height: 100%;
-    //     overflow: scroll;
-    //     margin-top: 5px;
-    // }
+    .table-contain {
+        background: url(../../../../assets/img/quanqiu.png) no-repeat;
+        background-repeat: no-repeat;
+        background-position: left top;
+        background-origin: content-box;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 480px;
+        margin-left: -20px;
+        margin-top: 10px;
+    }
     .ant-table-thead > tr > th {
         background-color: rgba(2, 81, 93, 1);
         color: white;

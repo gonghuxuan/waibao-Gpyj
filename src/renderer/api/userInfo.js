@@ -123,3 +123,11 @@ export function getPlateChangepercentData(params) {
         params,
     });
 }
+
+export function getStocksChangepercentData(params) {
+    return request({
+        url: "/stockAlert/importantStocks/getStocksChangepercentData",
+        method: "get",
+        params,
+    });
+}
