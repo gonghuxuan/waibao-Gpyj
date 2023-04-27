@@ -1,8 +1,8 @@
 <template>
-  <div class="jubu-10xianxing-detail">
+  <div class="jubu-10xianxingwei-detail">
     <div class="top-contain">
       <div>
-        <span class="padding active">10天线性跟踪</span>
+        <span class="padding active">10天线性未跟踪</span>
       </div>
     </div>
     <div class="content-contain">
@@ -89,7 +89,7 @@ export default {
             dateArr: [],
             dataObj: {},
             option: {},
-            timeType: 0,
+            timeType: 1,
             date: "",
         };
     },
@@ -118,16 +118,12 @@ export default {
                 this.chart.dispatchAction({
                     type: "legendUnSelect",
                     name: index,
-                    // 用 index 或 id 或 name 来指定系列。
-                    // 可以使用数组指定多个系列。
                 });
             } else {
                 this.selectedGupiao.push(index);
                 this.chart.dispatchAction({
                     type: "legendSelect",
                     name: index,
-                    // 用 index 或 id 或 name 来指定系列。
-                    // 可以使用数组指定多个系列。
                 });
             }
         },
@@ -144,8 +140,7 @@ export default {
                 // startDate: dayjs().format("YYYY-MM-DD"),
                 startDate: date ? date : get10dayago(),
             }).then((res) => {
-                console.log("10TIAN-----", res);
-                res.throughList.forEach((element, index) => {
+                res.notthroughList.forEach((element, index) => {
                     if (!this.dataObj.hasOwnProperty(element.stockName)) {
                         this.dataObj[element.stockName] = [];
                         this.dataObj[element.stockName].push(
@@ -249,7 +244,7 @@ export default {
 </script>
 
 <style lang="scss">
-.jubu-10xianxing-detail {
+.jubu-10xianxingwei-detail {
     .space {
         display: flex;
         justify-content: space-around;

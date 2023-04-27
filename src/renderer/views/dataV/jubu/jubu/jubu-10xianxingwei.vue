@@ -11,7 +11,7 @@
 
   <script>
 import { getStockThrough10Data } from "@/api/userInfo.js";
-import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import { getSecond, getDay, getMax, get10dayago } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
 export default {
@@ -42,7 +42,7 @@ export default {
         getData() {
             getStockThrough10Data({
                 // startDate: dayjs().format("YYYY-MM-DD"),
-                startDate: "2023-03-07",
+                startDate: get10dayago(),
             }).then((res) => {
                 console.log("10TIAN-----", res);
                 res.notthroughList.forEach((element, index) => {
@@ -147,9 +147,13 @@ export default {
             });
         },
         toDetail() {
-            // this.$router.push({
-            //     path: "/jubu-chengjiaoeyidong-detail",
-            // });
+            this.$router.push({
+                path: "/jubu-10xianxingwei-detail",
+                query: {
+                    title1: "局部预警",
+                    title2: "10天线性未跟踪",
+                },
+            });
         },
     },
 };
