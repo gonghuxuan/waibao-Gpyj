@@ -1,5 +1,5 @@
 <template>
-  <div class="jubu-chengjiaoeyidong-detail">
+  <div class="importStockData">
     <div class="top-contain">
       <div>
         <span class="padding active">导入股票数据</span>
@@ -16,6 +16,33 @@
             </div>
             </template>
         </a-table> -->
+        <div style="display: flex;justify-content: flex-start;">
+            <span style="font-size: 20px">上传类型</span>
+            <a-button>局部预警</a-button>
+            <a-button>重点预警</a-button>
+            <!-- <div>局部预警</div>
+            <div>重点预警</div> -->
+        </div>
+        <div style="margin-top: 20px;">
+            <a-upload-dragger
+                name="file"
+                :multiple="true"
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                @change="handleChange"
+            >
+                <p class="ant-upload-drag-icon">
+                <a-icon type="inbox" />
+                </p>
+                <p class="ant-upload-text">
+                Click or drag file to this area to upload
+                </p>
+                <p class="ant-upload-hint">
+                Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+                band files
+                </p>
+            </a-upload-dragger>
+        </div>
+        <div></div>
     </div>
   </div>
 </template>
@@ -89,7 +116,7 @@ export default {
 </script>
 
 <style lang="scss">
-.jubu-chengjiaoeyidong-detail {
+.importStockData {
     .gupiao-item {
         font-size: 16px;
         text-align: left;
