@@ -1,62 +1,78 @@
 <template>
-  <div class="zhong-zhishubankuai">
-    <div class="juzhong">
-      {{ title }}
-      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
+  <div class="zhong-lianxu-detail">
+    <div class="top-contain">
+      <div>
+        <span class="padding ">连续性检测</span>
+      </div>
     </div>
-    <div class="table-contain">
-      <div style="margin-bottom: 50px">
+    <div class="content-contain">
+      <div style="margin-bottom: -115px; margin-right: -150px;">
         <div class="text-date" v-for="item in dateArr" :key="item"> {{ item }}</div>
       </div>
-      <div id="charts-lianxu" style="height: 300px; width: 320px; margin-top: -42px;margin-left: -20px;"></div>
-      <div style="margin-bottom: 50px;margin-left: -10px;">
-        <div class="text-ji" :style="{'color' : item.color}" v-for="item in jiArr" :key="item.color"> {{ item.name }}</div>
+      <div id="charts-lianxu" style="height: 800px; width: 1800px; margin-top: 0px;margin-left: -20px;"></div>
+      <div style="margin-bottom: -90px; margin-left: -100px;">
+        <div class="text-ji" :style="{'color' : item.color}" v-for="item in jiArr" :key="item.color"> {{ item.name }}<span><img width="50" style="margin-left: 10px" :src="item.src" /></span></div>
       </div>
     </div>
   </div>
 </template>
-  
-  <script>
+
+    <script>
+import { getHitStocks } from "@/api/userInfo.js";
 import { getConsecutiveUpStocks } from "@/api/userInfo.js";
-import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
-import dayjs from "dayjs";
+
 import * as echarts from "echarts";
+
+console.log(echarts);
 export default {
     data() {
         return {
+            highestConNum: "",
+            avgSuccessRate: "",
             resData: [],
+            resDatadizeng: [],
+            resDatayidong: [],
+            resDatajigou: [],
+            resData1: [],
+            resData2: [],
+            resData3: [],
+            lianbantianti: {},
+            pagination: {
+                showQuickJumper: true,
+            },
+
             sandianData: [],
             dateArr: [],
             jiArr: [
-                { name: "5级", color: "#FFF45C" },
-                { name: "4级", color: "#1AB05D" },
-                { name: "3级", color: "#D93DD2" },
-                { name: "2级", color: "#1E8BFF" },
-                { name: "1级", color: "#DE5858" },
+                {
+                    name: "5级",
+                    color: "#FFF45C",
+                    src: require("../../../../assets/images/5ji.svg"),
+                },
+                {
+                    name: "4级",
+                    color: "#1AB05D",
+                    src: require("../../../../assets/images/4ji.svg"),
+                },
+                {
+                    name: "3级",
+                    color: "#D93DD2",
+                    src: require("../../../../assets/images/3ji.svg"),
+                },
+                {
+                    name: "2级",
+                    color: "#1E8BFF",
+                    src: require("../../../../assets/images/2ji.svg"),
+                },
+                {
+                    name: "1级",
+                    color: "#DE5858",
+                    src: require("../../../../assets/images/1ji.svg"),
+                },
             ],
         };
     },
-    props: {
-        title: {
-            type: String,
-            default: 0,
-        },
-    },
-    // watch: {
-    //     "$store.state.App.swiper"(newval, oldval) {
-    //         // 代码实现
-    //         console.warn("32222222222", newval);
-    //         if (newval === 1) {
-    //             this.chart.clear();
-    //             console.warn("iiiiiiiiiiiiiiiiiiii");
-    //             setTimeout(() => {
-    //                 this.$nextTick(() => {
-    //                     this.setChart();
-    //                 });
-    //             }, 1000);
-    //         }
-    //     },
-    // },
+    components: {},
     computed: {},
     created() {},
     mounted() {
@@ -191,6 +207,7 @@ export default {
                             right: "0%",
                         },
                         data: this.sandianData,
+                        symbolSize: 16,
                         itemStyle: {
                             normal: {
                                 color: function (param) {
@@ -213,14 +230,14 @@ export default {
                                 },
 
                                 label: {
-                                    position: [5, 9],
+                                    position: [5, 5],
                                     show: true,
                                     formatter: function (params) {
                                         return params.value[4];
                                     },
                                     textStyle: {
                                         color: "white",
-                                        fontSize: 10,
+                                        fontSize: 14,
                                     },
                                 },
                             },
@@ -231,112 +248,158 @@ export default {
 
             this.chart.setOption(option);
         },
-        toDetail() {
-            this.$router.push({
-                path: "/zhong-lianxu-detail",
-                query: {
-                    title1: "重点预警",
-                    title2: "连续性检测",
-                },
-            });
-        },
     },
 };
 </script>
-  
-  <style lang="scss">
-.zhong-zhishubankuai {
-    width: 900px;
-    height: 500px;
-    padding: 7px 5px;
+
+    <style lang="scss">
+.zhong-lianxu-detail {
     .text-date {
-        font-size: 12px;
-        width: 65px;
-        padding-bottom: 10px;
+        font-size: 14px;
+        width: 85px;
+        padding-bottom: 114px;
         color: rgba(93, 154, 158, 0.5);
     }
     .text-ji {
-        font-size: 13px;
-        width: 30px;
-        padding-bottom: 10px;
+        font-size: 14px;
+        width: 85px;
+        padding-bottom: 85px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    .table-contain {
-        width: 400px;
+    .daban-1 {
+        background: url(../../../../assets/img/daban-1.png) no-repeat;
+        background-size: cover;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .table1 {
+        width: 980px;
+        margin-right: 30px;
+        // height: 400px;
+        // overflow: scroll;
+    }
+    .table2 {
+        width: 980px;
+    }
+    .table-3 {
+        height: 400px;
+        margin-top: 20px;
+    }
+    .table-hei {
+        height: 360px;
+        overflow: scroll;
+    }
+    .active {
+        height: 40px;
+        background-image: linear-gradient(
+            to right,
+            rgba(29, 255, 255, 0.1),
+            rgba(29, 255, 255, 0.3),
+            rgba(29, 255, 255, 0.1)
+        );
+        border-top: 2px solid rgba(12, 220, 226, 0.3);
+        border-bottom: 2px solid rgba(12, 220, 226, 0.3);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        color: #1dffff;
+    }
+    .gupiao-item {
+        font-size: 16px;
+        text-align: left;
+        height: 40px;
+        position: relative;
+    }
+    .ant-divider-horizontal {
+        margin: 0px;
+    }
+    .gupiao {
+        padding-left: 10%;
+        display: flex;
+        align-items: center;
+        height: 38px;
+    }
+    .gupiao-active {
+        color: #1dffff;
+        background-color: rgba(2, 81, 93, 1);
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .padding {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .content-contain {
+        margin-top: 20px;
+        // display: flex;
+        // flex-direction: column;
+        // padding: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
         margin-left: 10px;
+        background: url(../../../../assets/img/jinzita.png) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
     }
-    .table-shuiwei {
+    .table-contain {
+        width: 100%;
+        height: 100%;
+        margin-top: 5px;
+    }
+    .detail {
         position: absolute;
-        width: 150px;
-        height: 90px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 3px;
-        margin-top: 10px;
-        &-1 {
-            right: 30px;
-            top: 80px;
-            background-image: linear-gradient(
-                to right,
-                rgba(26, 176, 93, 0.3),
-                rgba(26, 176, 93, 0.05),
-                rgba(26, 176, 93, 0.05),
-                rgba(26, 176, 93, 0.3)
-            );
-            border: 1px rgba(26, 176, 93, 1) solid;
-        }
-        &-2 {
-            right: 30px;
-            top: 190px;
-            background-image: linear-gradient(
-                to right,
-                rgba(255, 81, 69, 0.3),
-                rgba(255, 81, 69, 0.05),
-                rgba(255, 81, 69, 0.05),
-                rgba(255, 81, 69, 0.3)
-            );
-            border: 1px rgba(255, 81, 69, 1) solid;
-        }
-        &-3 {
-            background-image: linear-gradient(
-                to right,
-                rgba(29, 255, 255, 0.02),
-                rgba(29, 255, 255, 0.06),
-                rgba(29, 255, 255, 0.12)
-            );
-            border: 1px rgba(29, 255, 255, 0.2) solid;
-        }
+        right: 20px;
     }
-    .ant-select-selection {
-        background-color: rgba(5, 49, 58, 0.5);
-        color: #09b8bc;
-        // border-color: rgba(5, 49, 58, 1);
-        height: 35px;
-    }
-    .anticon {
-        color: #09b8bc;
+    .title-contain {
+        height: 100px;
+        width: 100%;
+        background-image: linear-gradient(
+            to right,
+            rgba(255, 244, 92, 0.01),
+            rgba(255, 244, 92, 0.05),
+            rgba(255, 244, 92, 0.01)
+        );
+        font-size: 22px;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
     .ant-btn {
         color: white;
         border-color: #5d9a9e;
+        min-width: 70px;
     }
     .ant-dropdown-menu-item {
         color: blue;
     }
-
-    .ant-table-thead > tr > th {
+    .table-contain {
+        width: 92%;
+        height: 195px;
+        overflow: scroll;
         background-color: rgba(2, 81, 93, 1);
+        margin: 0 auto;
+        margin-top: 5px;
+    }
+    .ant-table-thead > tr > th {
+        background-color: rgba(2, 81, 93, 0);
         color: white;
         font-size: 14px;
         text-align: center;
     }
-    .ant-table-tbody > tr > td {
-        color: #64b7bc;
-        border-color: #5f9ea0;
-    }
+    // .ant-table-tbody > tr > td {
+    //     color: #64b7bc;
+    //     border-color: #5f9ea0;
+    // }
     .detail {
         position: absolute;
         right: 20px;
@@ -356,22 +419,25 @@ export default {
     .ant-table-tbody > tr > td {
         text-align: cenetr;
     }
+    .ant-table-tbody
+        > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
+        > td {
+        background-color: #082d37;
+    }
 }
-.ant-select-dropdown-menu {
-    background-color: rgba(5, 49, 58, 0.7);
-    color: #09b8bc;
+.ant-table-tbody > tr > td {
+    color: #64b7bc;
+    border-color: #5f9ea0;
 }
-.ant-select-dropdown-menu-item-selected {
-    background-color: #082d37;
-    color: #09b8bc;
+.ant-pagination-options-quick-jumper {
+    color: white;
 }
-.ant-select-dropdown-menu-item:hover:not(
-        .ant-select-dropdown-menu-item-disabled
-    ) {
-    background-color: #082d37;
+.ant-pagination-item-container {
+    color: white;
 }
-.ant-select-dropdown-menu-item {
-    color: #09b8bc;
+.ant-pagination-jump-next
+    .ant-pagination-item-container
+    .ant-pagination-item-ellipsis {
+    color: white;
 }
 </style>
-  

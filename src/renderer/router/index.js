@@ -261,6 +261,18 @@ const router = new Router({
                                     },
                                 },
                                 {
+                                    path: "/zhong-lianxu-detail",
+                                    name: "zhong-lianxu-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/zhong/zhong/zhong-lianxu-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "zhong-lianxu-detail",
+                                        keepAlive: false,
+                                    },
+                                },
+                                {
                                     path: "/importStockData",
                                     name: "importStockData",
                                     component: () =>
