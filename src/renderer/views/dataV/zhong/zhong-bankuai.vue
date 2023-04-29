@@ -23,7 +23,8 @@
     </div>
     <div class="sn-container sn-container-4">
       <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title">振幅
+        <div class="juzhong font-18 bankuai-title">
+          <zhongzhengfu title="成交额异动" />
         </div>
       </dv-border-box-10>
     </div>
@@ -34,6 +35,7 @@
 import zhongzhangfuyidong from "./zhong/zhong-zhangfuyidong.vue";
 import zhongchengjiaoeyidong from "./zhong/zhong-chengjiaoeyidong.vue";
 import zhonglianxu from "./zhong/zhong-lianxu.vue";
+import zhongzhengfu from "./zhong/zhong-zhengfu.vue";
 
 export default {
     data() {
@@ -43,6 +45,7 @@ export default {
         zhongzhangfuyidong,
         zhongchengjiaoeyidong,
         zhonglianxu,
+        zhongzhengfu,
     },
     computed: {},
     created() {},

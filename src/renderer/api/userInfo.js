@@ -139,3 +139,11 @@ export function getConsecutiveUpStocks(params) {
         params,
     });
 }
+
+export function getAmplitudeStocks(params) {
+    return request({
+        url: "/stockAlert/importantStocks/getAmplitudeStocks",
+        method: "get",
+        params,
+    });
+}

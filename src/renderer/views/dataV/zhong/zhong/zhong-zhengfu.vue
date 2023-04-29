@@ -1,13 +1,12 @@
 <template>
-  <div class="zhong-zhangfuyidong">
+  <div class="zhong-zhegfu">
     <div class="juzhong">{{ title }}
       <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
     </div>
     <div class="table-contain">
-      <a-select label-in-value :default-value="{ key: 'qian' }" style="width: 400px;min-height: 30px; margin-bottom: 10px;" @change="handleChange">
-        <a-select-option value="qian"> 前部异动 </a-select-option>
-        <a-select-option value="zhong"> 中部异动 </a-select-option>
-        <a-select-option value="hou"> 后部异动 </a-select-option>
+      <a-select label-in-value :default-value="{ key: 'zao' }" style="width: 400px;min-height: 30px; margin-bottom: 10px;" @change="handleChange">
+        <a-select-option value="zao"> 早盘 </a-select-option>
+        <a-select-option value="wei"> 尾盘 </a-select-option>
         <!-- <a-select-option v-for="item in items" :key="item" :value="item">
             {{ item }}
             </a-select-option> -->
@@ -22,7 +21,7 @@
           <div :class="changepercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
               <span v-if="changepercent > 0"> +</span>
-              {{ changepercent }}
+              {{ changepercent | fixedTwo }}
             </a-button>
           </div>
         </template>
@@ -32,7 +31,7 @@
 </template>
 
 <script>
-import { getStockChangePercentActionZhong } from "@/api/userInfo.js";
+import { getAmplitudeStocks } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
@@ -40,8 +39,8 @@ export default {
     data() {
         return {
             resData: [],
-            resDataQianbu: [],
-            resDataZhongbu: [],
+            resDatazao: [],
+            resDatawei: [],
             resDataHoubu: [],
             columns: [
                 {
@@ -55,8 +54,8 @@ export default {
                     dataIndex: "close",
                     key: "close",
                     scopedSlots: { customRender: "close" },
-                    sorter: (a, b) => b.close - a.close,
                     align: "center",
+                    sorter: (a, b) => b.close - a.close,
                 },
                 {
                     title: "涨跌幅",
@@ -82,30 +81,38 @@ export default {
     },
     methods: {
         getData() {
-            getStockChangePercentActionZhong().then((res) => {
-                console.log("重点预警涨幅异动-----", res);
-                this.resData = res.前部异动;
-                this.resDataQianbu = res.前部异动;
-                this.resDataZhongbu = res.中部异动;
-                this.resDataHoubu = res.后部异动;
+            getAmplitudeStocks().then((res) => {
+                console.log("重点预警成交额异动-----", res);
+                this.resDatazao = [
+                    ...res["早盘（09:30~10:00）"].aboveAvgAmplitudeStocks,
+                    ...res["早盘（09:30~10:00）"].belowAvgAmplitudeStocks,
+                ];
+                this.resDatawei = [
+                    ...res["尾盘（14:30~15:00）"].aboveAvgAmplitudeStocks,
+                    ...res["尾盘（14:30~15:00）"].belowAvgAmplitudeStocks,
+                ];
+                this.resData = this.resDatazao;
+                console.log(this.resDatazao);
+                // this.resData = res.成交额递增;
+                // this.resDataQianbu = res.成交额递增;
+                // this.resDataZhongbu = res.机构票监测;
+                // this.resDataHoubu = res.成交额异动;
             });
         },
         toDetail() {
             this.$router.push({
-                path: "/zhong-zhangfuyidong-detail",
+                path: "/zhong-chengjiaoeyidong-detail",
                 query: {
                     title1: "重点预警",
-                    title2: "涨幅异动",
+                    title2: "成交额异动",
                 },
             });
         },
         handleChange(v) {
-            if (v.key === "qian") {
-                this.resData = this.resDataQianbu;
-            } else if (v.key === "zhong") {
-                this.resData = this.resDataZhongbu;
-            } else if (v.key === "hou") {
-                this.resData = this.resDataHoubu;
+            if (v.key === "zao") {
+                this.resData = this.resDatazao;
+            } else if (v.key === "wei") {
+                this.resData = this.resDatawei;
             }
         },
     },
@@ -113,7 +120,7 @@ export default {
 </script>
 
 <style lang="scss">
-.zhong-zhangfuyidong {
+.zhong-zhegfu {
     padding: 7px 5px;
     .ant-select-selection {
         background-color: rgba(5, 49, 58, 0.5);
