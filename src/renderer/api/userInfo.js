@@ -131,3 +131,11 @@ export function getStocksChangepercentData(params) {
         params,
     });
 }
+
+export function getConsecutiveUpStocks(params) {
+    return request({
+        url: "/stockAlert/importantStocks/getConsecutiveUpStocks",
+        method: "get",
+        params,
+    });
+}

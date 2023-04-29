@@ -5,8 +5,13 @@ import Toast from "./../components/Toast/toast";
 
 const baseURL =
     process.env.NODE_ENV === "development"
-        ? "http://test46.szdjct.com"
-        : "http://test46.szdjct.com";
+        ? "http://43.137.3.191:8080/"
+        : "http://43.137.3.191:8080/";
+
+// const baseURL =
+//     process.env.NODE_ENV === "development"
+//         ? "http://test46.szdjct.com"
+//         : "http://test46.szdjct.com";
 
 const instance = sguoyi.create({
     baseURL,

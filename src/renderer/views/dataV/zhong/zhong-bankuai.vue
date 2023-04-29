@@ -1,39 +1,39 @@
 <template>
-    <div class="zhong-bankuai">
-        <div class="sn-container sn-container-1">
-            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                ><div class="juzhong font-18 bankuai-title"
-                    ><zhongzhangfuyidong title="涨幅异动" />
-                </div></dv-border-box-10
-            >
+  <div class="zhong-bankuai">
+    <div class="sn-container sn-container-1">
+      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
+        <div class="juzhong font-18 bankuai-title">
+          <zhongzhangfuyidong title="涨幅异动" />
         </div>
-        <div class="sn-container sn-container-2">
-            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                ><div class="juzhong font-18 bankuai-title"
-                    ><zhongchengjiaoeyidong title="成交额异动" />
-                </div></dv-border-box-10
-            >
-        </div>
-        <div class="sn-container sn-container-3">
-            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                ><div class="juzhong font-18 bankuai-title"
-                    >连续性
-                </div></dv-border-box-10
-            >
-        </div>
-        <div class="sn-container sn-container-4">
-            <dv-border-box-10 :color="['#5D9A9E', '#0694B1']"
-                ><div class="juzhong font-18 bankuai-title"
-                    >振幅
-                </div></dv-border-box-10
-            >
-        </div>
+      </dv-border-box-10>
     </div>
+    <div class="sn-container sn-container-2">
+      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
+        <div class="juzhong font-18 bankuai-title">
+          <zhongchengjiaoeyidong title="成交额异动" />
+        </div>
+      </dv-border-box-10>
+    </div>
+    <div class="sn-container sn-container-3">
+      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
+        <div class="juzhong font-18 bankuai-title">
+          <zhonglianxu title="连续性" />
+        </div>
+      </dv-border-box-10>
+    </div>
+    <div class="sn-container sn-container-4">
+      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
+        <div class="juzhong font-18 bankuai-title">振幅
+        </div>
+      </dv-border-box-10>
+    </div>
+  </div>
 </template>
 
 <script>
 import zhongzhangfuyidong from "./zhong/zhong-zhangfuyidong.vue";
 import zhongchengjiaoeyidong from "./zhong/zhong-chengjiaoeyidong.vue";
+import zhonglianxu from "./zhong/zhong-lianxu.vue";
 
 export default {
     data() {
@@ -42,11 +42,11 @@ export default {
     components: {
         zhongzhangfuyidong,
         zhongchengjiaoeyidong,
+        zhonglianxu,
     },
     computed: {},
     created() {},
-    mounted() {
-    },
+    mounted() {},
     methods: {},
 };
 </script>

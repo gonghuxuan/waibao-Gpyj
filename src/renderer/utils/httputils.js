@@ -7,7 +7,7 @@ import Toast from "./../components/Toast/toast";
 const baseURL =
     process.env.NODE_ENV === "development"
         ? "/gpyj"
-        : "http://test46.szdjct.com";
+        : "http://43.137.3.191:8080/";
 const service = axios.create({
     baseURL: baseURL, // url = base api url + request url
     withCredentials: true, // send cookies when cross-domain requests
