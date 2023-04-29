@@ -101,10 +101,10 @@ export default {
         },
         toDetail() {
             this.$router.push({
-                path: "/zhong-chengjiaoeyidong-detail",
+                path: "/zhong-zhengfu-detail",
                 query: {
                     title1: "重点预警",
-                    title2: "成交额异动",
+                    title2: "振幅检测",
                 },
             });
         },

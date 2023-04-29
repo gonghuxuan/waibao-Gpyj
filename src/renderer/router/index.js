@@ -273,6 +273,18 @@ const router = new Router({
                                     },
                                 },
                                 {
+                                    path: "/zhong-zhengfu-detail",
+                                    name: "zhong-zhengfu-detail",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/zhong/zhong/zhong-zhengfu-detail.vue"
+                                        ),
+                                    meta: {
+                                        title: "zhong-zhengfu-detail",
+                                        keepAlive: false,
+                                    },
+                                },
+                                {
                                     path: "/importStockData",
                                     name: "importStockData",
                                     component: () =>
