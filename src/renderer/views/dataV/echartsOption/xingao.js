@@ -12,7 +12,7 @@ export function table2Optionfen(timeList, closeList, changeList) {
             },
         },
         legend: {
-            data: ["close", "changepercent"],
+            data: ["价格", "涨幅"],
             textStyle: {
                 fontSize: 16, //字体大小
                 color: "#ffffff", //字体颜色
@@ -43,23 +43,23 @@ export function table2Optionfen(timeList, closeList, changeList) {
         yAxis: [
             {
                 type: "value",
-                name: "close",
+                name: "价格",
                 scale: true,
             },
             {
                 type: "value",
-                name: "changepercent",
+                name: "涨幅",
             },
         ],
         series: [
             {
-                name: "close",
+                name: "价格",
                 type: "line",
                 yAxisIndex: 0,
                 data: closeList,
             },
             {
-                name: "changepercent",
+                name: "涨幅",
                 type: "line",
                 yAxisIndex: 1,
                 data: changeList,
@@ -95,9 +95,34 @@ export function table2Option(data) {
             },
         },
         tooltip: {
+            data: ["日K", "MA5", "MA10", "MA20", "MA30"],
             trigger: "axis",
             axisPointer: {
                 type: "cross",
+            },
+            // formatter: "{b0}: {c0}<br />{b1}: {c1}",
+
+            formatter: function (params) {
+                console.log(params[1].data);
+
+                //修改鼠标划过显示为中文
+                // let ma5 = params[1].data; //ma5的值
+                // let ma10 = params[2].data; //ma10的值
+                // let ma20 = params[3].data; //ma20的值
+                // let ma30 = params[4].data; //ma30的值
+                // params = params[0]; //开盘收盘最低最高数据汇总
+                // let currentItemData = params.data;
+                var res = "时间: " + params[0].name;
+                res += "<br/>开盘价: " + params[0].data[1].toFixed(2);
+                res += "<br/>最高价: " + params[0].data[2].toFixed(2);
+                res += "<br/>最低价: " + params[0].data[3].toFixed(2);
+                res += "<br/>收盘价: " + params[0].data[4].toFixed(2);
+                res += "<br/>MA5: " + params[1].data.toFixed(2);
+                res += "<br/>MA10: " + params[2].data.toFixed(2);
+                res += "<br/>MA20: " + params[3].data.toFixed(2);
+                res += "<br/>MA30: " + params[4].data.toFixed(2);
+
+                return res;
             },
         },
         legend: {
@@ -117,6 +142,7 @@ export function table2Option(data) {
                 bottom: 80,
             },
         ],
+
         // xAxis: {
         //     type: "category",
         //     data: data0,
@@ -218,6 +244,20 @@ export function table2Option(data) {
                     borderColor: upBorderColor,
                     borderColor0: downBorderColor,
                 },
+                // dimensions: {
+                //     open: 0,
+                //     close: 1,
+                //     high: 2,
+                //     low: 3,
+                // },
+                // encode: {
+                //     x: -1,
+                //     y: [0, 1, 2, 3],
+                // },
+                // seriesLayoutBy: "row",
+                // transform: {
+                //     type: "myTransform", // 使用自定义数据变换器
+                // },
             },
             {
                 xAxisIndex: 0,

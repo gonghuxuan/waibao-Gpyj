@@ -94,9 +94,9 @@
       </div>
 
       <div class="table3 table-shadow">
-        <div class="table3-item-contain">
-          <div style="color: white; font-size: 16px;padding-left: 30px;">{{ stockDetailItem.stockName }}</div>
-          <div style="color: white; font-size: 16px;padding-right: 30px;">{{ stockDetailItem.stockCode }}</div>
+        <div class="table3-item-contain" style="padding-top: 20px;padding-bottom: 20px">
+          <div style="color: white; font-size: 18px;padding-left: 30px;">{{ stockDetailItem.stockName }}</div>
+          <div style="color: white; font-size: 18px;padding-right: 30px;">{{ stockDetailItem.stockCode }}</div>
         </div>
         <div class="table3-item-contain">
           <div class="table3-key">今开</div>
@@ -115,19 +115,19 @@
           <div class="table3-value" :style="stockDetailItem.changepercent > 0 ? 'color: #FF5145': 'color: #1AB05D'">{{ stockDetailItem.changepercent }}</div>
         </div>
         <div class="table3-item-contain">
-          <div class="table3-key">换手</div>
+          <div class="table3-key">换手(%)</div>
           <div class="table3-value">{{ stockDetailItem.tun }}</div>
         </div>
         <div class="table3-item-contain">
-          <div class="table3-key">成交额</div>
+          <div class="table3-key">成交额(亿)</div>
           <div class="table3-value">{{ stockDetailItem.amount }}</div>
         </div>
         <div class="table3-item-contain">
-          <div class="table3-key">总市值</div>
+          <div class="table3-key">总市值(亿)</div>
           <div class="table3-value">{{ stockDetailItem.mktCap }}</div>
         </div>
         <div class="table3-item-contain">
-          <div class="table3-key">流通值</div>
+          <div class="table3-key">流通值(亿)</div>
           <div class="table3-value">{{ stockDetailItem.nmc }}</div>
         </div>
       </div>
@@ -177,6 +177,28 @@ export default {
         // console.log(this.$route.query.stockType);
     },
     activated() {
+        console.log("123");
+        // echarts.registerTransform(
+        //     "myTransform",
+        //     function (params) {
+        //         var data = params.data;
+        //         var dims = params.dimensions;
+        //         data.forEach(function (item) {
+        //             var open = item[dims.indexOf("open")];
+        //             var close = item[dims.indexOf("close")];
+        //             var high = item[dims.indexOf("high")];
+        //             var low = item[dims.indexOf("low")];
+        //             item[dims.indexOf("open")] = "开盘价: " + open;
+        //             item[dims.indexOf("close")] = "收盘价: " + close;
+        //             item[dims.indexOf("high")] = "最高价: " + high;
+        //             item[dims.indexOf("low")] = "最低价: " + low;
+        //         });
+        //         return { data: data };
+        //     },
+        //     {
+        //         type: "myTransform", // 必须指定 type 属性
+        //     }
+        // );
         this.active = this.$route.query.stockType;
         this.getData();
     },
@@ -336,11 +358,13 @@ export default {
             } else {
                 this.chart.setOption(table2Option(this.stockDetail));
             }
-            const _this = this;
-            this.chart.on("mouseover", function (param) {
-                _this.stockIndex = param.dataIndex;
-                _this.stockDetailItem = _this.stockDetail[_this.stockIndex];
-            });
+
+            // const _this = this;
+            // this.chart.on("mouseover", function (param) {
+            //     _this.stockIndex = param.dataIndex;
+            //     _this.stockDetailItem = _this.stockDetail[_this.stockIndex];
+            // });
+
             // this.chart.getZr().on("click", function (param) {
             //     // 获取 点击的 触发点像素坐标
             //     const pointInPixel = [param.offsetX, param.offsetY];

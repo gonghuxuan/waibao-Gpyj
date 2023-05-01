@@ -156,7 +156,7 @@ export default {
                                 },
                             },
                             {
-                                title: "封单额",
+                                title: "封单额(万)",
                                 dataIndex: "stopAmount",
                                 key: "stopAmount",
                                 // scopedSlots: {
