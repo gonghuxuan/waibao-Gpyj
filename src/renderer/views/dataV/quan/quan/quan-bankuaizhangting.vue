@@ -7,12 +7,12 @@
       <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
         <template slot="stockUpstopCount" slot-scope="stockUpstopCount">
           <div :class="stockUpstopCount > 0 ? 'red' : 'green'">{{
-                        stockUpstopCount
+                        stockUpstopCount | fixedTwo
                     }}</div>
         </template>
         <template slot="stockUpstopProportion" slot-scope="stockUpstopProportion">
           <div :class="stockUpstopProportion > 0 ? 'red' : 'green'">
-            {{ stockUpstopProportion }}
+            {{ stockUpstopProportion | fixedTwo }}
           </div>
         </template>
         <!-- <a slot="name" slot-scope="text">{{ text }}</a> -->

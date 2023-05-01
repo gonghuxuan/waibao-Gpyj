@@ -5,19 +5,17 @@
     </div>
     <div class="table-contain">
       <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
-        <!-- <template slot="close" slot-scope="close, record">
-          <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close
+        <template slot="close" slot-scope="close">
+          <div>{{
+                        close  | fixedTwo 
                     }}</div>
         </template>
         <template slot="changepercent" slot-scope="changepercent">
-          <div :class="changepercent > 0 ? 'red' : 'green'">
-            <a-button type="primary">
-              <span v-if="changepercent > 0"> +</span>
-              {{ changepercent }}
-            </a-button>
+          <div>
+
+            {{ changepercent | fixedTwo  }}
           </div>
-        </template> -->
+        </template>
         <!-- <a slot="name" slot-scope="text">{{ text }}</a> -->
       </a-table>
     </div>
@@ -48,7 +46,7 @@ export default {
                     dataIndex: "stopAmount",
                     key: "stopAmount",
                     width: 110,
-                    // scopedSlots: { customRender: "close" },
+                    scopedSlots: { customRender: "close" },
                     sorter: (a, b) => b.stopAmount - a.stopAmount,
 
                     align: "center",
@@ -58,7 +56,7 @@ export default {
                     dataIndex: "conNum",
                     key: "conNum",
                     align: "center",
-                    // scopedSlots: { customRender: "changepercent" },
+                    scopedSlots: { customRender: "changepercent" },
                     sorter: (a, b) => b.conNum - a.conNum,
                 },
             ],

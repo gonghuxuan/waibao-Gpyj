@@ -14,7 +14,7 @@
       <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
         <template slot="close" slot-scope="close, record">
           <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close
+                        close  | fixedTwo
                     }}</div>
         </template>
         <template slot="changepercent" slot-scope="changepercent">

@@ -15,14 +15,14 @@
       <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
         <template slot="close" slot-scope="close, record">
           <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close
+                        close  | fixedTwo 
                     }}</div>
         </template>
         <template slot="changepercent" slot-scope="changepercent">
           <div :class="changepercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
               <span v-if="changepercent > 0"> +</span>
-              {{ changepercent }}
+              {{ changepercent  | fixedTwo  }}
             </a-button>
           </div>
         </template>

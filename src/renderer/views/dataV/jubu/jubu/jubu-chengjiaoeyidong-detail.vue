@@ -12,24 +12,24 @@
           <a-table bordered :columns="columns" :data-source="resDatadizeng" :pagination="false" class="table-hei">
             <template slot="close" slot-scope="close, record">
               <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close
+                        close  | fixedTwo 
                     }}</div>
             </template>
             <template slot="amount" slot-scope="amount, record">
               <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        amount
+                        amount  | fixedTwo 
                     }}</div>
             </template>
             <template slot="changepercent" slot-scope="changepercent">
               <div :class="changepercent > 0 ? 'red' : 'green'">
-                {{ changepercent }}
+                {{ changepercent  | fixedTwo  }}
               </div>
             </template>
             <template slot="changepercent" slot-scope="changepercent">
               <div :class="changepercent > 0 ? 'red' : 'green'">
                 <a-button type="primary">
                   <span v-if="changepercent > 0"> +</span>
-                  {{ changepercent }}
+                  {{ changepercent  | fixedTwo  }}
                 </a-button>
               </div>
             </template>
@@ -37,7 +37,7 @@
               <div :class="changepercent3 > 0 ? 'red' : 'green'">
                 <a-button type="primary">
                   <span v-if="changepercent3 > 0"> +</span>
-                  {{ changepercent3 }}
+                  {{ changepercent3   | fixedTwo }}
                 </a-button>
               </div>
             </template>
@@ -48,24 +48,24 @@
           <a-table bordered :columns="columns" :data-source="resDatayidong" :pagination="false" class="table-hei">
             <template slot="close" slot-scope="close, record">
               <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close
+                        close  | fixedTwo 
                     }}</div>
             </template>
             <template slot="amount" slot-scope="amount, record">
               <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        amount
+                        amount  | fixedTwo 
                     }}</div>
             </template>
             <template slot="changepercent" slot-scope="changepercent">
               <div :class="changepercent > 0 ? 'red' : 'green'">
-                {{ changepercent }}
+                {{ changepercent  | fixedTwo  }}
               </div>
             </template>
             <template slot="changepercent" slot-scope="changepercent">
               <div :class="changepercent > 0 ? 'red' : 'green'">
                 <a-button type="primary">
                   <span v-if="changepercent > 0"> +</span>
-                  {{ changepercent }}
+                  {{ changepercent  | fixedTwo  }}
                 </a-button>
               </div>
             </template>
@@ -73,7 +73,7 @@
               <div :class="changepercent3 > 0 ? 'red' : 'green'">
                 <a-button type="primary">
                   <span v-if="changepercent3 > 0"> +</span>
-                  {{ changepercent3 }}
+                  {{ changepercent3 | fixedTwo  }}
                 </a-button>
               </div>
             </template>
@@ -86,24 +86,24 @@
         <a-table bordered :columns="columns" :data-source="resDatajigou" :pagination="false" class="table-hei">
           <template slot="close" slot-scope="close, record">
             <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close
+                        close | fixedTwo 
                     }}</div>
           </template>
           <template slot="amount" slot-scope="amount, record">
             <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        amount
+                        amount | fixedTwo 
                     }}</div>
           </template>
           <template slot="changepercent" slot-scope="changepercent">
             <div :class="changepercent > 0 ? 'red' : 'green'">
-              {{ changepercent }}
+              {{ changepercent | fixedTwo  }}
             </div>
           </template>
           <template slot="changepercent" slot-scope="changepercent">
             <div :class="changepercent > 0 ? 'red' : 'green'">
               <a-button type="primary">
                 <span v-if="changepercent > 0"> +</span>
-                {{ changepercent }}
+                {{ changepercent | fixedTwo  }}
               </a-button>
             </div>
           </template>
@@ -111,10 +111,10 @@
             <div :class="changepercent3 > 0 ? 'red' : 'green'">
               <a-button type="primary">
                 <span v-if="changepercent3 > 0"> +</span>
-                {{ changepercent3 }}
+                {{ changepercent3 | fixedTwo  }}
               </a-button>
             </div>
-          </template>
+          </template>zp
         </a-table>
         <div style="padding-bottom: 100px;"></div>
       </div>

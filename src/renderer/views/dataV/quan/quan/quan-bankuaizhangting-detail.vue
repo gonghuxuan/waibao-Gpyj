@@ -12,7 +12,7 @@
           <div :class="plateChangepercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
               <span v-if="plateChangepercent > 0"> +</span>
-              {{ plateChangepercent }}
+              {{ plateChangepercent | fixedTwo }}
             </a-button>
           </div>
         </template>
@@ -20,7 +20,7 @@
           <div :class="plateChangepercent2 > 0 ? 'red' : 'green'">
             <a-button type="primary">
               <span v-if="plateChangepercent2 > 0"> +</span>
-              {{ plateChangepercent2 }}
+              {{ plateChangepercent2 | fixedTwo}}
             </a-button>
           </div>
         </template>
@@ -28,7 +28,7 @@
           <div :class="plateChangepercent3 > 0 ? 'red' : 'green'">
             <a-button type="primary">
               <span v-if="plateChangepercent3 > 0"> +</span>
-              {{ plateChangepercent3 }}
+              {{ plateChangepercent3 | fixedTwo}}
             </a-button>
           </div>
         </template>
@@ -36,7 +36,7 @@
           <div :class="plateChangepercent4 > 0 ? 'red' : 'green'">
             <a-button type="primary">
               <span v-if="plateChangepercent4 > 0"> +</span>
-              {{ plateChangepercent4 }}
+              {{ plateChangepercent4| fixedTwo }}
             </a-button>
           </div>
         </template>
@@ -44,7 +44,7 @@
           <div :class="plateChangepercent5 > 0 ? 'red' : 'green'">
             <a-button type="primary">
               <span v-if="plateChangepercent5 > 0"> +</span>
-              {{ plateChangepercent5 }}
+              {{ plateChangepercent5 | fixedTwo}}
             </a-button>
           </div>
         </template>
