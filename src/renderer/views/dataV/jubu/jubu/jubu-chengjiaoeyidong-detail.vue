@@ -2,7 +2,7 @@
   <div class="quan-zijin-detail">
     <div class="top-contain">
       <div>
-        <span class="padding">打板</span>
+        <span class="padding">成交额异动</span>
       </div>
     </div>
     <div class="content-contain">

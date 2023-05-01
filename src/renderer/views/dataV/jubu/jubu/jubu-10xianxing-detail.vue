@@ -48,7 +48,7 @@
                                 timeType == '0'
                                     ? 'time-active'
                                     : 'time-unactive'
-                            ">突破</div>
+                            " @click="changetype('0')">突破</div>
             <div class="table-shadow" style="
                                 width: 70px;
                                 padding: 5px;
@@ -58,7 +58,7 @@
                                 timeType == '1'
                                     ? 'time-active'
                                     : 'time-unactive'
-                            ">未突破</div>
+                            " @click="changetype('1')">未突破</div>
           </div>
         </div>
         <div id="charts-10xianxing" style="height: 850px; width: 100%; margin-top: 0px"></div>
@@ -91,6 +91,7 @@ export default {
             option: {},
             timeType: 0,
             date: "",
+            type: "0",
         };
     },
     components: {},
@@ -105,6 +106,14 @@ export default {
     },
 
     methods: {
+        changetype(type) {
+            this.timeType = 1;
+            this.chart.clear();
+            this.dataObj = {};
+            this.dateArr = [];
+            this.type = type;
+            this.getData();
+        },
         selectgupiao(index) {
             // this.chart.dispatchAction({
             //     type: "hideTip",
@@ -145,21 +154,40 @@ export default {
                 startDate: date ? date : get10dayago(),
             }).then((res) => {
                 console.log("10TIAN-----", res);
-                res.throughList.forEach((element, index) => {
-                    if (!this.dataObj.hasOwnProperty(element.stockName)) {
-                        this.dataObj[element.stockName] = [];
-                        this.dataObj[element.stockName].push(
-                            element.changepercent
-                        );
-                    } else {
-                        this.dataObj[element.stockName].push(
-                            element.changepercent
-                        );
-                    }
-                    if (index < 10) {
-                        this.dateArr.push(getDay(element.dealDate));
-                    }
-                });
+                if (this.type == "0") {
+                    res.throughList.forEach((element, index) => {
+                        if (!this.dataObj.hasOwnProperty(element.stockName)) {
+                            this.dataObj[element.stockName] = [];
+                            this.dataObj[element.stockName].push(
+                                element.changepercent
+                            );
+                        } else {
+                            this.dataObj[element.stockName].push(
+                                element.changepercent
+                            );
+                        }
+                        if (index < 10) {
+                            this.dateArr.push(getDay(element.dealDate));
+                        }
+                    });
+                } else {
+                    res.notthroughList.forEach((element, index) => {
+                        if (!this.dataObj.hasOwnProperty(element.stockName)) {
+                            this.dataObj[element.stockName] = [];
+                            this.dataObj[element.stockName].push(
+                                element.changepercent
+                            );
+                        } else {
+                            this.dataObj[element.stockName].push(
+                                element.changepercent
+                            );
+                        }
+                        if (index < 10) {
+                            this.dateArr.push(getDay(element.dealDate));
+                        }
+                    });
+                }
+
                 console.log(this.dateArr);
                 console.log(this.dataObj);
                 this.setChart();
