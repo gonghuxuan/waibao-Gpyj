@@ -21,8 +21,8 @@ export function table2Optionfen(timeList, closeList, changeList) {
         dataZoom: [
             {
                 type: "inside",
-                start: 0,
-                end: 20,
+                start: 80,
+                end: 100,
             },
             {
                 show: true,
@@ -202,16 +202,16 @@ export function table2Option(data) {
             {
                 gridIndex: 0,
                 type: "inside",
-                start: 0,
-                end: 20,
+                start: 80,
+                end: 100,
                 // height: 10,
             },
             {
                 gridIndex: 0,
                 xAxisIndex: [0, 1], // 对应网格的索引
                 show: true,
-                start: 0,
-                end: 20,
+                start: 80,
+                end: 100,
                 type: "slider",
                 top: "90%",
                 // height: 20,

@@ -1,6 +1,24 @@
 <template>
   <div class="xingao-detail">
-    <div class="top-contain">
+    <div style="
+              font-size: 16px;
+                    padding-left: 10px;
+                    color: rgba(100, 183, 188, 0.5);
+                    margin-top: 20px;
+                    margin-bottom: -20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content:space-between;
+                ">
+      <div style="margin-left: 3vw">
+        <span style="padding-right: 5px"> 全场预警 </span>/
+        <span style="color: rgba(100, 183, 188, 1); padding-left: 5px">{{ active == 0 ? '新高异动' : active == 1 ? '平台突破' : active == 2 ? '强势回调': '游资股'}}</span>
+      </div>
+      <div style="margin-right: 3vw" @click="back"> <a-button>
+          返回
+        </a-button></div>
+    </div>
+    <div class="top-contain" :loading="true">
       <div>
         <span class="padding" :class="active == 0 ? 'active' : 'unactive'" @click="selectType(0)">新高异动</span>
         <span class="padding" :class="active == 1 ? 'active' : 'unactive'" @click="selectType(1)">平台突破</span>
@@ -8,24 +26,25 @@
         <span class="padding" :class="active == 3 ? 'active' : 'unactive'" @click="selectType(3)">游资股</span>
       </div>
     </div>
-    <div class="content-contain">
-      <div class="table1">
-        <div style="height: 20px"></div>
-        <div class="gupiao-item" v-for="item in gupiaoList" :key="item.stockCode" :class="
+    <a-spin :spinning="spin" size="large">
+      <div class="content-contain">
+        <div class="table1">
+          <div style="height: 20px"></div>
+          <div class="gupiao-item" v-for="item in gupiaoList" :key="item.stockCode" :class="
                         selectedGupiao == item.stockCode
                             ? 'gupiao-active'
                             : 'gupiao-unactive'
                     " @click="selectgupiao(item.stockCode)">
-          <div class="gupiao">{{ item.stockName }}</div>
-          <div class="divider">
-            <a-divider />
+            <div class="gupiao">{{ item.stockName }}</div>
+            <div class="divider">
+              <a-divider />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="table2">
-        <div class="table2-1 table-shadow">
-          <div class="juzhong" style="padding-top: 10px">
-            <div class="table-shadow" style="
+        <div class="table2">
+          <div class="table2-1 table-shadow">
+            <div class="juzhong" style="padding-top: 10px">
+              <div class="table-shadow" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -36,7 +55,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selecttime('0')">分时</div>
-            <div class="table-shadow" style="
+              <div class="table-shadow" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -46,15 +65,15 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selecttime('1')">日k</div>
+            </div>
+            <div id="charts" :class="timeType == '0' ? 'fenshi': 'rik'">
+            </div>
+            <div id="chartsVol" v-show="timeType == '1'" style="height: 150px">
+            </div>
           </div>
-          <div id="charts" :class="timeType == '0' ? 'fenshi': 'rik'">
-          </div>
-          <div id="chartsVol" v-show="timeType == '1'" style="height: 150px">
-          </div>
-        </div>
-        <div class="table2-2 table-shadow">
-          <div class="juzhong" style="padding-top: 10px">
-            <div class="table-shadow" style="
+          <div class="table2-2 table-shadow">
+            <div class="juzhong" style="padding-top: 10px">
+              <div class="table-shadow" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -65,7 +84,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selectBottom('MACD')">MACD</div>
-            <div class="table-shadow" style="
+              <div class="table-shadow" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -76,7 +95,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selectBottom('KDJ')">KDJ</div>
-            <div class="table-shadow" style="
+              <div class="table-shadow" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -87,51 +106,53 @@
                                     : 'time-unactive'
                             " @click="selectBottom('RSI')">RSI</div>
 
+            </div>
+
+            <div id="charts-2" style="height: 210px; width: 100%"></div>
           </div>
+        </div>
 
-          <div id="charts-2" style="height: 210px; width: 100%"></div>
+        <div class="table3 table-shadow">
+          <div class="table3-item-contain" style="padding-top: 20px;padding-bottom: 20px">
+            <div style="color: white; font-size: 18px;padding-left: 30px;">{{ stockDetailItem.stockName }}</div>
+            <div style="color: white; font-size: 18px;padding-right: 30px;">{{ stockDetailItem.stockCode }}</div>
+          </div>
+          <div class="table3-item-contain">
+            <div class="table3-key">今开</div>
+            <div class="table3-value">{{ stockDetailItem.open }}</div>
+          </div>
+          <div class="table3-item-contain">
+            <div class="table3-key">最高</div>
+            <div class="table3-value">{{ stockDetailItem.high }}</div>
+          </div>
+          <div class="table3-item-contain">
+            <div class="table3-key">最低</div>
+            <div class="table3-value">{{ stockDetailItem.low }}</div>
+          </div>
+          <div class="table3-item-contain">
+            <div class="table3-key">涨幅</div>
+            <div class="table3-value" :style="stockDetailItem.changepercent > 0 ? 'color: #FF5145': 'color: #1AB05D'">{{ stockDetailItem.changepercent }}</div>
+          </div>
+          <div class="table3-item-contain">
+            <div class="table3-key">换手(%)</div>
+            <div class="table3-value">{{ stockDetailItem.tun }}</div>
+          </div>
+          <div class="table3-item-contain">
+            <div class="table3-key">成交额(亿)</div>
+            <div class="table3-value">{{ stockDetailItem.amount }}</div>
+          </div>
+          <div class="table3-item-contain">
+            <div class="table3-key">总市值(亿)</div>
+            <div class="table3-value">{{ stockDetailItem.mktCap }}</div>
+          </div>
+          <div class="table3-item-contain">
+            <div class="table3-key">流通值(亿)</div>
+            <div class="table3-value">{{ stockDetailItem.nmc }}</div>
+          </div>
         </div>
       </div>
+    </a-spin>
 
-      <div class="table3 table-shadow">
-        <div class="table3-item-contain" style="padding-top: 20px;padding-bottom: 20px">
-          <div style="color: white; font-size: 18px;padding-left: 30px;">{{ stockDetailItem.stockName }}</div>
-          <div style="color: white; font-size: 18px;padding-right: 30px;">{{ stockDetailItem.stockCode }}</div>
-        </div>
-        <div class="table3-item-contain">
-          <div class="table3-key">今开</div>
-          <div class="table3-value">{{ stockDetailItem.open }}</div>
-        </div>
-        <div class="table3-item-contain">
-          <div class="table3-key">最高</div>
-          <div class="table3-value">{{ stockDetailItem.high }}</div>
-        </div>
-        <div class="table3-item-contain">
-          <div class="table3-key">最低</div>
-          <div class="table3-value">{{ stockDetailItem.low }}</div>
-        </div>
-        <div class="table3-item-contain">
-          <div class="table3-key">涨幅</div>
-          <div class="table3-value" :style="stockDetailItem.changepercent > 0 ? 'color: #FF5145': 'color: #1AB05D'">{{ stockDetailItem.changepercent }}</div>
-        </div>
-        <div class="table3-item-contain">
-          <div class="table3-key">换手(%)</div>
-          <div class="table3-value">{{ stockDetailItem.tun }}</div>
-        </div>
-        <div class="table3-item-contain">
-          <div class="table3-key">成交额(亿)</div>
-          <div class="table3-value">{{ stockDetailItem.amount }}</div>
-        </div>
-        <div class="table3-item-contain">
-          <div class="table3-key">总市值(亿)</div>
-          <div class="table3-value">{{ stockDetailItem.mktCap }}</div>
-        </div>
-        <div class="table3-item-contain">
-          <div class="table3-key">流通值(亿)</div>
-          <div class="table3-value">{{ stockDetailItem.nmc }}</div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -164,6 +185,7 @@ export default {
             resData: [],
             category: "MACD",
             stockDetailItem: {},
+            spin: false,
         };
     },
     components: {},
@@ -204,13 +226,39 @@ export default {
     },
 
     methods: {
+        back() {
+            this.$router.go(-1);
+        },
+        getTitle() {
+            if (this.active === 0) {
+                return "新高异动";
+            }
+            if (this.active === 1) {
+                return "平台突破";
+            }
+            if (this.active === 2) {
+                return "强势回调";
+            }
+            if (this.active === 3) {
+                return "游资股";
+            }
+        },
         getData(stockType) {
+            this.spin = true;
             getLetfStocks({
                 stockType: stockType ? stockType : this.$route.query.stockType,
             }).then((res) => {
-                this.gupiaoList = res;
-                this.selectedGupiao = this.gupiaoList[0].stockCode;
-                this.getStockDetail();
+                if (res.length > 0) {
+                    this.gupiaoList = res;
+                    this.selectedGupiao = this.gupiaoList[0].stockCode;
+                    this.getStockDetail();
+                } else {
+                    this.gupiaoList = res;
+                    this.stockDetailItem = {};
+                    this.chart.clear();
+                    this.chart2.clear();
+                    this.spin = false;
+                }
             });
         },
         getStockDetail() {
@@ -218,6 +266,7 @@ export default {
                 timeType: this.timeType,
                 code: this.selectedGupiao,
             }).then((res) => {
+                this.spin = false;
                 this.stockDetail = res;
                 if (this.timeType === "0") {
                     this.clearList();
@@ -229,8 +278,11 @@ export default {
                     });
                 } else {
                 }
+                console.log(res.length < 1);
+
                 this.stockDetailItem =
                     this.stockDetail[this.stockDetail.length - 1];
+
                 setTimeout(() => {
                     this.setCharts();
                 }, 0);
@@ -494,5 +546,14 @@ export default {
     .time-unactive {
         color: #64b7bc;
     }
+}
+.ant-spin-container::after {
+    background-color: unset;
+}
+.ant-spin {
+    color: green;
+}
+.ant-spin-dot-item {
+    background-color: green;
 }
 </style>
