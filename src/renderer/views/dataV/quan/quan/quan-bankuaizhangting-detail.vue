@@ -2,12 +2,12 @@
   <div class="quan-zhangting-detail">
     <div class="top-contain">
       <div>
-        <span class="padding " :class="active == 0 ? 'active' : 'unactive'">个股连扳高度预警</span>
+        <!-- <span class="padding " :class="active == 0 ? 'active' : 'unactive'">个股连扳高度预警</span> -->
         <span class="padding " :class="active == 1 ? 'active' : 'unactive'">板块涨停个数预警</span>
       </div>
     </div>
     <div class="content-contain-detail">
-      <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
+      <a-table bordered :columns="columns" :data-source="resData" :pagination="false" class="table">
         <template slot="plateChangepercent" slot-scope="plateChangepercent">
           <div :class="plateChangepercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
@@ -60,7 +60,7 @@ import dayjs from "dayjs";
 export default {
     data() {
         return {
-            active: 0,
+            active: 1,
             columns: [
                 {
                     title: "板块",
@@ -332,6 +332,7 @@ export default {
 
                 if (res) {
                     let objkeys = Object.keys(res);
+
                     console.log(objkeys);
                     console.log(res);
                     this.columns[2].title = objkeys[0];
@@ -339,6 +340,12 @@ export default {
                     this.columns[4].title = objkeys[2];
                     this.columns[5].title = objkeys[3];
                     this.columns[6].title = objkeys[4];
+                    if (objkeys.length < 5) {
+                        const lessNum = 5 - objkeys.length;
+                        for (let i = 0; i < lessNum; i++) {
+                            this.columns.pop();
+                        }
+                    }
                     // dataArr = [...res[objkeys[0]]];
                     const resArr = [
                         "stockUpstopCount",
@@ -394,6 +401,7 @@ export default {
                     console.log(resList[0]);
                 }
                 this.resData = resList[0];
+
                 console.log(this.resData);
             });
         },
@@ -430,6 +438,14 @@ export default {
 
 <style lang="scss">
 .quan-zhangting-detail {
+    td {
+        min-width: 120px;
+    }
+    .table {
+        overflow: scroll;
+        width: 100%;
+        height: 840px;
+    }
     .unactive {
         color: rgba(29, 255, 255, 0.5);
     }
