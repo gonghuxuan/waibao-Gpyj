@@ -1,5 +1,5 @@
 <template>
-  <div class="zhong-zhishubankuai">
+  <div class="jubu-zhishubankuai-1">
     <div class="juzhong">
       <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
     </div>
@@ -16,7 +16,7 @@
           <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">个股平均涨幅</div>
         </div>
       </div>
-      <div id="charts-zhishubankuai" style="height: 500px; width: 100%; margin-top: 0px"></div>
+      <div id="charts-zhishubankuai-1" style="height: 500px; width: 100%; margin-top: 0px"></div>
     </div>
   </div>
 </template>
@@ -82,7 +82,7 @@ export default {
         },
         setChart() {
             this.chart = echarts.init(
-                document.getElementById("charts-zhishubankuai")
+                document.getElementById("charts-zhishubankuai-1")
             );
             // const data = this.resData;
             const option = {
@@ -203,7 +203,7 @@ export default {
 </script>
 
 <style lang="scss">
-.zhong-zhishubankuai {
+.jubu-zhishubankuai-1 {
     width: 900px;
     height: 500px;
     padding: 7px 5px;

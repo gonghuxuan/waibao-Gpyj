@@ -1,6 +1,5 @@
 <template>
   <div class="menu">
-
     <div><a-icon style="margin-top: 9px;font-size: 14px;margin-left: 10px;padding-right: 5px;" type="home" theme="filled" class="icon" /></div>
     <a-dropdown>
       <a class="ant-dropdown-link" @click="handleClick">
@@ -42,35 +41,20 @@
         局部预警 <a-icon type="down" />
       </a>
       <a-menu slot="overlay">
-        <a-menu-item>
-          <a href="javascript:;">市场水位</a>
+        <a-menu-item @click="toDetail( '/jubu-zhishubankuai-detail', '局部预警',  '板块与指数的关系')">
+          <a href="javascript:;">板块与指数的关系</a>
         </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">指数背离</a>
+        <a-menu-item @click="toDetail( '/jubu-zhangfuyidong-detail', '局部预警',  '涨幅异动')">
+          <a href="javascript:;">涨幅异动</a>
         </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">打版</a>
+        <a-menu-item @click="toDetail( '/jubu-chengjiaoeyidong-detail', '局部预警',  '成交异动')">
+          <a href="javascript:;">成交异动</a>
         </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">资金流向</a>
+        <a-menu-item @click="toDetail( '/jubu-10xianxing-detail', '局部预警',  '10天线性跟踪')">
+          <a href="javascript:;">10天线性跟踪</a>
         </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">板块涨停个数</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">新高异动</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">平台突破</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">强势回调</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">游资股预警</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">连板高度预警</a>
+        <a-menu-item @click="toDetail( '/jubu-10xianxingwei-detail', '局部预警',  '10天线性未跟踪')">
+          <a href="javascript:;">10天未突破跟踪</a>
         </a-menu-item>
       </a-menu>
     </a-dropdown>
