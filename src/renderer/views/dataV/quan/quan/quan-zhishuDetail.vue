@@ -162,7 +162,7 @@ export default {
                     }
                     this.timeList.push(item.timeX);
                 });
-                res?.signalList.forEach((item) => {
+                res?.signalList?.forEach((item) => {
                     item.timeX =
                         this.timeType == "0"
                             ? getSecond(item.dealDate)

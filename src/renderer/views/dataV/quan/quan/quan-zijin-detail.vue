@@ -2,7 +2,7 @@
   <div class="quan-zijin-detail">
     <div class="top-contain">
       <div>
-        <span class="padding active">资金流向</span>
+        <span class="padding">资金流向</span>
       </div>
     </div>
     <div class="content-contain">
@@ -12,38 +12,38 @@
           <div :class="changePercent > 0 ? 'red' : 'green'">
             <a-button type="primary">
               <span v-if="changePercent > 0"> +</span>
-              {{ changePercent }}
+              {{ changePercent | fixedTwo }}
             </a-button>
           </div>
         </template>
         <template slot="mainAmount" slot-scope="mainAmount, record">
           <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
-                          mainAmount
+                          mainAmount | fixedTwo
                       }}</div>
         </template>
         <template slot="mainAmountProportion" slot-scope="mainAmountProportion, record">
           <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
-                          mainAmountProportion
+                          mainAmountProportion | fixedTwo
                       }}</div>
         </template>
         <template slot="superLargeAmount" slot-scope="superLargeAmount, record">
           <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
-                          superLargeAmount
+                          superLargeAmount | fixedTwo
                       }}</div>
         </template>
         <template slot="superLargeAmountProportion" slot-scope="superLargeAmountProportion, record">
           <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
-                          superLargeAmountProportion
+                          superLargeAmountProportion | fixedTwo
                       }}</div>
         </template>
         <template slot="largeAmount" slot-scope="largeAmount, record">
           <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
-                          largeAmount
+                          largeAmount | fixedTwo
                       }}</div>
         </template>
         <template slot="largeAmountProportion" slot-scope="largeAmountProportion, record">
           <div :class="record.changePercent > 0 ? 'red' : 'green'">{{
-                          largeAmountProportion
+                          largeAmountProportion | fixedTwo
                       }}</div>
         </template>
         <a slot="name" slot-scope="text">{{ text }}</a>
