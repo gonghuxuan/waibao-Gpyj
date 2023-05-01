@@ -266,12 +266,12 @@ export default {
     .ant-dropdown-menu-item {
         color: blue;
     }
-    // .table-contain {
-    //     width: 100%;
-    //     height: 100%;
-    //     overflow: scroll;
-    //     margin-top: 5px;
-    // }
+    .table-contain {
+        width: 100%;
+        // height: 100%;
+        // overflow: scroll;
+        // margin-top: 5px;
+    }
     .ant-table-thead > tr > th {
         background-color: rgba(2, 81, 93, 1);
         color: white;
