@@ -348,6 +348,7 @@ export default {
         setResContent(res) {
             const resDataChange = [];
             const arr = Object.keys(res[this.fiveDateArr[4]]).splice(0, 8); // 本来是1
+            arr.reverse();
             const arrmax = [];
             // console.log(arr);
             arr.forEach((item) => {
