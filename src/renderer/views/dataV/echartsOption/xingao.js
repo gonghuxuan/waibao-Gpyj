@@ -114,9 +114,9 @@ export function table2Option(data) {
                 // let currentItemData = params.data;
                 var res = "时间: " + params[0].name;
                 res += "<br/>开盘价: " + params[0].data[1].toFixed(2);
-                res += "<br/>最高价: " + params[0].data[2].toFixed(2);
+                res += "<br/>收盘价: " + params[0].data[2].toFixed(2);
                 res += "<br/>最低价: " + params[0].data[3].toFixed(2);
-                res += "<br/>收盘价: " + params[0].data[4].toFixed(2);
+                res += "<br/>最高价: " + params[0].data[4].toFixed(2);
                 res += "<br/>MA5: " + params[1].data.toFixed(2);
                 res += "<br/>MA10: " + params[2].data.toFixed(2);
                 res += "<br/>MA20: " + params[3].data.toFixed(2);
