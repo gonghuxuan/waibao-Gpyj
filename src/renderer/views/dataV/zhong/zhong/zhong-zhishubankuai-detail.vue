@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="table1-2">
-          <div style="font-size: 16px; color: white;padding-top: 10px; padding-bottom: 10px;padding-left: 10px;">大于平均涨幅</div>
+          <div style="font-size: 16px; color: white;padding-top: 10px; padding-bottom: 10px;padding-left: 10px;">小于平均涨幅</div>
           <div class="gupiao-item" v-for="(item, index)  in resData.belowAvgChangepercentStocks" :key="item.stockName" :class="
                         selectedGupiao == item.stockName
                             ? 'gupiao-active'

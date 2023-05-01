@@ -2,7 +2,7 @@
   <div class="zhong-chengjiaoeyidong-detail">
     <div class="top-contain">
       <div>
-        <span class="padding active">打板</span>
+        <span class="padding">打板</span>
       </div>
     </div>
     <div class="content-contain">

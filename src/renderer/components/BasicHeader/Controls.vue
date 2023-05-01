@@ -63,35 +63,20 @@
         重点预警 <a-icon type="down" />
       </a>
       <a-menu slot="overlay">
-        <a-menu-item>
-          <a href="javascript:;">市场水位</a>
+        <a-menu-item @click="toDetail( '/zhong-zhishubankuai-detail', '重点预警',  '个股与指数的关系')">
+          <a href="javascript:;">个股与指数的关系</a>
         </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">指数背离</a>
+        <a-menu-item @click="toDetail( '/zhong-zhangfuyidong-detail', '重点预警',  '涨幅异动')">
+          <a href="javascript:;">涨幅异动</a>
         </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">打版</a>
+        <a-menu-item @click="toDetail( '/zhong-chengjiaoeyidong-detail', '重点预警',  '成交额异动')">
+          <a href="javascript:;">成交额异动</a>
         </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">资金流向</a>
+        <a-menu-item @click="toDetail( '/zhong-lianxu-detail', '重点预警',  '连续性检测')">
+          <a href="javascript:;">连续性</a>
         </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">板块涨停个数</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">新高异动</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">平台突破</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">强势回调</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">游资股预警</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">连板高度预警</a>
+        <a-menu-item @click="toDetail( '/zhong-chengjiaoeyidong-detail', '重点预警',  '成交额异动')">
+          <a href="javascript:;">成交额异动</a>
         </a-menu-item>
       </a-menu>
     </a-dropdown>
@@ -151,6 +136,7 @@ import eventBus from "@/utils/eventBus";
 export default {
     methods: {
         toDetail(url, title1, title2, type) {
+            console.log(url);
             this.$router.push({
                 path: url,
                 query: {
