@@ -34,7 +34,7 @@
       <div v-show="status === 2">
         <zhongbankuai />
       </div>
-      <div class="divider2"></div>
+      <!-- <div class="divider2"></div> -->
     </div>
   </div>
 </template>
@@ -128,9 +128,9 @@ export default {
         background-color: rgb(0, 0, 0);
         min-width: auto;
         width: 1920px;
-        min-height: auto;
+        // min-height: auto;
         height: 1080px;
-        overflow: auto;
+        overflow: hidden;
         .top {
             position: absolute;
             left: 0;

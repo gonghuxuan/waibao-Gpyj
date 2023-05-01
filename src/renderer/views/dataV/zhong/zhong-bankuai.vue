@@ -24,7 +24,7 @@
     <div class="sn-container sn-container-4">
       <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
         <div class="juzhong font-18 bankuai-title">
-          <zhongzhengfu title="成交额异动" />
+          <zhongzhengfu title="振幅" />
         </div>
       </dv-border-box-10>
     </div>

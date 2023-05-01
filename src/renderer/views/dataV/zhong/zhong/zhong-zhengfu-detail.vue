@@ -2,7 +2,7 @@
   <div class="zhong-zhishubankuai-detail">
     <div class="top-contain">
       <div>
-        <span class="padding active">个股与指数的得到关系</span>
+        <span class="padding active">振幅检测</span>
       </div>
     </div>
     <div class="content-contain">
