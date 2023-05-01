@@ -150,10 +150,10 @@ export default {
                             param.value[4]
                         }<div><span>股票价格</span>: <span style="color: ${
                             param.value[3] > 0 ? "red" : "green"
-                        }">${param.value[2]}</span></div>
+                        }">${param.value[3]}</span></div>
                         <div><span>股票涨幅</span>: <span style="color: ${
                             param.value[3] > 0 ? "red" : "green"
-                        }">${param.value[3]}</span></div>
+                        }">${param.value[2]}</span></div>
                         </div>`;
                         // prettier-ignore
                     },
