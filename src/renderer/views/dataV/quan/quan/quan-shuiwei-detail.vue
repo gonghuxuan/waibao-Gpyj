@@ -31,6 +31,7 @@
           </div>
         </div>
       </div>
+      <div class="bottom"></div>
     </div>
   </div>
 </template>
@@ -88,6 +89,14 @@ export default {
 
 <style lang="scss">
 .quan-shuiwei-detail {
+    .bottom {
+        width: 100%;
+        height: 400px;
+        background: url(../../../../assets/img/shui-detail-bottom.png) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        margin-top: 70px;
+    }
     .gupiao-item {
         font-size: 16px;
         text-align: left;
@@ -130,12 +139,9 @@ export default {
     .title-contain {
         height: 100px;
         width: 100%;
-        background-image: linear-gradient(
-            to right,
-            rgba(255, 244, 92, 0.01),
-            rgba(255, 244, 92, 0.05),
-            rgba(255, 244, 92, 0.01)
-        );
+        background: url(../../../../assets/img/shui-top.png) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
         font-size: 22px;
         margin-top: 30px;
         margin-bottom: 30px;
@@ -149,31 +155,19 @@ export default {
         border-radius: 3px;
         margin-top: 10px;
         &-1 {
-            background-image: linear-gradient(
-                to right,
-                rgba(255, 244, 92, 0.04),
-                rgba(255, 244, 92, 0.06),
-                rgba(255, 244, 92, 0.1)
-            );
-            border: 1px rgba(255, 244, 92, 0.2) solid;
+            background: url(../../../../assets/img/shui-detail-1.png) no-repeat;
+            background-size: contain;
+            background-position: 50% 0;
         }
         &-2 {
-            background-image: linear-gradient(
-                to right,
-                rgba(250, 81, 81, 0.08),
-                rgba(250, 81, 81, 0.12),
-                rgba(250, 81, 81, 0.14)
-            );
-            border: 1px rgba(250, 81, 81, 0.2) solid;
+            background: url(../../../../assets/img/shui-detail-2.png) no-repeat;
+            background-size: contain;
+            background-position: 50% 0;
         }
         &-3 {
-            background-image: linear-gradient(
-                to right,
-                rgba(29, 255, 255, 0.02),
-                rgba(29, 255, 255, 0.06),
-                rgba(29, 255, 255, 0.12)
-            );
-            border: 1px rgba(29, 255, 255, 0.2) solid;
+            background: url(../../../../assets/img/shui-detail-3.png) no-repeat;
+            background-size: contain;
+            background-position: 50% 0;
         }
     }
     .table-shuiwei-contain {

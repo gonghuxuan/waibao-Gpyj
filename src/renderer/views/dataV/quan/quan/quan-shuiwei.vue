@@ -1,5 +1,5 @@
 <template>
-  <div class="jubu-shuiwei">
+  <div class="jubu-shuiwei-1">
     <div class="juzhong">市场水位
       <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;cursor: pointer;" />
     </div>
@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style lang="scss">
-.jubu-shuiwei {
+.jubu-shuiwei-1 {
     width: 100%;
     height: 100%;
     padding: 7px 5px;
@@ -98,12 +98,15 @@ export default {
     }
     .title-contain {
         height: 40px;
-        background-image: linear-gradient(
-            to right,
-            rgba(255, 244, 92, 0.01),
-            rgba(255, 244, 92, 0.05),
-            rgba(255, 244, 92, 0.01)
-        );
+        // background-image: linear-gradient(
+        //     to right,
+        //     rgba(255, 244, 92, 0.01),
+        //     rgba(255, 244, 92, 0.05),
+        //     rgba(255, 244, 92, 0.01)
+        // );
+        background: url(../../../../assets/img/shui-top.png) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
     }
     .table-shuiwei {
         width: 30%;
@@ -114,31 +117,40 @@ export default {
         border-radius: 3px;
         margin-top: 10px;
         &-1 {
-            background-image: linear-gradient(
-                to right,
-                rgba(255, 244, 92, 0.04),
-                rgba(255, 244, 92, 0.06),
-                rgba(255, 244, 92, 0.1)
-            );
-            border: 1px rgba(255, 244, 92, 0.2) solid;
+            // background-image: linear-gradient(
+            //     to right,
+            //     rgba(255, 244, 92, 0.04),
+            //     rgba(255, 244, 92, 0.06),
+            //     rgba(255, 244, 92, 0.1)
+            // );
+            // border: 1px rgba(255, 244, 92, 0.2) solid;
+            background: url(../../../../assets/img/shui-1.png) no-repeat;
+            background-size: contain;
+            background-position: 50% 0;
         }
         &-2 {
-            background-image: linear-gradient(
-                to right,
-                rgba(250, 81, 81, 0.08),
-                rgba(250, 81, 81, 0.12),
-                rgba(250, 81, 81, 0.14)
-            );
-            border: 1px rgba(250, 81, 81, 0.2) solid;
+            // background-image: linear-gradient(
+            //     to right,
+            //     rgba(250, 81, 81, 0.08),
+            //     rgba(250, 81, 81, 0.12),
+            //     rgba(250, 81, 81, 0.14)
+            // );
+            // border: 1px rgba(250, 81, 81, 0.2) solid;
+            background: url(../../../../assets/img/shui-2.png) no-repeat;
+            background-size: contain;
+            background-position: 50% 0;
         }
         &-3 {
-            background-image: linear-gradient(
-                to right,
-                rgba(29, 255, 255, 0.02),
-                rgba(29, 255, 255, 0.06),
-                rgba(29, 255, 255, 0.12)
-            );
-            border: 1px rgba(29, 255, 255, 0.2) solid;
+            // background-image: linear-gradient(
+            //     to right,
+            //     rgba(29, 255, 255, 0.02),
+            //     rgba(29, 255, 255, 0.06),
+            //     rgba(29, 255, 255, 0.12)
+            // );
+            // border: 1px rgba(29, 255, 255, 0.2) solid;
+            background: url(../../../../assets/img/shui-3.png) no-repeat;
+            background-size: contain;
+            background-position: 50% 0;
         }
     }
     .table-shuiwei-contain {
