@@ -24,7 +24,7 @@
         <div class="table-shuiwei table-shuiwei-3">
 
           <div style="text-align: center">
-            <div style="color: #1DFFFF; font-size: 20px;">{{ resData.amountRatio }}</div>
+            <div style="color: #1DFFFF; font-size: 20px;">{{ resData.amountRatio| fixedTwo }}</div>
             <div style="color:#64B7BC;font-size: 13px;padding-top: 10px;">量比</div>
           </div>
         </div>

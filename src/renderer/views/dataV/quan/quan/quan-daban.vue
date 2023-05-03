@@ -38,6 +38,8 @@ record[index].changepercent > 0 ? 'red' : 'green'
 <script>
 import { getHitStocks } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import pollMixin from "@/utils/gpyjminix.js";
+
 import * as echarts from "echarts";
 export default {
     data() {
@@ -48,6 +50,7 @@ export default {
             zhangsuyujing: [],
             kaibantixing: [],
             geyeweituo: [],
+            pollApi: this.getData,
         };
     },
     props: {
@@ -62,6 +65,7 @@ export default {
     },
     computed: {},
     created() {},
+    mixins: [pollMixin],
     mounted() {
         this.getData();
     },

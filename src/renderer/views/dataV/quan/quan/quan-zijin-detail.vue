@@ -55,6 +55,7 @@
 <script>
 import { getAmountDirection, getLetfStocks } from "@/api/userInfo.js";
 import dayjs from "dayjs";
+import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
@@ -173,11 +174,13 @@ export default {
                 },
             ],
             resData: [],
+            pollApi: this.getData,
         };
     },
     components: {},
     computed: {},
     created() {},
+    mixins: [pollMixin],
     mounted() {
         // this.getName();
         this.getData();

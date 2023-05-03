@@ -59,6 +59,7 @@
 <script>
 import { getHitStocks } from "@/api/userInfo.js";
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
 
 console.log(echarts);
 export default {
@@ -111,11 +112,13 @@ export default {
             pagination: {
                 showQuickJumper: true,
             },
+            pollApi: this.getData,
         };
     },
     components: {},
     computed: {},
     created() {},
+    mixins: [pollMixin],
     mounted() {
         this.getData();
     },

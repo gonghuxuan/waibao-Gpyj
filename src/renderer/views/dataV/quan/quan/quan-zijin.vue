@@ -37,6 +37,8 @@ import { getAmountDirection, getLetfStocks } from "@/api/userInfo.js";
 import dayjs from "dayjs";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
+
 export default {
     data() {
         return {
@@ -76,6 +78,7 @@ export default {
                 },
             ],
             resData: [],
+            pollApi: this.getData,
         };
     },
     props: {
@@ -88,6 +91,7 @@ export default {
             default: 0,
         },
     },
+    mixins: [pollMixin],
     computed: {},
     created() {},
     mounted() {

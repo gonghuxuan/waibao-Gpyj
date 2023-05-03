@@ -26,7 +26,7 @@
         <div class="table-shuiwei table-shuiwei-3">
 
           <div style="text-align: center">
-            <div style="color: #1DFFFF; font-size: 20px;">{{ resData.amountRatio }}</div>
+            <div style="color: #1DFFFF; font-size: 20px;">{{ resData.amountRatio| fixedTwo }}</div>
             <div style="color:#64B7BC;font-size: 13px;padding-top: 10px;">量比</div>
           </div>
         </div>
@@ -38,6 +38,7 @@
 
 <script>
 import { get2MarketAmount } from "@/api/userInfo.js";
+import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
@@ -51,8 +52,10 @@ export default {
             timeType: "1",
             stockDetail: [],
             resData: [],
+            pollApi: this.getData,
         };
     },
+    mixins: [pollMixin],
     components: {},
     computed: {},
     created() {},

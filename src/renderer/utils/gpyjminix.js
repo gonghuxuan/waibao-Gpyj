@@ -8,16 +8,18 @@ export default {
         };
     },
     activated() {
-        console.log("activated  minix");
+        console.log("activated  minix:", this.$route.name);
         this.startpoll();
     },
     deactivated() {
         console.log("deactivated  minix");
         clearInterval(this.timer);
+        this.timer = null;
     },
     beforeDestroy() {
         console.log("beforeDestroy  minix");
         clearInterval(this.timer);
+        this.timer = null;
     },
     methods: {
         startpoll() {
@@ -26,7 +28,7 @@ export default {
                 //     func();
                 // }
                 this.pollApi();
-            }, 10000);
+            }, 30000);
         },
         inTime() {
             let flag = true;

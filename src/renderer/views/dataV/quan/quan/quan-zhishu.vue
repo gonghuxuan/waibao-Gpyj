@@ -42,6 +42,8 @@ import { getExponentDivergeSignal } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import { splitData, getDayArr, getSecondArr } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
+
 export default {
     data() {
         return {
@@ -59,6 +61,7 @@ export default {
             kOpen: [],
             kClose: [],
             dataK: [],
+            pollApi: this.getData,
         };
     },
     computed: {},
@@ -67,6 +70,7 @@ export default {
         this.getName();
         this.getData();
     },
+    mixins: [pollMixin],
     methods: {
         toDetail() {
             this.$router.push({
@@ -127,7 +131,7 @@ export default {
                     }
                     this.timeList.push(item.timeX);
                 });
-                res.signalList.forEach((item) => {
+                res.signalList?.forEach((item) => {
                     item.timeX =
                         this.timeType == "0"
                             ? getSecond(item.dealDate)
@@ -192,32 +196,32 @@ export default {
                     min: this.min,
                 },
 
-                dataZoom: {
-                    // 开启数据平移
-                    type: "inside", // 滑动条单独显示
-                    show: true, // 是否显示滑动条
-                    startValue: 0, // 展示区域内容的起始数值
-                    endValue: 5, // 展示区域内容的结束数值 当前展示x坐标下标为0-16
-                    height: 10, // 滑动条组件高度
-                    bottom: 0, // 距离图表区域下边的距离
-                    showDetail: false, // 拖拽时是否显示详情
-                    showDataShadow: false,
-                    fillerColor: "#D4D4D4", // 平移条的填充颜色
-                    borderColor: "transparent", // 边框颜色
-                    zoomLock: true, // 锁定视图
-                    brushSelect: false, // 不可缩放 滑动条默认是有手柄可以进行展示的内容区域缩放的，不太美观
-                    // 通过该属性可以只滑动，不显示缩放功能
-                    handleStyle: {
-                        opacity: 0,
-                    },
-                    lineStyle: {
-                        opacity: 0,
-                    },
-                    textStyle: {
-                        fontSize: 0,
-                    },
-                    filterMode: "none",
-                },
+                // dataZoom: {
+                //     // 开启数据平移
+                //     type: "inside", // 滑动条单独显示
+                //     show: true, // 是否显示滑动条
+                //     startValue: 0, // 展示区域内容的起始数值
+                //     endValue: 5, // 展示区域内容的结束数值 当前展示x坐标下标为0-16
+                //     height: 10, // 滑动条组件高度
+                //     bottom: 0, // 距离图表区域下边的距离
+                //     showDetail: false, // 拖拽时是否显示详情
+                //     showDataShadow: false,
+                //     fillerColor: "#D4D4D4", // 平移条的填充颜色
+                //     borderColor: "transparent", // 边框颜色
+                //     zoomLock: true, // 锁定视图
+                //     brushSelect: false, // 不可缩放 滑动条默认是有手柄可以进行展示的内容区域缩放的，不太美观
+                //     // 通过该属性可以只滑动，不显示缩放功能
+                //     handleStyle: {
+                //         opacity: 0,
+                //     },
+                //     lineStyle: {
+                //         opacity: 0,
+                //     },
+                //     textStyle: {
+                //         fontSize: 0,
+                //     },
+                //     filterMode: "none",
+                // },
 
                 // dataZoom: [
                 //     {

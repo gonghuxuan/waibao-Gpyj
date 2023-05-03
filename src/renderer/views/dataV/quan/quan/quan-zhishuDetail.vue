@@ -63,6 +63,8 @@ import { getSecond, getDay, getMax, getMin, splitData } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
 import timecom from "@/views/dataV/components/time.vue";
 import usercom from "@/views/dataV/components/user.vue";
+import pollMixin from "@/utils/gpyjminix.js";
+
 console.log(echarts);
 export default {
     data() {
@@ -81,12 +83,14 @@ export default {
             kOpen: [],
             kClose: [],
             dataK: [],
+            pollApi: this.getData,
         };
     },
     components: {
         timecom,
         usercom,
     },
+    mixins: [pollMixin],
     computed: {},
     created() {},
     mounted() {
@@ -268,14 +272,14 @@ export default {
                     {
                         type: "slider", //这个dataZoom组件是slider型dataZoom组件
                         xAxisIndex: 0, //dataZoom-slider组件控制第一个XAxis
-                        start: 0, //左边在10%位置
-                        end: 30, //右边在60%位置
+                        start: 70, //左边在10%位置
+                        end: 100, //右边在60%位置
                     },
                     {
                         type: "inside", //这个dataZoom组件是inside型dataZoom组件
                         xAxisIndex: 0, //dataZoom-inslide组件控制第一个XAxis
-                        start: 0, //左边在10%的位置
-                        end: 30, //右边在60%的位置
+                        start: 70, //左边在10%的位置
+                        end: 100, //右边在60%的位置
                     },
                 ],
                 tooltip: {
@@ -376,15 +380,15 @@ export default {
                     {
                         type: "slider", //这个dataZoom组件是slider型dataZoom组件
                         xAxisIndex: 0, //dataZoom-slider组件控制第一个XAxis
-                        start: 0, //左边在10%位置
-                        end: 30, //右边在60%位置
+                        start: 60, //左边在10%位置
+                        end: 100, //右边在60%位置
                         bottom: 0, // 距离图表区域下边的距离
                     },
                     {
                         type: "inside", //这个dataZoom组件是inside型dataZoom组件
                         xAxisIndex: 0, //dataZoom-inslide组件控制第一个XAxis
-                        start: 0, //左边在10%的位置
-                        end: 30, //右边在60%的位置
+                        start: 70, //左边在10%的位置
+                        end: 100, //右边在60%的位置
                         bottom: 100, // 距离图表区域下边的距离
                     },
                 ],
@@ -395,6 +399,15 @@ export default {
                         label: {
                             backgroundColor: "#6a7985",
                         },
+                    },
+                    formatter: function (params) {
+                        console.log(params);
+                        var res = "时间: " + params[0].name;
+                        res += "<br/>开盘价: " + params[0].data[1].toFixed(2);
+                        res += "<br/>收盘价: " + params[0].data[2].toFixed(2);
+                        res += "<br/>最低价: " + params[0].data[3].toFixed(2);
+                        res += "<br/>最高价: " + params[0].data[4].toFixed(2);
+                        return res;
                     },
                 },
                 title: {
