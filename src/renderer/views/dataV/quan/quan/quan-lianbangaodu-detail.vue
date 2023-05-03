@@ -52,6 +52,7 @@ import { getContinuousStockUpstop } from "@/api/userInfo.js";
 import { getFiveDay, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import cloneDeep from "lodash/cloneDeep";
 import moment from "moment";
+import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 import { get } from "http";
@@ -60,6 +61,7 @@ import { chownSync } from "fs";
 export default {
     data() {
         return {
+            pollApi: this.getData,
             fiveDateArr: [],
             columnscopy: [],
             realColumns: [],
@@ -178,6 +180,7 @@ export default {
             this.copyColumns = val;
         },
     },
+    mixins: [pollMixin],
     components: {},
     computed: {
         getColumns() {

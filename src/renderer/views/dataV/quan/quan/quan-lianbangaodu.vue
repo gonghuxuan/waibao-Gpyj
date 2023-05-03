@@ -28,9 +28,12 @@ record[index].changepercent > 0 ? 'red' : 'green'
 import { getContinuousStockUpstop } from "@/api/userInfo.js";
 import { getFiveDay, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
+
 export default {
     data() {
         return {
+            pollApi: this.getData,
             resData: [],
             fiveDateArr: [],
             columns: [
@@ -67,6 +70,7 @@ export default {
             default: 0,
         },
     },
+    mixins: [pollMixin],
     computed: {},
     created() {},
     mounted() {

@@ -57,6 +57,8 @@
 <script>
 import { getPlateStockUpstop } from "@/api/userInfo.js";
 import dayjs from "dayjs";
+import pollMixin from "@/utils/gpyjminix.js";
+
 export default {
     data() {
         return {
@@ -308,8 +310,10 @@ export default {
             arr: [],
             startTime: "",
             endtime: "",
+            pollApi: this.getData,
         };
     },
+    mixins: [pollMixin],
     components: {},
     computed: {},
     created() {},

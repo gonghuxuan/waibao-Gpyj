@@ -166,12 +166,14 @@ import {
     table2bottomOptionRSI,
     table2Optionfen,
 } from "@/views/dataV/echartsOption/xingao.js";
+import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
 export default {
     data() {
         return {
+            pollApi: this.getData,
             active: 0,
             gupiaoList: [],
             selectedGupiao: "",
@@ -199,6 +201,7 @@ export default {
         // console.log(this.$route.query.stockType);
         // this.getData2();
     },
+    mixins: [pollMixin],
     activated() {
         // this.getData2();
 
@@ -304,8 +307,6 @@ export default {
                     });
                 } else {
                 }
-                console.log(res.length < 1);
-
                 this.stockDetailItem =
                     this.stockDetail[this.stockDetail.length - 1];
 

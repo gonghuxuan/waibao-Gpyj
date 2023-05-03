@@ -30,9 +30,12 @@ record[index].changepercent > 0 ? 'red' : 'green'
 import { getLetfStocks } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
+
 export default {
     data() {
         return {
+            pollApi: this.getData,
             resData: [],
             columns: [
                 {
@@ -60,6 +63,7 @@ export default {
             ],
         };
     },
+    mixins: [pollMixin],
     props: {
         title: {
             type: String,

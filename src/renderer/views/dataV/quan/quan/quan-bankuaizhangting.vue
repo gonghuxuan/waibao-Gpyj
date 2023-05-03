@@ -27,10 +27,13 @@ record[index].changepercent > 0 ? 'red' : 'green'
 import { getPlateStockUpstop } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
+import pollMixin from "@/utils/gpyjminix.js";
+
 import * as echarts from "echarts";
 export default {
     data() {
         return {
+            pollApi: this.getData,
             resData: [],
             startTime: "",
             endtime: "",
@@ -75,6 +78,7 @@ export default {
             default: 0,
         },
     },
+    mixins: [pollMixin],
     computed: {},
     created() {},
     mounted() {
