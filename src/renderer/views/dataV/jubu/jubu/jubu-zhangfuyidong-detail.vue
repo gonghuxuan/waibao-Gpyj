@@ -14,7 +14,7 @@
         </div>
       </div> -->
       <!-- <div class="qian">前部异动</div> -->
-      <div id="chart-yuan" style="width: 810px;height: 810px;pointer-events: auto"></div>
+      <div id="chart-yuan" class="charts-yuan"></div>
     </div>
   </div>
 </template>
@@ -38,15 +38,56 @@ export default {
     computed: {},
     created() {},
     mounted() {
-        this.getData();
+        // this.getData();
+        // this.getData2();
+        console.log(123);
     },
     activated() {
-        // this.getData();
+        this.getData();
     },
 
     methods: {
+        getData2() {
+            let res = localStorage.getItem("sandian");
+            res = JSON.parse(res);
+            this.resData = res.前部异动;
+            this.resDataQianbu = res.前部异动;
+            this.resDataZhongbu = res.中部异动;
+            this.resDataHoubu = res.后部异动;
+            res.前部异动.forEach((element) => {
+                const item = this.randomPointInCircle(0.9);
+                item.push(element.close);
+                item.push(element.changepercent);
+                item.push(element.stockName);
+                item.push("前部异动");
+                this.sandianData.push(item);
+            });
+            res.中部异动.forEach((element) => {
+                const item = this.getRandomPoint(1.45, 1.75, 2);
+                item.push(element.close);
+                item.push(element.changepercent);
+                item.push(element.stockName);
+                item.push("中部异动");
+                this.sandianData.push(item);
+            });
+            res.后部异动.forEach((element) => {
+                const item = this.getRandomPoint(2.45, 2.75, 2);
+                item.push(element.close);
+                item.push(element.changepercent);
+                item.push(element.stockName);
+                item.push("后部异动");
+                this.sandianData.push(item);
+            });
+            const flag = this.sandianData.some((item) => {
+                return item[0] * item[0] + item[1] * item[1] >= 9;
+            });
+            setTimeout(() => {
+                this.setChart();
+            }, 0);
+        },
         getData() {
             getStockChangePercentAction().then((res) => {
+                localStorage.setItem("sandian", JSON.stringify(res));
                 this.resData = res.前部异动;
                 this.resDataQianbu = res.前部异动;
                 this.resDataZhongbu = res.中部异动;
@@ -60,7 +101,7 @@ export default {
                     this.sandianData.push(item);
                 });
                 res.中部异动.forEach((element) => {
-                    const item = this.randomPointInAnnulus(1.1, 1.9);
+                    const item = this.getRandomPoint(1.45, 1.75, 2);
                     item.push(element.close);
                     item.push(element.changepercent);
                     item.push(element.stockName);
@@ -68,7 +109,7 @@ export default {
                     this.sandianData.push(item);
                 });
                 res.后部异动.forEach((element) => {
-                    const item = this.randomPointInAnnulus(2.1, 2.9);
+                    const item = this.getRandomPoint(2.45, 2.75, 2);
                     item.push(element.close);
                     item.push(element.changepercent);
                     item.push(element.stockName);
@@ -378,8 +419,49 @@ export default {
                         data: this.sandianData,
                         yAxisIndex: 0,
                         xAxisIndex: 0,
-                        symbolSize: 20,
+                        symbolSize: 15,
                         zlevel: 1,
+                        itemStyle: {
+                            normal: {
+                                color: function (param) {
+                                    if (param.value[5] == "前部异动") {
+                                        return "rgba(255, 194, 27, 1)";
+                                    }
+                                    if (param.value[5] == "中部异动") {
+                                        return "rgba(26, 176, 93, 1)";
+                                    }
+                                    if (param.value[5] == "后部异动") {
+                                        return "rgba(255, 52, 38, 1)";
+                                    }
+                                    // if (param.value[1] < 1) {
+                                    //     return "#DE5858";
+                                    // }
+                                    // if (param.value[1] < 2) {
+                                    //     return "#1E8BFF";
+                                    // }
+                                    // if (param.value[1] < 3) {
+                                    //     return "#D93DD2";
+                                    // }
+                                    // if (param.value[1] < 4) {
+                                    //     return "#1AB05D";
+                                    // }
+                                    // if (param.value[1] < 5) {
+                                    //     return "#FFF45C";
+                                    // }
+                                },
+                                label: {
+                                    position: [15, 5],
+                                    show: true,
+                                    formatter: function (params) {
+                                        return params.value[4];
+                                    },
+                                    textStyle: {
+                                        color: "white",
+                                        fontSize: 12,
+                                    },
+                                },
+                            },
+                        },
                     },
                     {
                         name: "涨幅",
@@ -390,42 +472,42 @@ export default {
                         zlevel: 0,
                         tooltip: false,
                         data: [
-                            {
-                                value: [0, 0, false, "前部异动"],
-                                symbolSize: 270,
-                                itemStyle: {
-                                    color: "rgba(1,1,1,0)",
-                                    borderColor: "rgba(6, 100, 117, 1)",
-                                    borderWidth: 10,
-                                    shadowColor: "rgba(6, 100, 117, 1)",
-                                    shadowBlur: 30,
-                                    shadowType: "inset",
-                                },
-                            },
-                            {
-                                value: [0, 0, false, "中部异动"],
-                                symbolSize: 540,
-                                itemStyle: {
-                                    color: "rgba(1,1,1,0)",
-                                    borderColor: "rgba(6, 100, 117, 1)",
-                                    borderWidth: 10,
-                                    shadowColor: "rgba(6, 100, 117, 1)",
-                                    shadowBlur: 30,
-                                    shadowType: "inset",
-                                },
-                            },
-                            {
-                                value: [0, 0, false, "后部异动"],
-                                symbolSize: 810,
-                                itemStyle: {
-                                    color: "rgba(1,1,1,0)",
-                                    borderColor: "rgba(6, 100, 117, 1)",
-                                    borderWidth: 10,
-                                    shadowColor: "rgba(6, 100, 117, 1)",
-                                    shadowBlur: 30,
-                                    shadowType: "inset",
-                                },
-                            },
+                            // {
+                            //     value: [0, 0, false, "前部异动"],
+                            //     symbolSize: 270,
+                            //     itemStyle: {
+                            //         color: "rgba(1,1,1,0)",
+                            //         borderColor: "rgba(6, 100, 117, 1)",
+                            //         borderWidth: 10,
+                            //         shadowColor: "rgba(6, 100, 117, 1)",
+                            //         shadowBlur: 30,
+                            //         shadowType: "inset",
+                            //     },
+                            // },
+                            // {
+                            //     value: [0, 0, false, "中部异动"],
+                            //     symbolSize: 540,
+                            //     itemStyle: {
+                            //         color: "rgba(1,1,1,0)",
+                            //         borderColor: "rgba(6, 100, 117, 1)",
+                            //         borderWidth: 10,
+                            //         shadowColor: "rgba(6, 100, 117, 1)",
+                            //         shadowBlur: 30,
+                            //         shadowType: "inset",
+                            //     },
+                            // },
+                            // {
+                            //     value: [0, 0, false, "后部异动"],
+                            //     symbolSize: 810,
+                            //     itemStyle: {
+                            //         color: "rgba(1,1,1,0)",
+                            //         borderColor: "rgba(6, 100, 117, 1)",
+                            //         borderWidth: 10,
+                            //         shadowColor: "rgba(6, 100, 117, 1)",
+                            //         shadowBlur: 30,
+                            //         shadowType: "inset",
+                            //     },
+                            // },
                         ],
                         symbolSize: 20,
                         labelLayout: {
@@ -470,6 +552,24 @@ export default {
             const y = Math.sin(randomAngle) * randomDistance;
             return [x, y];
         },
+        getRandomPoint(innerRadius, outerRadius, heightLimit) {
+            // 生成随机高度
+            const height = Math.random() * (2 * heightLimit) - heightLimit;
+            const flag = Math.random() < 0.5 ? -1 : 1;
+            const yheight = heightLimit * Math.random() * flag;
+            // console.log("height:", yheight);
+            // 生成随机极角
+            const angle = Math.atan2(height, outerRadius);
+            // 生成随机距离
+            const distance =
+                Math.random() * (outerRadius - innerRadius) + innerRadius;
+            // 计算x、y坐标
+            let x = Math.cos(angle) * distance;
+            const y = Math.sin(angle) * distance;
+            x = Math.random() < 0.5 ? -x : x;
+            // 返回结果
+            return [x, yheight];
+        },
         randomPointInCircle(radius) {
             // 随机生成一个点在圆内
             const randomRadius = Math.sqrt(Math.random()) * radius;
@@ -487,6 +587,20 @@ export default {
 
 <style lang="scss">
 .jubu-zhangfuyidong-detail {
+    .charts-yuan {
+        width: 1800px;
+        height: 810px;
+        pointer-events: auto;
+    }
+    .content-contain {
+        background: url(../../../../assets/img/baohan.png) no-repeat;
+        background-size: contain;
+        background-position: 100% 100%;
+        width: 1800px;
+        height: 784px;
+        // border: 1px red solid;
+        margin-top: 40px;
+    }
     .padding {
         padding-left: 20px;
         padding-right: 20px;

@@ -108,7 +108,7 @@
 
             </div>
 
-            <div id="charts-2" style="height: 210px; width: 100%"></div>
+            <div id="charts-2" style="height: 200px; width: 100%; margin-top: 0px"></div>
           </div>
         </div>
 
@@ -197,8 +197,11 @@ export default {
         // this.getData();
         // this.active = this.$route.query.stockType;
         // console.log(this.$route.query.stockType);
+        // this.getData2();
     },
     activated() {
+        // this.getData2();
+
         console.log("123");
         // echarts.registerTransform(
         //     "myTransform",
@@ -226,6 +229,28 @@ export default {
     },
 
     methods: {
+        getData2() {
+            this.stockDetail = JSON.parse(localStorage.getItem("gupiao"));
+            if (this.timeType === "0") {
+                this.clearList();
+                this.stockIndex = this.stockDetail.length - 1;
+                this.stockDetail.forEach((item) => {
+                    this.closeList.push(item.close);
+                    this.changeList.push(item.changepercent);
+                    this.timeList.push(getSecond(item.dealDate));
+                });
+            } else {
+            }
+            this.stockDetailItem =
+                this.stockDetail[this.stockDetail.length - 1];
+
+            setTimeout(() => {
+                this.setCharts();
+            }, 0);
+            setTimeout(() => {
+                this.setCharts2();
+            }, 0);
+        },
         back() {
             this.$router.go(-1);
         },
@@ -266,6 +291,7 @@ export default {
                 timeType: this.timeType,
                 code: this.selectedGupiao,
             }).then((res) => {
+                localStorage.setItem("gupiao", JSON.stringify(res));
                 this.spin = false;
                 this.stockDetail = res;
                 if (this.timeType === "0") {
@@ -300,6 +326,7 @@ export default {
             this.getStockDetail();
         },
         selectBottom(category) {
+            console.log("123");
             this.category = category;
             this.chart2.clear();
             if (category === "MACD") {

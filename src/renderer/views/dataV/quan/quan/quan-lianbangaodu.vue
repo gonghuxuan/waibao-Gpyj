@@ -39,13 +39,12 @@ export default {
                     dataIndex: "stockName",
                     key: "stockName",
                     align: "center",
-                    width: 102,
                 },
                 {
                     title: "封单额(万)",
                     dataIndex: "stopAmount",
                     key: "stopAmount",
-                    width: 110,
+                    width: 200,
                     scopedSlots: { customRender: "close" },
                     sorter: (a, b) => b.stopAmount - a.stopAmount,
 
@@ -111,6 +110,10 @@ export default {
 <style lang="scss">
 .jubu-xingao {
     padding: 7px 5px;
+    .ant-table-thead > tr > th {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
     .ant-btn {
         color: white;
         border-color: #5d9a9e;

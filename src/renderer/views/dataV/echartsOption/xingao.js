@@ -342,6 +342,8 @@ export function table2bottomOption(data, timetype) {
                 fontSize: 16, //字体大小
                 color: "#ffffff", //字体颜色
             },
+            padding: [0, 0, 0, 0],
+            top: 5,
         },
         xAxis: [
             {
@@ -349,6 +351,10 @@ export function table2bottomOption(data, timetype) {
                 data: data0,
             },
         ],
+        grid: {
+            bottom: "50%",
+            top: "15%",
+        },
         yAxis: [
             {
                 type: "value",
@@ -358,7 +364,7 @@ export function table2bottomOption(data, timetype) {
             //     type: "value",
             //     name: "Temperature",
             //     min: 0,
-            //     max: 25,
+            //     max: 25,table2bottomOption
             //     interval: 5,
             //     axisLabel: {
             //         formatter: "{value} °C",
@@ -374,6 +380,25 @@ export function table2bottomOption(data, timetype) {
                 },
             },
         },
+        dataZoom: [
+            {
+                gridIndex: 0,
+                type: "inside",
+                start: 80,
+                end: 100,
+                // height: 10,
+            },
+            {
+                gridIndex: 0,
+                xAxisIndex: [0, 1], // 对应网格的索引
+                show: true,
+                start: 80,
+                end: 100,
+                type: "slider",
+                top: "60%",
+                // height: 20,
+            },
+        ],
         series: [
             {
                 name: "dif",
@@ -414,6 +439,8 @@ export function table2bottomOptionKDJ(data, timetype) {
                 fontSize: 16, //字体大小
                 color: "#ffffff", //字体颜色
             },
+            padding: [0, 0, 0, 0],
+            top: 5,
         },
         xAxis: [
             {
@@ -436,6 +463,30 @@ export function table2bottomOptionKDJ(data, timetype) {
             //         formatter: "{value} °C",
             //     },
             // },
+        ],
+        grid: {
+            bottom: "50%",
+            top: "15%",
+        },
+        dataZoom: [
+            {
+                gridIndex: 0,
+                type: "inside",
+                start: 80,
+                end: 100,
+                // height: 10,
+            },
+            {
+                gridIndex: 0,
+                xAxisIndex: [0, 1], // 对应网格的索引
+                show: true,
+                start: 80,
+                end: 100,
+                type: "slider",
+                top: "60%",
+
+                // height: 20,
+            },
         ],
         tooltip: {
             trigger: "axis",
@@ -484,11 +535,37 @@ export function table2bottomOptionRSI(data, timetype) {
                 fontSize: 16, //字体大小
                 color: "#ffffff", //字体颜色
             },
+            padding: [0, 0, 0, 0],
+            top: 5,
         },
         xAxis: [
             {
                 type: "category",
                 data: data0,
+            },
+        ],
+        grid: {
+            bottom: "50%",
+            top: "15%",
+        },
+        dataZoom: [
+            {
+                gridIndex: 0,
+                type: "inside",
+                start: 80,
+                end: 100,
+                // height: 10,
+            },
+            {
+                gridIndex: 0,
+                xAxisIndex: [0, 1], // 对应网格的索引
+                show: true,
+                start: 80,
+                end: 100,
+                type: "slider",
+                top: "60%",
+
+                // height: 20,
             },
         ],
         yAxis: [
