@@ -38,11 +38,14 @@ record[index].changepercent > 0 ? 'red' : 'green'
 <script>
 import { get2MarketAmount } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import pollMixin from "@/utils/gpyjminix.js";
+
 import * as echarts from "echarts";
 export default {
     data() {
         return {
             resData: [],
+            pollApi: this.getData,
         };
     },
     props: {
@@ -55,14 +58,22 @@ export default {
             default: 0,
         },
     },
+    mixins: [pollMixin],
     computed: {},
     created() {},
     mounted() {
         this.getData();
     },
+    // activated() {
+    //     console.log("activeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+    // },
+    // deactivated() {
+    //     console.log("shuiweiiiiideactivated");
+    // },
     methods: {
         getData() {
             get2MarketAmount().then((res) => {
+                this.resData = [];
                 console.log(res);
                 this.resData = res;
             });

@@ -88,6 +88,9 @@
 
 <script>
 import { getStockThrough10Data } from "@/api/userInfo.js";
+// import { sendRequestWithInterval } from "@/utils/gpyj.js";
+import pollMixin from "@/utils/gpyjminix.js";
+
 import {
     getSecond,
     getDay,
@@ -110,19 +113,27 @@ export default {
             type: 1,
             date: "",
             title: "",
+            pollApi: this.getData,
         };
     },
+    mixins: [pollMixin],
     components: {},
     computed: {},
     created() {},
     mounted() {
         this.getData();
+        console.log(this.pollApi);
+        // sendRequestWithInterval(this.getData, this);
         console.log(get10dayago());
     },
     activated() {
         // this.getData();
     },
-
+    deactivated() {
+        // console.log(
+        //     "beforeDestroybeforeDestroybeforeDestroybeforeDestroybeforeDestroybeforeDestroy"
+        // );
+    },
     methods: {
         back() {
             this.$router.go(-1);
