@@ -98,6 +98,7 @@ import {
     getMin,
     get10dayago,
 } from "@/utils/gpyj.js";
+import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
@@ -121,10 +122,10 @@ export default {
     computed: {},
     created() {},
     mounted() {
+        this.date = get10dayago();
         this.getData();
         console.log(this.pollApi);
         // sendRequestWithInterval(this.getData, this);
-        console.log(get10dayago());
     },
     activated() {
         // this.getData();
@@ -150,7 +151,6 @@ export default {
             // this.chart.dispatchAction({
             //     type: "hideTip",
             // });
-            console.log(this.selectedGupiao);
             if (this.selectedGupiao.includes(index)) {
                 const xiabiao = this.selectedGupiao.findIndex((item) => {
                     return item == index;
@@ -174,7 +174,8 @@ export default {
             this.chart.clear();
             this.dataObj = {};
             this.dateArr = [];
-            this.getData(el.format("YYYY-MM-DD"));
+            this.date = el.format("YYYY-MM-DD");
+            this.getData();
         },
         getDataSelect(res) {
             if (this.type == "0") {
@@ -216,7 +217,7 @@ export default {
         getData(date) {
             getStockThrough10Data({
                 // startDate: dayjs().format("YYYY-MM-DD"),
-                startDate: date ? date : get10dayago(),
+                startDate: this.date,
             }).then((res) => {
                 this.resData = res;
                 res.notthroughList.forEach((element, index) => {

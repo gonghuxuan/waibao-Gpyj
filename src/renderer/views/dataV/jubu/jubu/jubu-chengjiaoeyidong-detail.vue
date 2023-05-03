@@ -127,11 +127,13 @@
 import { getHitStocks } from "@/api/userInfo.js";
 import { getStockAmountAction } from "@/api/userInfo.js";
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
 
 console.log(echarts);
 export default {
     data() {
         return {
+            pollApi: this.getData,
             highestConNum: "",
             avgSuccessRate: "",
             resData: [],
@@ -204,6 +206,7 @@ export default {
             },
         };
     },
+    mixins: [pollMixin],
     components: {},
     computed: {},
     created() {},

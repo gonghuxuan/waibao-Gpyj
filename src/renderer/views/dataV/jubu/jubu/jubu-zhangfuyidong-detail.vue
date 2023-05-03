@@ -25,6 +25,7 @@ import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import { getStockChangePercentAction } from "@/api/userInfo.js";
 
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
 
 export default {
     data() {
@@ -32,11 +33,13 @@ export default {
             resData: [],
             sandianData: [],
             selectedGupiao: 0,
+            pollApi: this.getData,
         };
     },
     components: {},
     computed: {},
     created() {},
+    mixins: [pollMixin],
     mounted() {
         // this.getData();
         // this.getData2();
@@ -87,7 +90,8 @@ export default {
         },
         getData() {
             getStockChangePercentAction().then((res) => {
-                localStorage.setItem("sandian", JSON.stringify(res));
+                this.sandianData = [];
+                // localStorage.setItem("sandian", JSON.stringify(res));
                 this.resData = res.前部异动;
                 this.resDataQianbu = res.前部异动;
                 this.resDataZhongbu = res.中部异动;

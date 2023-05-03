@@ -14,6 +14,8 @@ import { getStockThrough10Data } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, get10dayago } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
+
 export default {
     data() {
         return {
@@ -21,6 +23,7 @@ export default {
             dateArr: [],
             dataObj: {},
             status: -1,
+            pollApi: this.getData,
         };
     },
     props: {
@@ -29,6 +32,7 @@ export default {
             default: 0,
         },
     },
+    mixins: [pollMixin],
     computed: {},
     created() {},
     mounted() {
@@ -44,7 +48,9 @@ export default {
                 // startDate: dayjs().format("YYYY-MM-DD"),
                 startDate: get10dayago(),
             }).then((res) => {
-                console.log("10TIAN-----", res);
+                // console.log("10TIAN-----", res);
+                this.dateArr = [];
+                this.dataObj = {};
                 res.notthroughList.forEach((element, index) => {
                     if (!this.dataObj.hasOwnProperty(element.stockName)) {
                         this.dataObj[element.stockName] = [];
@@ -60,8 +66,6 @@ export default {
                         this.dateArr.push(getDay(element.dealDate));
                     }
                 });
-                console.log(this.dateArr);
-                console.log(this.dataObj);
                 this.setChart();
             });
         },

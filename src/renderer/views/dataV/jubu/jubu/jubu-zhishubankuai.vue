@@ -25,12 +25,15 @@
 import { getPlateChangepercentData } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
+import pollMixin from "@/utils/gpyjminix.js";
+
 import * as echarts from "echarts";
 export default {
     data() {
         return {
             resData: [],
             sandianData: [],
+            pollApi: this.getData,
         };
     },
     props: {
@@ -59,9 +62,11 @@ export default {
     mounted() {
         this.getData();
     },
+    mixins: [pollMixin],
     methods: {
         getData() {
             getPlateChangepercentData({}).then((res) => {
+                this.sandianData = [];
                 this.resData = res;
                 this.resData.aboveAvgChangepercentPlates.forEach((item) => {
                     const dataItem = [];
@@ -168,7 +173,13 @@ export default {
                         data: this.sandianData,
                         itemStyle: {
                             normal: {
-                                color: "rgba(255, 52, 38, 1)",
+                                color: function (param) {
+                                    if (param.value[3] == "up") {
+                                        return "rgba(255, 52, 38, 1)";
+                                    } else {
+                                        return "rgba(26, 176, 93, 1)";
+                                    }
+                                },
 
                                 label: {
                                     position: [5, 9],

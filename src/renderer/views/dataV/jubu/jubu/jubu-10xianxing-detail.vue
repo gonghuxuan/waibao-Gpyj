@@ -95,6 +95,7 @@ import {
     getMin,
     get10dayago,
 } from "@/utils/gpyj.js";
+import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
@@ -110,15 +111,17 @@ export default {
             timeType: "0",
             date: "",
             type: "0",
+            pollApi: this.getData,
         };
     },
     components: {},
     computed: {},
+    mixins: [pollMixin],
     created() {},
     mounted() {
+        this.date = get10dayago();
         this.getData();
         // this.getData2();
-        console.log(get10dayago());
     },
     activated() {
         // this.getData();
@@ -168,11 +171,11 @@ export default {
         },
         onChange(el) {
             console.log(el.format("YYYY-MM-DD"));
-            console.log(this.date.format("YYYY-MM-DD"));
             this.chart.clear();
             this.dataObj = {};
             this.dateArr = [];
-            this.getData(el.format("YYYY-MM-DD"));
+            this.date = el.format("YYYY-MM-DD");
+            this.getData();
         },
         getDataSelect(res) {
             if (this.type == "0") {
@@ -214,8 +217,10 @@ export default {
         getData(date) {
             getStockThrough10Data({
                 // startDate: dayjs().format("YYYY-MM-DD"),
-                startDate: date ? date : get10dayago(),
+                startDate: this.date,
             }).then((res) => {
+                this.dateArr = [];
+                this.dataObj = {};
                 console.log("10TIAN-----", res);
                 this.resData = res;
                 localStorage.setItem("10tian", JSON.stringify(res));

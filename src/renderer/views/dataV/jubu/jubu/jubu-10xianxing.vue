@@ -15,6 +15,7 @@ import { getSecond, getDay, getMax, get10dayago } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
 import { mapGetters } from "vuex";
+import pollMixin from "@/utils/gpyjminix.js";
 
 export default {
     data() {
@@ -23,6 +24,7 @@ export default {
             dateArr: [],
             dataObj: {},
             option: {},
+            pollApi: this.getData,
         };
     },
     props: {
@@ -31,6 +33,7 @@ export default {
             default: 0,
         },
     },
+    mixins: [pollMixin],
     computed: {},
     created() {},
     mounted() {
@@ -42,7 +45,9 @@ export default {
                 // startDate: dayjs().format("YYYY-MM-DD"),
                 startDate: get10dayago(),
             }).then((res) => {
-                console.log("10TIAN-----", res);
+                // console.log("10TIAN-----", res);
+                this.dateArr = [];
+                this.dataObj = {};
                 res.throughList.forEach((element, index) => {
                     if (!this.dataObj.hasOwnProperty(element.stockName)) {
                         this.dataObj[element.stockName] = [];
