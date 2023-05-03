@@ -4,9 +4,10 @@
             font-size: 16px;
             padding-top: 15px;
             padding-left: 30px;
+            z-index: 999
         ">
-    <span>{{ username }}</span>
-    <span style="padding-left: 15px;padding-right: 30px;"><img src="@/assets/img/logout.svg" alt="" style="width: 20px;" /></span>
+    <span @click="show">{{ username }}</span>
+    <span @click="logout" style="padding-left: 15px;padding-right: 30px;"><img src="@/assets/img/logout.svg" alt="" style="width: 20px;" /></span>
   </div>
 </template>
 <script>
@@ -18,7 +19,17 @@ export default {
         };
     },
     mounted() {},
-    methods: {},
+    methods: {
+        logout() {
+            console.log("logout");
+            this.$router.push({
+                path: "/login",
+            });
+        },
+        show() {
+            console.log("show");
+        },
+    },
 };
 </script>
 

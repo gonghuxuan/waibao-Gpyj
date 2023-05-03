@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="content-contain">
-        <!-- <a-table bordered :columns="columns" :data-source="机构票监测" :pagination="false" :scroll="{ y: 240 }">
+      <!-- <a-table bordered :columns="columns" :data-source="机构票监测" :pagination="false" :scroll="{ y: 240 }">
             <template slot="value" slot-scope="value">
             <div :class="value > 0 ? 'red' : 'green'">
                 <a-button type="primary">
@@ -16,33 +16,21 @@
             </div>
             </template>
         </a-table> -->
-        <div style="display: flex;justify-content: flex-start;">
-            <span style="font-size: 20px">上传类型</span>
-            <a-button>局部预警</a-button>
-            <a-button>重点预警</a-button>
-            <!-- <div>局部预警</div>
+      <div style="display: flex;justify-content: flex-start;">
+        <span style="font-size: 16px; color:#5FA4A8; height: 40px;line-height: 40px;margin-right: 30px">上传类型</span>
+        <div :class="type == '0'? 'selected' : 'unselected'" style="margin-right: 30px;">局部预警</div>
+        <div :class="type == '1'? 'selected' : 'unselected'">重点预警</div>
+        <!-- <div>局部预警</div>
             <div>重点预警</div> -->
-        </div>
-        <div style="margin-top: 20px;">
-            <a-upload-dragger
-                name="file"
-                :multiple="true"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                @change="handleChange"
-            >
-                <p class="ant-upload-drag-icon">
-                <a-icon type="inbox" />
-                </p>
-                <p class="ant-upload-text">
-                Click or drag file to this area to upload
-                </p>
-                <p class="ant-upload-hint">
-                Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                band files
-                </p>
-            </a-upload-dragger>
-        </div>
-        <div></div>
+      </div>
+      <div style="margin-top: 20px;">
+        <a-upload-dragger name="file" :multiple="true" action="https://www.mocky.io/v2/5cc8019d300000980a055e76" @change="handleChange">
+          <img src="../../../assets/img/upload-4.png" />
+          <div class="upload-text">点击或拖动TXT文件上传</div>
+        </a-upload-dragger>
+      </div>
+      <div>
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +43,7 @@ console.log(echarts);
 export default {
     data() {
         return {
+            type: 0,
             columns: [
                 {
                     title: "名称",
@@ -101,7 +90,7 @@ export default {
     computed: {},
     created() {},
     mounted() {
-        // this.getData();
+        this.getData();
     },
     methods: {
         getData() {
@@ -117,6 +106,40 @@ export default {
 
 <style lang="scss">
 .importStockData {
+    .ant-upload {
+        padding-bottom: 0px;
+        padding-top: 0px;
+        background-color: #082932;
+    }
+    .upload-text {
+        font-size: 16px;
+        color: rgba(93, 154, 158, 0.7);
+        padding-top: 20px;
+    }
+    .selected {
+        height: 50px;
+        width: 100px;
+        background: url(../../../assets/img/upload-1.png) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1dffff;
+        font-size: 15px;
+    }
+    .unselected {
+        height: 50px;
+        width: 100px;
+        background: url(../../../assets/img/upload-2.png) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #09b8bc;
+        font-size: 15px;
+    }
     .gupiao-item {
         font-size: 16px;
         text-align: left;
@@ -222,7 +245,7 @@ export default {
     }
 }
 .ant-table-tbody > tr > td {
-        color: #64b7bc;
-        border-color: #5f9ea0;
-    }
+    color: #64b7bc;
+    border-color: #5f9ea0;
+}
 </style>
