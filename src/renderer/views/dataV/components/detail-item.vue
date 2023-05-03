@@ -5,7 +5,7 @@
         <timecom />
         <usercom />
       </div>
-      <div v-show="title2    !== '新高异动' && title2 !== '平台突破' && title2 !== '游资股'" style="
+      <div v-show="title2    !== '新高异动' && title2 !== '平台突破' && title2 !== '游资股'&& getTilte() " style="
               font-size: 16px;
                     padding-left: 10px;
                     color: rgba(100, 183, 188, 0.5);
@@ -53,6 +53,7 @@ export default {
     computed: {},
     created() {},
     mounted() {
+        console.log(this.$route);
         console.log(this.$route.query.title1);
         console.log(this.$route.query.title2);
     },
@@ -64,6 +65,12 @@ export default {
     methods: {
         back() {
             this.$router.go(-1);
+        },
+        getTilte() {
+            return (
+                this.$route.name !== "jubu-10xianxingwei-detail" &&
+                this.$route.name !== "jubu-10xianxing-detail"
+            );
         },
     },
 };

@@ -1,8 +1,26 @@
 <template>
   <div class="jubu-10xianxing-detail">
+    <div style="
+              font-size: 16px;
+                    padding-left: 10px;
+                    color: rgba(100, 183, 188, 0.5);
+                    margin-top: 20px;
+                    margin-bottom: -20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content:space-between;
+                ">
+      <div style="margin-left: 3vw">
+        <span style="padding-right: 5px"> 局部预警 </span>/
+        <span style="color: rgba(100, 183, 188, 1); padding-left: 5px">{{ type == '0' ? '10天线性跟踪' : '10天线性未跟踪'}}</span>
+      </div>
+      <div style="margin-right: 3vw" @click="back"> <a-button>
+          返回
+        </a-button></div>
+    </div>
     <div class="top-contain">
       <div>
-        <span class="padding active">10天线性跟踪</span>
+        <span class="padding active">{{ type == '0' ? '10天线性跟踪' : '10天线性未跟踪'}}</span>
       </div>
     </div>
     <div class="content-contain">
@@ -45,7 +63,7 @@
                                 font-size: 14px;
                                 margin-right: 30px;
                             " :class="
-                                timeType == '0'
+                                type == '0'
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="changetype('0')">突破</div>
@@ -55,7 +73,7 @@
                                 text-align: center;
                                 font-size: 14px;
                             " :class="
-                                timeType == '1'
+                                type == '1'
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="changetype('1')">未突破</div>
@@ -89,7 +107,7 @@ export default {
             dateArr: [],
             dataObj: {},
             option: {},
-            timeType: 0,
+            timeType: "0",
             date: "",
             type: "0",
         };
@@ -99,6 +117,7 @@ export default {
     created() {},
     mounted() {
         this.getData();
+        // this.getData2();
         console.log(get10dayago());
     },
     activated() {
@@ -106,13 +125,20 @@ export default {
     },
 
     methods: {
+        back() {
+            this.$router.go(-1);
+        },
+        getData2() {
+            this.getDataSelect(JSON.parse(localStorage.getItem("10tian")));
+        },
         changetype(type) {
-            this.timeType = 1;
+            this.type = type;
+            console.log(this.type);
             this.chart.clear();
             this.dataObj = {};
             this.dateArr = [];
             this.type = type;
-            this.getData();
+            this.getDataSelect(this.resData);
         },
         selectgupiao(index) {
             // this.chart.dispatchAction({
@@ -148,12 +174,51 @@ export default {
             this.dateArr = [];
             this.getData(el.format("YYYY-MM-DD"));
         },
+        getDataSelect(res) {
+            if (this.type == "0") {
+                res.throughList.forEach((element, index) => {
+                    if (!this.dataObj.hasOwnProperty(element.stockName)) {
+                        this.dataObj[element.stockName] = [];
+                        this.dataObj[element.stockName].push(
+                            element.changepercent
+                        );
+                    } else {
+                        this.dataObj[element.stockName].push(
+                            element.changepercent
+                        );
+                    }
+                    if (index < 10) {
+                        this.dateArr.push(getDay(element.dealDate));
+                    }
+                });
+            } else {
+                res.notthroughList.forEach((element, index) => {
+                    if (!this.dataObj.hasOwnProperty(element.stockName)) {
+                        this.dataObj[element.stockName] = [];
+                        this.dataObj[element.stockName].push(
+                            element.changepercent
+                        );
+                    } else {
+                        this.dataObj[element.stockName].push(
+                            element.changepercent
+                        );
+                    }
+                    if (index < 10) {
+                        this.dateArr.push(getDay(element.dealDate));
+                    }
+                });
+            }
+
+            this.setChart();
+        },
         getData(date) {
             getStockThrough10Data({
                 // startDate: dayjs().format("YYYY-MM-DD"),
                 startDate: date ? date : get10dayago(),
             }).then((res) => {
                 console.log("10TIAN-----", res);
+                this.resData = res;
+                localStorage.setItem("10tian", JSON.stringify(res));
                 if (this.type == "0") {
                     res.throughList.forEach((element, index) => {
                         if (!this.dataObj.hasOwnProperty(element.stockName)) {
