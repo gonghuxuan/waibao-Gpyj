@@ -98,7 +98,6 @@ import {
     getMin,
     get10dayago,
 } from "@/utils/gpyj.js";
-import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
