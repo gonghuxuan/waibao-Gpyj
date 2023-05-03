@@ -44,7 +44,7 @@
         <div class="table2">
           <div class="table2-1 table-shadow">
             <div class="juzhong" style="padding-top: 10px">
-              <div class="table-shadow" style="
+              <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -55,7 +55,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selecttime('0')">分时</div>
-              <div class="table-shadow" style="
+              <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -73,7 +73,7 @@
           </div>
           <div class="table2-2 table-shadow">
             <div class="juzhong" style="padding-top: 10px">
-              <div class="table-shadow" style="
+              <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -84,7 +84,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selectBottom('MACD')">MACD</div>
-              <div class="table-shadow" style="
+              <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -95,7 +95,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selectBottom('KDJ')">KDJ</div>
-              <div class="table-shadow" style="
+              <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -272,7 +272,7 @@ export default {
             }
         },
         getData(stockType) {
-            this.spin = true;
+            // this.spin = true;
             getLetfStocks({
                 stockType: stockType ? stockType : this.$route.query.stockType,
             }).then((res) => {
@@ -568,11 +568,14 @@ export default {
         margin-top: 20px;
     }
     .time-active {
-        color: #1dffff;
-        box-shadow: 0px 0px 15px #1dffff inset;
+        // color: #fff45c;
+        background-color: rgba(246, 211, 34, 0.7);
+        color: white;
+        // box-shadow: 0px 0px 15px #fff45c inset;
     }
     .time-unactive {
-        color: #64b7bc;
+        color: white;
+        background-color: rgba(246, 211, 34, 0.4);
     }
 }
 .ant-spin-container::after {
