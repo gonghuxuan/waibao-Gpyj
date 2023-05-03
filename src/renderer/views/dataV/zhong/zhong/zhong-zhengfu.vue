@@ -35,9 +35,11 @@ import { getAmplitudeStocks } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
 export default {
     data() {
         return {
+            pollApi: this.getData,
             resData: [],
             resDatazao: [],
             resDatawei: [],
@@ -74,6 +76,7 @@ export default {
             default: 0,
         },
     },
+    mixins: [pollMixin],
     computed: {},
     created() {},
     mounted() {

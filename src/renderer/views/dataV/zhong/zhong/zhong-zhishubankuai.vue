@@ -48,6 +48,7 @@
 import { getStocksChangepercentData } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
+import pollMixin from "@/utils/gpyjminix.js";
 import * as echarts from "echarts";
 export default {
     data() {
@@ -56,8 +57,10 @@ export default {
             sandianData: [],
             timeType: 0,
             avgChangepercent: "",
+            pollApi: this.getData,
         };
     },
+    mixins: [pollMixin],
     props: {
         title: {
             type: String,
@@ -93,7 +96,7 @@ export default {
         },
         getData() {
             getStocksChangepercentData({}).then((res) => {
-                console.log(res);
+                this.sandianData = [];
                 this.resData = this.timeType == "0" ? res.同步性 : res.抗跌性;
                 console.log(this.timeType == "0");
                 this.resData.aboveAvgChangepercentStocks.forEach((item) => {
@@ -101,6 +104,7 @@ export default {
                     dataItem[0] = Math.random();
                     dataItem[1] = item.changepercent;
                     dataItem[2] = item.stockName;
+                    dataItem[3] = "up";
                     this.sandianData.push(dataItem);
                 });
                 this.resData.belowAvgChangepercentStocks.forEach((item) => {
@@ -108,6 +112,7 @@ export default {
                     dataItem[0] = Math.random();
                     dataItem[1] = item.changepercent;
                     dataItem[2] = item.stockName;
+                    dataItem[3] = "down";
                     this.sandianData.push(dataItem);
                 });
                 this.setChart();
@@ -202,7 +207,13 @@ export default {
                         data: this.sandianData,
                         itemStyle: {
                             normal: {
-                                color: "rgba(255, 52, 38, 1)",
+                                color: function (param) {
+                                    if (param.value[3] == "up") {
+                                        return "rgba(255, 52, 38, 1)";
+                                    } else {
+                                        return "rgba(26, 176, 93, 1)";
+                                    }
+                                },
 
                                 label: {
                                     position: [5, 9],
@@ -220,8 +231,6 @@ export default {
                     },
                 ],
             };
-            console.log(this.sandianData);
-
             this.chart.setOption(option);
         },
         toDetail() {

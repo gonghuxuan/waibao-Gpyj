@@ -21,9 +21,12 @@ import { getConsecutiveUpStocks } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
+import pollMixin from "@/utils/gpyjminix.js";
+
 export default {
     data() {
         return {
+            pollApi: this.getData,
             resData: [],
             sandianData: [],
             dateArr: [],
@@ -59,12 +62,14 @@ export default {
     // },
     computed: {},
     created() {},
+    mixins: [pollMixin],
     mounted() {
         this.getData();
     },
     methods: {
         getData() {
             getConsecutiveUpStocks({}).then((res) => {
+                this.sandianData = [];
                 const keys = Object.keys(res);
                 this.dateArr = keys;
                 keys.reverse().forEach((item, index) => {

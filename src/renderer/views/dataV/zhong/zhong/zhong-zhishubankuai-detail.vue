@@ -81,6 +81,7 @@
 <script>
 import { getStocksChangepercentData } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
@@ -92,11 +93,13 @@ export default {
             timeType: 0,
             avgChangepercent: "",
             selectedGupiao: "",
+            pollApi: this.getData,
         };
     },
     components: {},
     computed: {},
     created() {},
+    mixins: [pollMixin],
     mounted() {
         this.getData();
     },
@@ -132,7 +135,7 @@ export default {
         },
         getData() {
             getStocksChangepercentData({}).then((res) => {
-                console.log(res);
+                this.sandianData = [];
                 this.resData = this.timeType == "0" ? res.同步性 : res.抗跌性;
                 console.log(this.timeType == "0");
                 this.resData.aboveAvgChangepercentStocks.forEach((item) => {
@@ -141,6 +144,7 @@ export default {
                     dataItem[1] = item.changepercent;
                     dataItem[2] = item.stockName;
                     dataItem[3] = item.close;
+                    dataItem[4] = "up";
 
                     this.sandianData.push(dataItem);
                 });
@@ -150,6 +154,8 @@ export default {
                     dataItem[1] = item.changepercent;
                     dataItem[2] = item.stockName;
                     dataItem[3] = item.close;
+                    dataItem[4] = "down";
+
                     this.sandianData.push(dataItem);
                 });
                 this.setChart();
@@ -256,7 +262,13 @@ export default {
                         data: this.sandianData,
                         itemStyle: {
                             normal: {
-                                color: "rgba(255, 52, 38, 1)",
+                                color: function (param) {
+                                    if (param.value[4] == "up") {
+                                        return "rgba(255, 52, 38, 1)";
+                                    } else {
+                                        return "rgba(26, 176, 93, 1)";
+                                    }
+                                },
 
                                 label: {
                                     position: [5, 9],

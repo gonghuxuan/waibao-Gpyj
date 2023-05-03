@@ -126,6 +126,7 @@
     <script>
 import { getHitStocks } from "@/api/userInfo.js";
 import { getStockAmountActionZhong } from "@/api/userInfo.js";
+import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
@@ -133,6 +134,7 @@ console.log(echarts);
 export default {
     data() {
         return {
+            pollApi: this.getData,
             highestConNum: "",
             avgSuccessRate: "",
             resData: [],
@@ -211,6 +213,7 @@ export default {
     mounted() {
         this.getData();
     },
+    mixins: [pollMixin],
     methods: {
         getData() {
             getStockAmountActionZhong().then((res) => {

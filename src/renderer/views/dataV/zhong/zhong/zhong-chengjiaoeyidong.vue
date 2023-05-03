@@ -34,11 +34,14 @@
 <script>
 import { getStockAmountActionZhong } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
+import pollMixin from "@/utils/gpyjminix.js";
+
 import dayjs from "dayjs";
 import * as echarts from "echarts";
 export default {
     data() {
         return {
+            pollApi: this.getData,
             resData: [],
             resDataQianbu: [],
             resDataZhongbu: [],
@@ -77,6 +80,7 @@ export default {
     },
     computed: {},
     created() {},
+    mixins: [pollMixin],
     mounted() {
         this.getData();
     },

@@ -102,7 +102,7 @@
   
   <script>
 import { getAmplitudeStocks } from "@/api/userInfo.js";
-
+import pollMixin from "@/utils/gpyjminix.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 
 import * as echarts from "echarts";
@@ -110,6 +110,7 @@ import * as echarts from "echarts";
 export default {
     data() {
         return {
+            pollApi: this.getData,
             resData: [],
             resDatazao: [],
             resDatawei: [],
@@ -132,11 +133,13 @@ export default {
     activated() {
         // this.getData();
     },
-
+    mixins: [pollMixin],
     methods: {
         getData() {
             getAmplitudeStocks().then((res) => {
-                console.log("重点预警成交额异动-----", res);
+                // console.log("重点预警成交额异动-----", res);
+                this.sandianData1 = [];
+                this.sandianData2 = [];
 
                 res["早盘（09:30~10:00）"].aboveAvgAmplitudeStocks.forEach(
                     (item) => {

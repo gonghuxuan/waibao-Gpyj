@@ -23,6 +23,7 @@
 // import { getPlateChangepercentData } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import { getStockChangePercentActionZhong } from "@/api/userInfo.js";
+import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
@@ -32,8 +33,10 @@ export default {
             resData: [],
             sandianData: [],
             selectedGupiao: 0,
+            pollApi: this.getData,
         };
     },
+    mixins: [pollMixin],
     components: {},
     computed: {},
     created() {},
@@ -87,7 +90,8 @@ export default {
         },
         getData() {
             getStockChangePercentActionZhong().then((res) => {
-                localStorage.setItem("sandian", JSON.stringify(res));
+                this.sandianData = [];
+                // localStorage.setItem("sandian", JSON.stringify(res));
                 this.resData = res.前部异动;
                 this.resDataQianbu = res.前部异动;
                 this.resDataZhongbu = res.中部异动;

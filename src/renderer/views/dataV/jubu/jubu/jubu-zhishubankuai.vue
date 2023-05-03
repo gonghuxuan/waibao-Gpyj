@@ -73,6 +73,7 @@ export default {
                     dataItem[0] = Math.random();
                     dataItem[1] = item.plateChangepercent;
                     dataItem[2] = item.plateName;
+                    dataItem[3] = "up";
                     this.sandianData.push(dataItem);
                 });
                 this.resData.belowAvgChangepercentPlates.forEach((item) => {
@@ -80,6 +81,7 @@ export default {
                     dataItem[0] = Math.random();
                     dataItem[1] = item.plateChangepercent;
                     dataItem[2] = item.plateName;
+                    dataItem[3] = "down";
                     this.sandianData.push(dataItem);
                 });
                 this.setChart();
