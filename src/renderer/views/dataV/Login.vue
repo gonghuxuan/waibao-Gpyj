@@ -7,7 +7,7 @@
 <template>
   <div class="login-container">
     <div class="layer">
-      <div class="some-space">
+      <!-- <div class="some-space">
         <div class="form">
           <h2>股票预警系统可视化平台</h2>
           <div class="item">
@@ -24,18 +24,52 @@
           <button class="loginBtn" :disabled="isLoginAble" @click.stop="login">
             立即登录
           </button>
-          <!-- <div class="tip" @click="showDevtool">
-            devtool
-          </div> -->
+        </div>
+      </div> -->
+      <div class="bg-2">
+        <div class="right">
+          <div class="title">股票预警系统登录</div>
+          <div class="login-1">
+            <div class="login-2">
+              <span :class="typeFlag ? 'active': 'unactive'" @click="onChange">管理员</span>
+              <span :class="!typeFlag ? 'active': 'unactive'" @click="onChange">普通用户</span>
+            </div>
+            <div class="login-4">
+              <div class="some-space">
+                <div class="form">
+                  <a-input ref="userNameInput" v-model="userName" placeholder="请输入账号" style="margin-bottom: 20px;">
+                    <a-icon slot="prefix" type="user" style="color: #09B8BC" />
+                    <!-- <a-tooltip slot="suffix" title="Extra information">
+                      <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
+                    </a-tooltip> -->
+                  </a-input>
+                  <a-input-password ref="userNameInput" v-model="userPwd" placeholder="请输入密码">
+                    <a-icon type="lock" slot="prefix" theme="filled" style="color: #09B8BC" />
+                    <!-- <a-tooltip slot="suffix" title="Extra information">
+                      <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
+                    </a-tooltip> -->
+                  </a-input-password>
+                  <div class="login-5" @click="login">登录</div>
+                  <!-- <a-checkbox @change="onChange"  style="color: white">
+                    管理员登录
+                  </a-checkbox> -->
+                  <!-- <button class="loginBtn" :disabled="isLoginAble" @click.stop="login">
+                    立即登录
+                  </button> -->
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
 
-    <vue-particles color="#6495ED" :particleOpacity="0.7" :particlesNumber="80" shapeType="circle" :particleSize="4" linesColor="#6495ED" :linesWidth="1" :lineLinked="true" :lineOpacity="0.6" :linesDistance="150"
+    <!-- <vue-particles color="#6495ED" :particleOpacity="0.7" :particlesNumber="80" shapeType="circle" :particleSize="4" linesColor="#6495ED" :linesWidth="1" :lineLinked="true" :lineOpacity="0.6" :linesDistance="150"
       :moveSpeed="3" :hoverEffect="true" hoverMode="grab" :clickEffect="true" clickMode="push">
-    </vue-particles>
+    </vue-particles> -->
 
-    <bgAnimation />
+    <!-- <bgAnimation /> -->
 
     <modal title="提示" :content="modalContent" :visible.sync="visible" @confirm="confirm">
     </modal>
@@ -113,6 +147,8 @@ export default {
         },
         onChange() {
             this.typeFlag = !this.typeFlag;
+            this.userName = "";
+            this.userPwd = "";
         },
         confirm() {
             this.visible = false;
@@ -128,12 +164,93 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .login-container {
+    .ant-input-password-icon {
+        color: rgba(93, 154, 158, 0.5);
+    }
+    .ant-input {
+        padding: 0;
+        background-color: #082932;
+        border-color: #082932;
+        border-radius: 30px;
+        height: 40px;
+        color: white;
+    }
+    .login-5 {
+        background: url(../../assets/img/login-6.png) no-repeat;
+        background-size: cover;
+        background-position: 50% 0;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        margin-top: 20px;
+        font-size: 15px;
+    }
+    .bg-2 {
+        width: 80%;
+        height: 80%;
+        background: url(../../assets/img/login-2.png) no-repeat;
+        background-size: cover;
+        background-position: 50% 0;
+        position: relative;
+    }
+    .title {
+        color: white;
+        font-size: 32px;
+    }
+    .login-1 {
+        width: 100%;
+    }
+    .active {
+        color: #1dffff;
+        font-size: 14px;
+    }
+    .unactive {
+        color: #09b8bc;
+        font-size: 14px;
+    }
+    .login-2 {
+        background: url(../../assets/img/login-3.png) no-repeat;
+        background-size: cover;
+        background-position: 50% 0;
+        height: 40px;
+        margin-top: 20px;
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .login-4 {
+        background: url(../../assets/img/login-4.png) no-repeat;
+        background-size: cover;
+        background-position: 50% 0;
+        height: 340px;
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .right {
+        position: absolute;
+        right: 0;
+        top: 150px;
+        width: 500px;
+        text-align: center;
+    }
     .layer {
         position: absolute;
         height: 100%;
         width: 100%;
+        background: url(../../assets/img/login-1.png) no-repeat;
+        background-size: cover;
+        background-position: 50% 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     #particles-js {
         position: absolute;
@@ -144,36 +261,40 @@ export default {
         z-index: 1000;
     }
     .some-space {
-        color: white;
-        font-weight: 100;
-        letter-spacing: 2px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        z-index: 1001;
-        -webkit-transform: translate3d(-50%, -50%, 0);
-        transform: translate3d(-50%, -50%, 0);
+        // color: white;
+        // font-weight: 100;
+        // letter-spacing: 2px;
+        // position: absolute;
+        // top: 50%;
+        // left: 50%;
+        // z-index: 1001;
+        // -webkit-transform: translate3d(-50%, -50%, 0);
+        // transform: translate3d(-50%, -50%, 0);
 
-        -ms-animation: cloud 2s 3s ease-in infinite alternate;
-        -moz-animation: cloud 2s 3s ease-in infinite alternate;
-        -webkit-animation: cloud 2s 3s ease-in infinite alternate;
-        -o-animation: cloud 2s 3s ease-in infinite alternate;
-        -webkit-animation: cloud 2s 3s ease-in infinite alternate;
-        animation: cloud 2s 3s ease-in infinite alternate;
+        // -ms-animation: cloud 2s 3s ease-in infinite alternate;
+        // -moz-animation: cloud 2s 3s ease-in infinite alternate;
+        // -webkit-animation: cloud 2s 3s ease-in infinite alternate;
+        // -o-animation: cloud 2s 3s ease-in infinite alternate;
+        // -webkit-animation: cloud 2s 3s ease-in infinite alternate;
+        // animation: cloud 2s 3s ease-in infinite alternate;
 
         .form {
-            width: 460px;
-            height: auto;
-            background: rgba(36, 36, 85, 0.5);
-            margin: 0 auto;
-            padding: 35px 30px 25px;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
-            border-radius: 10px;
+            padding-top: 80px;
+            width: 80%;
+            // height: auto;
+            // background: rgba(36, 36, 85, 0.5);
+            // margin: 0 auto;
+            // padding: 35px 30px 25px;
+            // box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+            // border-radius: 10px;
+            margin-left: auto;
+            margin-right: auto;
             .item {
                 display: flex;
                 align-items: center;
                 margin-bottom: 25px;
                 border-bottom: 1px solid #d3d7f7;
+
                 i {
                     color: #d3d7f7;
                     margin-right: 10px;
