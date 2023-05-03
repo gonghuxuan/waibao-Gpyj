@@ -252,8 +252,14 @@ export default {
     height: 500px;
     padding: 7px 5px;
     .time-active {
-        color: #1dffff;
-        box-shadow: 0px 0px 15px #1dffff inset;
+        // color: #fff45c;
+        background-color: rgba(246, 211, 34, 0.7);
+        color: white;
+        // box-shadow: 0px 0px 15px #fff45c inset;
+    }
+    .time-unactive {
+        color: white;
+        background-color: rgba(246, 211, 34, 0.4);
     }
     .table-shuiwei {
         position: absolute;
