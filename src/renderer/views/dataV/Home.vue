@@ -107,6 +107,12 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
+    .left-1 {
+        background-color: rgba(255, 244, 92, 0.2);
+    }
+    .right-1 {
+        background-color: rgba(217, 61, 210, 0.2);
+    }
     .test {
         width: 30vw;
         height: 20vh;

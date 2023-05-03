@@ -185,7 +185,8 @@ export default {
     .table-contain {
         width: 400px;
         height: 195px;
-        background-color: rgba(2, 81, 93, 1);
+        // background-color: rgba(2, 81, 93, 1);
+        // background-color: rgba(217, 61, 210, 0.3);
         margin-top: 5px;
     }
     .ant-table-thead > tr > th {

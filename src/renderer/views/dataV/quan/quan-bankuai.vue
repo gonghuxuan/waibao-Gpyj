@@ -2,21 +2,21 @@
   <div class="jubu-bankuai">
     <div class="sn-container sn-container-1">
       <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title">
+        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(255,244,92,0.3);">
           <quanbankuaizhangting stockType="1" title="板块涨停个数" />
         </div>
       </dv-border-box-10>
     </div>
     <div class="sn-container sn-container-2">
       <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title">
+        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(255,81,69,0.3);">
           <quanxingao stockType="0" title="新高异动" />
         </div>
       </dv-border-box-10>
     </div>
     <div class="sn-container sn-container-3">
       <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title">
+        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(217,61,210,0.3);">
           <bankuaiitem title="平台突破">
             <quanxingao stockType="1" title="平台突破" />
           </bankuaiitem>
@@ -25,7 +25,7 @@
     </div>
     <div class="sn-container sn-container-4">
       <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title">
+        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(30,139,255,0.3);">
           <bankuaiitem title="游资股预警">
             <quanxingao stockType="3" title="游资股预警" />
           </bankuaiitem>
