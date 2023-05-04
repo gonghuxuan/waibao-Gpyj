@@ -1,88 +1,92 @@
 <template>
-  <div class="importStockData">
-    <div class="top-contain">
-      <div>
-        <span class="padding active">导入股票数据</span>
-      </div>
-    </div>
-    <div class="content-contain">
-      <!-- <a-table bordered :columns="columns" :data-source="机构票监测" :pagination="false" :scroll="{ y: 240 }">
-            <template slot="value" slot-scope="value">
-            <div :class="value > 0 ? 'red' : 'green'">
-                <a-button type="primary">
-                <span v-if="value > 0"> +</span>
-                {{ value }}
-                </a-button>
+    <div class="importStockData">
+        <div class="top-contain">
+            <div>
+                <span class="padding active">导入股票数据</span>
             </div>
-            </template>
-        </a-table> -->
-      <div style="display: flex;justify-content: flex-start;">
-        <span style="font-size: 16px; color:#5FA4A8; height: 40px;line-height: 40px;margin-right: 30px">上传类型</span>
-        <div :class="type == '0'? 'selected' : 'unselected'" style="margin-right: 30px;">局部预警</div>
-        <div :class="type == '1'? 'selected' : 'unselected'">重点预警</div>
-        <!-- <div>局部预警</div>
-            <div>重点预警</div> -->
-      </div>
-      <div style="margin-top: 20px;">
-        <a-upload-dragger name="file" :multiple="true" action="https://www.mocky.io/v2/5cc8019d300000980a055e76" @change="handleChange">
-          <img src="../../../assets/img/upload-4.png" />
-          <div class="upload-text">点击或拖动TXT文件上传</div>
-        </a-upload-dragger>
-      </div>
-      <div>
-      </div>
+        </div>
+        <div class="content-contain">
+            <div style="display: flex; justify-content: flex-start">
+                <span
+                    style="
+                        font-size: 16px;
+                        color: #5fa4a8;
+                        height: 40px;
+                        line-height: 40px;
+                        margin-right: 30px;
+                    "
+                    >上传类型</span
+                >
+                <div
+                    :class="type == '0' ? 'selected' : 'unselected'"
+                    style="margin-right: 30px"
+                    @click="typeClick('jubu')"
+                    >局部预警</div
+                >
+                <div
+                    :class="type == '1' ? 'selected' : 'unselected'"
+                    @click="typeClick('zhongdian')"
+                    >重点预警</div
+                >
+            </div>
+            <div style="margin-top: 20px">
+                <a-upload-dragger
+                    name="file"
+                    :multiple="false"
+                    @change="handleChange"
+                    accept=".txt"
+                    :before-upload="beforeUpload"
+                    showUploadList
+                >
+                    <img src="../../../assets/img/upload-4.png" />
+                    <div class="upload-text">点击或拖动TXT文件上传</div>
+                </a-upload-dragger>
+            </div>
+            <div
+                style="
+                    display: flex;
+                    gap: 20px;
+                    justify-content: center;
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                "
+            >
+                <a-button type="primary" @click="confirm">提交</a-button>
+                <a-button>取消</a-button>
+            </div>
+            <a-table
+                bordered
+                :columns="columns"
+                :data-source="stockData"
+                :pagination="false"
+                :scroll="{ y: 240 }"
+            >
+            </a-table>
+            <div> </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import { getStockAmountAction } from "@/api/userInfo.js";
+import { uploadStockDataTxt, stockList } from "@/api/userInfo.js";
 import * as echarts from "echarts";
 
-console.log(echarts);
 export default {
     data() {
         return {
-            type: 0,
+            type: "0",
+            fileList: [],
             columns: [
                 {
-                    title: "名称",
-                    dataIndex: "stockName",
-                    key: "stockName",
+                    title: "股票代码",
+                    dataIndex: "stockCode",
+                    key: "stockCode",
                     align: "center",
-                    // customRender: (text, record, index) => `${index + 1}`, //此处为重点
-                },
-                {
-                    title: "价格",
-                    dataIndex: "close",
-                    key: "close",
-                    align: "center",
-                },
-                {
-                    title: "涨跌幅",
-                    dataIndex: "changepercent",
-                    key: "changepercent",
-                    align: "center",
-                    scopedSlots: { customRender: "changepercent" },
-                },
-                {
-                    title: "3日涨跌幅",
-                    dataIndex: "changepercent3",
-                    key: "changepercent3",
-                    align: "center",
-                    scopedSlots: { customRender: "changepercent3" },
-                },
-                {
-                    title: "成交额(亿)",
-                    dataIndex: "amount",
-                    key: "amount",
-                    align: "center",
-                    scopedSlots: { customRender: "amount" },
                 },
             ],
-            成交额递增: [],
-            机构票监测: [],
-            成交额异动: [],
+            重点预警: [],
+            stockData: [],
+            局部预警: [],
             lianbantianti: {},
         };
     },
@@ -90,16 +94,77 @@ export default {
     computed: {},
     created() {},
     mounted() {
-        this.getData();
+        this.getStockList();
     },
     methods: {
-        getData() {
-            getStockAmountAction().then((res) => {
-                this.成交额递增 = res.成交额递增;
-                this.机构票监测 = res.机构票监测;
-                this.成交额异动 = res.成交额异动;
+        typeClick(type){
+            if(type === 'jubu'){
+                this.type = '0';
+                this.stockData = this.局部预警
+            }else if(type === 'zhongdian'){
+                this.type = '1';
+                this.stockData = this.重点预警
+            }
+        },
+        beforeUpload(file) {
+            return new Promise((resolve, reject) => {
+                let type = file.name
+                    .toLowerCase()
+                    .substr(file.name.lastIndexOf("."));
+                if (type != ".txt") {
+                    this.$message.warning("请上传txt文件");
+                    return reject(false);
+                }
+                this.fileList = [...this.fileList, file].slice(0, 1);
+                return false;
             });
         },
+        confirm() {
+            if (this.fileList.length == 0) {
+                this.$message.warn("请上传文件");
+                return;
+            } else {
+                const that = this;
+                const fd = new FormData();
+                this.fileList.forEach((file) => {
+                    fd.append("files", file);
+                });
+                fd.append(
+                    "userName",'stockCode'
+                );
+                // console.log(fd);
+                // debugger
+                let param = {
+                    file: fd,
+                    stockType: this.type==='0' ? '局部预警': '重点预警'
+                }
+                uploadStockDataTxt(param).then((res) => {
+                    if (res.code == "200" || res.status == "0") {
+                        that.$message.success("上传成功");
+                        that.modalValue.visible = false;
+                        that.$emit("updatetable");
+                    } else {
+                        that.$message.error(res.description || res.message);
+                    }
+                });
+                this.fileList = [];
+            }
+        },
+        handleCancel() {
+            this.modalValue.visible = false;
+            this.fileList = [];
+        },
+        getStockList(){
+            stockList({stockType:'重点预警'}).then(res=>{
+                this.重点预警 = res
+            });
+            stockList({stockType:'局部预警'}).then(res=>{
+                this.局部预警 = res
+                this.stockData = this.局部预警
+            })
+        }
+        
+        
     },
 };
 </script>

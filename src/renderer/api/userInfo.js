@@ -147,3 +147,22 @@ export function getAmplitudeStocks(params) {
         params,
     });
 }
+
+export function uploadStockDataTxt(data) {
+    return request({
+        url: "/stockAlert/manageStock/uploadStockDataTxt",
+        method: "post",
+        data,
+    });
+}
+
+export function stockList(params) {
+    return request({
+        url: "/stockAlert/manageStock/stockList",
+        method: "get",
+        params,
+    });
+}
+
+
+
