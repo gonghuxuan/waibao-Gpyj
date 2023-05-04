@@ -56,7 +56,7 @@
       <div class="table2 ">
         <div class="table2-1">
           <div class="juzhong" style="padding-top: 10px; padding-bottom: 20px;">
-            <div class="table-shadow" style="
+            <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -67,7 +67,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="changetype('0')">突破</div>
-            <div class="table-shadow" style="
+            <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;

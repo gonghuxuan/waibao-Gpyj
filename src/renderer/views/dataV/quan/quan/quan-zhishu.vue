@@ -339,6 +339,15 @@ export default {
                             backgroundColor: "#6a7985",
                         },
                     },
+                    formatter: function (params) {
+                        console.log(params);
+                        var res = "时间: " + params[0].name;
+                        res += "<br/>开盘价: " + params[0].data[1].toFixed(2);
+                        res += "<br/>收盘价: " + params[0].data[2].toFixed(2);
+                        res += "<br/>最低价: " + params[0].data[3].toFixed(2);
+                        res += "<br/>最高价: " + params[0].data[4].toFixed(2);
+                        return res;
+                    },
                 },
                 title: {
                     // text: "Stacked Line",

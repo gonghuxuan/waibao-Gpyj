@@ -96,7 +96,11 @@ export default {
             return !(this.userName && this.userPwd);
         },
     },
-    created() {},
+    created() {
+        console.log("created");
+        this.$forceUpdate();
+    },
+    activated() {},
     mounted() {},
     methods: {
         login() {
@@ -112,6 +116,11 @@ export default {
                 localStorage.setItem("authorization", res.authorization);
                 localStorage.setItem("userId", res.userId);
                 localStorage.setItem("username", this.userName);
+                if (this.typeFlag == "1") {
+                    localStorage.setItem("admin", 1);
+                } else {
+                    localStorage.setItem("admin", 2);
+                }
                 this.$router.push({
                     path: "/home",
                 });

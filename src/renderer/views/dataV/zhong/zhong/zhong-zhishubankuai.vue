@@ -5,7 +5,7 @@
     </div>
     <div class="table-contain">
       <div class="juzhong" style="">
-        <div class="table-shadow" style="
+        <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -16,7 +16,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selecttime('0')">同步性</div>
-        <div class="table-shadow" style="
+        <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;

@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <div><a-icon style="margin-top: 9px;font-size: 14px;margin-left: 10px;padding-right: 5px;" type="home" theme="filled" class="icon" /></div>
+    <div @click="toHome"><a-icon style="margin-top: 9px;font-size: 14px;margin-left: 10px;padding-right: 5px;" type="home" theme="filled" class="icon" /></div>
     <a-dropdown>
       <a class="ant-dropdown-link" @click="handleClick">
         全局市场预警 <a-icon type="down" />
@@ -80,7 +80,7 @@
         </a-menu-item>
       </a-menu>
     </a-dropdown>
-    <a-dropdown>
+    <a-dropdown v-if="admin == 1">
       <a class="ant-dropdown-link" @click="toManagement">
         后台管理 <a-icon type="down" />
       </a>
@@ -117,7 +117,7 @@
                 </a-menu-item>
             </a-menu> -->
     </a-dropdown>
-    <a-button-group size="small">
+    <!-- <a-button-group size="small">
       <a-button type="primary" @click="back">
         <a-icon type="left" />
       </a-button>
@@ -127,13 +127,26 @@
       <a-button type="primary" @click="refresh">
         <a-icon type="reload" />
       </a-button>
-    </a-button-group>
+    </a-button-group> -->
   </div>
 </template>
 
 <script>
 import eventBus from "@/utils/eventBus";
 export default {
+    data() {
+        return {
+            admin: localStorage.getItem("admin"),
+        };
+    },
+    created() {
+        console.log(this.admin);
+    },
+    activated() {
+        console.log("control acticed");
+        this.admin = localStorage.getItem("admin");
+        this.$forceUpdate();
+    },
     methods: {
         toDetail(url, title1, title2, type) {
             console.log(url);
@@ -150,6 +163,9 @@ export default {
             this.$router.push({
                 path: "/importStockData",
             });
+        },
+        toHome() {
+            this.$router.push({ path: "/home" });
         },
         back() {
             this.$router.go(-1);

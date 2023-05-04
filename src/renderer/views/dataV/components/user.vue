@@ -6,7 +6,8 @@
             padding-left: 30px;
             z-index: 999
         ">
-    <span @click="show">{{ username }}</span>
+    <span v-if="admin == 1">{{ username }}</span>
+    <span v-if="admin == 2">{{ username }}</span>
     <span @click="logout" style="padding-left: 15px;padding-right: 30px;"><img src="@/assets/img/logout.svg" alt="" style="width: 20px;" /></span>
   </div>
 </template>
@@ -16,9 +17,14 @@ export default {
     data() {
         return {
             username: localStorage.getItem("username"),
+            admin: localStorage.getItem("admin"),
         };
     },
     mounted() {},
+    activated() {
+        console.log("user acticed");
+        this.username = localStorage.getItem("username");
+    },
     methods: {
         logout() {
             console.log("logout");

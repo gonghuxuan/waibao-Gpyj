@@ -1,6 +1,6 @@
 {
     "name": "gpyj",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "private": false,
     "scripts": {
         "start": "vue-cli-service electron:serve",

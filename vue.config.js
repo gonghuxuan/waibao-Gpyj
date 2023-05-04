@@ -107,7 +107,7 @@ module.exports = {
         hotOnly: false,
         proxy: {
             "/gpyj": {
-                target: "http://43.137.3.191:8080/", // 本地模拟数据服务器
+                target: "http://test46.szdjct.com/", // 本地模拟数据服务器
                 changeOrigin: true,
                 pathRewrite: {
                     "^/gpyj": "", // 去掉接口地址中的api字符串

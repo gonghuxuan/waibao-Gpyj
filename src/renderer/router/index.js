@@ -316,6 +316,7 @@ const router = new Router({
             meta: {
                 title: "登录界面",
             },
+            keepAlive: false,
         },
         // {
         //     name: "tray",
