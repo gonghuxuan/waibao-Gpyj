@@ -1,70 +1,46 @@
 <template>
-    <div class="importStockData">
-        <div class="top-contain">
-            <div>
-                <span class="padding active">导入股票数据</span>
-            </div>
-        </div>
-        <div class="content-contain">
-            <div style="display: flex; justify-content: flex-start">
-                <span
-                    style="
+  <div class="importStockData">
+    <div class="top-contain">
+      <div>
+        <span class="padding active">导入股票数据</span>
+      </div>
+    </div>
+    <div class="content-contain">
+      <div style="display: flex; justify-content: flex-start">
+        <span style="
                         font-size: 16px;
                         color: #5fa4a8;
                         height: 40px;
                         line-height: 40px;
                         margin-right: 30px;
-                    "
-                    >上传类型</span
-                >
-                <div
-                    :class="type == '0' ? 'selected' : 'unselected'"
-                    style="margin-right: 30px"
-                    @click="typeClick('jubu')"
-                    >局部预警</div
-                >
-                <div
-                    :class="type == '1' ? 'selected' : 'unselected'"
-                    @click="typeClick('zhongdian')"
-                    >重点预警</div
-                >
-            </div>
-            <div style="margin-top: 20px">
-                <a-upload-dragger
-                    name="file"
-                    :multiple="false"
-                    @change="handleChange"
-                    accept=".txt"
-                    :before-upload="beforeUpload"
-                    showUploadList
-                >
-                    <img src="../../../assets/img/upload-4.png" />
-                    <div class="upload-text">点击或拖动TXT文件上传</div>
-                </a-upload-dragger>
-            </div>
-            <div
-                style="
+                    ">上传类型</span>
+        <div :class="type == '0' ? 'selected' : 'unselected'" style="margin-right: 30px" @click="typeClick('jubu')">局部预警</div>
+        <div :class="type == '1' ? 'selected' : 'unselected'" @click="typeClick('zhongdian')">重点预警</div>
+      </div>
+      <div style="margin-top: 20px">
+        <a-upload-dragger name="file" :multiple="false" accept=".txt" :before-upload="beforeUpload">
+          <div v-if="fileList < 1">
+            <img src="../../../assets/img/upload-4.png" />
+            <div class="upload-text">点击或拖动TXT文件上传</div>
+          </div>
+
+        </a-upload-dragger>
+      </div>
+      <div style="
                     display: flex;
                     gap: 20px;
                     justify-content: center;
                     margin-top: 20px;
                     margin-bottom: 20px;
-                "
-            >
-                <a-button type="primary" @click="confirm">提交</a-button>
-                <a-button>取消</a-button>
-            </div>
-            <a-table
-                bordered
-                :columns="columns"
-                :data-source="stockData"
-                :pagination="false"
-                :scroll="{ y: 240 }"
-            >
-            </a-table>
-            <div> </div>
-        </div>
+                ">
+        <a-button type="primary" @click="confirm">提交</a-button>
+        <a-button>取消</a-button>
+      </div>
+      <a-table bordered :columns="columns" :data-source="stockData" :pagination="false" :scroll="{ y: 500 }">
+      </a-table>
+      <div> </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -97,13 +73,13 @@ export default {
         this.getStockList();
     },
     methods: {
-        typeClick(type){
-            if(type === 'jubu'){
-                this.type = '0';
-                this.stockData = this.局部预警
-            }else if(type === 'zhongdian'){
-                this.type = '1';
-                this.stockData = this.重点预警
+        typeClick(type) {
+            if (type === "jubu") {
+                this.type = "0";
+                this.stockData = this.局部预警;
+            } else if (type === "zhongdian") {
+                this.type = "1";
+                this.stockData = this.重点预警;
             }
         },
         beforeUpload(file) {
@@ -116,7 +92,8 @@ export default {
                     return reject(false);
                 }
                 this.fileList = [...this.fileList, file].slice(0, 1);
-                return false;
+                console.log(this.fileList);
+                // return false;
             });
         },
         confirm() {
@@ -126,19 +103,21 @@ export default {
             } else {
                 const that = this;
                 const fd = new FormData();
-                this.fileList.forEach((file) => {
-                    fd.append("files", file);
-                });
-                fd.append(
-                    "userName",'stockCode'
-                );
+                console.log(this.fileList);
+                // this.fileList.forEach((file) => {
+                //     fd.append("files", file);
+                // });
+                fd.append("file", this.fileList[0]);
+                fd.append("stockType", "重点预警");
+
+                // fd.append("userName", "stockCode");
                 // console.log(fd);
                 // debugger
-                let param = {
-                    file: fd,
-                    stockType: this.type==='0' ? '局部预警': '重点预警'
-                }
-                uploadStockDataTxt(param).then((res) => {
+                // let param = {
+                //     file: fd,
+                //     stockType: this.type === "0" ? "局部预警" : "重点预警",
+                // };
+                uploadStockDataTxt(fd).then((res) => {
                     if (res.code == "200" || res.status == "0") {
                         that.$message.success("上传成功");
                         that.modalValue.visible = false;
@@ -154,23 +133,27 @@ export default {
             this.modalValue.visible = false;
             this.fileList = [];
         },
-        getStockList(){
-            stockList({stockType:'重点预警'}).then(res=>{
-                this.重点预警 = res
+        getStockList() {
+            stockList({ stockType: "重点预警" }).then((res) => {
+                this.重点预警 = res;
             });
-            stockList({stockType:'局部预警'}).then(res=>{
-                this.局部预警 = res
-                this.stockData = this.局部预警
-            })
-        }
-        
-        
+            stockList({ stockType: "局部预警" }).then((res) => {
+                this.局部预警 = res;
+                this.stockData = this.局部预警;
+            });
+        },
     },
 };
 </script>
 
 <style lang="scss">
 .importStockData {
+    .ant-table-row {
+        background-color: #073b49;
+    }
+    .ant-table-thead {
+        background-color: #073b49;
+    }
     .ant-upload {
         padding-bottom: 0px;
         padding-top: 0px;
