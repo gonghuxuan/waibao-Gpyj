@@ -310,7 +310,7 @@ export default {
                                     lineStyle: {
                                         //警戒线的样式  ，虚实  颜色
                                         type: "dashed",
-                                        color: "#5D9A9E",
+                                        color: "yellow",
                                     },
                                     yAxis: this.resData.preClose, // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
                                 },
@@ -400,15 +400,15 @@ export default {
                             backgroundColor: "#6a7985",
                         },
                     },
-                    formatter: function (params) {
-                        console.log(params);
-                        var res = "时间: " + params[0].name;
-                        res += "<br/>开盘价: " + params[0].data[1].toFixed(2);
-                        res += "<br/>收盘价: " + params[0].data[2].toFixed(2);
-                        res += "<br/>最低价: " + params[0].data[3].toFixed(2);
-                        res += "<br/>最高价: " + params[0].data[4].toFixed(2);
-                        return res;
-                    },
+                    // formatter: function (params) {
+                    //     console.log(params);
+                    //     var res = "时间: " + params[0].name;
+                    //     res += "<br/>开盘价: " + params[0].data[1].toFixed(2);
+                    //     res += "<br/>收盘价: " + params[0].data[2].toFixed(2);
+                    //     res += "<br/>最低价: " + params[0].data[3].toFixed(2);
+                    //     res += "<br/>最高价: " + params[0].data[4].toFixed(2);
+                    //     return res;
+                    // },
                 },
                 title: {
                     // text: "Stacked Line",
@@ -452,7 +452,7 @@ export default {
                                     lineStyle: {
                                         //警戒线的样式  ，虚实  颜色
                                         type: "dashed",
-                                        color: "#5D9A9E",
+                                        color: "yellow",
                                     },
                                     yAxis: this.resData.preClose, // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
                                 },

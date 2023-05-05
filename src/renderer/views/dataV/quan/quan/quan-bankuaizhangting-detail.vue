@@ -365,9 +365,13 @@ export default {
                     console.log(res);
                     resList[0].forEach((item, index) => {
                         resArr.forEach((key) => {
-                            item[key + "2"] = resList[1][index][key];
-                            item[key + "3"] = resList?.[2][index][key];
-                            if (resList[4]) {
+                            if (resList[1]) {
+                                item[key + "2"] = resList[1][index][key];
+                            }
+                            if (resList[2]) {
+                                item[key + "3"] = resList?.[2][index][key];
+                            }
+                            if (resList[3]) {
                                 item[key + "4"] = resList[3][index][key];
                             }
                             if (resList[4]) {

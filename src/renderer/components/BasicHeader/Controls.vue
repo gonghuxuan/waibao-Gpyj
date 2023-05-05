@@ -4,7 +4,7 @@
       <!-- <a-icon style="margin-top: 9px;font-size: 14px;margin-left: 10px;padding-right: 5px;" type="home" theme="filled" class="icon" /> -->
       <img src="../../assets/img/home.svg" height="23" style="margin-left: 10px;" />
     </div>
-    <a-dropdown trigger="click">
+    <a-dropdown>
       <a class="ant-dropdown-link" @click="handleClick">
         <img src="../../assets/img/quan.svg" height="23" style="margin-left: -16px" />
       </a>
@@ -16,7 +16,7 @@
           <a href="javascript:;">指数背离</a>
         </a-menu-item>
         <a-menu-item @click="toDetail( '/quan-daban-detail')">
-          <a href="javascript:;">打版</a>
+          <a href="javascript:;">打板</a>
         </a-menu-item>
         <a-menu-item @click="toDetail( '/quan-zijin-detail','全场预警','资金流向', 0)">
           <a href="javascript:;">资金流向</a>

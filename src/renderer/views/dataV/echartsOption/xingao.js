@@ -10,6 +10,14 @@ export function table2Optionfen(timeList, closeList, changeList) {
                     color: "#999",
                 },
             },
+            formatter: (params) => {
+                console.log(params[0]);
+                var res = "时间: " + params[0].axisValue;
+                res += "<br/>价格: " + params[0].data;
+                res +=
+                    "<br/>涨幅: " + changeList[params[0].dataIndex].toFixed(2);
+                return res;
+            },
         },
         legend: {
             data: ["价格", "涨幅"],
@@ -46,24 +54,26 @@ export function table2Optionfen(timeList, closeList, changeList) {
                 name: "价格",
                 scale: true,
             },
-            {
-                type: "value",
-                name: "涨幅",
-            },
+            // {
+            //     type: "value",
+            //     name: "涨幅",
+            // },
         ],
         series: [
             {
                 name: "价格",
                 type: "line",
-                yAxisIndex: 0,
                 data: closeList,
             },
-            {
-                name: "涨幅",
-                type: "line",
-                yAxisIndex: 1,
-                data: changeList,
-            },
+            // {
+            //     name: "涨幅",
+            //     type: "line",
+            //     data: changeList,
+            //     show: false,
+            //     itemStyle: {
+            //         color: "red",
+            //     },
+            // },
         ],
     };
     return option;

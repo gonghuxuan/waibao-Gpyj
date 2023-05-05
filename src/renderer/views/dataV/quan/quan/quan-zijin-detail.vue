@@ -65,6 +65,7 @@ export default {
         return {
             pagination: {
                 showQuickJumper: true,
+                pageSize: 15,
             },
             columns: [
                 {

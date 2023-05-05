@@ -265,7 +265,7 @@ export default {
                                     lineStyle: {
                                         //警戒线的样式  ，虚实  颜色
                                         type: "dashed",
-                                        color: "#5D9A9E",
+                                        color: "yellow",
                                     },
                                     yAxis: this.resData.preClose, // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
                                 },
@@ -391,7 +391,7 @@ export default {
                                     lineStyle: {
                                         //警戒线的样式  ，虚实  颜色
                                         type: "dashed",
-                                        color: "#5D9A9E",
+                                        color: "yellow",
                                     },
                                     yAxis: this.resData.preClose, // 警戒线的标注值，可以有多个yAxis,多条警示线   或者采用   {type : 'average', name: '平均值'}，type值有  max  min  average，分为最大，最小，平均值
                                 },

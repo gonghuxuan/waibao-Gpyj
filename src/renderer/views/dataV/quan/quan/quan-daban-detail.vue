@@ -18,7 +18,7 @@
               <div :class="value > 0 ? 'red' : 'green'">
                 <a-button type="primary">
                   <span v-if="value > 0"> +</span>
-                  {{ value }}
+                  {{ value| fixedTwo  }}
                 </a-button>
               </div>
             </template>
@@ -31,7 +31,7 @@
               <div :class="value > 0 ? 'red' : 'green'">
                 <a-button type="primary">
                   <span v-if="value > 0"> +</span>
-                  {{ value }}
+                  {{ value| fixedTwo  }}
                 </a-button>
               </div>
             </template>
@@ -42,12 +42,9 @@
       <div class="table-3">
         <div class="active padding"><span style="color: white">隔夜委托量</span></div>
         <a-table bordered :columns="columns2" :data-source="resData3" :pagination="pagination" class="table-hei">
-          <!-- <template slot="value" slot-scope="value">
-            <div style="color: white">
-              <span v-if="value > 0"> +</span>
-              {{ value }}
-            </div>
-          </template> -->
+          <template slot="value" slot-scope="value">
+            {{ value| fixedTwo  }}
+          </template>
         </a-table>
         <div style="padding-bottom: 100px;"></div>
       </div>
@@ -80,6 +77,7 @@ export default {
                     dataIndex: "close",
                     key: "close",
                     align: "center",
+                    sorter: (a, b) => b.close - a.close,
                 },
                 {
                     title: "涨跌幅",
@@ -87,6 +85,7 @@ export default {
                     key: "value",
                     align: "center",
                     scopedSlots: { customRender: "value" },
+                    sorter: (a, b) => b.value - a.value,
                 },
             ],
             columns2: [
@@ -103,6 +102,7 @@ export default {
                     key: "value",
                     align: "center",
                     scopedSlots: { customRender: "value" },
+                    sorter: (a, b) => b.value - a.value,
                 },
             ],
             resData1: [],

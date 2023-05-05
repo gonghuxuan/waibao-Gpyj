@@ -205,6 +205,8 @@ export default {
     computed: {},
     created() {},
     mounted() {
+        // this.active = this.$route.query.stockType;
+        // this.getData();
         // this.getName();
         // console.log(this.$route.query.stockType);
         // this.getData();
