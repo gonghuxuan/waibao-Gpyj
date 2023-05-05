@@ -51,6 +51,8 @@ export default {
                 // console.log("10TIAN-----", res);
                 this.dateArr = [];
                 this.dataObj = {};
+                let flag = true;
+                let stocknameOne = "";
                 res.notthroughList.forEach((element, index) => {
                     if (!this.dataObj.hasOwnProperty(element.stockName)) {
                         this.dataObj[element.stockName] = [];
@@ -62,7 +64,11 @@ export default {
                             element.changepercent
                         );
                     }
-                    if (index < 10) {
+                    if (flag) {
+                        stocknameOne = element.stockName;
+                        flag = false;
+                    }
+                    if (stocknameOne == element.stockName) {
                         this.dateArr.push(getDay(element.dealDate));
                     }
                 });

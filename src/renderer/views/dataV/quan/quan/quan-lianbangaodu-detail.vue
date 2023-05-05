@@ -7,7 +7,6 @@
     </div>
     <div class="content-contain-detail">
       <div style="color: #64B7BC; font-size: 16px; padding-left: 20px; padding-bottom: 20px;">自定义时间
-
         <a-range-picker style="margin-left: 20px;" :disabled-date="disabledDate" v-model="rangeTime" @change="changetime" @calendarChange="calendarPriceRangeChange" format="YYYY-MM-DD" />
       </div>
       <a-table bordered :columns="columns" :data-source="datasource" :pagination="false" class="table">
@@ -657,5 +656,11 @@ export default {
         > td {
         background-color: #082d37;
     }
+    .ant-calendar th {
+        min-width: unset;
+    }
+}
+.ant-calendar th {
+    min-width: unset;
 }
 </style>

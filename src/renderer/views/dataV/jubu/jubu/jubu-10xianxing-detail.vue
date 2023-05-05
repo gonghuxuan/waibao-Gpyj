@@ -179,6 +179,8 @@ export default {
             this.getData();
         },
         getDataSelect(res) {
+            let flag = true;
+            let stocknameOne = "";
             if (this.type == "0") {
                 res.throughList.forEach((element, index) => {
                     if (!this.dataObj.hasOwnProperty(element.stockName)) {
@@ -191,7 +193,11 @@ export default {
                             element.changepercent
                         );
                     }
-                    if (index < 10) {
+                    if (flag) {
+                        stocknameOne = element.stockName;
+                        flag = false;
+                    }
+                    if (stocknameOne == element.stockName) {
                         this.dateArr.push(getDay(element.dealDate));
                     }
                 });
@@ -207,7 +213,11 @@ export default {
                             element.changepercent
                         );
                     }
-                    if (index < 10) {
+                    if (flag) {
+                        stocknameOne = element.stockName;
+                        flag = false;
+                    }
+                    if (stocknameOne == element.stockName) {
                         this.dateArr.push(getDay(element.dealDate));
                     }
                 });
@@ -225,6 +235,8 @@ export default {
                 console.log("10TIAN-----", res);
                 this.resData = res;
                 localStorage.setItem("10tian", JSON.stringify(res));
+                let flag = true;
+                let stocknameOne = "";
                 if (this.type == "0") {
                     res.throughList.forEach((element, index) => {
                         if (!this.dataObj.hasOwnProperty(element.stockName)) {
@@ -237,7 +249,11 @@ export default {
                                 element.changepercent
                             );
                         }
-                        if (index < 10) {
+                        if (flag) {
+                            stocknameOne = element.stockName;
+                            flag = false;
+                        }
+                        if (stocknameOne == element.stockName) {
                             this.dateArr.push(getDay(element.dealDate));
                         }
                     });
@@ -253,7 +269,11 @@ export default {
                                 element.changepercent
                             );
                         }
-                        if (index < 10) {
+                        if (flag) {
+                            stocknameOne = element.stockName;
+                            flag = false;
+                        }
+                        if (stocknameOne == element.stockName) {
                             this.dateArr.push(getDay(element.dealDate));
                         }
                     });
