@@ -49,6 +49,12 @@
                       <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
                     </a-tooltip> -->
                   </a-input-password>
+                  <div class="mima-con">
+                    <a-checkbox @change="jizhumima" style="color: white" class="mima">
+                      记住密码
+                    </a-checkbox>
+                  </div>
+
                   <div class="login-5" @click="login">登录</div>
                   <!-- <a-checkbox @change="onChange"  style="color: white">
                     管理员登录
@@ -89,6 +95,7 @@ export default {
             visible: false,
             modalContent: "这是一段自定义模态框消息",
             typeFlag: false,
+            jishu: false,
         };
     },
     computed: {
@@ -100,9 +107,21 @@ export default {
         console.log("created");
         this.$forceUpdate();
     },
-    activated() {},
+    activated() {
+        if (
+            localStorage.getItem("userName") &&
+            localStorage.getItem("userPwd")
+        ) {
+            this.userName = localStorage.getItem("userName");
+            this.userPwd = localStorage.getItem("userPwd");
+            this.jishu = true;
+        }
+    },
     mounted() {},
     methods: {
+        jizhumima() {
+            this.jishu = !this.jishu;
+        },
         login() {
             // this.$router.go(-1);
             // return
@@ -121,6 +140,12 @@ export default {
                 } else {
                     localStorage.setItem("admin", 2);
                 }
+
+                if (this.jishu) {
+                    localStorage.setItem("userName", this.userName);
+                    localStorage.setItem("userPwd", this.userPwd);
+                }
+                this.$electron.ipcRenderer.send("window-max");
                 this.$router.push({
                     path: "/home",
                 });
@@ -178,6 +203,24 @@ export default {
     .ant-input-password-icon {
         color: rgba(93, 154, 158, 0.5);
     }
+    .mima {
+        text-align: left;
+    }
+    .ant-checkbox-input {
+        background-color: #082932 !important;
+        border: #64b7bc 2px solid;
+    }
+    .ant-checkbox-inner {
+        background-color: unset;
+        border: #64b7bc 2px solid !important;
+    }
+    .mima-con {
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+    }
     .ant-input {
         padding: 0;
         background-color: #082932;
@@ -218,7 +261,7 @@ export default {
         font-size: 14px;
     }
     .unactive {
-        color: #09b8bc;
+        color: rgba(9, 184, 188, 0.5);
         font-size: 14px;
     }
     .login-2 {

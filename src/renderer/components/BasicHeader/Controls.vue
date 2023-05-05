@@ -1,9 +1,12 @@
 <template>
   <div class="menu">
-    <div @click="toHome"><a-icon style="margin-top: 9px;font-size: 14px;margin-left: 10px;padding-right: 5px;" type="home" theme="filled" class="icon" /></div>
-    <a-dropdown>
+    <div @click="toHome">
+      <!-- <a-icon style="margin-top: 9px;font-size: 14px;margin-left: 10px;padding-right: 5px;" type="home" theme="filled" class="icon" /> -->
+      <img src="../../assets/img/home.svg" height="23" style="margin-left: 10px;" />
+    </div>
+    <a-dropdown trigger="click">
       <a class="ant-dropdown-link" @click="handleClick">
-        全局市场预警 <a-icon type="down" />
+        <img src="../../assets/img/quan.svg" height="23" style="margin-left: -16px" />
       </a>
       <a-menu slot="overlay">
         <a-menu-item @click="toDetail( '/quan-shuiwei-detail', '全场预警',  '市场水位', 0)">
@@ -38,7 +41,7 @@
     <!-- :trigger="['click']" -->
     <a-dropdown>
       <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
-        局部预警 <a-icon type="down" />
+        <img src="../../assets/img/jubu.svg" height="23" style="margin-left: -16px" />
       </a>
       <a-menu slot="overlay">
         <a-menu-item @click="toDetail( '/jubu-zhishubankuai-detail', '局部预警',  '板块与指数的关系')">
@@ -60,7 +63,7 @@
     </a-dropdown>
     <a-dropdown>
       <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
-        重点预警 <a-icon type="down" />
+        <img src="../../assets/img/zhong.svg" height="23" style="margin-left: -16px" />
       </a>
       <a-menu slot="overlay">
         <a-menu-item @click="toDetail( '/zhong-zhishubankuai-detail', '重点预警',  '个股与指数的关系')">
@@ -82,7 +85,7 @@
     </a-dropdown>
     <a-dropdown v-if="admin == 1">
       <a class="ant-dropdown-link" @click="toManagement">
-        后台管理 <a-icon type="down" />
+        <img src="../../assets/img/hou.svg" height="23" style="margin-left: -16px" />
       </a>
       <!-- <a-menu slot="overlay">
                 <a-menu-item>
@@ -183,6 +186,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.ant-dropdown-menu-item:hover {
+    background-color: #082d37;
+}
 .ant-btn {
     border: 1px solid rgba(0, 0, 0, 0.1);
     // /deep/ .ant-dropdown-menu {
