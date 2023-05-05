@@ -18,19 +18,19 @@ export function table2Optionfen(timeList, closeList, changeList) {
                 color: "#ffffff", //字体颜色
             },
         },
-        dataZoom: [
-            {
-                type: "inside",
-                start: 80,
-                end: 100,
-            },
-            {
-                show: true,
-                type: "slider",
-                top: "90%",
-                // show: false,
-            },
-        ],
+        // dataZoom: [
+        //     {
+        //         type: "inside",
+        //         start: 80,
+        //         end: 100,
+        //     },
+        //     {
+        //         show: true,
+        //         type: "slider",
+        //         top: "90%",
+        //         // show: false,
+        //     },
+        // ],
         xAxis: [
             {
                 type: "category",
@@ -100,30 +100,45 @@ export function table2Option(data) {
             axisPointer: {
                 type: "cross",
             },
+            // itemFormatter: function (params) {
+            //     // 获取当前数据的各项信息
+            //     var seriesName = params.seriesName;
+            //     var open = params.data[0];
+            //     var close = params.data[1];
+            //     var lowest = params.data[2];
+            //     var highest = params.data[3];
+            //     var timestamp = params.data[4];
+
+            //     // 将最低价修改为中文“最低价”
+            //     var formattedLowest = "最低价: " + lowest;
+
+            //     // 返回修改后的 tooltip 文本
+            //     return [
+            //         "日期: " + new Date(timestamp).toLocaleDateString(),
+            //         "名称: " + seriesName,
+            //         "开盘价: " + open,
+            //         "收盘价: " + close,
+            //         formattedLowest,
+            //         "最高价: " + highest,
+            //     ].join("<br>");
+            // },
+            locale: "zh_CN",
             // formatter: "{b0}: {c0}<br />{b1}: {c1}",
 
-            formatter: function (params) {
-                console.log(params[1].data);
+            // formatter: function (params) {
+            //     console.log(params[1].data);
+            //     var res = "时间: " + params[0].name;
+            //     res += "<br/>开盘价: " + params[0].data[1].toFixed(2);
+            //     res += "<br/>收盘价: " + params[0].data[2].toFixed(2);
+            //     res += "<br/>最低价: " + params[0].data[3].toFixed(2);
+            //     res += "<br/>最高价: " + params[0].data[4].toFixed(2);
+            //     res += "<br/>MA5: " + params[1].data.toFixed(2);
+            //     res += "<br/>MA10: " + params[2].data.toFixed(2);
+            //     res += "<br/>MA20: " + params[3].data.toFixed(2);
+            //     res += "<br/>MA30: " + params[4].data.toFixed(2);
 
-                //修改鼠标划过显示为中文
-                // let ma5 = params[1].data; //ma5的值
-                // let ma10 = params[2].data; //ma10的值
-                // let ma20 = params[3].data; //ma20的值
-                // let ma30 = params[4].data; //ma30的值
-                // params = params[0]; //开盘收盘最低最高数据汇总
-                // let currentItemData = params.data;
-                var res = "时间: " + params[0].name;
-                res += "<br/>开盘价: " + params[0].data[1].toFixed(2);
-                res += "<br/>收盘价: " + params[0].data[2].toFixed(2);
-                res += "<br/>最低价: " + params[0].data[3].toFixed(2);
-                res += "<br/>最高价: " + params[0].data[4].toFixed(2);
-                res += "<br/>MA5: " + params[1].data.toFixed(2);
-                res += "<br/>MA10: " + params[2].data.toFixed(2);
-                res += "<br/>MA20: " + params[3].data.toFixed(2);
-                res += "<br/>MA30: " + params[4].data.toFixed(2);
-
-                return res;
-            },
+            //     return res;
+            // },
         },
         legend: {
             data: ["日K", "MA5", "MA10", "MA20", "MA30"],
@@ -326,7 +341,6 @@ export function table2Option(data) {
 
 export function table2bottomOption(data, timetype) {
     let data0;
-    console.log(timetype);
     if (timetype == "0") {
         data0 = getSecondArr(splitData(data, "dealDate"));
     } else {
@@ -384,16 +398,16 @@ export function table2bottomOption(data, timetype) {
             {
                 gridIndex: 0,
                 type: "inside",
-                start: 80,
-                end: 100,
+                start: timetype == "0" ? null : 80,
+                end: timetype == "0" ? null : 100,
                 // height: 10,
             },
             {
                 gridIndex: 0,
                 xAxisIndex: [0, 1], // 对应网格的索引
-                show: true,
-                start: 80,
-                end: 100,
+                show: timetype == "0" ? false : true,
+                start: timetype == "0" ? null : 80,
+                end: timetype == "0" ? null : 100,
                 type: "slider",
                 top: "60%",
                 // height: 20,
@@ -419,6 +433,7 @@ export function table2bottomOption(data, timetype) {
             },
         ],
     };
+
     return option;
 }
 

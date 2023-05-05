@@ -169,6 +169,17 @@ import {
 import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
+// import langZH from "echarts/dist/extension/lang/zh_CN";
+import "echarts-liquidfill";
+const zh_CN = {
+    tooltip: {
+        item: "项",
+        items: "项",
+        lowest: "最低价", // 将 'low' 映射成 '最低价',
+        open: "开盘价",
+    },
+};
+echarts.registerLocale("zh_CN", zh_CN);
 
 export default {
     data() {
@@ -312,10 +323,9 @@ export default {
 
                 setTimeout(() => {
                     this.setCharts();
-                }, 0);
-                setTimeout(() => {
                     this.setCharts2();
                 }, 0);
+                setTimeout(() => {}, 0);
             });
         },
         selectType(index) {
@@ -330,19 +340,21 @@ export default {
             console.log("123");
             this.category = category;
             this.chart2.clear();
-            if (category === "MACD") {
-                this.setCharts2();
-            }
-            if (category === "KDJ") {
-                this.setCharts2(
-                    table2bottomOptionKDJ(this.stockDetail, this.timeType)
-                );
-            }
-            if (category === "RSI") {
-                this.setCharts2(
-                    table2bottomOptionRSI(this.stockDetail, this.timeType)
-                );
-            }
+            setTimeout(() => {
+                if (category === "MACD") {
+                    this.setCharts2();
+                }
+                if (category === "KDJ") {
+                    this.setCharts2(
+                        table2bottomOptionKDJ(this.stockDetail, this.timeType)
+                    );
+                }
+                if (category === "RSI") {
+                    this.setCharts2(
+                        table2bottomOptionRSI(this.stockDetail, this.timeType)
+                    );
+                }
+            }, 100);
         },
         clearList() {
             this.closeList = [];
@@ -361,7 +373,9 @@ export default {
             this.chart2.setOption(option);
         },
         setCharts() {
-            this.chart = echarts.init(document.getElementById("charts"));
+            this.chart = echarts.init(document.getElementById("charts"), {
+                locale: "zh_CN",
+            });
             // const option = {
             //     tooltip: {
             //         trigger: "axis",
@@ -428,15 +442,22 @@ export default {
             //     ],
             // };
             if (this.timeType === "0") {
-                this.chart.setOption(
-                    table2Optionfen(
-                        this.timeList,
-                        this.closeList,
-                        this.changeList
-                    )
-                );
+                setTimeout(() => {
+                    this.chart.setOption(
+                        table2Optionfen(
+                            this.timeList,
+                            this.closeList,
+                            this.changeList
+                        )
+                    );
+                }, 0);
             } else {
-                this.chart.setOption(table2Option(this.stockDetail));
+                setTimeout(() => {
+                    this.chart.setOption(
+                        table2Option(this.stockDetail),
+                        "zh_CN"
+                    );
+                }, 0);
             }
 
             // const _this = this;

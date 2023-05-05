@@ -268,20 +268,20 @@ export default {
                 //     // },
                 // ],
 
-                dataZoom: [
-                    {
-                        type: "slider", //这个dataZoom组件是slider型dataZoom组件
-                        xAxisIndex: 0, //dataZoom-slider组件控制第一个XAxis
-                        start: 70, //左边在10%位置
-                        end: 100, //右边在60%位置
-                    },
-                    {
-                        type: "inside", //这个dataZoom组件是inside型dataZoom组件
-                        xAxisIndex: 0, //dataZoom-inslide组件控制第一个XAxis
-                        start: 70, //左边在10%的位置
-                        end: 100, //右边在60%的位置
-                    },
-                ],
+                // dataZoom: [
+                //     {
+                //         type: "slider", //这个dataZoom组件是slider型dataZoom组件
+                //         xAxisIndex: 0, //dataZoom-slider组件控制第一个XAxis
+                //         start: 70, //左边在10%位置
+                //         end: 100, //右边在60%位置
+                //     },
+                //     {
+                //         type: "inside", //这个dataZoom组件是inside型dataZoom组件
+                //         xAxisIndex: 0, //dataZoom-inslide组件控制第一个XAxis
+                //         start: 70, //左边在10%的位置
+                //         end: 100, //右边在60%的位置
+                //     },
+                // ],
                 tooltip: {
                     trigger: "axis",
                     axisPointer: {
