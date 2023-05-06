@@ -119,19 +119,19 @@ export default {
         height: 250px;
     }
     .sn-container-1 {
-        left: 10px;
+        left: 15px;
     }
     .sn-container-2 {
-        left: 390px;
+        left: 395px;
     }
     .sn-container-3 {
-        left: 770px;
+        left: 775px;
     }
     .sn-container-4 {
-        left: 1150px;
+        left: 1155px;
     }
     .sn-container-5 {
-        left: 1530px;
+        left: 1535px;
     }
     .bankuai-title {
         color: #1dffff;
