@@ -14,6 +14,11 @@
       <!-- <sinan />
             <seamless />
             <pyramid /> -->
+      <div class="left-slider"><img width="430" src="../../assets/img/left-slider.svg" /></div>
+      <div class="right-slider"><img width="430" src="../../assets/img/right-slider.svg" /></div>
+      <div class="jiantou-1"><img width="30" src="../../assets/img/jiantou-1.svg" /></div>
+      <div class="jiantou-2"><img width="30" src="../../assets/img/jiantou-2.svg" /></div>
+
       <carousel-3d class="sn-container-car wrap-container" perspective="35" space="750" height="600" width="950" inverseScaling="300" sliderWidthmy="500" @before-slide-change="slideChange($event)">
         <slide :index="0" class="slider">
           <quanslide />
@@ -107,6 +112,30 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
+    .left-slider {
+        position: absolute;
+        top: 100px;
+        left: 30px;
+        width: 200px;
+    }
+    .right-slider {
+        position: absolute;
+        top: 100px;
+        left: 1460px;
+        width: 200px;
+    }
+    .jiantou-1 {
+        position: absolute;
+        top: 400px;
+        left: 460px;
+        width: 200px;
+    }
+    .jiantou-2 {
+        position: absolute;
+        top: 400px;
+        left: 1430px;
+        width: 200px;
+    }
     .left-1 {
         background-color: rgba(255, 244, 92, 0.2);
     }

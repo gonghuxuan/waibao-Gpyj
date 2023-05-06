@@ -39,7 +39,7 @@
           <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">个股平均涨幅</div>
         </div>
       </div>
-      <div id="charts-zhishubankuai-zhong" style="height: 500px; width: 100%; margin-top: 0px"></div>
+      <div v-if="show" id="charts-zhishubankuai-zhong" style="height: 500px; width: 100%; margin-top: 0px"></div>
     </div>
   </div>
 </template>
@@ -58,6 +58,7 @@ export default {
             timeType: 0,
             avgChangepercent: "",
             pollApi: this.getData,
+            show: true,
         };
     },
     mixins: [pollMixin],
@@ -65,6 +66,17 @@ export default {
         title: {
             type: String,
             default: 0,
+        },
+    },
+    watch: {
+        "$store.state.App.swiper"(newval, oldval) {
+            // 代码实现
+            if (newval === 2) {
+                this.show = false;
+                this.$nextTick(() => {
+                    this.show = true;
+                });
+            }
         },
     },
     // watch: {
@@ -86,6 +98,7 @@ export default {
     created() {},
     mounted() {
         this.getData();
+        console.log("mounted");
     },
     methods: {
         selecttime(index) {
