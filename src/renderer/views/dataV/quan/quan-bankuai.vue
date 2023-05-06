@@ -1,45 +1,45 @@
 <template>
   <div class="jubu-bankuai">
-    <div class="sn-container sn-container-1">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(255,244,92,0.3);">
-          <quanbankuaizhangting stockType="1" title="板块涨停个数" />
+    <div class="sn-container sn-container-1 ">
+      <div class="table-1">
+        <div class="juzhong font-18 bankuai-title">
+          <quanbankuaizhangting style="padding-top: 36px" stockType="1" title="板块涨停个数" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
     <div class="sn-container sn-container-2">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(255,81,69,0.3);">
-          <quanxingao stockType="0" title="新高异动" />
+      <div class="table-2">
+        <div class="juzhong font-18 bankuai-title">
+          <quanxingao stockType="0" style="padding-top: 36px" title="新高异动" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
     <div class="sn-container sn-container-3">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(217,61,210,0.3);">
-          <bankuaiitem title="平台突破">
+      <div class="table-3">
+        <div class="juzhong font-18 bankuai-title">
+          <bankuaiitem title="平台突破" style="padding-top: 36px">
             <quanxingao stockType="1" title="平台突破" />
           </bankuaiitem>
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
     <div class="sn-container sn-container-4">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(30,139,255,0.3);">
-          <bankuaiitem title="游资股预警">
+      <div class="table-4">
+        <div class="juzhong font-18 bankuai-title">
+          <bankuaiitem title="游资股预警" style="padding-top: 36px">
             <quanxingao stockType="3" title="游资股预警" />
           </bankuaiitem>
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
     <div class="sn-container sn-container-5">
-      <dv-border-box-10 :color="['#0694B1', '#5D9A9E']">
+      <div class="table-5">
         <div class="juzhong font-18 bankuai-title">
-          <bankuaiitem title="">
+          <bankuaiitem title="" style="padding-top: 36px">
             <quanlianbangaodu stockType="1" title="连板高度预警" />
           </bankuaiitem>
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
   </div>
 </template>
@@ -73,29 +73,69 @@ export default {
 
 <style lang="scss">
 .jubu-bankuai {
+    .table-1 {
+        background: url(../../../assets/img/table-1.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
+    .table-2 {
+        background: url(../../../assets/img/table-2.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
+    .table-3 {
+        background: url(../../../assets/img/table-3.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
+    .table-4 {
+        background: url(../../../assets/img/table-4.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
+    .table-5 {
+        background: url(../../../assets/img/table-5.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
     .sn-container {
         top: 760px;
         width: 350px;
         height: 250px;
     }
     .sn-container-1 {
-        left: 50px;
+        left: 10px;
     }
     .sn-container-2 {
-        left: 420px;
+        left: 390px;
     }
     .sn-container-3 {
-        left: 790px;
+        left: 770px;
     }
     .sn-container-4 {
-        left: 1160px;
+        left: 1150px;
     }
     .sn-container-5 {
         left: 1530px;
     }
     .bankuai-title {
         color: #1dffff;
-        padding-top: 10px;
+        // padding-top: 10px;
     }
 }
 </style>
