@@ -50,7 +50,7 @@
                     </a-tooltip> -->
                   </a-input-password>
                   <div class="mima-con">
-                    <a-checkbox @change="jizhumima" style="color: white" class="mima">
+                    <a-checkbox @change="jizhumima" v-model="jishu" style="color: white" class="mima">
                       记住密码
                     </a-checkbox>
                   </div>
@@ -108,6 +108,7 @@ export default {
         this.$forceUpdate();
     },
     activated() {
+        console.log("actived");
         if (
             localStorage.getItem("userName") &&
             localStorage.getItem("userPwd")
@@ -118,6 +119,8 @@ export default {
 
             this.jishu = true;
         }
+        console.log(this.typeFlag);
+        console.log(this.jishu);
     },
     mounted() {},
     methods: {
@@ -142,7 +145,7 @@ export default {
                 } else {
                     localStorage.setItem("admin", 2);
                 }
-
+                console.log(this.jishu);
                 if (this.jishu) {
                     localStorage.setItem("userName", this.userName);
                     localStorage.setItem("userPwd", this.userPwd);

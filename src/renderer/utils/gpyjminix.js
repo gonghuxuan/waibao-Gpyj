@@ -22,12 +22,15 @@ export default {
         this.timer = null;
     },
     methods: {
+        testTime() {
+            if (this.inTime()) {
+                console.warn("poll true");
+                this.pollApi();
+            }
+        },
         startpoll() {
             this.timer = setInterval(() => {
-                // if (this.inTime()) {
-                //     func();
-                // }
-                this.pollApi();
+                this.testTime();
             }, 30000);
         },
         inTime() {
@@ -37,6 +40,11 @@ export default {
             const wanStart = dayjs().hour(13).minute(0);
             const wanend = dayjs().hour(15).minute(1);
             const now = dayjs();
+            const xinqi = now.day();
+            console.warn("xinqi", xinqi);
+            if (xinqi == 0 || xinqi == 6) {
+                return false;
+            }
             if (
                 now.isBetween(zaoStart, zaoend) ||
                 now.isBetween(wanStart, wanend)
