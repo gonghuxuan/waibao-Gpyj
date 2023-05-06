@@ -1,12 +1,13 @@
 <template>
   <div class="quan-bankuai">
     <div class="sn-container sn-container-1">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(255,244,92,0.3);">
+      <div class="table-1">
+        <div class="juzhong font-18 bankuai-title">
           <jubuzhangfuyidong title="涨幅异动" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
+
     <div class="sn-container sn-container-2">
       <dv-border-box-10 :color="['#5D9A9E', '#0694B1']" style="background-color: rgba(255,81,69,0.3);">
         <div class="juzhong font-18 bankuai-title">
@@ -73,6 +74,46 @@ export default {
 
 <style lang="scss">
 .quan-bankuai {
+    .table-1 {
+        background: url(../../../assets/img/jubu-table-1.svg) no-repeat;
+        background-size: cover;
+        background-position: 50% 0;
+        width: 480px;
+        height: 280px;
+        margin-top: -100px;
+    }
+    .table-2 {
+        background: url(../../../assets/img/table-2.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
+    .table-3 {
+        background: url(../../../assets/img/table-3.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
+    .table-4 {
+        background: url(../../../assets/img/table-4.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
+    .table-5 {
+        background: url(../../../assets/img/table-5.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
     .sn-container {
         top: 760px;
         width: 440px;

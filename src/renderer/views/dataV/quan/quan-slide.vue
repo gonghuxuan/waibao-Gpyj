@@ -56,7 +56,7 @@ export default {
 <style lang="scss">
 .jubu-slide {
     // background-color: #002531;
-    background-color: rgba(2, 56, 75, 0.5);
+    // background-color: rgba(2, 56, 75, 0.5);
     .bankuai-contain {
         width: 100%;
         display: flex;
