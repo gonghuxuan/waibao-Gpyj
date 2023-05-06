@@ -24,8 +24,7 @@
             <div class="upload-text">点击或拖动TXT文件上传</div>
           </div>
           <div v-show="fileList.length > 0">
-            <img src="../../../assets/img/upload-4.png" />
-            <div class="upload-text">点击或拖动TXT文件上传11</div>
+            <img src="../../../assets/img/upload-2.svg" />
           </div>
 
         </a-upload-dragger>
@@ -37,9 +36,12 @@
                     margin-top: 20px;
                     margin-bottom: 20px;
                 ">
-        <a-button type="primary" @click="confirm">提交</a-button>
-        <a-button>取消</a-button>
+        <!-- <a-button type="primary" @click="confirm">提交</a-button>
+        <a-button>取消</a-button> -->
+        <div @click="confirm"><img src="../../../assets/img/upload-button1.svg" /></div>
+        <div @click="cancelFile"><img src="../../../assets/img/upload-button2.svg" /></div>
       </div>
+      <div style="width: 100%" @click="cancelFile"><img style="width: 100%" src="../../../assets/img/upload-title.svg" /></div>
       <a-table bordered :columns="columns" :data-source="stockData" :pagination="false" :scroll="{ y: 500 }">
       </a-table>
       <div> </div>
@@ -64,6 +66,12 @@ export default {
                     key: "stockCode",
                     align: "center",
                 },
+                {
+                    title: "股票名称",
+                    dataIndex: "stockName",
+                    key: "stockName",
+                    align: "center",
+                },
             ],
             重点预警: [],
             stockData: [],
@@ -78,6 +86,9 @@ export default {
         this.getStockList();
     },
     methods: {
+        cancelFile() {
+            this.fileList = [];
+        },
         typeClick(type) {
             if (type === "jubu") {
                 this.type = "0";

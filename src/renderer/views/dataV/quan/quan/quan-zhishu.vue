@@ -62,6 +62,7 @@ export default {
             kClose: [],
             dataK: [],
             pollApi: this.getData,
+            pointIndex: 0,
         };
     },
     computed: {},
@@ -89,6 +90,21 @@ export default {
             getExponentNames().then((res) => {
                 this.exponentNameList = res;
             });
+        },
+        getColorPoint(name) {
+            if (name == "MACD顶") {
+                return "#1E8BFF";
+            }
+            if (name == "MACD底") {
+                return "#FF5145";
+            }
+            if (name == "RSI顶") {
+                return "#1AB05D";
+            }
+            if (name == "RSI底") {
+                return "#D93DD2";
+            }
+            return "green";
         },
         getData() {
             getExponentDivergeSignal({
@@ -145,6 +161,9 @@ export default {
                             value: item.typeName,
                             xAxis: item.timeX,
                             yAxis: this.closeList[index],
+                            itemStyle: {
+                                color: this.getColorPoint(item.typeName),
+                            },
                         });
                     } else {
                         this.pointList.push({
@@ -152,6 +171,9 @@ export default {
                             value: item.typeName,
                             xAxis: item.timeX,
                             yAxis: this.kClose[index],
+                            itemStyle: {
+                                color: this.getColorPoint(item.typeName),
+                            },
                         });
                     }
                 });
@@ -176,6 +198,11 @@ export default {
                 }
                 this.setCharts();
             });
+        },
+        getColor() {
+            console.log("didi:", this.pointIndex);
+            this.pointIndex + 1;
+            return "red";
         },
         setCharts() {
             if (this.timeType == "0") {
@@ -253,6 +280,14 @@ export default {
                         markPoint: {
                             data: this.pointList,
                             symbolSize: 50,
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        show: true,
+                                        color: "white",
+                                    },
+                                },
+                            },
                         },
                         markLine: {
                             symbol: "none", //去掉警戒线最后面的箭头
@@ -400,6 +435,14 @@ export default {
                         markPoint: {
                             data: this.pointList,
                             symbolSize: 50,
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        show: true,
+                                        color: "white",
+                                    },
+                                },
+                            },
                         },
                     },
                     // {

@@ -114,6 +114,8 @@ export default {
         ) {
             this.userName = localStorage.getItem("userName");
             this.userPwd = localStorage.getItem("userPwd");
+            this.typeFlag = localStorage.getItem("typeFlag");
+
             this.jishu = true;
         }
     },
@@ -144,6 +146,7 @@ export default {
                 if (this.jishu) {
                     localStorage.setItem("userName", this.userName);
                     localStorage.setItem("userPwd", this.userPwd);
+                    localStorage.setItem("typeFlag", this.typeFlag);
                 }
                 this.$electron.ipcRenderer.send("window-max");
                 this.$router.push({
