@@ -19,9 +19,13 @@
       </div>
       <div style="margin-top: 20px">
         <a-upload-dragger name="file" :multiple="false" accept=".txt" :before-upload="beforeUpload">
-          <div v-if="fileList < 1">
+          <div v-show="fileList.length < 1">
             <img src="../../../assets/img/upload-4.png" />
             <div class="upload-text">点击或拖动TXT文件上传</div>
+          </div>
+          <div v-show="fileList.length > 0">
+            <img src="../../../assets/img/upload-4.png" />
+            <div class="upload-text">点击或拖动TXT文件上传11</div>
           </div>
 
         </a-upload-dragger>
@@ -46,6 +50,7 @@
 <script>
 import { uploadStockDataTxt, stockList } from "@/api/userInfo.js";
 import * as echarts from "echarts";
+import { chownSync } from "original-fs";
 
 export default {
     data() {
@@ -76,10 +81,10 @@ export default {
         typeClick(type) {
             if (type === "jubu") {
                 this.type = "0";
-                this.stockData = this.局部预警;
+                this.getStockList();
             } else if (type === "zhongdian") {
                 this.type = "1";
-                this.stockData = this.重点预警;
+                this.getStockList();
             }
         },
         beforeUpload(file) {
@@ -118,13 +123,8 @@ export default {
                 //     stockType: this.type === "0" ? "局部预警" : "重点预警",
                 // };
                 uploadStockDataTxt(fd).then((res) => {
-                    if (res.code == "200" || res.status == "0") {
-                        that.$message.success("上传成功");
-                        that.modalValue.visible = false;
-                        that.$emit("updatetable");
-                    } else {
-                        that.$message.error(res.description || res.message);
-                    }
+                    that.$message.success("上传成功");
+                    this.getStockList();
                 });
                 this.fileList = [];
             }
@@ -134,12 +134,10 @@ export default {
             this.fileList = [];
         },
         getStockList() {
-            stockList({ stockType: "重点预警" }).then((res) => {
-                this.重点预警 = res;
-            });
-            stockList({ stockType: "局部预警" }).then((res) => {
-                this.局部预警 = res;
-                this.stockData = this.局部预警;
+            stockList({
+                stockType: this.type == "0" ? "局部预警" : "重点预警",
+            }).then((res) => {
+                this.stockData = res;
             });
         },
     },
@@ -185,7 +183,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #09b8bc;
+        color: rgba(9, 184, 188, 0.4);
         font-size: 15px;
     }
     .gupiao-item {

@@ -177,6 +177,8 @@ export default {
             this.getData();
         },
         getDataSelect(res) {
+            let flag = true;
+            let stocknameOne = "";
             if (this.type == "0") {
                 res.throughList.forEach((element, index) => {
                     if (!this.dataObj.hasOwnProperty(element.stockName)) {
@@ -189,7 +191,11 @@ export default {
                             element.changepercent
                         );
                     }
-                    if (index < 10) {
+                    if (flag) {
+                        stocknameOne = element.stockName;
+                        flag = false;
+                    }
+                    if (stocknameOne == element.stockName) {
                         this.dateArr.push(getDay(element.dealDate));
                     }
                 });
@@ -205,7 +211,11 @@ export default {
                             element.changepercent
                         );
                     }
-                    if (index < 10) {
+                    if (flag) {
+                        stocknameOne = element.stockName;
+                        flag = false;
+                    }
+                    if (stocknameOne == element.stockName) {
                         this.dateArr.push(getDay(element.dealDate));
                     }
                 });
@@ -219,6 +229,10 @@ export default {
                 startDate: this.date,
             }).then((res) => {
                 this.resData = res;
+                this.dateArr = [];
+                this.dataObj = {};
+                let flag = true;
+                let stocknameOne = "";
                 res.notthroughList.forEach((element, index) => {
                     if (!this.dataObj.hasOwnProperty(element.stockName)) {
                         this.dataObj[element.stockName] = [];
@@ -230,7 +244,11 @@ export default {
                             element.changepercent
                         );
                     }
-                    if (index < 10) {
+                    if (flag) {
+                        stocknameOne = element.stockName;
+                        flag = false;
+                    }
+                    if (stocknameOne == element.stockName) {
                         this.dateArr.push(getDay(element.dealDate));
                     }
                 });

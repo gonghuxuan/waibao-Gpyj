@@ -78,8 +78,8 @@
         <a-menu-item @click="toDetail( '/zhong-lianxu-detail', '重点预警',  '连续性检测')">
           <a href="javascript:;">连续性</a>
         </a-menu-item>
-        <a-menu-item @click="toDetail( '/zhong-chengjiaoeyidong-detail', '重点预警',  '成交额异动')">
-          <a href="javascript:;">成交额异动</a>
+        <a-menu-item @click="toDetail( '/zhong-zhengfu-detail', '重点预警',  '振幅')">
+          <a href="javascript:;">振幅</a>
         </a-menu-item>
       </a-menu>
     </a-dropdown>

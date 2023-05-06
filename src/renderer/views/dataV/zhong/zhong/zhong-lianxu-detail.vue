@@ -234,7 +234,7 @@ export default {
                                 },
 
                                 label: {
-                                    position: [5, 5],
+                                    position: [18, 5],
                                     show: true,
                                     formatter: function (params) {
                                         return params.value[4];

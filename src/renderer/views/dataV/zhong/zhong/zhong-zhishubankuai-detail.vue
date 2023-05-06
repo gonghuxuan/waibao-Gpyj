@@ -1,5 +1,5 @@
 <template>
-  <div class="zhong-zhishubankuai-detail">
+  <div class="zhong-zhishubankuai-detail-1">
     <div class="top-contain">
       <div>
         <span class="padding active">个股与指数的得到关系</span>
@@ -37,7 +37,7 @@
 
       <div class="table2 table-shadow">
         <div class="juzhong" style="">
-          <div class="table-shadow" style="
+          <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -48,7 +48,7 @@
                                     ? 'time-active'
                                     : 'time-unactive'
                             " @click="selecttime('0')">同步性</div>
-          <div class="table-shadow" style="
+          <div class="" style="
                                 width: 70px;
                                 padding: 5px;
                                 text-align: center;
@@ -294,7 +294,7 @@ export default {
 </script>
 
 <style lang="scss">
-.zhong-zhishubankuai-detail {
+.zhong-zhishubankuai-detail-1 {
     .table-shuiwei {
         position: absolute;
         width: 150px;
