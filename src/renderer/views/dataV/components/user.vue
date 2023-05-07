@@ -28,6 +28,7 @@ export default {
     methods: {
         logout() {
             console.log("logout");
+            this.$electron.ipcRenderer.send("window-max");
             this.$router.push({
                 path: "/login",
             });

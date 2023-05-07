@@ -170,7 +170,7 @@ import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 // import langZH from "echarts/dist/extension/lang/zh_CN";
-import "echarts-liquidfill";
+// import "echarts-liquidfill";
 const zh_CN = {
     tooltip: {
         item: "项",

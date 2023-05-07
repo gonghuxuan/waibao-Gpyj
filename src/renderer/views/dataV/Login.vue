@@ -30,6 +30,7 @@
         <div class="right">
           <div class="title">股票预警系统登录</div>
           <div class="login-1">
+            <!-- {{ typeFlag ? 'active': 'unactive' }} {{  typeFlag}} -->
             <div class="login-2">
               <span :class="typeFlag ? 'active': 'unactive'" @click="onChange">管理员</span>
               <span :class="!typeFlag ? 'active': 'unactive'" @click="onChange">普通用户</span>
@@ -50,7 +51,7 @@
                     </a-tooltip> -->
                   </a-input-password>
                   <div class="mima-con">
-                    <a-checkbox @change="jizhumima" v-model="jishu" style="color: white" class="mima">
+                    <a-checkbox v-model="jishu" style="color: white" class="mima">
                       记住密码
                     </a-checkbox>
                   </div>
@@ -115,11 +116,16 @@ export default {
         ) {
             this.userName = localStorage.getItem("userName");
             this.userPwd = localStorage.getItem("userPwd");
-            this.typeFlag = localStorage.getItem("typeFlag");
+            this.typeFlag = JSON.parse(localStorage.getItem("typeFlag"));
 
             this.jishu = true;
+        } else {
+            this.userName = "";
+            this.userPwd = "";
+            this.typeFlag = false;
         }
         console.log(this.typeFlag);
+        console.log(this.jishu);
         console.log(this.jishu);
     },
     mounted() {},
@@ -150,6 +156,11 @@ export default {
                     localStorage.setItem("userName", this.userName);
                     localStorage.setItem("userPwd", this.userPwd);
                     localStorage.setItem("typeFlag", this.typeFlag);
+                } else {
+                    console.log("in remove");
+                    localStorage.removeItem("userName");
+                    localStorage.removeItem("userPwd");
+                    localStorage.removeItem("typeFlag");
                 }
                 this.$electron.ipcRenderer.send("window-max");
                 this.$router.push({
