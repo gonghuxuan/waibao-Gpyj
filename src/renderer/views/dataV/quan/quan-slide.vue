@@ -1,39 +1,42 @@
 <template>
   <div class="jubu-slide">
-    <div class="juzhong font-18">全局预警 </div>
-    <div class="flex bankuai-contain">
-      <div class="quan-bankuai-contain left">
-        <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-          <div class="juzhong font-18 quan-bankuai-inner">
-            <quanshuiwei />
+    <div :class="color == 0 ? 'color1': color == 1 ? 'color2': 'color3'">
+      <div class="juzhong font-18" style="padding-top: 18px;color: #1DFFFF">全局预警</div>
+      <div class="flex bankuai-contain">
+        <div class="quan-bankuai-contain left">
+          <div :color="['#5D9A9E', '#0694B1']">
+            <div class="juzhong font-18 quan-bankuai-inner">
+              <quanshuiwei />
+            </div>
           </div>
-        </dv-border-box-10>
+        </div>
+        <div class="quan-bankuai-contain right">
+          <div>
+            <div class="font-18 quan-bankuai-inner">
+              <quanzhishu />
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="quan-bankuai-contain right">
-        <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-          <div class="font-18 quan-bankuai-inner">
-            <quanzhishu />
+      <div class="flex bankuai-contain" style="margin-top: -12px">
+        <div class="quan-bankuai-contain left">
+          <div>
+            <div class="juzhong font-18 quan-bankuai-inner under">
+              <quandaban />
+            </div>
           </div>
-        </dv-border-box-10>
-      </div>
-    </div>
-    <div class="flex bankuai-contain">
-      <div class="quan-bankuai-contain left">
-        <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-          <div class="juzhong font-18 quan-bankuai-inner under">
-            <quandaban />
+        </div>
+        <div class="quan-bankuai-contain right">
+          <div>
+            <div class="juzhong font-18 quan-bankuai-inner under">
+              <quanzijin />
+            </div>
           </div>
-        </dv-border-box-10>
-      </div>
-      <div class="quan-bankuai-contain right">
-        <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-          <div class="juzhong font-18 quan-bankuai-inner under">
-            <quanzijin />
-          </div>
-        </dv-border-box-10>
+        </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -50,11 +53,44 @@ export default {
         quanzijin,
         quandaban,
     },
+    data() {
+        return {
+            color: 0,
+        };
+    },
+    watch: {
+        "$store.state.App.swiper"(newval, oldval) {
+            // 代码实现
+
+            if (newval === 0) {
+                console.warn("newcal1");
+                this.color = 0;
+            }
+            if (newval === 1) {
+                console.warn("newcal2");
+
+                this.color = 1;
+            }
+            if (newval === 2) {
+                console.warn("newcal3");
+
+                this.color = 2;
+            }
+        },
+    },
 };
 </script>
 
 <style lang="scss">
 .jubu-slide {
+    .color1 {
+    }
+    .color2 {
+        background-color: rgba(255, 244, 92, 0.2);
+    }
+    .color3 {
+        background-color: rgba(217, 61, 210, 0.2);
+    }
     // background-color: #002531;
     // background-color: rgba(2, 56, 75, 0.5);
     .bankuai-contain {

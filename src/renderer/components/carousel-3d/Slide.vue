@@ -1,9 +1,9 @@
 <template>
-  <dv-border-box-11 :color="['#0694B1', '#5D9A9E']" id="slider456" class="carousel-3d-slide" :style="slideStyle" :class="computedClasses" @click.native="goTo()">
+  <div :color="['#0694B1', '#5D9A9E']" id="slider456" class="carousel-3d-slide table-big" :style="slideStyle" :class="computedClasses" @click.native="goTo()">
     .
 
     <slot :index="index" :isCurrent="isCurrent" :leftIndex="leftIndex" :rightIndex="rightIndex" />
-  </dv-border-box-11>
+  </div>
 </template>
 
 <script>
@@ -194,6 +194,13 @@ export default {
 </script>
 
 <style>
+.table-big {
+    background: url(../../assets/img/table-notitle.svg) no-repeat;
+    background-size: cover;
+    background-position: 50% 0;
+    width: 460px;
+    height: 275px;
+}
 .carousel-3d-slide {
     position: absolute;
     opacity: 0;

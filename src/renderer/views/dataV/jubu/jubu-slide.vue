@@ -1,13 +1,16 @@
 <template>
   <div class="quan-slide">
-    <div class="juzhong font-18">局部预警 </div>
-    <div class="title" style="font-size: 16px">板块与指数的关系</div>
-    <div class="quanqiu">
-      <div v-if="show" class="flex bankuai-contain">
-        <jubuzhishubankuai />
+    <div :class="color == 0 ? 'color1': color == 1 ? 'color2': 'color3'">
+      <div class="juzhong font-18" style="padding-top: 18px;color: #1DFFFF">局部预警 </div>
+      <div class="title" style="font-size: 16px;margin-top: 20px">板块与指数的关系</div>
+      <div class="quanqiu">
+        <div v-if="show" class="flex bankuai-contain">
+          <jubuzhishubankuai />
+        </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -18,6 +21,7 @@ export default {
     data() {
         return {
             show: true,
+            color: 0,
         };
     },
     watch: {
@@ -29,6 +33,20 @@ export default {
                     this.show = true;
                 });
             }
+            if (newval === 0) {
+                console.warn("newcal1");
+                this.color = 0;
+            }
+            if (newval === 1) {
+                console.warn("newcal2");
+
+                this.color = 1;
+            }
+            if (newval === 2) {
+                console.warn("newcal3");
+
+                this.color = 2;
+            }
         },
     },
     components: {
@@ -39,6 +57,12 @@ export default {
 
 <style lang="scss">
 .quan-slide {
+    .color3 {
+        background-color: rgba(255, 244, 92, 0.2);
+    }
+    .color1 {
+        background-color: rgba(217, 61, 210, 0.2);
+    }
     .quanqiu {
         background: url(../../../assets/img/quanqiu.png) no-repeat;
         background-repeat: no-repeat;

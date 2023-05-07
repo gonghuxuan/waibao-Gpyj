@@ -1,6 +1,7 @@
 <template>
   <div class="jubu-shuiwei">
-    <div class="juzhong">打板
+    <div class="juzhong">
+      <div style="margin-top: -5px;margin-bottom: -10px"><img src="../../../../assets/img/daban-title.svg" /></div>
       <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;cursor: pointer;" />
     </div>
     <div class="table-contain">

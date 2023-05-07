@@ -1,7 +1,7 @@
 <template>
   <div class="jubu-zhishubankuai">
     <div class="juzhong">
-      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer" />
+      <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px; cursor: pointer;margin-top: -40px" />
     </div>
     <div class="table-contain">
       <div class="juzhong" style="">
@@ -285,7 +285,7 @@ export default {
         margin-top: 10px;
         &-1 {
             right: 30px;
-            top: 80px;
+            top: 110px;
             background-image: linear-gradient(
                 to right,
                 rgba(26, 176, 93, 0.3),
@@ -297,7 +297,7 @@ export default {
         }
         &-2 {
             right: 30px;
-            top: 190px;
+            top: 220px;
             background-image: linear-gradient(
                 to right,
                 rgba(255, 81, 69, 0.3),

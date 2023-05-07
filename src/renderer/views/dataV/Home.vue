@@ -136,12 +136,14 @@ export default {
         left: 1430px;
         width: 200px;
     }
-    .left-1 {
-        background-color: rgba(255, 244, 92, 0.2);
-    }
-    .right-1 {
-        background-color: rgba(217, 61, 210, 0.2);
-    }
+    // .left-1 {
+    //     background-color: rgba(255, 244, 92, 0.2);
+    //     // background-size: 0 0;
+    //     // background-position-y: 10px;
+    // }
+    // .right-1 {
+    //     background-color: rgba(217, 61, 210, 0.2);
+    // }
     .test {
         width: 30vw;
         height: 20vh;

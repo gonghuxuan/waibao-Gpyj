@@ -1,7 +1,9 @@
 <template>
   <div class="jubu-zhishu-detail">
     <div>
-      <div class="juzhong">指数背离
+      <div class="juzhong">
+        <div style="margin-top: -5px;margin-bottom: -10px"><img src="../../../../assets/img/zhishu-title.svg" /></div>
+
         <img @click="toDetail" src="@/assets/img/detail.svg" alt="" class="detail" style="width: 20px;cursor: pointer;" />
       </div>
       <!-- <div style="font-size: 16px; padding-left: 10px" @click="toDetail">指数背离</div> -->
