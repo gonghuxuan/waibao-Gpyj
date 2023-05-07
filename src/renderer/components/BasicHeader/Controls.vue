@@ -165,6 +165,10 @@ export default {
         toManagement() {
             this.$router.push({
                 path: "/importStockData",
+                query: {
+                    title1: "后台管理",
+                    title2: "导入股票数据",
+                },
             });
         },
         toHome() {
