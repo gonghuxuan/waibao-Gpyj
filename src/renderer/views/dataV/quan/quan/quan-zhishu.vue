@@ -487,7 +487,7 @@ export default {
     }
     .detail {
         position: absolute;
-        right: 20px;
+        right: 40px;
     }
 }
 </style>

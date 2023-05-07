@@ -424,7 +424,7 @@ export default {
                             param["stopAmount" + index] =
                                 res[itemdate][item].stockUpstopList[
                                     i
-                                ]?.stopAmount.toFixed(2);
+                                ]?.stopAmount;
                             // console.log(
                             //     res[itemdate][item].stockUpstopList[i].stockName
                             // );

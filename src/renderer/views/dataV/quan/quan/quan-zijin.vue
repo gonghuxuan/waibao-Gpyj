@@ -155,7 +155,7 @@ export default {
     }
     .detail {
         position: absolute;
-        right: 20px;
+        right: 40px;
     }
     .green {
         color: #1ab05d;

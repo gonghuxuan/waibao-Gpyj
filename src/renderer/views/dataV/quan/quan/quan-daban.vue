@@ -103,7 +103,7 @@ export default {
     }
     .detail {
         position: absolute;
-        right: 20px;
+        right: 500px;
     }
     .title-contain {
         height: 40px;
