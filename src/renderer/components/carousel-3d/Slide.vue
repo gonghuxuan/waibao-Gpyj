@@ -1,21 +1,9 @@
 <template>
-    <dv-border-box-11
-        :color="['#0694B1', '#5D9A9E']"
-        id="slider456"
-        class="carousel-3d-slide"
-        :style="slideStyle"
-        :class="computedClasses"
-        @click.native="goTo()"
-    >
-        >
+  <dv-border-box-11 :color="['#0694B1', '#5D9A9E']" id="slider456" class="carousel-3d-slide" :style="slideStyle" :class="computedClasses" @click.native="goTo()">
+    .
 
-        <slot
-            :index="index"
-            :isCurrent="isCurrent"
-            :leftIndex="leftIndex"
-            :rightIndex="rightIndex"
-        />
-    </dv-border-box-11>
+    <slot :index="index" :isCurrent="isCurrent" :leftIndex="leftIndex" :rightIndex="rightIndex" />
+  </dv-border-box-11>
 </template>
 
 <script>

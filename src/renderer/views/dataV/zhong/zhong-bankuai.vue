@@ -1,32 +1,32 @@
 <template>
   <div class="zhong-bankuai">
     <div class="sn-container sn-container-1">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(255,244,92,0.3);">
-          <zhongzhangfuyidong title="涨幅异动" />
+      <div class="table-1">
+        <div class="juzhong font-18 bankuai-title">
+          <zhongzhangfuyidong title="涨幅异动" style="margin-top: 20px" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
     <div class="sn-container sn-container-2">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div class="juzhong font-18 bankuai-title" style="background-color: rgba(255,81,69,0.3);">
-          <zhongchengjiaoeyidong title="成交额异动" />
+      <div class="table-2">
+        <div class="juzhong font-18 bankuai-title">
+          <zhongchengjiaoeyidong title="成交额异动" style="margin-top: 20px" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
     <div class="sn-container sn-container-3">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']" style="background-color: rgba(217,61,210,0.3);">
+      <div class="table-3">
         <div class="juzhong font-18 bankuai-title">
-          <zhonglianxu title="连续性" />
+          <zhonglianxu title="连续性" style="margin-top: 20px" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
     <div class="sn-container sn-container-4">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']" style="background-color: rgba(30,139,255,0.3);">
+      <div class="table-4">
         <div class="juzhong font-18 bankuai-title">
-          <zhongzhengfu title="振幅" />
+          <zhongzhengfu title="振幅" style="margin-top: 20px" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
   </div>
 </template>
@@ -56,22 +56,62 @@ export default {
 
 <style lang="scss">
 .zhong-bankuai {
+    .table-1 {
+        background: url(../../../assets/img/jubu-table-1.svg) no-repeat;
+        background-size: cover;
+        background-position: 50% 0;
+        width: 460px;
+        height: 275px;
+        margin-top: -30px;
+    }
+    .table-2 {
+        background: url(../../../assets/img/jubu-table-2.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 470px;
+        height: 275px;
+        margin-top: -30px;
+    }
+    .table-3 {
+        background: url(../../../assets/img/jubu-table-3.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 470px;
+        height: 275px;
+        margin-top: -30px;
+    }
+    .table-4 {
+        background: url(../../../assets/img/jubu-table-4.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 470px;
+        height: 275px;
+        margin-top: -30px;
+    }
+    .table-5 {
+        background: url(../../../assets/img/table-5.svg) no-repeat;
+        background-size: contain;
+        background-position: 50% 0;
+        width: 370px;
+        height: 300px;
+        margin-top: -30px;
+    }
     .sn-container {
         top: 760px;
         width: 440px;
         height: 250px;
     }
     .sn-container-1 {
-        left: 50px;
+        left: 10px;
     }
     .sn-container-2 {
-        left: 510px;
+        left: 480px;
     }
     .sn-container-3 {
-        left: 970px;
+        left: 960px;
     }
     .sn-container-4 {
-        left: 1430px;
+        left: 1440px;
     }
 
     .bankuai-title {

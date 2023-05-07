@@ -3,32 +3,32 @@
     <div class="sn-container sn-container-1">
       <div class="table-1">
         <div class="juzhong font-18 bankuai-title">
-          <jubuzhangfuyidong title="涨幅异动" />
+          <jubuzhangfuyidong title="涨幅异动" style="margin-top: 20px" />
         </div>
       </div>
     </div>
 
     <div class="sn-container sn-container-2">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']" style="background-color: rgba(255,81,69,0.3);">
+      <div class="table-2">
         <div class="juzhong font-18 bankuai-title">
-          <jubuchengjiaoeyidong title="成交额异动" />
+          <jubuchengjiaoeyidong title="成交额异动" style="margin-top: 20px" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
     <div class="sn-container sn-container-3" @click="show3d">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
+      <div class="table-3">
         <!-- <span style="font-size: 16px; color: white">{{ getstatus3d() == 1 }}</span> -->
-        <div v-if="getstatus3d() == 1" class="juzhong font-18 bankuai-title" style="background-color: rgba(217,61,210,0.3);">
-          <jubu10xianxing title="10天线性跟踪" />
+        <div v-if="getstatus3d() == 1" class="juzhong font-18 bankuai-title">
+          <jubu10xianxing title="10天线性跟踪" style="margin-top: 20px" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
     <div class="sn-container sn-container-4">
-      <dv-border-box-10 :color="['#5D9A9E', '#0694B1']">
-        <div v-if="getstatus3d() == 1" class="juzhong font-18 bankuai-title" style="background-color: rgba(30,139,255,0.3);">
-          <jubu10xianxingwei title="10天未突破跟踪" />
+      <div class="table-4">
+        <div v-if="getstatus3d() == 1" class="juzhong font-18 bankuai-title">
+          <jubu10xianxingwei title="10天未突破跟踪" style="margin-top: 20px" />
         </div>
-      </dv-border-box-10>
+      </div>
     </div>
   </div>
 </template>
@@ -78,32 +78,32 @@ export default {
         background: url(../../../assets/img/jubu-table-1.svg) no-repeat;
         background-size: cover;
         background-position: 50% 0;
-        width: 480px;
-        height: 280px;
-        margin-top: -100px;
+        width: 460px;
+        height: 275px;
+        margin-top: -30px;
     }
     .table-2 {
-        background: url(../../../assets/img/table-2.svg) no-repeat;
+        background: url(../../../assets/img/jubu-table-2.svg) no-repeat;
         background-size: contain;
         background-position: 50% 0;
-        width: 370px;
-        height: 300px;
+        width: 470px;
+        height: 275px;
         margin-top: -30px;
     }
     .table-3 {
-        background: url(../../../assets/img/table-3.svg) no-repeat;
+        background: url(../../../assets/img/jubu-table-3.svg) no-repeat;
         background-size: contain;
         background-position: 50% 0;
-        width: 370px;
-        height: 300px;
+        width: 470px;
+        height: 275px;
         margin-top: -30px;
     }
     .table-4 {
-        background: url(../../../assets/img/table-4.svg) no-repeat;
+        background: url(../../../assets/img/jubu-table-4.svg) no-repeat;
         background-size: contain;
         background-position: 50% 0;
-        width: 370px;
-        height: 300px;
+        width: 470px;
+        height: 275px;
         margin-top: -30px;
     }
     .table-5 {
@@ -120,16 +120,16 @@ export default {
         height: 250px;
     }
     .sn-container-1 {
-        left: 50px;
+        left: 10px;
     }
     .sn-container-2 {
-        left: 510px;
+        left: 480px;
     }
     .sn-container-3 {
-        left: 970px;
+        left: 960px;
     }
     .sn-container-4 {
-        left: 1430px;
+        left: 1440px;
     }
 
     .bankuai-title {
