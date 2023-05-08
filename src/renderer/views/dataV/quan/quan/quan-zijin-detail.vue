@@ -125,7 +125,7 @@ export default {
                     align: "center",
                     children: [
                         {
-                            title: "净额",
+                            title: "净额(万)",
                             dataIndex: "superLargeAmount",
                             key: "superLargeAmount",
                             scopedSlots: { customRender: "superLargeAmount" },
@@ -134,7 +134,7 @@ export default {
                                 b.superLargeAmount - a.superLargeAmount,
                         },
                         {
-                            title: "净占比",
+                            title: "净占比(%)",
                             dataIndex: "superLargeAmountProportion",
                             key: "superLargeAmountProportion",
                             scopedSlots: {
@@ -152,7 +152,7 @@ export default {
                     align: "center",
                     children: [
                         {
-                            title: "净额",
+                            title: "净额(万)",
                             dataIndex: "largeAmount",
                             key: "largeAmount",
                             scopedSlots: { customRender: "largeAmount" },
@@ -160,7 +160,7 @@ export default {
                             sorter: (a, b) => b.largeAmount - a.largeAmount,
                         },
                         {
-                            title: "净占比",
+                            title: "净占比(%)",
                             dataIndex: "largeAmountProportion",
                             key: "largeAmountProportion",
                             scopedSlots: {

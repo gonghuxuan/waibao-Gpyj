@@ -50,6 +50,11 @@ export default {
         timecom,
         usercom,
     },
+    watch: {
+        $route(to, from) {
+            this.title2 = this.$route.query.title2;
+        },
+    },
     computed: {
         key() {
             return this.$route.name + Math.random();
@@ -60,6 +65,7 @@ export default {
         console.log(this.$route);
         console.log(this.$route.query.title1);
         console.log(this.$route.query.title2);
+        this.title1 = this.$route.query.title1;
     },
 
     activated() {

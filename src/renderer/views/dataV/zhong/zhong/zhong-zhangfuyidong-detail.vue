@@ -18,7 +18,7 @@
     </div>
   </div>
 </template>
-  
+
   <script>
 // import { getPlateChangepercentData } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
@@ -44,6 +44,9 @@ export default {
         // this.getData();
         // this.getData2();
         console.log(123);
+        if (this.$route.query.refreshMounted) {
+            this.getData();
+        }
     },
     activated() {
         this.getData();
@@ -588,7 +591,7 @@ export default {
     },
 };
 </script>
-  
+
   <style lang="scss">
 .jubu-zhangfuyidong-detail {
     .charts-yuan {
@@ -652,4 +655,3 @@ export default {
     }
 }
 </style>
-  

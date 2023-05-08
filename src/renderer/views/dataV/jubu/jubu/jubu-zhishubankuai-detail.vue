@@ -2,7 +2,7 @@
   <div class="jubu-zhishubankuai-detail">
     <div class="top-contain">
       <div>
-        <span class="padding active">板块与指数的得到关系</span>
+        <span class="padding active">板块与指数的关系</span>
       </div>
     </div>
     <div class="content-contain">
