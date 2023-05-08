@@ -21,20 +21,20 @@ export default {
             initDownload: "init",
             checkDownloaded: "checkDownloaded",
         }),
-        // handleAppWillClose() {
-        //     if (this.$route.name !== "mini") {
-        //         this.$store.commit("play/SET_PLAY_STATUS", false);
-        //     }
-        //     this.$store.commit("play/SET_SHOW_DESKTOP_LYRIC", false);
-        // },
-        // handleNetworkChange({ name, title, message }, status = true) {
-        //     let networkNotification = new Notification(name, {
-        //         title,
-        //         body: message,
-        //         icon: "public/images/icon.ico",
-        //     });
-        //     this.$store.commit("App/SET_ONLINE", status);
-        // },
+        handleAppWillClose() {
+            if (this.$route.name !== "mini") {
+                this.$store.commit("play/SET_PLAY_STATUS", false);
+            }
+            this.$store.commit("play/SET_SHOW_DESKTOP_LYRIC", false);
+        },
+        handleNetworkChange({ name, title, message }, status = true) {
+            let networkNotification = new Notification(name, {
+                title,
+                body: message,
+                icon: "public/images/icon.ico",
+            });
+            this.$store.commit("App/SET_ONLINE", status);
+        },
     },
     created() {
         this.initDownload();
@@ -45,13 +45,13 @@ export default {
         );
     },
     mounted() {
-        // this.$electron.ipcRenderer.on("will-close", () => {
-        //     this.handleAppWillClose();
-        //     this.$electron.ipcRenderer.send("app-exit");
-        // });
-        // window.onunload = () => {
-        //     this.handleAppWillClose();
-        // };
+        this.$electron.ipcRenderer.on("will-close", () => {
+            this.handleAppWillClose();
+            this.$electron.ipcRenderer.send("app-exit");
+        });
+        window.onunload = () => {
+            this.handleAppWillClose();
+        };
         // window.onoffline = () => {
         //     this.handleNetworkChange(
         //         {
