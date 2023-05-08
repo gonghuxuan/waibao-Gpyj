@@ -64,6 +64,9 @@ export default {
         console.log(this.$route.query.stockType);
         this.getData();
     },
+    activated() {
+        this.getData();
+    },
     methods: {
         getData() {
             get2MarketAmount().then((res) => {

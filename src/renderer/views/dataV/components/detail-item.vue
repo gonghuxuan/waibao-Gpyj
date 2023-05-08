@@ -24,7 +24,7 @@
           </a-button></div>
       </div>
       <keep-alive v-if="$route.meta.keepAlive">
-        <router-view></router-view>
+        <router-view :key="key"></router-view>
       </keep-alive>
       <router-view v-else></router-view>
     </div>
@@ -50,7 +50,11 @@ export default {
         timecom,
         usercom,
     },
-    computed: {},
+    computed: {
+        key() {
+            return this.$route.name + Math.random();
+        },
+    },
     created() {},
     mounted() {
         console.log(this.$route);

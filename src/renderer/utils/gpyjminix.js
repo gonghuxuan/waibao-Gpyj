@@ -5,10 +5,59 @@ export default {
     data() {
         return {
             timer: null,
+            pollSelect: 1,
         };
     },
+    watch: {
+        $route(to, from) {
+            // console.log(to.path);
+            // console.log(from.path);
+            // console.log(to.name);
+            // console.log(from.name);
+            // console.log(to.path === from.path && to.name === from.name);
+
+            if (to.path === from.path && to.name === from.name) {
+                // 如果是相同路由，则手动触发 activated 钩子
+                this.$options.activated[0].call(this);
+            }
+        },
+    },
+    mounted() {
+        console.log("pollSelect mounted", this.pollSelect);
+        console.log(this.$route.query);
+        // console.log("mounted minix");
+        // if (this.pollSelect == 2) {
+        //     console.log("no");
+        // } else {
+        //     this.pollSelect = 1;
+        //     this.startpoll();
+        //     this.pollSelect = 2;
+        // }
+        if (this.$route.query.refreshMounted) {
+            console.log("refreshMounted");
+            this.startpoll();
+            console.log("startpoll");
+        }
+    },
+    watch: {
+        $route(to, from) {
+            if (to.path === this.$route.path) {
+                console.log(this.$options);
+                this.$options.activated.call(this);
+            }
+        },
+    },
+    // beforeRouteEnter(to, from, next) {
+    //     next((vm) => {
+    //         vm.$nextTick(() => {
+    //             vm.$options.activated.call(vm);
+    //         });
+    //     });
+    // },
     activated() {
+        console.log("pollSelect activated", this.pollSelect);
         console.log("activated  minix:", this.$route.name);
+
         this.startpoll();
     },
     deactivated() {
@@ -24,12 +73,14 @@ export default {
     methods: {
         testTime() {
             if (this.inTime()) {
-                console.warn("poll true");
+                console.log("poll true");
                 this.pollApi();
             }
         },
         startpoll() {
+            console.log("pollllllllllllllllllllllllllllll");
             this.timer = setInterval(() => {
+                console.log("innnnnnnnnnnnnnnnnnn");
                 this.testTime();
             }, 30000);
         },

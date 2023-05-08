@@ -51,7 +51,7 @@
           <a href="javascript:;">涨幅异动</a>
         </a-menu-item>
         <a-menu-item @click="toDetail( '/jubu-chengjiaoeyidong-detail', '局部预警',  '成交异动')">
-          <a href="javascript:;">成交异动</a>
+          <a href="javascript:;">成交额异动</a>
         </a-menu-item>
         <a-menu-item @click="toDetail( '/jubu-10xianxing-detail', '局部预警',  '10天线性跟踪')">
           <a href="javascript:;">10天线性跟踪</a>
@@ -159,6 +159,7 @@ export default {
                     stockType: type,
                     title1: title1,
                     title2: title2,
+                    refreshMounted: 1,
                 },
             });
         },

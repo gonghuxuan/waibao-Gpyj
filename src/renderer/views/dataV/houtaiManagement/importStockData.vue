@@ -41,6 +41,8 @@
         <div @click="confirm"><img src="../../../assets/img/upload-button1.svg" /></div>
         <div @click="cancelFile"><img src="../../../assets/img/upload-button2.svg" /></div>
       </div>
+      <div class="newt">当前股票数量：{{lengthS}}个</div>
+
       <div style="width: 100%" @click="cancelFile"><img style="width: 100%" src="../../../assets/img/upload-title.svg" /></div>
       <a-table bordered :columns="columns" :data-source="stockData" :pagination="false" :scroll="{ y: 500 }">
       </a-table>
@@ -77,6 +79,7 @@ export default {
             stockData: [],
             局部预警: [],
             lianbantianti: {},
+            lengthS: 0,
         };
     },
     components: {},
@@ -149,6 +152,8 @@ export default {
                 stockType: this.type == "0" ? "局部预警" : "重点预警",
             }).then((res) => {
                 this.stockData = res;
+                this.lengthS = this.stockData.length;
+                console.log(this.lengthS);
             });
         },
     },
@@ -157,6 +162,13 @@ export default {
 
 <style lang="scss">
 .importStockData {
+    .newt {
+        position: relative;
+        bottom: -30px;
+        left: 10px;
+        font-size: 15px;
+        color: white;
+    }
     .ant-table-row {
         background-color: #073b49;
     }

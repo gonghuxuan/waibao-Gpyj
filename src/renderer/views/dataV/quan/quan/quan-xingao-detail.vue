@@ -205,6 +205,9 @@ export default {
     computed: {},
     created() {},
     mounted() {
+        console.log("mounted123");
+        this.active = this.$route.query.stockType;
+        this.getData();
         // this.active = this.$route.query.stockType;
         // this.getData();
         // this.getName();
@@ -217,8 +220,6 @@ export default {
     mixins: [pollMixin],
     activated() {
         // this.getData2();
-
-        console.log("123");
         // echarts.registerTransform(
         //     "myTransform",
         //     function (params) {
@@ -240,8 +241,6 @@ export default {
         //         type: "myTransform", // 必须指定 type 属性
         //     }
         // );
-        this.active = this.$route.query.stockType;
-        this.getData();
     },
 
     methods: {
@@ -268,6 +267,7 @@ export default {
             }, 0);
         },
         back() {
+            console.log("backkkkkkk");
             this.$router.go(-1);
         },
         getTitle() {
