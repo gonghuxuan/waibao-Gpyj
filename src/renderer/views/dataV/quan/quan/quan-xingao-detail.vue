@@ -206,8 +206,11 @@ export default {
     created() {},
     mounted() {
         console.log("mounted123");
-        this.active = this.$route.query.stockType;
-        this.getData();
+        if (this.$route.query.refreshMounted) {
+            this.active = this.$route.query.stockType;
+            this.getData();
+        }
+
         // this.active = this.$route.query.stockType;
         // this.getData();
         // this.getName();
@@ -219,6 +222,8 @@ export default {
     },
     mixins: [pollMixin],
     activated() {
+        this.active = this.$route.query.stockType;
+        this.getData();
         // this.getData2();
         // echarts.registerTransform(
         //     "myTransform",

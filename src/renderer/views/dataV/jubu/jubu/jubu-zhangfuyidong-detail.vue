@@ -44,6 +44,9 @@ export default {
         // this.getData();
         // this.getData2();
         console.log(123);
+        if (this.$route.query.refreshMounted) {
+            this.getData();
+        }
     },
     activated() {
         this.getData();
