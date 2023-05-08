@@ -100,7 +100,7 @@ export default {
                     align: "center",
                     children: [
                         {
-                            title: "净额",
+                            title: "净额(万)",
                             dataIndex: "mainAmount",
                             key: "mainAmount",
                             scopedSlots: { customRender: "mainAmount" },
@@ -108,7 +108,7 @@ export default {
                             sorter: (a, b) => b.mainAmount - a.mainAmount,
                         },
                         {
-                            title: "净占比",
+                            title: "净占比(%)",
                             dataIndex: "mainAmountProportion",
                             key: "mainAmountProportion",
                             scopedSlots: {
