@@ -8,20 +8,20 @@ export default {
             pollSelect: 1,
         };
     },
-    watch: {
-        $route(to, from) {
-            // console.log(to.path);
-            // console.log(from.path);
-            // console.log(to.name);
-            // console.log(from.name);
-            // console.log(to.path === from.path && to.name === from.name);
+    // watch: {
+    //     $route(to, from) {
+    //         // console.log(to.path);
+    //         // console.log(from.path);
+    //         // console.log(to.name);
+    //         // console.log(from.name);
+    //         // console.log(to.path === from.path && to.name === from.name);
 
-            if (to.path === from.path && to.name === from.name) {
-                // 如果是相同路由，则手动触发 activated 钩子
-                this.$options.activated[0].call(this);
-            }
-        },
-    },
+    //         if (to.path === from.path && to.name === from.name) {
+    //             // 如果是相同路由，则手动触发 activated 钩子
+    //             this.$options.activated[0].call(this);
+    //         }
+    //     },
+    // },
     mounted() {
         console.log("pollSelect mounted", this.pollSelect);
         console.log(this.$route.query);
@@ -39,14 +39,14 @@ export default {
             console.log("startpoll");
         }
     },
-    watch: {
-        $route(to, from) {
-            if (to.path === this.$route.path) {
-                console.log(this.$options);
-                this.$options.activated.call(this);
-            }
-        },
-    },
+    // watch: {
+    //     $route(to, from) {
+    //         if (to.path === this.$route.path) {
+    //             console.log(this.$options);
+    //             this.$options.activated.call(this);
+    //         }
+    //     },
+    // },
     // beforeRouteEnter(to, from, next) {
     //     next((vm) => {
     //         vm.$nextTick(() => {
