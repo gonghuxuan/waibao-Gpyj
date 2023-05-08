@@ -143,8 +143,17 @@ export default {
         };
     },
     created() {
+        console.log(this.$route.name);
         console.log(this.admin);
     },
+    //     watch: {
+    //     $route(to, from) {
+    //         if (to.path === this.$route.path) {
+    //             console.log(this.$options);
+    //             this.$options.activated.call(this);
+    //         }
+    //     },
+    // },
     activated() {
         console.log("control acticed");
         this.admin = localStorage.getItem("admin");
@@ -152,14 +161,16 @@ export default {
     },
     methods: {
         toDetail(url, title1, title2, type) {
-            console.log(url);
+            console.log(this.$route.name);
+            console.log(this.$route.name == "Home");
+
             this.$router.push({
                 path: url,
                 query: {
                     stockType: type,
                     title1: title1,
                     title2: title2,
-                    refreshMounted: 1,
+                    refreshMounted: this.$route.name == "Home" ? undefined : 1,
                 },
             });
         },
