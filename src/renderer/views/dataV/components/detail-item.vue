@@ -5,7 +5,7 @@
         <timecom />
         <usercom />
       </div>
-      <div v-show="title2    !== '新高异动' && title2 !== '平台突破' && title2 !== '游资股'&& getTilte() " style="
+      <div v-show="title2    !== '新高异动' && title2 !== '平台突破' && title2 !== '游资股' && title2 !== '强势回调'&& getTilte() " style="
               font-size: 16px;
                     padding-left: 10px;
                     color: rgba(100, 183, 188, 0.5);

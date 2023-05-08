@@ -30,8 +30,11 @@
         <a-menu-item @click="toDetail( '/quan-xingao-detail','全场预警','平台突破', 1)">
           <a href="javascript:;">平台突破</a>
         </a-menu-item>
-        <a-menu-item @click="toDetail( '/quan-xingao-detail','全场预警','游资股预警', 3)">
-          <a href="javascript:;">游资股预警</a>
+        <a-menu-item @click="toDetail( '/quan-xingao-detail','全场预警','强势回调', 2)">
+          <a href="javascript:;">强势回调</a>
+        </a-menu-item>
+        <a-menu-item @click="toDetail( '/quan-xingao-detail','全场预警','游资股', 3)">
+          <a href="javascript:;">游资股</a>
         </a-menu-item>
         <a-menu-item @click="toDetail( '/quan-lianbangaodu-detail','全场预警','连板高度')">
           <a href="javascript:;">连板高度预警</a>

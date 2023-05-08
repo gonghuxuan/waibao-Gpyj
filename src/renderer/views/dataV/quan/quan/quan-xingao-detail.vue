@@ -204,8 +204,16 @@ export default {
     components: {},
     computed: {},
     created() {},
+    watch: {
+        "$route.query.stockType": function () {
+            console.warn(this.$route.query.stockType);
+            this.active = this.$route.query.stockType;
+            if (this.active !== undefined) {
+                this.getData();
+            }
+        },
+    },
     mounted() {
-        console.log("mounted123");
         if (this.$route.query.refreshMounted) {
             this.active = this.$route.query.stockType;
             this.getData();
@@ -222,6 +230,7 @@ export default {
     },
     mixins: [pollMixin],
     activated() {
+        console.log("activated111");
         this.active = this.$route.query.stockType;
         this.getData();
         // this.getData2();
