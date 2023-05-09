@@ -86,7 +86,7 @@ export default {
             getConsecutiveUpStocks({}).then((res) => {
                 this.sandianData = [];
                 const keys = Object.keys(res);
-                this.dateArr = keys;
+                this.dateArr = JSON.parse(JSON.stringify(keys));
                 keys.reverse().forEach((item, index) => {
                     res[item].forEach((itemDay) => {
                         const datasan = [];

@@ -15,7 +15,7 @@
     </div>
   </div>
 </template>
-  
+
   <script>
 import { getConsecutiveUpStocks } from "@/api/userInfo.js";
 import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
@@ -71,7 +71,7 @@ export default {
             getConsecutiveUpStocks({}).then((res) => {
                 this.sandianData = [];
                 const keys = Object.keys(res);
-                this.dateArr = keys;
+                this.dateArr = JSON.parse(JSON.stringify(keys));
                 keys.reverse().forEach((item, index) => {
                     res[item].forEach((itemDay) => {
                         const datasan = [];
@@ -248,7 +248,7 @@ export default {
     },
 };
 </script>
-  
+
   <style lang="scss">
 .zhong-zhishubankuai {
     width: 900px;
@@ -379,4 +379,3 @@ export default {
     color: #09b8bc;
 }
 </style>
-  

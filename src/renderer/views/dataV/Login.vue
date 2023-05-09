@@ -198,8 +198,6 @@ export default {
         },
         onChange() {
             this.typeFlag = !this.typeFlag;
-            this.userName = "";
-            this.userPwd = "";
         },
         confirm() {
             this.visible = false;

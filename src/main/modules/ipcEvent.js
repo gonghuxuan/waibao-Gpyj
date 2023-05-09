@@ -57,7 +57,9 @@ export default function () {
     ipcMain.on("window-min", () => {
         global.mainWindow.minimize();
     });
-
+    ipcMain.on("window-restore", () => {
+        global.mainWindow.restore();
+    });
     ipcMain.on("window-max", () => {
         if (global.mainWindow.isMaximized()) {
             global.mainWindow.restore();

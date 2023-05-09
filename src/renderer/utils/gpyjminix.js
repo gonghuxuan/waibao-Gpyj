@@ -22,9 +22,21 @@ export default {
     //         }
     //     },
     // },
+    watch: {
+        "$store.state.App.swiper"(newval, oldval) {
+            // 代码实现
+            if (newval === 0) {
+                console.debug(
+                    "实现首页刷新11111111111111111111",
+                    this.$route.name
+                );
+                this.pollApi();
+            }
+        },
+    },
     mounted() {
-        console.log("pollSelect mounted", this.pollSelect);
-        console.log(this.$route.query);
+        // console.log("pollSelect mounted", this.pollSelect);
+        // console.log(this.$route.query);
         // console.log("mounted minix");
         // if (this.pollSelect == 2) {
         //     console.log("no");
@@ -55,8 +67,8 @@ export default {
     //     });
     // },
     activated() {
-        console.log("pollSelect activated", this.pollSelect);
-        console.log("activated  minix:", this.$route.name);
+        // console.log("pollSelect activated", this.pollSelect);
+        // console.log("activated  minix:", this.$route.name);
 
         this.startpoll();
     },
@@ -73,14 +85,14 @@ export default {
     methods: {
         testTime() {
             if (this.inTime()) {
-                console.log("poll true");
+                // console.log("poll true");
                 this.pollApi();
             }
         },
         startpoll() {
-            console.log("pollllllllllllllllllllllllllllll");
+            // console.log("pollllllllllllllllllllllllllllll");
             this.timer = setInterval(() => {
-                console.log("innnnnnnnnnnnnnnnnnn");
+                // console.log("innnnnnnnnnnnnnnnnnn");
                 this.testTime();
             }, 30000);
         },

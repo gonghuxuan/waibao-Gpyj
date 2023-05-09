@@ -6,8 +6,8 @@
             padding-left: 30px;
             z-index: 999
         ">
-    <span v-if="admin == 1">{{ username }}</span>
-    <span v-if="admin == 2">{{ username }}</span>
+    <!-- <span v-if="admin == 1">{{ username }}</span>
+    <span v-if="admin == 2">{{ username }}</span> -->
     <span @click="logout" style="padding-left: 15px;padding-right: 30px;"><img src="@/assets/img/logout.svg" alt="" style="width: 20px;" /></span>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
     methods: {
         logout() {
             console.log("logout");
-            this.$electron.ipcRenderer.send("window-max");
+            this.$electron.ipcRenderer.send("window-restore");
             this.$router.push({
                 path: "/login",
             });
