@@ -40,6 +40,8 @@
         "lodash": "^4.17.21",
         "music-metadata": "^7.8.1",
         "nedb": "^1.8.0",
+        "node-localstorage": "^2.2.1",
+        "node-sessionstorage": "^1.0.0",
         "request-progress": "^3.0.0",
         "right-pad": "^1.0.1",
         "semver": "^7.3.4",

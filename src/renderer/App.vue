@@ -10,6 +10,7 @@
 <script>
 import { mapActions } from "vuex";
 import MusicViewer from "@/views/MusicViewer.vue";
+import dayjs from "dayjs";
 
 export default {
     name: "app",
@@ -48,6 +49,29 @@ export default {
         this.$electron.ipcRenderer.on("will-close", () => {
             this.handleAppWillClose();
             this.$electron.ipcRenderer.send("app-exit");
+        });
+        const win = this.$electron.remote.getCurrentWindow();
+        win.on("minimize", () => {
+            console.log("minnnnnnnnnnnnnnnnnnsize");
+            const time = dayjs().format("YYYY-MM-DD HH:mm");
+            sessionStorage.setItem("minTime", time);
+        });
+
+        win.on("restore", () => {
+            const readyTime = sessionStorage.getItem("minTime");
+            console.log(readyTime);
+            if (readyTime) {
+                const nowtime = dayjs().subtract(30, "minute");
+                // const nowtime = dayjs().subtract(30, "second");
+
+                const lasttime = dayjs(readyTime);
+                if (nowtime.isAfter(lasttime)) {
+                    console.log("重启--------------");
+                    win.webContents.reload();
+                }
+            }
+            console.log("restorennnnnnnnnnnsize");
+            // 窗口还原时触发的操作
         });
         window.onunload = () => {
             this.handleAppWillClose();

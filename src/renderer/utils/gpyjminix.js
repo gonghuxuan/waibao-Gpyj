@@ -30,6 +30,7 @@ export default {
                     "实现首页刷新11111111111111111111",
                     this.$route.name
                 );
+                console.debug(this.$electron);
                 this.pollApi();
             }
         },

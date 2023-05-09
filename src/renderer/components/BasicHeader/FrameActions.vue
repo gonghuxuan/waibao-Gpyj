@@ -1,30 +1,16 @@
 <template>
-    <div class="frame-actions">
-        <!-- <a-icon type="shrink" class="item" @click="setFrame('mini')" /> -->
-        <a-icon
-            type="minus"
-            class="item"
-            @click="setFrame('min')"
-            v-if="platform === 'win32'"
-        />
-        <z-icon
-            :type="isMax ? 'tuichuquanping' : 'juxing'"
-            class="item"
-            @click.native="setFrame('plus')"
-            v-if="platform === 'win32'"
-        />
-        <a-icon
-            type="close"
-            class="item"
-            @click="setFrame('close')"
-            v-if="platform === 'win32'"
-        />
-    </div>
+  <div class="frame-actions">
+    <!-- <a-icon type="shrink" class="item" @click="setFrame('mini')" /> -->
+    <a-icon type="minus" class="item" @click="setFrame('min')" v-if="platform === 'win32'" />
+    <z-icon :type="isMax ? 'tuichuquanping' : 'juxing'" class="item" @click.native="setFrame('plus')" v-if="platform === 'win32'" />
+    <a-icon type="close" class="item" @click="setFrame('close')" v-if="platform === 'win32'" />
+  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import ZIcon from "@/components/ZIcon";
+import dayjs from "dayjs";
 export default {
     data() {
         this.currentWindow = this.$electron.remote.getCurrentWindow();

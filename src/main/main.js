@@ -19,7 +19,7 @@ import createMiniWindow from "./windows/miniWindow";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import { ACHEME, LOAD_URL } from "./config";
 import axios from "axios";
-
+const sessionstorage = require("node-sessionstorage");
 const isDevelopment = process.env.NODE_ENV !== "production";
 if (process.env.NODE_ENV === "production") {
     global.__img = path.join(__dirname, "./img");
@@ -134,7 +134,12 @@ async function createWindow() {
         event.preventDefault();
         mainWindow.webContents.send("will-close");
     });
-
+    mainWindow.on("minimize", function (event) {
+        console.log("minnnnnnnnnnnnnnnnnnnnn");
+    });
+    mainWindow.on("restore", function (event) {
+        console.log("ressssssssssssssssssssssss");
+    });
     mainWindow.on("closed", () => {
         mainWindow = null;
     });

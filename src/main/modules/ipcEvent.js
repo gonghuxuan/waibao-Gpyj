@@ -1,5 +1,6 @@
 import { ipcMain, dialog, app, BrowserWindow, shell } from "electron";
 import path from "path";
+import dayjs from "dayjs";
 import createMiniWindow from "../windows/miniWindow";
 import createUpdateWindow from "./../windows/updateWindow";
 let { download } = require("electron-dl");
@@ -51,16 +52,23 @@ export default function () {
     });
 
     ipcMain.on("show-window", () => {
+        console.log("window showwwwwwwwwwwwwwww");
         global.mainWindow.show();
     });
 
     ipcMain.on("window-min", () => {
+        const time = dayjs().format("YYYY-MM-DD HH:mm");
+        console.log(time);
         global.mainWindow.minimize();
     });
     ipcMain.on("window-restore", () => {
+        console.log("window restore");
+
         global.mainWindow.restore();
     });
     ipcMain.on("window-max", () => {
+        console.log("window maxxxxxxxxxxx");
+
         if (global.mainWindow.isMaximized()) {
             global.mainWindow.restore();
         } else {
