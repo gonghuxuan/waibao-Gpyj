@@ -26,11 +26,6 @@ export default {
         "$store.state.App.swiper"(newval, oldval) {
             // 代码实现
             if (newval === 0) {
-                console.debug(
-                    "实现首页刷新11111111111111111111",
-                    this.$route.name
-                );
-                console.debug(this.$electron);
                 this.pollApi();
             }
         },
