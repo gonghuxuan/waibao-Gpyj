@@ -103,8 +103,8 @@ export default {
             if (this.stockType == "1") {
                 return "平台突破";
             }
-            if (this.stockType == "3") {
-                return "游资股预警";
+            if (this.stockType == "2") {
+                return "强势回调";
             }
         },
     },

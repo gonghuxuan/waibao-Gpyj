@@ -26,8 +26,8 @@
     <div class="sn-container sn-container-4">
       <div class="table-4">
         <div class="juzhong font-18 bankuai-title">
-          <bankuaiitem title="游资股预警" style="padding-top: 36px">
-            <quanxingao stockType="3" title="强势回调" />
+          <bankuaiitem title="强势回调" style="padding-top: 36px">
+            <quanxingao stockType="2" title="强势回调" />
           </bankuaiitem>
         </div>
       </div>
