@@ -1,26 +1,13 @@
 <template>
-    <div
-        class="carousel-3d-container"
-        :style="{ height: this.slideHeight + 'px' }"
-    >
-        <div
-            id="slider123"
-            class="carousel-3d-slider"
-            :style="{
+  <div class="carousel-3d-container" :style="{ height: this.slideHeight + 'px' }">
+    <div id="slider123" class="carousel-3d-slider" :style="{
                 width: this.slideWidth + 'px',
                 height: this.slideHeight + 'px',
-            }"
-        >
-            <slot></slot>
-        </div>
-        <controls
-            v-if="controlsVisible"
-            :next-html="controlsNextHtml"
-            :prev-html="controlsPrevHtml"
-            :width="controlsWidth"
-            :height="controlsHeight"
-        ></controls>
+            }">
+      <slot></slot>
     </div>
+    <controls v-if="controlsVisible" :next-html="controlsNextHtml" :prev-html="controlsPrevHtml" :width="controlsWidth" :height="controlsHeight"></controls>
+  </div>
 </template>
 
 <script>
@@ -160,7 +147,7 @@ export default {
         },
     },
     mounted() {
-        console.log(this.onSlideChange);
+        // console.log(this.onSlideChange);
     },
     computed: {
         isLastSlide() {
@@ -177,7 +164,7 @@ export default {
         },
         slideWidth() {
             const vw = this.viewport;
-            console.log(this.onSlideChange);
+            // console.log(this.onSlideChange);
             const sw = parseInt(this.width) + parseInt(this.border, 10) * 2;
 
             return vw < sw && process.browser ? vw : sw;

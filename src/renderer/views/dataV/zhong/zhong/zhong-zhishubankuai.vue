@@ -98,7 +98,7 @@ export default {
     created() {},
     mounted() {
         this.getData();
-        console.log("mounted");
+        // console.log("mounted");
     },
     methods: {
         selecttime(index) {
@@ -111,7 +111,7 @@ export default {
             getStocksChangepercentData({}).then((res) => {
                 this.sandianData = [];
                 this.resData = this.timeType == "0" ? res.同步性 : res.抗跌性;
-                console.log(this.timeType == "0");
+                // console.log(this.timeType == "0");
                 this.resData.aboveAvgChangepercentStocks.forEach((item) => {
                     const dataItem = [];
                     dataItem[0] = Math.random();

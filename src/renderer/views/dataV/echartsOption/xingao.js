@@ -11,7 +11,7 @@ export function table2Optionfen(timeList, closeList, changeList) {
                 },
             },
             formatter: (params) => {
-                console.log(params[0]);
+                // console.log(params[0]);
                 var res = "时间: " + params[0].axisValue;
                 res += "<br/>价格: " + params[0].data;
                 res +=

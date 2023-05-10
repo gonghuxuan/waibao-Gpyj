@@ -52,7 +52,7 @@ export default function () {
     });
 
     ipcMain.on("show-window", () => {
-        console.log("window showwwwwwwwwwwwwwww");
+        // console.log("window showwwwwwwwwwwwwwww");
         global.mainWindow.show();
     });
 

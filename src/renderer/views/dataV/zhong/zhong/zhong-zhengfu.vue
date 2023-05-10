@@ -85,7 +85,7 @@ export default {
     methods: {
         getData() {
             getAmplitudeStocks().then((res) => {
-                console.log("重点预警成交额异动-----", res);
+                // console.log("重点预警成交额异动-----", res);
                 this.resDatazao = [
                     ...res["早盘（09:30~10:00）"].aboveAvgAmplitudeStocks,
                     ...res["早盘（09:30~10:00）"].belowAvgAmplitudeStocks,
@@ -95,7 +95,7 @@ export default {
                     ...res["尾盘（14:30~15:00）"].belowAvgAmplitudeStocks,
                 ];
                 this.resData = this.resDatazao;
-                console.log(this.resDatazao);
+                // console.log(this.resDatazao);
                 // this.resData = res.成交额递增;
                 // this.resDataQianbu = res.成交额递增;
                 // this.resDataZhongbu = res.机构票监测;

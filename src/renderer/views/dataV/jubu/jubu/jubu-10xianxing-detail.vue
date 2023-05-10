@@ -137,7 +137,7 @@ export default {
         },
         changetype(type) {
             this.type = type;
-            console.log(this.type);
+            // console.log(this.type);
             this.chart.clear();
             this.dataObj = {};
             this.dateArr = [];
@@ -148,7 +148,7 @@ export default {
             // this.chart.dispatchAction({
             //     type: "hideTip",
             // });
-            console.log(this.selectedGupiao);
+            // console.log(this.selectedGupiao);
             if (this.selectedGupiao.includes(index)) {
                 const xiabiao = this.selectedGupiao.findIndex((item) => {
                     return item == index;
@@ -171,7 +171,7 @@ export default {
             }
         },
         onChange(el) {
-            console.log(el.format("YYYY-MM-DD"));
+            // console.log(el.format("YYYY-MM-DD"));
             this.chart.clear();
             this.dataObj = {};
             this.dateArr = [];
@@ -232,7 +232,7 @@ export default {
             }).then((res) => {
                 this.dateArr = [];
                 this.dataObj = {};
-                console.log("10TIAN-----", res);
+                // console.log("10TIAN-----", res);
                 this.resData = res;
                 localStorage.setItem("10tian", JSON.stringify(res));
                 let flag = true;
@@ -279,8 +279,8 @@ export default {
                     });
                 }
 
-                console.log(this.dateArr);
-                console.log(this.dataObj);
+                // console.log(this.dateArr);
+                // console.log(this.dataObj);
                 this.setChart();
             });
         },
@@ -337,7 +337,7 @@ export default {
                     // },
                 ],
             };
-            console.log(this.dataObj);
+            // console.log(this.dataObj);
             for (let key in this.dataObj) {
                 const seriesItem = {
                     name: key,
@@ -352,8 +352,8 @@ export default {
                 JSON.stringify(option.legend.data)
             );
             this.option = option;
-            console.log(this.option);
-            console.log(option);
+            // console.log(this.option);
+            // console.log(option);
 
             this.$nextTick(() => {
                 this.chart = echarts.init(

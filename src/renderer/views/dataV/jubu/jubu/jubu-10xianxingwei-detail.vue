@@ -123,7 +123,7 @@ export default {
     mounted() {
         this.date = get10dayago();
         this.getData();
-        console.log(this.pollApi);
+        // console.log(this.pollApi);
         // sendRequestWithInterval(this.getData, this);
     },
     activated() {
@@ -168,8 +168,8 @@ export default {
             }
         },
         onChange(el) {
-            console.log(el.format("YYYY-MM-DD"));
-            console.log(this.date.format("YYYY-MM-DD"));
+            // console.log(el.format("YYYY-MM-DD"));
+            // console.log(this.date.format("YYYY-MM-DD"));
             this.chart.clear();
             this.dataObj = {};
             this.dateArr = [];
@@ -252,8 +252,8 @@ export default {
                         this.dateArr.push(getDay(element.dealDate));
                     }
                 });
-                console.log(this.dateArr);
-                console.log(this.dataObj);
+                // console.log(this.dateArr);
+                // console.log(this.dataObj);
                 this.setChart();
             });
         },
@@ -310,7 +310,7 @@ export default {
                     // },
                 ],
             };
-            console.log(this.dataObj);
+            // console.log(this.dataObj);
             for (let key in this.dataObj) {
                 const seriesItem = {
                     name: key,
@@ -325,8 +325,8 @@ export default {
                 JSON.stringify(option.legend.data)
             );
             this.option = option;
-            console.log(this.option);
-            console.log(option);
+            // console.log(this.option);
+            // console.log(option);
 
             this.$nextTick(() => {
                 this.chart = echarts.init(

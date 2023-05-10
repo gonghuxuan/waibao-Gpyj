@@ -330,15 +330,15 @@ export default {
                 startDate: this.startTime,
                 endDate: this.endtime,
             }).then((res) => {
-                console.log("板块涨停个股", res);
+                // console.log("板块涨停个股", res);
                 let dataArr = [];
                 const resList = [];
 
                 if (res) {
                     let objkeys = Object.keys(res);
 
-                    console.log(objkeys);
-                    console.log(res);
+                    // console.log(objkeys);
+                    // console.log(res);
                     this.columns[2].title = objkeys[0];
                     this.columns[3].title = objkeys[1];
                     this.columns[4].title = objkeys[2];
@@ -358,11 +358,11 @@ export default {
                         "highestConNum",
                     ];
                     objkeys.forEach((item) => {
-                        console.log(item);
+                        // console.log(item);
                         resList.push(res[item]);
                     });
-                    console.log(resList);
-                    console.log(res);
+                    // console.log(resList);
+                    // console.log(res);
                     resList[0].forEach((item, index) => {
                         resArr.forEach((key) => {
                             if (resList[1]) {
@@ -406,11 +406,11 @@ export default {
                         //     }
                         // });
                     });
-                    console.log(resList[0]);
+                    // console.log(resList[0]);
                 }
                 this.resData = resList[0];
 
-                console.log(this.resData);
+                // console.log(this.resData);
             });
         },
         getFiveDay() {
@@ -435,7 +435,7 @@ export default {
                     arr.push(dayjs(nowTime).format("YYYY-MM-DD"));
                 }
             }
-            console.log(arr);
+            // console.log(arr);
             this.startTime = arr[4];
             this.endtime = arr[0];
             this.arr = arr;

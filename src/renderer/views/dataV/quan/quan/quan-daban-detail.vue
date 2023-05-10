@@ -58,7 +58,7 @@ import { getHitStocks } from "@/api/userInfo.js";
 import * as echarts from "echarts";
 import pollMixin from "@/utils/gpyjminix.js";
 
-console.log(echarts);
+// console.log(echarts);
 export default {
     data() {
         return {
@@ -125,7 +125,7 @@ export default {
     methods: {
         getData() {
             getHitStocks().then((res) => {
-                console.log("打板", res);
+                // console.log("打板", res);
                 this.resData1 = res.涨速预警;
                 this.resData2 = res.开板提醒;
                 this.resData3 = res.隔夜委托量;

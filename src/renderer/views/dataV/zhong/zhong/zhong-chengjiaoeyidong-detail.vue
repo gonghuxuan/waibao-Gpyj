@@ -130,7 +130,7 @@ import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
-console.log(echarts);
+// console.log(echarts);
 export default {
     data() {
         return {

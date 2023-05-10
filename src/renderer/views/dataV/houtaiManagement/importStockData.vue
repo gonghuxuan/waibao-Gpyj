@@ -111,7 +111,7 @@ export default {
                     return reject(false);
                 }
                 this.fileList = [...this.fileList, file].slice(0, 1);
-                console.log(this.fileList);
+                // console.log(this.fileList);
                 // return false;
             });
         },
@@ -122,7 +122,7 @@ export default {
             } else {
                 const that = this;
                 const fd = new FormData();
-                console.log(this.fileList);
+                // console.log(this.fileList);
                 // this.fileList.forEach((file) => {
                 //     fd.append("files", file);
                 // });
@@ -153,7 +153,7 @@ export default {
             }).then((res) => {
                 this.stockData = res;
                 this.lengthS = this.stockData.length;
-                console.log(this.lengthS);
+                // console.log(this.lengthS);
             });
         },
     },

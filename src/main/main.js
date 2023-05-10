@@ -90,7 +90,7 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 async function createWindow() {
-    console.log(global);
+    // console.log(global);
     global.mainWindow = mainWindow = new BrowserWindow({
         width: 1400,
         height: 900,
@@ -135,10 +135,10 @@ async function createWindow() {
         mainWindow.webContents.send("will-close");
     });
     mainWindow.on("minimize", function (event) {
-        console.log("minnnnnnnnnnnnnnnnnnnnn");
+        // console.log("minnnnnnnnnnnnnnnnnnnnn");
     });
     mainWindow.on("restore", function (event) {
-        console.log("ressssssssssssssssssssssss");
+        // console.log("ressssssssssssssssssssssss");
     });
     mainWindow.on("closed", () => {
         mainWindow = null;
@@ -198,7 +198,7 @@ app.on("ready", async () => {
     }
     global.execPath = process.execPath;
     global.argv = process.argv;
-    console.log("123");
+    // console.log("123");
     await createWindow();
     global.lyricWindow = createLyricWindow(BrowserWindow);
     global.miniWindow = createMiniWindow(BrowserWindow);

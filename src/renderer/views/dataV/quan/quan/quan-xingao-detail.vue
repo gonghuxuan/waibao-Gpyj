@@ -230,7 +230,7 @@ export default {
     },
     mixins: [pollMixin],
     activated() {
-        console.log("activated111");
+        // console.log("activated111");
         this.active = this.$route.query.stockType;
         this.getData();
         // this.getData2();
@@ -281,7 +281,7 @@ export default {
             }, 0);
         },
         back() {
-            console.log("backkkkkkk");
+            // console.log("backkkkkkk");
             this.$router.go(-1);
         },
         getTitle() {
@@ -353,7 +353,7 @@ export default {
             this.getStockDetail();
         },
         selectBottom(category) {
-            console.log("123");
+            // console.log("123");
             this.category = category;
             this.chart2.clear();
             setTimeout(() => {

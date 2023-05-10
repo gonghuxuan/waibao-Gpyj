@@ -38,7 +38,6 @@ import { getSecond, getDay, getMax, getMin } from "@/utils/gpyj.js";
 import * as echarts from "echarts";
 import timecom from "@/views/dataV/components/time.vue";
 import usercom from "@/views/dataV/components/user.vue";
-console.log(echarts);
 export default {
     data() {
         return {
@@ -62,9 +61,9 @@ export default {
     },
     created() {},
     mounted() {
-        console.log(this.$route);
-        console.log(this.$route.query.title1);
-        console.log(this.$route.query.title2);
+        // console.log(this.$route);
+        // console.log(this.$route.query.title1);
+        // console.log(this.$route.query.title2);
         this.title1 = this.$route.query.title1;
     },
 

@@ -22,20 +22,16 @@ export default {
     },
     mounted() {},
     activated() {
-        console.log("user acticed");
         this.username = localStorage.getItem("username");
     },
     methods: {
         logout() {
-            console.log("logout");
             this.$electron.ipcRenderer.send("window-restore");
             this.$router.push({
                 path: "/login",
             });
         },
-        show() {
-            console.log("show");
-        },
+        show() {},
     },
 };
 </script>

@@ -1,79 +1,47 @@
 <template>
-    <div class="downloading">
-        <a-card :bordered="false">
-            <div slot="title">
-                <a-button
-                    icon="delete"
-                    :disabled="!downloading.length"
-                    @click="openDownloadFolder"
-                    >清空全部</a-button
-                >
+  <div class="downloading">
+    <a-card :bordered="false">
+      <div slot="title">
+        <a-button icon="delete" :disabled="!downloading.length" @click="openDownloadFolder">清空全部</a-button>
 
-                <span
-                    >存储目录:{{ defaultDownloadFolder }}
-                    <a href="#" @click="openDownloadFolder">打开目录</a></span
-                >
-            </div>
+        <span>存储目录:{{ defaultDownloadFolder }}
+          <a href="#" @click="openDownloadFolder">打开目录</a></span>
+      </div>
 
-            <track-list
-                :columns="columns"
-                :tracks="downloading"
-                :isShowActions="false"
-            >
-                <template slot="downloadPercent" slot-scope="{ row }">
-                    <div style="width: 170px; line-height: 1">
-                        <a-progress
-                            size="small"
-                            :percent="parseInt(row.downloadPercent)"
-                        />
-                        <div style="fontsize: 11px; font-weight: 500">
-                            <span
-                                >{{
+      <track-list :columns="columns" :tracks="downloading" :isShowActions="false">
+        <template slot="downloadPercent" slot-scope="{ row }">
+          <div style="width: 170px; line-height: 1">
+            <a-progress size="small" :percent="parseInt(row.downloadPercent)" />
+            <div style="fontsize: 11px; font-weight: 500">
+              <span>{{
                                     (
                                         ((parseInt(row.downloadPercent) / 100) *
                                             row.totalBytes) /
                                         1024 /
                                         1000
                                     ).toFixed(2)
-                                }}M</span
-                            >
-                            <span> / </span>
-                            <span
-                                >{{
+                                }}M</span>
+              <span> / </span>
+              <span>{{
                                     (row.totalBytes / 1024 / 1000).toFixed(2)
-                                }}M</span
-                            >
-                        </div>
-                    </div>
-                </template>
-                <template slot="actions" slot-scope="{ row }">
-                    <div>
-                        <ul class="actions">
-                            <li class="item">
-                                <a-icon
-                                    type="caret-right"
-                                    title="开始下载"
-                                    @click="toggleDownload(row, false)"
-                                    v-if="row.isPaused === true"
-                                />
-                                <a-icon
-                                    type="pause"
-                                    title="暂停下载"
-                                    @click="toggleDownload(row, true)"
-                                    v-else
-                                />
-                                <a-icon
-                                    type="close"
-                                    title="取消下载"
-                                    @click="cancelDownload(row)"
-                                />
-                            </li>
-                        </ul>
-                    </div>
-                </template>
-            </track-list>
-        </a-card>
-    </div>
+                                }}M</span>
+            </div>
+          </div>
+        </template>
+        <template slot="actions" slot-scope="{ row }">
+          <div>
+            <ul class="actions">
+              <li class="item">
+                <a-icon type="caret-right" title="开始下载" @click="toggleDownload(row, false)" v-if="row.isPaused === true" />
+                <a-icon type="pause" title="暂停下载" @click="toggleDownload(row, true)" v-else />
+                <a-icon type="close" title="取消下载" @click="cancelDownload(row)" />
+              </li>
+            </ul>
+          </div>
+        </template>
+      </track-list>
+    </a-card>
+  </div>
 </template>
 
 <script>
@@ -145,9 +113,9 @@ export default {
             }
             this.$db.test.remove({ id: song.id }, {}, (err, numRemoved) => {
                 if (err) {
-                    console.log(err);
+                    // console.log(err);
                 } else {
-                    console.log("numRemoved", numRemoved);
+                    // console.log("numRemoved", numRemoved);
                 }
             });
         },

@@ -40,7 +40,7 @@ export default {
     },
     activated() {
         this.status = sessionStorage.getItem("status");
-        console.log(this.status);
+        // console.log(this.status);
     },
     methods: {
         getData() {
@@ -153,7 +153,7 @@ export default {
             this.$nextTick(() => {
                 const chart = document.getElementById("charts-10xianxing");
                 chart.firstChild.firstChild.width = 400;
-                console.log(chart.firstChild.firstChild.width);
+                // console.log(chart.firstChild.firstChild.width);
             });
         },
         toDetail() {

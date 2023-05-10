@@ -349,10 +349,10 @@ export default {
         },
         setResContent(res) {
             const resDataChange = [];
-            console.log(this.fiveDateArr);
-            console.log(res);
+            // console.log(this.fiveDateArr);
+            // console.log(res);
             const cunzai = Object.keys(res)[0];
-            console.log(cunzai);
+            // console.log(cunzai);
             const arr = Object.keys(res[cunzai]).splice(0, 8); // 本来是1
             arr.reverse();
             const arrmax = [];

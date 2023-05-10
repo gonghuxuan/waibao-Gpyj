@@ -75,7 +75,7 @@ export default {
         getData() {
             get2MarketAmount().then((res) => {
                 this.resData = [];
-                console.log(res);
+                // console.log(res);
                 this.resData = res;
             });
         },

@@ -1,104 +1,64 @@
 <template>
-    <home-layout>
-        <div class="page-dj">
-            <div class="banners">
-                <slider
-                    ref="slider"
-                    :height="width * 0.251"
-                    :list="banners"
-                    @sliderClick="onSliderClick"
-                />
+  <home-layout>
+    <div class="page-dj">
+      <div class="banners">
+        <slider ref="slider" :height="width * 0.251" :list="banners" @sliderClick="onSliderClick" />
+      </div>
+      <div class="cates">
+        <ul class="list">
+          <router-link tag="li" :to="`/dj-recommend?id=${item.id}`" class="item" v-for="item in categories" :key="item.id">
+            <div class="icon">
+              <img :src="item.picMacUrl" class="img" />
             </div>
-            <div class="cates">
-                <ul class="list">
-                    <router-link
-                        tag="li"
-                        :to="`/dj-recommend?id=${item.id}`"
-                        class="item"
-                        v-for="item in categories"
-                        :key="item.id"
-                    >
-                        <div class="icon">
-                            <img :src="item.picMacUrl" class="img" />
-                        </div>
-                        <div class="name">{{ item.name }}</div>
-                    </router-link>
-                </ul>
+            <div class="name">{{ item.name }}</div>
+          </router-link>
+        </ul>
+      </div>
+      <div class="channel">
+        <h5 class="title">
+          <span>推荐电台</span>
+        </h5>
+        <ul class="list">
+          <router-link tag="li" :to="'/dj/' + item.id" class="item" v-for="(item, index) in djList" :key="index">
+            <div class="icon">
+              <img class="avatar" v-lazy="`${item.picUrl}?param=180y180`" :key="item.picUrl" />
+              <span class="icon-play"></span>
             </div>
-            <div class="channel">
-                <h5 class="title">
-                    <span>推荐电台</span>
-                </h5>
-                <ul class="list">
-                    <router-link
-                        tag="li"
-                        :to="'/dj/' + item.id"
-                        class="item"
-                        v-for="(item, index) in djList"
-                        :key="index"
-                    >
-                        <div class="icon">
-                            <img
-                                class="avatar"
-                                v-lazy="`${item.picUrl}?param=180y180`"
-                                :key="item.picUrl"
-                            />
-                            <span class="icon-play"></span>
-                        </div>
-                        <div class="name">
-                            <div class="text"
-                                >{{ item.name }}-{{ item.id }}</div
-                            >
-                            <div class="desc">{{ item.rcmdtext }}</div>
-                        </div>
-                    </router-link>
-                </ul>
+            <div class="name">
+              <div class="text">{{ item.name }}-{{ item.id }}</div>
+              <div class="desc">{{ item.rcmdtext }}</div>
             </div>
+          </router-link>
+        </ul>
+      </div>
 
-            <template v-if="programs">
-                <div
-                    class="channel"
-                    v-for="(program, index) in programs"
-                    :key="index"
-                >
-                    <h5 class="title">
-                        <span>{{ titles[index].name }}</span>
-                        <router-link
-                            :to="`/dj-recommend?id=${titles[index].id}`"
-                            class="more"
-                            >更多
-                            <a-icon type="right" />
-                        </router-link>
-                    </h5>
-                    <ul class="list">
-                        <router-link
-                            tag="li"
-                            :to="'/dj/' + item.id"
-                            class="item"
-                            v-for="(item, index) in program.djRadios.slice(
+      <template v-if="programs">
+        <div class="channel" v-for="(program, index) in programs" :key="index">
+          <h5 class="title">
+            <span>{{ titles[index].name }}</span>
+            <router-link :to="`/dj-recommend?id=${titles[index].id}`" class="more">更多
+              <a-icon type="right" />
+            </router-link>
+          </h5>
+          <ul class="list">
+            <router-link tag="li" :to="'/dj/' + item.id" class="item" v-for="(item, index) in program.djRadios.slice(
                                 0,
                                 5
-                            )"
-                            :key="index"
-                        >
-                            <div class="icon">
-                                <img
-                                    class="avatar"
-                                    v-lazy="`${item.picUrl}?param=180y180`"
-                                    :key="item.picUrl"
-                                />
-                                <span class="icon-play"></span>
-                            </div>
-                            <div class="name">
-                                <div class="text">{{ item.name }}</div>
-                                <div class="desc">{{ item.rcmdtext }}</div>
-                            </div>
-                        </router-link>
-                    </ul>
-                </div>
-            </template>
+                            )" :key="index">
+              <div class="icon">
+                <img class="avatar" v-lazy="`${item.picUrl}?param=180y180`" :key="item.picUrl" />
+                <span class="icon-play"></span>
+              </div>
+              <div class="name">
+                <div class="text">{{ item.name }}</div>
+                <div class="desc">{{ item.rcmdtext }}</div>
+              </div>
+            </router-link>
+          </ul>
         </div>
-    </home-layout>
+      </template>
+    </div>
+  </home-layout>
 </template>
 
 <script>
@@ -173,7 +133,7 @@ export default {
         _getDjByCate(type) {
             getDjByCate({ type }).then((res) => {
                 this.djList = res.djRadios;
-                console.log(this.djList);
+                // console.log(this.djList);
             });
         },
         async _getDjBanner() {

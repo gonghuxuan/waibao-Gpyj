@@ -83,7 +83,7 @@ export default {
                         this.sandianData.push(datasan);
                     });
                 });
-                console.log(this.sandianData);
+                // console.log(this.sandianData);
                 this.setChart();
             });
         },
@@ -199,7 +199,7 @@ export default {
                         itemStyle: {
                             normal: {
                                 color: function (param) {
-                                    console.log(param.value[1]);
+                                    // console.log(param.value[1]);
                                     if (param.value[1] < 1) {
                                         return "#DE5858";
                                     }

@@ -1,18 +1,18 @@
 <template>
-    <div class="top-bar">
-        <!-- <div class="top-bar-logo" @click="toRouter">
+  <div class="top-bar">
+    <!-- <div class="top-bar-logo" @click="toRouter">
             <img src="../../assets/images/logo.svg" alt="LOGO" />
         </div> -->
-        <div class="top-bar-main">
-            <div class="top-bar-control">
-                <controls />
-            </div>
-            <!-- <div class="top-bar-search">
+    <div class="top-bar-main">
+      <div class="top-bar-control">
+        <controls />
+      </div>
+      <!-- <div class="top-bar-search">
                 <search-box />
             </div> -->
-            <div class="top-bar-menu">
+      <div class="top-bar-menu">
 
-                <!-- <div class="top-bar-menu-user">
+        <!-- <div class="top-bar-menu-user">
                     <div class="item">
                         <user-info />
                     </div>
@@ -27,10 +27,10 @@
                     </div>
                     <div class="item" @click="logout" v-if="userId">退出</div>
                 </div> -->
-                <frame-actions />
-            </div>
-        </div>
+        <frame-actions />
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

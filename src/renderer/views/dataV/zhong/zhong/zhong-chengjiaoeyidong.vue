@@ -15,7 +15,7 @@
       <a-table bordered :columns="columns" :data-source="resData" :pagination="false">
         <template slot="close" slot-scope="close, record">
           <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close  | fixedTwo 
+                        close  | fixedTwo
                     }}</div>
         </template>
         <template slot="changepercent" slot-scope="changepercent">
@@ -87,7 +87,7 @@ export default {
     methods: {
         getData() {
             getStockAmountActionZhong().then((res) => {
-                console.log("重点预警成交额异动-----", res);
+                // console.log("重点预警成交额异动-----", res);
                 this.resData = res.成交额递增;
                 this.resDataQianbu = res.成交额递增;
                 this.resDataZhongbu = res.机构票监测;

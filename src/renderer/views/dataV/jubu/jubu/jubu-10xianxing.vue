@@ -70,8 +70,8 @@ export default {
                         this.dateArr.push(getDay(element.dealDate));
                     }
                 });
-                console.log(this.dateArr);
-                console.log(this.dataObj);
+                // console.log(this.dateArr);
+                // console.log(this.dataObj);
                 this.setChart();
             });
         },
@@ -154,7 +154,7 @@ export default {
                 );
                 this.chart.setOption(option);
                 // chart.firstChild.firstChild.width = 400;
-                console.log(chart.firstChild.firstChild.width);
+                // console.log(chart.firstChild.firstChild.width);
             });
         },
         toDetail() {

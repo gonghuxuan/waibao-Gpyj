@@ -99,7 +99,7 @@
     </div>
   </div>
 </template>
-  
+
   <script>
 import { getAmplitudeStocks } from "@/api/userInfo.js";
 import pollMixin from "@/utils/gpyjminix.js";
@@ -198,8 +198,8 @@ export default {
                 this.weiline = res["尾盘（14:30~15:00）"].avgAmplitude;
 
                 this.resData = this.resDatazao;
-                console.log(this.zaoline);
-                console.log(this.zaoline);
+                // console.log(this.zaoline);
+                // console.log(this.zaoline);
 
                 // this.resData = res.成交额递增;
                 // this.resDataQianbu = res.成交额递增;
@@ -494,7 +494,7 @@ export default {
     },
 };
 </script>
-  
+
   <style lang="scss">
 .zhong-zhishubankuai-detail {
     .table-2 {
@@ -680,4 +680,3 @@ export default {
     }
 }
 </style>
-  

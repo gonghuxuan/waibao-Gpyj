@@ -24,7 +24,7 @@ import { getConsecutiveUpStocks } from "@/api/userInfo.js";
 import * as echarts from "echarts";
 import pollMixin from "@/utils/gpyjminix.js";
 
-console.log(echarts);
+// console.log(echarts);
 export default {
     data() {
         return {
@@ -98,7 +98,7 @@ export default {
                         this.sandianData.push(datasan);
                     });
                 });
-                console.log(this.sandianData);
+                // console.log(this.sandianData);
                 this.setChart();
             });
         },
@@ -215,7 +215,7 @@ export default {
                         itemStyle: {
                             normal: {
                                 color: function (param) {
-                                    console.log(param.value[1]);
+                                    // console.log(param.value[1]);
                                     if (param.value[1] < 1) {
                                         return "#DE5858";
                                     }

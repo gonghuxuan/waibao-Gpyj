@@ -29,12 +29,12 @@ export default {
     created() {},
     mounted() {
         this.getData();
-        console.log(this.title);
+        // console.log(this.title);
     },
     methods: {
         getData() {
             getLetfStocks({ stockType: 0 }).then((res) => {
-                console.log(res);
+                // console.log(res);
                 this.resData = res;
             });
         },

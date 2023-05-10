@@ -43,7 +43,7 @@ export default {
     mounted() {
         // this.getData();
         // this.getData2();
-        console.log(123);
+        // console.log(123);
         if (this.$route.query.refreshMounted) {
             this.getData();
         }
@@ -533,7 +533,7 @@ export default {
                         label: {
                             show: true,
                             formatter: function (param) {
-                                console.log(param);
+                                // console.log(param);
                                 return param.value[3];
                             },
                             minMargin: 200,
@@ -545,7 +545,7 @@ export default {
                     },
                 ],
             };
-            console.log(this.sandianData);
+            // console.log(this.sandianData);
             this.chart.setOption(option2);
         },
         randomPointInAnnulus(innerRadius, outerRadius) {

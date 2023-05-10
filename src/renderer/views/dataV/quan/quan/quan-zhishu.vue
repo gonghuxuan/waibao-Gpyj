@@ -202,7 +202,7 @@ export default {
             });
         },
         getColor() {
-            console.log("didi:", this.pointIndex);
+            // console.log("didi:", this.pointIndex);
             this.pointIndex + 1;
             return "red";
         },
@@ -377,7 +377,7 @@ export default {
                         },
                     },
                     formatter: function (params) {
-                        console.log(params);
+                        // console.log(params);
                         var res = "时间: " + params[0].name;
                         res += "<br/>开盘价: " + params[0].data[1].toFixed(2);
                         res += "<br/>收盘价: " + params[0].data[2].toFixed(2);

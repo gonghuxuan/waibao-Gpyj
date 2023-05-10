@@ -123,17 +123,17 @@
                 </a-menu-item>
             </a-menu> -->
     </a-dropdown>
-    <!-- <a-button-group size="small">
+    <a-button-group size="small">
       <a-button type="primary" @click="back">
         <a-icon type="left" />
       </a-button>
-      <a-button type="primary" @click="forward">
+      <!-- <a-button type="primary" @click="forward">
         <a-icon type="right" />
       </a-button>
       <a-button type="primary" @click="refresh">
         <a-icon type="reload" />
-      </a-button>
-    </a-button-group> -->
+      </a-button> -->
+    </a-button-group>
   </div>
 </template>
 
@@ -146,8 +146,8 @@ export default {
         };
     },
     created() {
-        console.log(this.$route.name);
-        console.log(this.admin);
+        // console.log(this.$route.name);
+        // console.log(this.admin);
     },
     //     watch: {
     //     $route(to, from) {
@@ -158,14 +158,14 @@ export default {
     //     },
     // },
     activated() {
-        console.log("control acticed");
+        // console.log("control acticed");
         this.admin = localStorage.getItem("admin");
         this.$forceUpdate();
     },
     methods: {
         toDetail(url, title1, title2, type) {
-            console.log(this.$route.name);
-            console.log(this.$route.name == "Home");
+            // console.log(this.$route.name);
+            // console.log(this.$route.name == "Home");
 
             this.$router.push({
                 path: url,
@@ -190,7 +190,7 @@ export default {
             this.$router.push({ path: "/home" });
         },
         back() {
-            this.$router.go(-1);
+            this.$electron.remote.getCurrentWindow().webContents.openDevTools();
         },
         forward() {
             // this.$router.go(1);

@@ -42,7 +42,7 @@ import pollMixin from "@/utils/gpyjminix.js";
 
 import * as echarts from "echarts";
 
-console.log(echarts);
+// console.log(echarts);
 export default {
     data() {
         return {
@@ -61,7 +61,7 @@ export default {
     created() {},
     mounted() {
         // this.getName();
-        console.log(this.$route.query.stockType);
+        // console.log(this.$route.query.stockType);
         this.getData();
     },
     activated() {
@@ -70,7 +70,7 @@ export default {
     methods: {
         getData() {
             get2MarketAmount().then((res) => {
-                console.log(res);
+                // console.log(res);
                 this.resData = res;
             });
         },
@@ -79,7 +79,7 @@ export default {
                 timeType: this.timeType,
                 code: this.selectedGupiao,
             }).then((res) => {
-                console.log(res);
+                // console.log(res);
                 this.stockDetail = res;
             });
         },

@@ -65,7 +65,7 @@ import timecom from "@/views/dataV/components/time.vue";
 import usercom from "@/views/dataV/components/user.vue";
 import pollMixin from "@/utils/gpyjminix.js";
 
-console.log(echarts);
+// console.log(echarts);
 export default {
     data() {
         return {
@@ -101,28 +101,28 @@ export default {
     },
     methods: {
         back() {
-            console.log(123);
+            // console.log(123);
             this.$router.go(-1);
         },
         toDetail() {
-            console.log("tiaozhuan");
+            // console.log("tiaozhuan");
             this.$router.push({
                 path: "/quan-zhishu-detail",
             });
         },
         handleMenuClick(el) {
-            console.log(el);
+            // console.log(el);
             this.exponentName = el.key;
             this.getData();
         },
         handleMenuClick2(el) {
-            console.log(el.key);
+            // console.log(el.key);
             this.timeType = el.key;
             this.getData();
         },
         getName() {
             getExponentNames().then((res) => {
-                console.log(res);
+                // console.log(res);
                 this.exponentNameList = res;
             });
         },
@@ -146,7 +146,7 @@ export default {
                 timeType: this.timeType,
                 exponentName: this.exponentName,
             }).then((res) => {
-                console.log(res);
+                // console.log(res);
                 this.resData = res;
                 this.closeList = [];
                 this.timeList = [];
@@ -241,13 +241,13 @@ export default {
             return "red";
         },
         setCharts() {
-            console.log(this.closeList);
+            // console.log(this.closeList);
             if (this.timeType == "0") {
                 this.chart = echarts.init(document.getElementById("charts"));
             } else {
                 this.chart2 = echarts.init(document.getElementById("chart2"));
             }
-            console.log(this.pointList);
+            // console.log(this.pointList);
             const option1 = {
                 xAxis: {
                     type: "category",

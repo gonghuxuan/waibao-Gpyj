@@ -12,12 +12,12 @@
           <a-table bordered :columns="columns" :data-source="resDatadizeng" :pagination="false" class="table-hei">
             <template slot="close" slot-scope="close, record">
               <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close  | fixedTwo 
+                        close  | fixedTwo
                     }}</div>
             </template>
             <template slot="amount" slot-scope="amount, record">
               <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        amount  | fixedTwo 
+                        amount  | fixedTwo
                     }}</div>
             </template>
             <template slot="changepercent" slot-scope="changepercent">
@@ -48,12 +48,12 @@
           <a-table bordered :columns="columns" :data-source="resDatayidong" :pagination="false" class="table-hei">
             <template slot="close" slot-scope="close, record">
               <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close  | fixedTwo 
+                        close  | fixedTwo
                     }}</div>
             </template>
             <template slot="amount" slot-scope="amount, record">
               <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        amount  | fixedTwo 
+                        amount  | fixedTwo
                     }}</div>
             </template>
             <template slot="changepercent" slot-scope="changepercent">
@@ -86,12 +86,12 @@
         <a-table bordered :columns="columns" :data-source="resDatajigou" :pagination="false" class="table-hei">
           <template slot="close" slot-scope="close, record">
             <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        close | fixedTwo 
+                        close | fixedTwo
                     }}</div>
           </template>
           <template slot="amount" slot-scope="amount, record">
             <div :class="record.changepercent > 0 ? 'red' : 'green'">{{
-                        amount | fixedTwo 
+                        amount | fixedTwo
                     }}</div>
           </template>
           <template slot="changepercent" slot-scope="changepercent">
@@ -129,7 +129,7 @@ import { getStockAmountAction } from "@/api/userInfo.js";
 import * as echarts from "echarts";
 import pollMixin from "@/utils/gpyjminix.js";
 
-console.log(echarts);
+// console.log(echarts);
 export default {
     data() {
         return {
