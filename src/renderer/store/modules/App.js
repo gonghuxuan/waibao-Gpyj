@@ -23,11 +23,11 @@ const mutations = {
         state.redirect = url;
     },
     SHOW_VIEW(state, flag) {
-        console.warn(flag);
+        // console.warn(flag);
         state.isShowVisual = flag;
     },
     SHOW_SWIPER(state, flag) {
-        console.warn(flag);
+        // console.warn(flag);
         state.swiper = flag;
     },
     SET_ONLINE(state, flag) {

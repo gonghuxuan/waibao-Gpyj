@@ -105,11 +105,15 @@ export default {
         },
     },
     created() {
-        console.log("created");
         this.$forceUpdate();
     },
+    mounted() {},
     activated() {
-        console.log("actived");
+        // this.$electron.ipcRenderer.send("window-restore");
+
+        if (this.$route.query.tokenEx) {
+            this.$electron.ipcRenderer.send("window-restore");
+        }
         if (
             localStorage.getItem("userName") &&
             localStorage.getItem("userPwd")

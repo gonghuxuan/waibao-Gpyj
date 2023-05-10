@@ -1,6 +1,8 @@
 import axios from "axios";
 import Message from "ant-design-vue/es/message";
 import Toast from "./../components/Toast/toast";
+import router from "@/router";
+
 // 根据环境不同引入不同api地址
 
 // create an axios instance
@@ -36,7 +38,9 @@ service.interceptors.request.use(
             );
         }
         if (localStorage.getItem("userId")) {
+            console.log(localStorage.getItem("userId"));
             config.headers["userId"] = localStorage.getItem("userId");
+            // config.headers["userId"] = 100;
         }
         // }
         config.headers["platform"] = "web";
@@ -53,6 +57,7 @@ service.interceptors.response.use(
     (response) => {
         try {
             const res = response.data;
+            console.log(res);
             if (res.code && res.code !== 200) {
                 if (res.code === 401) {
                     // store.dispatch("FedLogOut").then(() => {
@@ -71,13 +76,18 @@ service.interceptors.response.use(
     (error) => {
         try {
             // console.log(error.response)
+            console.log(error);
+            console.warn(error?.response?.status === 401);
             if (error?.response?.status === 401) {
                 // router.push({ path: '/login/emailLogin' })
                 // Toast({
                 //   message: error?.response?.data?.errorMessage
                 // })
+                Message.error(error.response.data.msg);
+                router.push({ path: "/login", query: { tokenEx: 1 } });
                 return Promise.reject(error);
             }
+            console.log(error.response.data.msg);
             Message.error(error.response.data.msg);
             const errorMessage = error?.response?.data?.errorMessage;
             return Promise.reject(error);

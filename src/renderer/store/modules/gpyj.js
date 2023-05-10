@@ -12,7 +12,7 @@ const actions = {
     // 设置name
     setSwiper({ commit }, statusSwiper) {
         commit("SET_SWIPER", statusSwiper);
-        console.warn("123SET_SWIPER");
+        // console.warn("123SET_SWIPER");
     },
 };
 
