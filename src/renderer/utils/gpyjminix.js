@@ -29,6 +29,16 @@ export default {
                 this.pollApi();
             }
         },
+        $route(to, from) {
+            console.log(to.path);
+            if (to.path === "/home" && this.$store.state.App.swiper == 0) {
+                this.pollApi();
+            }
+            // console.log(from.path);
+
+            // if (to.path === from.path && to.name === from.name) {
+            // }
+        },
     },
     mounted() {
         // console.log("pollSelect mounted", this.pollSelect);
