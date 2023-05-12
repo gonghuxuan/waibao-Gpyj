@@ -123,17 +123,17 @@
                 </a-menu-item>
             </a-menu> -->
     </a-dropdown>
-    <a-button-group size="small">
+    <!-- <a-button-group size="small">
       <a-button type="primary" @click="back">
         <a-icon type="left" />
       </a-button>
-      <!-- <a-button type="primary" @click="forward">
+      <a-button type="primary" @click="forward">
         <a-icon type="right" />
       </a-button>
       <a-button type="primary" @click="refresh">
         <a-icon type="reload" />
-      </a-button> -->
-    </a-button-group>
+      </a-button>
+    </a-button-group> -->
   </div>
 </template>
 

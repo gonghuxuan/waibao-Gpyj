@@ -150,11 +150,14 @@ export default {
                 option.legend.data.push(key);
             }
             this.chart.setOption(option);
-            this.$nextTick(() => {
-                const chart = document.getElementById("charts-10xianxing");
-                chart.firstChild.firstChild.width = 400;
-                // console.log(chart.firstChild.firstChild.width);
-            });
+
+            // setTimeout(() => {
+            //     this.$nextTick(() => {
+            //         const chart = document.getElementById("charts-10xianxing");
+            //         chart.firstChild.firstChild.width = 400;
+            //         // console.log(chart.firstChild.firstChild.width);
+            //     });
+            // }, 1000);
         },
         toDetail() {
             this.$router.push({

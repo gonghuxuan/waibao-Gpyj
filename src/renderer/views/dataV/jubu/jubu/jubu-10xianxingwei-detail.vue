@@ -114,6 +114,7 @@ export default {
             date: "",
             title: "",
             pollApi: this.getData,
+            frist: true,
         };
     },
     mixins: [pollMixin],
@@ -127,7 +128,9 @@ export default {
         // sendRequestWithInterval(this.getData, this);
     },
     activated() {
-        // this.getData();
+        if (!this.frist) {
+            this.getData();
+        }
     },
     deactivated() {
         // console.log(
@@ -228,7 +231,12 @@ export default {
                 // startDate: dayjs().format("YYYY-MM-DD"),
                 startDate: this.date,
             }).then((res) => {
+                this.frist = false;
+
                 this.resData = res;
+                if (this.chart) {
+                    this.chart.clear();
+                }
                 this.dateArr = [];
                 this.dataObj = {};
                 let flag = true;
@@ -522,5 +530,8 @@ export default {
         border-radius: 4px;
         transition: all 0.3s;
     }
+}
+.ant-calendar th {
+    min-width: unset;
 }
 </style>

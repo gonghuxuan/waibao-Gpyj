@@ -199,6 +199,7 @@ export default {
             category: "MACD",
             stockDetailItem: {},
             spin: false,
+            noBackApi: true,
         };
     },
     components: {},
@@ -208,6 +209,7 @@ export default {
         "$route.query.stockType": function () {
             console.warn(this.$route.query.stockType);
             this.active = this.$route.query.stockType;
+            console.warn("active", this.active);
             if (this.active !== undefined) {
                 this.getData();
             }

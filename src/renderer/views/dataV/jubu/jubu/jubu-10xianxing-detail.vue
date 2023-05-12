@@ -113,6 +113,7 @@ export default {
             date: "",
             type: "0",
             pollApi: this.getData,
+            frist: true,
         };
     },
     components: {},
@@ -125,7 +126,9 @@ export default {
         // this.getData2();
     },
     activated() {
-        // this.getData();
+        if (!this.frist) {
+            this.getData();
+        }
     },
 
     methods: {
@@ -229,7 +232,12 @@ export default {
             getStockThrough10Data({
                 // startDate: dayjs().format("YYYY-MM-DD"),
                 startDate: this.date,
+                // startDate: "2023-04-13",
             }).then((res) => {
+                this.frist = false;
+                if (this.chart) {
+                    this.chart.clear();
+                }
                 this.dateArr = [];
                 this.dataObj = {};
                 // console.log("10TIAN-----", res);
@@ -549,5 +557,11 @@ export default {
         border-radius: 4px;
         transition: all 0.3s;
     }
+    .ant-calendar th {
+        min-width: unset;
+    }
+}
+.ant-calendar th {
+    min-width: unset;
 }
 </style>

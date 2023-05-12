@@ -14,7 +14,7 @@
                     display: flex;
                     align-items: center;
                     justify-content:space-between;
-                " @click="toDetail">
+                ">
         <div style="margin-left: 3vw">
           <span style="padding-right: 5px">全市场预警</span>/
           <span style="color: rgba(100, 183, 188, 1); padding-left: 5px">指数背离</span>
