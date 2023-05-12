@@ -86,6 +86,7 @@ export default {
             pollApi: this.getData,
             pointIndex: 0,
             colorList: [],
+            frist: true,
         };
     },
     components: {
@@ -98,6 +99,12 @@ export default {
     mounted() {
         this.getName();
         this.getData();
+    },
+    activated() {
+        if (!this.frist) {
+            this.getName();
+            this.getData();
+        }
     },
     methods: {
         back() {
@@ -147,6 +154,7 @@ export default {
                 exponentName: this.exponentName,
             }).then((res) => {
                 // console.log(res);
+                this.frist = false;
                 this.resData = res;
                 this.closeList = [];
                 this.timeList = [];
