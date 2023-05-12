@@ -315,10 +315,14 @@ export default {
                     this.chart.clear();
                     this.chart2.clear();
                     this.spin = false;
+                    this.selectedGupiao = "";
                 }
             });
         },
         getStockDetail() {
+            if (this.selectedGupiao == "") {
+                return;
+            }
             getStockDataLine({
                 timeType: this.timeType,
                 code: this.selectedGupiao,
@@ -389,6 +393,7 @@ export default {
         ) {
             this.chart2 = echarts.init(document.getElementById("charts-2"));
             this.chart2.setOption(option);
+            echarts.connect([this.chart, this.chart2]);
         },
         setCharts() {
             this.chart = echarts.init(document.getElementById("charts"), {

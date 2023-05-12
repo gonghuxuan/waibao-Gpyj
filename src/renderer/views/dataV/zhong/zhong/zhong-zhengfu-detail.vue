@@ -41,7 +41,7 @@
           <div class="table1-2">
             <div style="font-size: 16px; color: white;padding-top: 10px; padding-bottom: 10px;padding-left: 10px;">大于平均涨幅</div>
             <div class="gupiao-item" v-for="(item, index)  in resweibig" :key="item.stockName" :class="
-                          selectedGupiao == item.stockName
+                          selectedGupiao2 == item.stockName
                               ? 'gupiao-active'
                               : 'gupiao-unactive'
                       " @click="selectgupiao2(item.stockName)">
