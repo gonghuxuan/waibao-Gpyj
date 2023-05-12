@@ -20,7 +20,7 @@
     </div>
     <div class="top-contain">
       <div>
-        <span class="padding active">10天线性未跟踪</span>
+        <span class="padding active">10天未突破跟踪</span>
       </div>
     </div>
     <div class="content-contain">

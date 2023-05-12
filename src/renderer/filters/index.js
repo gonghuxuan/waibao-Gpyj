@@ -23,6 +23,14 @@ Vue.filter("fixedTwo", function (num) {
     return money.toFixed(2);
 });
 
+Vue.filter("fixedTwo2", function (num) {
+    const money = Number(num);
+    if (isNaN(money)) {
+        return "";
+    }
+    return money.toFixed(2);
+});
+
 Vue.filter("moment", function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") {
     return moment(dataStr).format(pattern);
 });

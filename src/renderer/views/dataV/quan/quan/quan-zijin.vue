@@ -113,7 +113,7 @@ export default {
                 path: "/quan-zijin-detail",
                 query: {
                     stockType: 0,
-                    title1: "全场预警",
+                    title1: "全市场预警",
                     title2: "资金流向",
                 },
             });

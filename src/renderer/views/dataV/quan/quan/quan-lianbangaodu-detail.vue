@@ -36,6 +36,11 @@
             共<span style="color: #FFF45C">{{stockName.stockCount}}</span>只晋级率 <span style="color:#FF5145">{{ stockName.successRate }} %</span>
           </div>
         </template>
+        <template slot="stopAmount" slot-scope="stopAmount">
+          <div>
+            {{ stopAmount | fixedTwo2 }}
+          </div>
+        </template>
         <span :slot="item" v-for="(item, index) in columnsSlot" :key="index">共
           <span style="color:#FFF45C">{{  resData[index].countall }}</span> 只 晋级率
           <span style="color:#FF5145">{{  resData[index].rateall }}</span>
@@ -70,7 +75,7 @@ export default {
             show: false,
             columns: [
                 {
-                    title: "板块",
+                    title: "板位",
                     dataIndex: "bankuai",
                     key: "bankuai",
                     align: "center",
@@ -160,9 +165,9 @@ export default {
                                 title: "封单额(万)",
                                 dataIndex: "stopAmount",
                                 key: "stopAmount",
-                                // scopedSlots: {
-                                //     customRender: "mainAmountProportion",
-                                // },
+                                scopedSlots: {
+                                    customRender: "stopAmount",
+                                },
                                 align: "center",
                                 customRender: (value, row, index) => {
                                     this.render();

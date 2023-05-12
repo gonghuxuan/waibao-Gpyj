@@ -30,9 +30,9 @@ export default {
             }
         },
         $route(to, from) {
-            console.log(to.path);
-            console.log("from", from.path);
-            console.log(this.$route.name);
+            // console.log(to.path);
+            // console.log("from", from.path);
+            // console.log(this.$route.name);
             if (to.path === "/home" && this.$store.state.App.swiper == 0) {
                 if (!this.noBackApi) {
                     this.pollApi();

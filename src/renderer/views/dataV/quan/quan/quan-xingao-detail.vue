@@ -11,7 +11,7 @@
                     justify-content:space-between;
                 ">
       <div style="margin-left: 3vw">
-        <span style="padding-right: 5px"> 全场预警 </span>/
+        <span style="padding-right: 5px"> 全市场预警 </span>/
         <span style="color: rgba(100, 183, 188, 1); padding-left: 5px">{{ active == 0 ? '新高异动' : active == 1 ? '平台突破' : active == 2 ? '强势回调': '游资股'}}</span>
       </div>
       <div style="margin-right: 3vw" @click="back"> <a-button>
@@ -119,35 +119,35 @@
           </div>
           <div class="table3-item-contain">
             <div class="table3-key">今开</div>
-            <div class="table3-value">{{ stockDetailItem.open }}</div>
+            <div class="table3-value">{{ stockDetailItem.open |fixedTwo }}</div>
           </div>
           <div class="table3-item-contain">
             <div class="table3-key">最高</div>
-            <div class="table3-value">{{ stockDetailItem.high }}</div>
+            <div class="table3-value">{{ stockDetailItem.high|fixedTwo }}</div>
           </div>
           <div class="table3-item-contain">
             <div class="table3-key">最低</div>
-            <div class="table3-value">{{ stockDetailItem.low }}</div>
+            <div class="table3-value">{{ stockDetailItem.low |fixedTwo}}</div>
           </div>
           <div class="table3-item-contain">
             <div class="table3-key">涨幅</div>
-            <div class="table3-value" :style="stockDetailItem.changepercent > 0 ? 'color: #FF5145': 'color: #1AB05D'">{{ stockDetailItem.changepercent }}</div>
+            <div class="table3-value" :style="stockDetailItem.changepercent > 0 ? 'color: #FF5145': 'color: #1AB05D'">{{ stockDetailItem.changepercent|fixedTwo }}</div>
           </div>
           <div class="table3-item-contain">
             <div class="table3-key">换手(%)</div>
-            <div class="table3-value">{{ stockDetailItem.tun }}</div>
+            <div class="table3-value">{{ stockDetailItem.tun |fixedTwo}}</div>
           </div>
           <div class="table3-item-contain">
             <div class="table3-key">成交额(亿)</div>
-            <div class="table3-value">{{ stockDetailItem.amount }}</div>
+            <div class="table3-value">{{ stockDetailItem.amount|fixedTwo }}</div>
           </div>
           <div class="table3-item-contain">
             <div class="table3-key">总市值(亿)</div>
-            <div class="table3-value">{{ stockDetailItem.mktCap }}</div>
+            <div class="table3-value">{{ stockDetailItem.mktCap|fixedTwo }}</div>
           </div>
           <div class="table3-item-contain">
             <div class="table3-key">流通值(亿)</div>
-            <div class="table3-value">{{ stockDetailItem.nmc }}</div>
+            <div class="table3-value">{{ stockDetailItem.nmc|fixedTwo }}</div>
           </div>
         </div>
       </div>

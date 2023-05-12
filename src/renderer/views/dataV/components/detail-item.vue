@@ -51,6 +51,7 @@ export default {
     },
     watch: {
         $route(to, from) {
+            this.title1 = this.$route.query.title1;
             this.title2 = this.$route.query.title2;
         },
     },
@@ -65,6 +66,7 @@ export default {
         // console.log(this.$route.query.title1);
         // console.log(this.$route.query.title2);
         this.title1 = this.$route.query.title1;
+        this.title2 = this.$route.query.title2;
     },
 
     activated() {

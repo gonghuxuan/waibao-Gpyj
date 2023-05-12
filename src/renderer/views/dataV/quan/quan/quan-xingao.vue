@@ -91,7 +91,7 @@ export default {
                 path: "/quan-xingao-detail",
                 query: {
                     stockType: this.stockType,
-                    title1: "全场预警",
+                    title1: "全市场预警",
                     title2: this.getTitle(),
                 },
             });

@@ -107,7 +107,7 @@ export default {
                 path: "/zhong-zhengfu-detail",
                 query: {
                     title1: "重点预警",
-                    title2: "振幅检测",
+                    title2: "振幅",
                 },
             });
         },

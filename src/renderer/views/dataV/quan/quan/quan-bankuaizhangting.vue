@@ -121,7 +121,7 @@ export default {
         toDetail() {
             this.$router.push({
                 path: "/quan-bankuaizhangting-detail",
-                title1: "全场预警",
+                title1: "全市场预警",
                 title2: "板块涨停",
             });
         },

@@ -9,7 +9,7 @@
         <img src="../../assets/img/quan.svg" height="23" style="margin-left: -16px" />
       </a>
       <a-menu slot="overlay">
-        <a-menu-item @click="toDetail( '/quan-shuiwei-detail', '全场预警',  '市场水位', 0)">
+        <a-menu-item @click="toDetail( '/quan-shuiwei-detail', '全市场预警',  '市场水位', 0)">
           <a href="javascript:;">市场水位</a>
         </a-menu-item>
         <a-menu-item @click="toDetail( '/detail/quan-zhishu-detail')">
@@ -18,25 +18,25 @@
         <a-menu-item @click="toDetail( '/quan-daban-detail')">
           <a href="javascript:;">打板</a>
         </a-menu-item>
-        <a-menu-item @click="toDetail( '/quan-zijin-detail','全场预警','资金流向', 0)">
+        <a-menu-item @click="toDetail( '/quan-zijin-detail','全市场预警','资金流向', 0)">
           <a href="javascript:;">资金流向</a>
         </a-menu-item>
-        <a-menu-item @click="toDetail( '/quan-bankuaizhangting-detail','全场预警','板块涨停')">
+        <a-menu-item @click="toDetail( '/quan-bankuaizhangting-detail','全市场预警','板块涨停')">
           <a href="javascript:;">板块涨停个数</a>
         </a-menu-item>
-        <a-menu-item @click="toDetail( '/quan-xingao-detail','全场预警','新高异动', 0)">
+        <a-menu-item @click="toDetail( '/quan-xingao-detail','全市场预警','新高异动', 0)">
           <a href="javascript:;">新高异动</a>
         </a-menu-item>
-        <a-menu-item @click="toDetail( '/quan-xingao-detail','全场预警','平台突破', 1)">
+        <a-menu-item @click="toDetail( '/quan-xingao-detail','全市场预警','平台突破', 1)">
           <a href="javascript:;">平台突破</a>
         </a-menu-item>
-        <a-menu-item @click="toDetail( '/quan-xingao-detail','全场预警','强势回调', 2)">
+        <a-menu-item @click="toDetail( '/quan-xingao-detail','全市场预警','强势回调', 2)">
           <a href="javascript:;">强势回调</a>
         </a-menu-item>
-        <a-menu-item @click="toDetail( '/quan-xingao-detail','全场预警','游资股', 3)">
+        <a-menu-item @click="toDetail( '/quan-xingao-detail','全市场预警','游资股', 3)">
           <a href="javascript:;">游资股</a>
         </a-menu-item>
-        <a-menu-item @click="toDetail( '/quan-lianbangaodu-detail','全场预警','连板高度')">
+        <a-menu-item @click="toDetail( '/quan-lianbangaodu-detail','全市场预警','连板高度')">
           <a href="javascript:;">连板高度预警</a>
         </a-menu-item>
       </a-menu>
