@@ -93,7 +93,19 @@ export default {
                     URL.revokeObjectURL(downloadUrl);
                 }
             };
+            xhr.onprogress = (event) => {
+                console.log("onprogress");
+                console.log(event.lengthComputable);
+                console.log(event);
 
+                if (event.lengthComputable) {
+                    const percentComplete = (event.loaded / event.total) * 100;
+                    this.progress = Math.round(percentComplete);
+                    console.log("this.progress", this.progress);
+                } else {
+                    this.progress = 100;
+                }
+            };
             xhr.send();
         },
         calendarPriceRangeChange(date) {
