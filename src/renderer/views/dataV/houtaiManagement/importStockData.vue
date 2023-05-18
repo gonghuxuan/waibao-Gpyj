@@ -38,7 +38,7 @@
                 ">
         <!-- <a-button type="primary" @click="confirm">提交</a-button>
         <a-button>取消</a-button> -->
-        <div @click="confirm"><img src="../../../assets/img/upload-button1.svg" /></div>
+        <div @click="preconfirm"><img src="../../../assets/img/upload-button1.svg" /></div>
         <div @click="cancelFile"><img src="../../../assets/img/upload-button2.svg" /></div>
       </div>
       <div class="newt">当前股票数量：{{lengthS}}个</div>
@@ -115,6 +115,26 @@ export default {
                 // return false;
             });
         },
+        preconfirm() {
+            let self = this;
+            this.$confirm({
+                title: `您是否提交${
+                    this.type == "0" ? "局部预警" : "重点预警"
+                }股票数据`,
+                // "您是否提交" + this.type == "0"
+                //     ? "局部预警"
+                //     : "重点预警" + "股票数据",
+                // content:
+                //     "When clicked the OK button, this dialog will be closed after 1 second",
+                onOk() {
+                    // return new Promise((resolve, reject) => {
+                    //     this.confirm();
+                    // }).catch(() => console.log("Oops errors!"));
+                    self.confirm();
+                },
+                onCancel() {},
+            });
+        },
         confirm() {
             if (this.fileList.length == 0) {
                 this.$message.warn("请上传文件");
@@ -127,7 +147,11 @@ export default {
                 //     fd.append("files", file);
                 // });
                 fd.append("file", this.fileList[0]);
-                fd.append("stockType", "重点预警");
+                if (this.type == "0") {
+                    fd.append("stockType", "局部预警");
+                } else {
+                    fd.append("stockType", "重点预警");
+                }
 
                 // fd.append("userName", "stockCode");
                 // console.log(fd);
@@ -316,5 +340,12 @@ export default {
 .ant-table-tbody > tr > td {
     color: #64b7bc;
     border-color: #5f9ea0;
+}
+.ant-modal-content {
+    background-color: rgba(11, 69, 74, 1);
+    // color: white;
+}
+.ant-modal-confirm-body .ant-modal-confirm-title {
+    color: white;
 }
 </style>

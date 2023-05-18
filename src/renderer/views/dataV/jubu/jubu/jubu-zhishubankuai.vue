@@ -13,7 +13,7 @@
       <div class="table-shuiwei table-shuiwei-2">
         <div style="text-align: center">
           <div style="color: #FF5145; font-size: 20px;">{{resData.avgChangepercent | fixedTwo}}%</div>
-          <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">个股平均涨幅</div>
+          <div style="color:#64B7BC;font-size: 16px;padding-top: 3px;">板块平均涨幅</div>
         </div>
       </div>
       <div id="charts-zhishubankuai-1" style="height: 500px; width: 100%; margin-top: 0px"></div>

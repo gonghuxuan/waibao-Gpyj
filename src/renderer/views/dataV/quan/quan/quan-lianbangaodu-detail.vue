@@ -43,7 +43,7 @@
         </template>
         <span :slot="item" v-for="(item, index) in columnsSlot" :key="index">共
           <span style="color:#FFF45C">{{  resData[index].countall }}</span> 只 晋级率
-          <span style="color:#FF5145">{{  resData[index].rateall }}</span>
+          <span style="color:#FF5145">{{  resData[index].rateall }}%</span>
         </span>
       </a-table>
       <div style="padding-bottom: 150px"></div>
@@ -333,8 +333,8 @@ export default {
                 // console.log("alllllllllllll", countall);
 
                 rateall = (rateall / countall).toFixed(2);
-                res[key].countall = countall;
-                res[key].rateall = rateall;
+                res[key].countall = res[key].total.stockCount;
+                res[key].rateall = res[key].total.successRate;
                 // console.log(res);
             }
             // console.log(res);
