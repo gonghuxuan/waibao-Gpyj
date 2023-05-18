@@ -33,7 +33,7 @@
             {{ stockName }}
           </div>
           <div v-if="typeof stockName == 'object'">
-            共<span style="color: #FFF45C">{{stockName.stockCount}}</span>只晋级率 <span style="color:#FF5145">{{ stockName.successRate }} %</span>
+            共<span style="color: #FFF45C">{{stockName.stockCount}}</span>只晋级率 <span style="color:#FF5145">{{ stockName.successRate }}%</span>
           </div>
         </template>
         <template slot="stopAmount" slot-scope="stopAmount">

@@ -12,7 +12,7 @@
                 ">
       <div style="margin-left: 3vw">
         <span style="padding-right: 5px"> 局部预警 </span>/
-        <span style="color: rgba(100, 183, 188, 1); padding-left: 5px">{{ type == 0 ? '10天线性跟踪' : '10天线性未跟踪'}}</span>
+        <span style="color: rgba(100, 183, 188, 1); padding-left: 5px">{{ type == 0 ? '10天线性跟踪' : '10天未突破跟踪'}}</span>
       </div>
       <div style="margin-right: 3vw" @click="back"> <a-button>
           返回
@@ -20,7 +20,7 @@
     </div>
     <div class="top-contain">
       <div>
-        <span class="padding active">10天未突破跟踪</span>
+        <span class="padding active">{{ type == '0' ? '10天线性跟踪' : '10天未突破跟踪'}}</span>
       </div>
     </div>
     <div class="content-contain">

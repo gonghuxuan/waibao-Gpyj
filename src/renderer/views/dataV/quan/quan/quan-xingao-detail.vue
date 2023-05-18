@@ -210,7 +210,7 @@ export default {
             console.warn(this.$route.query.stockType);
             this.active = this.$route.query.stockType;
             console.warn("active", this.active);
-            if (this.active !== undefined) {
+            if (this.active !== undefined && this.$route.query.refreshMounted) {
                 this.getData();
             }
         },
@@ -218,6 +218,7 @@ export default {
     mounted() {
         if (this.$route.query.refreshMounted) {
             this.active = this.$route.query.stockType;
+            console.log("mounted----------------");
             this.getData();
         }
 
@@ -302,8 +303,11 @@ export default {
         },
         getData(stockType) {
             // this.spin = true;
+            console.log(stockType);
+            console.log(stockType ? stockType : this.$route.query.stockType);
+            const flag = stockType ? true : stockType == 0 ? true : false;
             getLetfStocks({
-                stockType: stockType ? stockType : this.$route.query.stockType,
+                stockType: flag ? stockType : this.$route.query.stockType,
             }).then((res) => {
                 if (res.length > 0) {
                     this.gupiaoList = res;
@@ -345,7 +349,7 @@ export default {
 
                 setTimeout(() => {
                     this.setCharts();
-                    this.setCharts2();
+                    this.selectBottom();
                 }, 0);
                 setTimeout(() => {}, 0);
             });
@@ -360,18 +364,25 @@ export default {
         },
         selectBottom(category) {
             // console.log("123");
-            this.category = category;
-            this.chart2.clear();
+            if (category) {
+                this.category = category;
+            }
+            if (this.chart2) {
+                this.chart2.clear();
+            }
+            if (this.selectedGupiao == "") {
+                return;
+            }
             setTimeout(() => {
-                if (category === "MACD") {
+                if (this.category === "MACD") {
                     this.setCharts2();
                 }
-                if (category === "KDJ") {
+                if (this.category === "KDJ") {
                     this.setCharts2(
                         table2bottomOptionKDJ(this.stockDetail, this.timeType)
                     );
                 }
-                if (category === "RSI") {
+                if (this.category === "RSI") {
                     this.setCharts2(
                         table2bottomOptionRSI(this.stockDetail, this.timeType)
                     );
