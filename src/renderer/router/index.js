@@ -296,6 +296,18 @@ const router = new Router({
                                         keepAlive: false,
                                     },
                                 },
+                                {
+                                    path: "/exportStock",
+                                    name: "exportStock",
+                                    component: () =>
+                                        import(
+                                            "@/views/dataV/houtaiManagement/exportStock.vue"
+                                        ),
+                                    meta: {
+                                        title: "exportStock",
+                                        keepAlive: false,
+                                    },
+                                },
                             ],
                         },
                     ],

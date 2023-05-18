@@ -164,5 +164,18 @@ export function stockList(params) {
     });
 }
 
+export function getExportDataNavigation(params) {
+    return request({
+        url: "/stockAlert/export/excel/getExportDataNavigation",
+        method: "get",
+        params,
+    });
+}
 
-
+export function downloadData(params) {
+    return request({
+        url: "/stockAlert/export/excel/downloadData",
+        method: "get",
+        params,
+    });
+}

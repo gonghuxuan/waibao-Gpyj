@@ -108,7 +108,6 @@ async function createWindow() {
             contextIsolation: false,
         },
     });
-
     // 设置appId才能使用Notification
     if (process.platform === "win32") {
         app.setAppUserModelId(pkg.appId);

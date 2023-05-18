@@ -1,5 +1,6 @@
 <template>
   <div class="frame-actions">
+    <a-icon class="dowmload" @click="toDetail" type="download" />
     <!-- <a-icon type="shrink" class="item" @click="setFrame('mini')" /> -->
     <a-icon type="minus" class="item" @click="setFrame('min')" v-if="platform === 'win32'" />
     <z-icon :type="isMax ? 'tuichuquanping' : 'juxing'" class="item" @click.native="setFrame('plus')" v-if="platform === 'win32'" />
@@ -44,6 +45,17 @@ export default {
             }
             this.isMax = this.currentWindow.isMaximized();
         },
+        toDetail() {
+            this.$router.push({
+                path: "/exportStock",
+                // query: {
+                //     stockType: type,
+                //     title1: title1,
+                //     title2: title2,
+                //     refreshMounted: this.$route.name == "Home" ? undefined : 1,
+                // },
+            });
+        },
     },
 };
 </script>
@@ -69,6 +81,10 @@ export default {
         vertical-align: unset;
         font-size: 18px;
         cursor: pointer;
+    }
+    .dowmload {
+        margin-right: 30px;
+        font-size: 18px;
     }
 }
 </style>
