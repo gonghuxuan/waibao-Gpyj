@@ -33,7 +33,7 @@
             {{ stockName }}
           </div>
           <div v-if="typeof stockName == 'object'">
-            共<span style="color: #FFF45C">{{stockName.stockCount}}</span>只晋级率 <span style="color:#FF5145">{{ stockName.successRate }} %</span>
+            共<span style="color: #FFF45C">{{stockName.stockCount}}</span>只晋级率 <span style="color:#FF5145">{{ stockName.successRate }}%</span>
           </div>
         </template>
         <template slot="stopAmount" slot-scope="stopAmount">
@@ -43,7 +43,7 @@
         </template>
         <span :slot="item" v-for="(item, index) in columnsSlot" :key="index">共
           <span style="color:#FFF45C">{{  resData[index].countall }}</span> 只 晋级率
-          <span style="color:#FF5145">{{  resData[index].rateall }}</span>
+          <span style="color:#FF5145">{{  resData[index].rateall }}%</span>
         </span>
       </a-table>
       <div style="padding-bottom: 150px"></div>
