@@ -16,6 +16,8 @@ import createTray from "./modules/tray";
 import createTrayWindow from "./windows/trayWindow";
 import createLyricWindow from "./windows/desktopLyricWindow";
 import createMiniWindow from "./windows/miniWindow";
+import { initDownload } from "./windows/download";
+
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import { ACHEME, LOAD_URL } from "./config";
 import axios from "axios";
@@ -108,6 +110,8 @@ async function createWindow() {
             contextIsolation: false,
         },
     });
+    mainWindow.loadFile("./index.html");
+    initDownload(mainWindow);
     // 设置appId才能使用Notification
     if (process.platform === "win32") {
         app.setAppUserModelId(pkg.appId);

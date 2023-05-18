@@ -11,12 +11,16 @@
       <a-button style="margin-left: 50px" @click="download" type="primary">
         下载
       </a-button>
+      <a href="http://test46.szdjct.com/stockAlert/export/excel/downloadData?startDate=2023-05-12&endDate=2023-05-18&navigationFirst=全市场预警&navigationSecond=新高异动" target="_blank">123</a>
+      <a-button style="margin-left: 50px" @click="downloadFile" type="primary">
+        下载2
+      </a-button>
     </div>
   </div>
 </template>
 
 <script>
-import { uploadStockDataTxt, getExportDataNavigation } from "@/api/userInfo.js";
+import { downloadData, getExportDataNavigation } from "@/api/userInfo.js";
 import { getFiveDay, getDay, getMax, getMin } from "@/utils/gpyj.js";
 
 import * as echarts from "echarts";
@@ -31,6 +35,8 @@ export default {
             selectPriceDate: "",
             navigationFirst: "",
             navigationSecond: "",
+            downloadUrl:
+                "http://test46.szdjct.com/stockAlert/export/excel/downloadData?startDate=2023-05-12&endDate=2023-05-18&navigationFirst=全市场预警&navigationSecond=新高异动",
         };
     },
     components: {},
@@ -42,18 +48,53 @@ export default {
     },
     methods: {
         download() {
-            console.log(!!(!this.navigationFirst && !this.navigationSecond));
-            if (!this.navigationFirst && !this.navigationSecond) {
-                this.$message.warn("请先选择类型");
-                // this.$message.success("退出成功");
-                return;
-            }
-            const url =
-                "/stockAlert/export/excel/downloadData?startDate=2023-05-16&endDate=2023-05-16&navigationFirst=全市场预警&navigationSecond=新高异动";
-            this.$electron.ipcRenderer.send("download-start", {
-                url: url,
-                filename: "123",
+            // console.log(!!(!this.navigationFirst && !this.navigationSecond));
+            // if (!this.navigationFirst && !this.navigationSecond) {
+            //     this.$message.warn("请先选择类型");
+            //     // this.$message.success("退出成功");
+            //     return;
+            // }
+            // const url =
+            //     "http://test46.szdjct.com/stockAlert/export/excel/downloadData?startDate=2023-05-12&endDate=2023-05-18&navigationFirst=全市场预警&navigationSecond=新高异动";
+            // this.$electron.ipcRenderer.send("download", {
+            //     downloadPath: url,
+            //     fileName: "123",
+            // });
+            downloadData({
+                startDate: "2023-05-12",
+                endDate: "2023-05-18",
+                navigationFirst: "全市场预警",
+                navigationSecond: "新高异动",
             });
+        },
+        downloadFile() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", this.downloadUrl, true);
+            xhr.setRequestHeader(
+                "authorization",
+                localStorage.getItem("authorization")
+            );
+            xhr.setRequestHeader("userId", localStorage.getItem("userId"));
+
+            xhr.responseType = "blob";
+
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    const blob = new Blob([this.response], {
+                        type: "application/octet-stream",
+                    });
+                    const downloadUrl = URL.createObjectURL(blob);
+
+                    const link = document.createElement("a");
+                    link.href = downloadUrl;
+                    link.download = "file.xlsx";
+                    link.click();
+
+                    URL.revokeObjectURL(downloadUrl);
+                }
+            };
+
+            xhr.send();
         },
         calendarPriceRangeChange(date) {
             this.selectPriceDate = date[0];

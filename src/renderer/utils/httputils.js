@@ -44,6 +44,7 @@ service.interceptors.request.use(
         }
         // }
         config.headers["platform"] = "web";
+        // config.headers["responseType"] = "blob";
 
         // console.log('config===' + JSON.stringify(config))
         return config;
