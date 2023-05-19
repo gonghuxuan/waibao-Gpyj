@@ -16,7 +16,8 @@
                     justify-content:space-between;
                 ">
         <div style="margin-left: 3vw">
-          <span style="padding-right: 5px">{{ title1 }}</span>/
+          <span style="padding-right: 5px">{{ title1 }}</span>
+          <span v-show="hidden">/</span>
           <span style="color: rgba(100, 183, 188, 1); padding-left: 5px">{{ title2 }}</span>
         </div>
         <div style="margin-right: 3vw" @click="back"> <a-button>
@@ -43,6 +44,7 @@ export default {
         return {
             title1: "",
             title2: "",
+            hidden: true,
         };
     },
     components: {
@@ -53,6 +55,11 @@ export default {
         $route(to, from) {
             this.title1 = this.$route.query.title1;
             this.title2 = this.$route.query.title2;
+            if (!this.title2 && !this.title2) {
+                this.hidden = false;
+            } else {
+                this.hidden = true;
+            }
         },
     },
     computed: {

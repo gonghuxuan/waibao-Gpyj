@@ -1,21 +1,32 @@
 <template>
   <div class="exportStock">
+
     <div class="top-contain">
       <div>
         <span class="padding active">导出数据</span>
       </div>
     </div>
     <div class="content-contain">
-      <span style="margin-left: 20px;">日期：<a-range-picker :disabled-date="disabledDate" v-model="rangeTime" @change="changetime" @calendarChange="calendarPriceRangeChange" format="YYYY-MM-DD" /></span>
-      <span style="margin-left: 50px;">类型：<a-cascader class="cascader" :options="options" placeholder="请选择" @change="onChange" /></span>
-      <a-button style="margin-left: 50px" @click="download" type="primary">
-        下载
-      </a-button>
-      <a href="http://test46.szdjct.com/stockAlert/export/excel/downloadData?startDate=2023-05-12&endDate=2023-05-18&navigationFirst=全市场预警&navigationSecond=新高异动" target="_blank">123</a>
+      <a-spin :spinning="loading" size="large">
+        <div style="height: 825px;">
+          <span style="margin-left: 20px;">日期：<a-range-picker :disabled-date="disabledDate" v-model="rangeTime" @change="changetime" @calendarChange="calendarPriceRangeChange" format="YYYY-MM-DD" /></span>
+          <span style="margin-left: 50px;">类型：<a-cascader class="cascader" :options="options" placeholder="请选择" @change="onChange" /></span>
+          <a-button style="margin-left: 50px" @click="downloadFile" type="primary">
+            下载
+          </a-button>
+        </div>
+
+      </a-spin>
+
+      <!-- <a href="http://test46.szdjct.com/stockAlert/export/excel/downloadData?startDate=2023-05-12&endDate=2023-05-18&navigationFirst=全市场预警&navigationSecond=新高异动" target="_blank">123</a>
       <a-button style="margin-left: 50px" @click="downloadFile" type="primary">
         下载2
-      </a-button>
+      </a-button> -->
+      <!-- <div class="progress" v-if="loading">
+        正在下载 <a-progress type="circle" style="color: white" :percent="30" />
+      </div> -->
     </div>
+
   </div>
 </template>
 
@@ -35,6 +46,8 @@ export default {
             selectPriceDate: "",
             navigationFirst: "",
             navigationSecond: "",
+            loading: false,
+
             downloadUrl:
                 "http://test46.szdjct.com/stockAlert/export/excel/downloadData?startDate=2023-05-12&endDate=2023-05-18&navigationFirst=全市场预警&navigationSecond=新高异动",
         };
@@ -68,6 +81,13 @@ export default {
             });
         },
         downloadFile() {
+            if (!this.navigationFirst && !this.navigationSecond) {
+                this.$message.warn("请先选择类型");
+                // this.$message.success("退出成功");
+                return;
+            }
+            const _this = this;
+            this.downloadUrl = `http://test46.szdjct.com/stockAlert/export/excel/downloadData?startDate=${this.rangeTime[0]}&endDate=${this.rangeTime[1]}&navigationFirst=${this.navigationFirst}&navigationSecond=${this.navigationSecond}`;
             const xhr = new XMLHttpRequest();
             xhr.open("GET", this.downloadUrl, true);
             xhr.setRequestHeader(
@@ -75,9 +95,16 @@ export default {
                 localStorage.getItem("authorization")
             );
             xhr.setRequestHeader("userId", localStorage.getItem("userId"));
-
+            xhr.addEventListener("progress", updateProgress);
             xhr.responseType = "blob";
+            xhr.onprogress = (event) => {
+                console.log("onprogress");
+                console.log(event.lengthComputable);
+                console.log(event);
 
+                const percentComplete = (event.loaded / event.total) * 100;
+                this.progress = Math.round(percentComplete);
+            };
             xhr.onload = function () {
                 if (this.status === 200) {
                     const blob = new Blob([this.response], {
@@ -87,32 +114,35 @@ export default {
 
                     const link = document.createElement("a");
                     link.href = downloadUrl;
-                    link.download = "file.xlsx";
+                    link.download = `${_this.navigationFirst}-${_this.navigationSecond}.xlsx`;
                     link.click();
-
+                    _this.loading = false;
                     URL.revokeObjectURL(downloadUrl);
                 }
             };
-            xhr.onprogress = (event) => {
-                console.log("onprogress");
-                console.log(event.lengthComputable);
+            function updateProgress(event) {
                 console.log(event);
-
+                // 如果 `lengthComputable` 属性的值是 false，那么意味着总字节数是未知并且 total 的值为零。
                 if (event.lengthComputable) {
-                    const percentComplete = (event.loaded / event.total) * 100;
-                    this.progress = Math.round(percentComplete);
-                    console.log("this.progress", this.progress);
+                    let progress = (event.loaded / event.total) * 100;
+                    console.log("加载进度：" + progress + "%"); // 一个百分比进度
                 } else {
-                    this.progress = 100;
+                    // 总大小未知时不能计算进度信息
                 }
-            };
+            }
             xhr.send();
+            this.loading = true;
         },
         calendarPriceRangeChange(date) {
             this.selectPriceDate = date[0];
         },
         changetime(value) {
             console.log(value);
+            this.rangeTime = [
+                value[0].format("YYYY-MM-DD"),
+                value[1].format("YYYY-MM-DD"),
+            ];
+            console.log(this.rangeTime);
         },
         getStockList() {
             getExportDataNavigation().then((res) => {
@@ -233,6 +263,9 @@ export default {
     .cascader {
         margin-top: 30px;
         // margin-left: 50px;
+    }
+    .progress {
+        width: 400px;
     }
     .ant-input {
         box-sizing: border-box;
