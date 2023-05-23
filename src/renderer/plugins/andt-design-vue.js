@@ -52,6 +52,7 @@ import {
     Skeleton,
     Comment,
     Cascader,
+    Collapse,
 } from "ant-design-vue";
 import Toast from "./../components/Toast/toast";
 // import * as Icons from "@ant-design/icons-vue";
@@ -118,4 +119,6 @@ Vue.use(Comment);
 Vue.use(ConfigProvider);
 Vue.use(Table);
 Vue.use(Cascader);
+Vue.use(Collapse);
+
 Vue.use(dataV);

@@ -75,6 +75,7 @@ export default {
     data() {
         return {
             status: 0,
+            res: [],
         };
     },
     computed: {
@@ -89,6 +90,7 @@ export default {
         // console.log(this.$refs.editor);
         screenSize(this.$refs.editor);
         console.log(document.location.href);
+        // console.log("control mounted");
     },
     methods: {
         ...mapMutations("Setting", ["mutateState"]),
@@ -112,6 +114,23 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
+    .popup {
+        position: absolute;
+        right: 20px;
+        top: 0;
+        width: 400px;
+        height: 700px;
+        background-color: #003c50;
+        overflow-y: scroll;
+        z-index: 999;
+        font-size: 16px;
+    }
+    .popup-item {
+        padding-bottom: 10px;
+        padding-top: 10px;
+
+        // border-bottom: #000000 1px solid;
+    }
     .left-slider {
         position: absolute;
         top: 100px;

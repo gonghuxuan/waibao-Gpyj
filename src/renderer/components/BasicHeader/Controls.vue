@@ -123,6 +123,7 @@
                 </a-menu-item>
             </a-menu> -->
     </a-dropdown>
+    <!-- <a-icon class="bell" @click="showpopup" type="bell" /> -->
     <!-- <a-button-group size="small">
       <a-button type="primary" @click="back">
         <a-icon type="left" />
@@ -139,6 +140,9 @@
 
 <script>
 import eventBus from "@/utils/eventBus";
+import { getWarningRecords } from "@/api/userInfo.js";
+import dayjs from "dayjs";
+
 export default {
     data() {
         return {
@@ -149,6 +153,13 @@ export default {
         // console.log(this.$route.name);
         // console.log(this.admin);
     },
+    // mounted() {
+    //     console.log("control mounted");
+    //     setInterval(() => {
+    //         this.getpop();
+    //     }, 30000);
+    //     this.getpop();
+    // },
     //     watch: {
     //     $route(to, from) {
     //         if (to.path === this.$route.path) {
@@ -163,6 +174,43 @@ export default {
         this.$forceUpdate();
     },
     methods: {
+        getpop() {
+            getWarningRecords({
+                dealDate: dayjs().format("YYYY-MM-DD"),
+            }).then((res) => {
+                this.xinxi = res.records[0];
+                sessionStorage.setItem("popup", JSON.stringify(this.xinxi));
+                if (res.warned) {
+                    const dialog = this.$electron.remote.dialog;
+                    const popupinfo = JSON.parse(
+                        sessionStorage.getItem("popup")
+                    );
+                    dialog
+                        .showMessageBox({
+                            type: "info",
+                            title: "预警信息时间:" + popupinfo.timeStr,
+                            message: popupinfo.redord,
+                            position: { x: "0", y: "0" },
+                            buttons: ["确定"],
+                        })
+                        .then((res) => {});
+                }
+            });
+        },
+        showpopup() {
+            const dialog = this.$electron.remote.dialog;
+            const popupinfo = JSON.parse(sessionStorage.getItem("popup"));
+            console.log(popupinfo);
+            dialog
+                .showMessageBox({
+                    type: "info",
+                    title: "预警信息时间:" + popupinfo.timeStr,
+                    message: popupinfo.redord,
+                    position: { x: "0", y: "0" },
+                    buttons: ["确定"],
+                })
+                .then((res) => {});
+        },
         toDetail(url, title1, title2, type) {
             // console.log(this.$route.name);
             // console.log(this.$route.name == "Home");
@@ -205,6 +253,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.bell {
+    font-size: 18px;
+    margin-top: 15px;
+    padding-right: 10px;
+    position: relative;
+    left: 20px;
+}
 .ant-dropdown-menu-item:hover {
     background-color: #082d37;
 }

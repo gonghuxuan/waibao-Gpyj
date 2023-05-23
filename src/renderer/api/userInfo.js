@@ -179,3 +179,11 @@ export function downloadData(params) {
         params,
     });
 }
+
+export function getWarningRecords(params) {
+    return request({
+        url: "/stockAlert/warningRecords/getWarningRecords",
+        method: "get",
+        params,
+    });
+}

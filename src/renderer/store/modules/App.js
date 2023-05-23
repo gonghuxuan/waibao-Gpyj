@@ -9,6 +9,7 @@ const state = {
     noLimitRoutes: ["music_local", "music_download", "setting"],
     platform: process.platform,
     swiper: 0,
+    showPupop: false,
 };
 
 const mutations = {
@@ -29,6 +30,10 @@ const mutations = {
     SHOW_SWIPER(state, flag) {
         // console.warn(flag);
         state.swiper = flag;
+    },
+    SHOW_POPUP(state, flag) {
+        // console.warn(flag);
+        state.showPupop = flag;
     },
     SET_ONLINE(state, flag) {
         state.isOnline = flag;
