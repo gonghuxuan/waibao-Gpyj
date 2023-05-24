@@ -119,6 +119,7 @@ export default {
                         fontSize: 14, //字体大小
                         color: "#ffffff", //字体颜色
                     },
+                    type: "scroll",
                 },
                 series: [
                     // {

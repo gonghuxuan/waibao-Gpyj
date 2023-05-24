@@ -4,7 +4,7 @@
       <router-view />
     </keep-alive>
     <music-viewer />
-    <div style="color:white" class="popup-app" ref="editor" v-show="$store.state.App.showPupop">
+    <div style="color:white" class="popup-app" ref="editor" v-show="$store.state.App.showPupop && $route.path !== '/login'">
       <div v-for="(item, index) in res" :key="index" class="popup-item-app">
         <span style="color: yellow">{{ item.timeStr }}:</span> {{ item.redord }}
       </div>
@@ -156,6 +156,7 @@ export default {
     z-index: 999;
     font-size: 14px;
     padding-left: 5px;
+    border: #1dffff 1px solid;
 }
 .popup-item-app {
     padding-bottom: 10px;
